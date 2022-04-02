@@ -39,18 +39,18 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Run Tests
-        run: ./gradlew test -i
-      - name: Run Jacoco
-        run: ./gradlew jacocoTestReport
       - name: Cache Gradle packages
         uses: actions/cache@v1
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Run Tests
+        run: ./gradlew test -i
+      - name: Run Jacoco
+        run: ./gradlew jacocoTestReport
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
