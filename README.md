@@ -188,3 +188,6 @@ auf das nächste freie Sonderfeld im Uhrzeigersinn springen. Damit kann er auch 
 Narr: Der Narr kann, wenn er ins Ziel hineinzieht, bis zu 2 Punkte verfallen lassen. Im
 Verlaufe des Spiels darf der Narr auf der umlaufenden Bahn – wie alle anderen Figuren auch –
 keine Punkte verfallen lassen.
+
+Schummelfunktion:
+Es werden unteschiedliche Schummelfunktion welche auf den Bewegungssensor und den Lichtsensor des Handys reagieren eingebaut. Alle fünf Runden soll es möglich sein, einmal zu schummeln und einmal das Schummmeln zu entlarven.
