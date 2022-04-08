@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <Button
         android:id="@+id/inGameButton"
         android:layout_width="wrap_content"
@@ -17,6 +16,7 @@
         app:layout_constraintTop_toTopOf="@+id/twoWayScrollView"
         app:layout_constraintVertical_bias="0.92" />
 
+
     <com.example.gruppenphaseandroid.twowaynestedscrollview.TwoWayNestedScrollView
         android:id="@+id/twoWayScrollView"
         android:layout_width="match_parent"
@@ -24,9 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,24 +32,75 @@
 
             <ImageView
                 android:id="@+id/playingFieldBackground"
-                android:layout_width="360mm"
-                android:layout_height="360mm"
+                android:layout_width="2267dp"
+                android:layout_height="2267dp"
                 android:src="@drawable/ic_playingfieldbackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-            <ImageView
-                android:id="@+id/regularPlayingField"
-                android:layout_width="36dp"
-                android:layout_height="30dp"
+            <RelativeLayout
+                android:id="@+id/playingFieldRelativeLayout"
+                android:layout_width="2267dp"
+                android:layout_height="2267dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.47"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_regularfield"></ImageView>
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/regularPlayingField1"
+                    android:layout_width="101dp"
+                    android:layout_height="101dp"
+                    android:layout_marginLeft="108dp"
+                    android:layout_marginTop="895dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+                <ImageView
+                    android:id="@+id/regularPlayingField2"
+                    android:layout_width="101dp"
+                    android:layout_height="101dp"
+                    android:layout_marginLeft="221dp"
+                    android:layout_marginTop="895dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField3"
+                    android:layout_width="101dp"
+                    android:layout_height="101dp"
+                    android:layout_marginStart="334dp"
+                    android:layout_marginLeft="334dp"
+                    android:layout_marginTop="895dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField4"
+                    android:layout_width="101dp"
+                    android:layout_height="101dp"
+                    android:layout_marginStart="447dp"
+                    android:layout_marginLeft="447dp"
+                    android:layout_marginTop="895dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField5"
+                    android:layout_width="101dp"
+                    android:layout_height="101dp"
+                    android:layout_marginStart="560dp"
+                    android:layout_marginLeft="560dp"
+                    android:layout_marginTop="895dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField6"
+                    android:layout_width="101dp"
+                    android:layout_height="101dp"
+                    android:layout_marginStart="642dp"
+                    android:layout_marginLeft="642dp"
+                    android:layout_marginTop="813dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
