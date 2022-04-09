@@ -32,8 +32,8 @@
 
             <ImageView
                 android:id="@+id/playingFieldBackground"
-                android:layout_width="2267dp"
-                android:layout_height="2267dp"
+                android:layout_width="1130dp"
+                android:layout_height="1130dp"
                 android:src="@drawable/ic_playingfieldbackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,62 +42,535 @@
 
             <RelativeLayout
                 android:id="@+id/playingFieldRelativeLayout"
-                android:layout_width="2267dp"
-                android:layout_height="2267dp"
+                android:layout_width="1130dp"
+                android:layout_height="1130dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/regularPlayingField1"
-                    android:layout_width="101dp"
-                    android:layout_height="101dp"
-                    android:layout_marginLeft="108dp"
-                    android:layout_marginTop="895dp"
+                    android:id="@+id/regularPlayingField19"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="169dp"
                     app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField37"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="829dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField38"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="829dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField39"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="789dp"
+                    android:layout_marginTop="716dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField40"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="749dp"
+                    android:layout_marginTop="757dp"
+                    app:srcCompat="@drawable/ic_draw2field" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField41"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="709dp"
+                    android:layout_marginTop="798dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField42"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="839dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField43"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="896dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField44"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="953dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField45"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="1010dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField46"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_redfieldstart" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField47"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="612dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField48"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="555dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField49"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="498dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField50"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField51"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="1010dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField52"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="953dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField53"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="896dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField54"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="839dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField55"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="401dp"
+                    android:layout_marginTop="798dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField56"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="361dp"
+                    android:layout_marginTop="757dp"
+                    app:srcCompat="@drawable/ic_draw2field" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField57"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="321dp"
+                    android:layout_marginTop="716dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField58"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="281dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField59"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="224dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField60"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="167dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField61"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField62"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_bluefieldstart" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField63"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="618dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField64"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="561dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField65"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="504dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField24"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="789dp"
+                    android:layout_marginTop="406dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
                 <ImageView
                     android:id="@+id/regularPlayingField2"
-                    android:layout_width="101dp"
-                    android:layout_height="101dp"
-                    android:layout_marginLeft="221dp"
-                    android:layout_marginTop="895dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginTop="447dp"
                     app:srcCompat="@drawable/ic_regularfield" />
 
                 <ImageView
-                    android:id="@+id/regularPlayingField3"
-                    android:layout_width="101dp"
-                    android:layout_height="101dp"
-                    android:layout_marginStart="334dp"
-                    android:layout_marginLeft="334dp"
-                    android:layout_marginTop="895dp"
+                    android:id="@+id/regularPlayingField27"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="943dp"
+                    android:layout_marginTop="447dp"
                     app:srcCompat="@drawable/ic_regularfield" />
 
                 <ImageView
-                    android:id="@+id/regularPlayingField4"
-                    android:layout_width="101dp"
-                    android:layout_height="101dp"
-                    android:layout_marginStart="447dp"
-                    android:layout_marginLeft="447dp"
-                    android:layout_marginTop="895dp"
+                    android:id="@+id/regularPlayingField7"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="361dp"
+                    android:layout_marginTop="365dp"
+                    app:srcCompat="@drawable/ic_draw2field" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField29"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_yellowfieldstart" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField22"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="709dp"
+                    android:layout_marginTop="324dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField11"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="169dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField33"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField36"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="886dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField10"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="226dp"
                     app:srcCompat="@drawable/ic_regularfield" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField5"
-                    android:layout_width="101dp"
-                    android:layout_height="101dp"
-                    android:layout_marginStart="560dp"
-                    android:layout_marginLeft="560dp"
-                    android:layout_marginTop="895dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="281dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="167dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField28"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1000dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField8"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="401dp"
+                    android:layout_marginTop="324dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField34"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1000dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField26"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="886dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="224dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField15"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="555dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField32"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="618dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="54dp"
+                    android:layout_marginLeft="54dp"
+                    android:layout_marginTop="447dp"
                     app:srcCompat="@drawable/ic_regularfield" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField6"
-                    android:layout_width="101dp"
-                    android:layout_height="101dp"
-                    android:layout_marginStart="642dp"
-                    android:layout_marginLeft="642dp"
-                    android:layout_marginTop="813dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="321dp"
+                    android:layout_marginTop="406dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField30"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="504dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField9"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="283dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField14"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="498dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField25"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="829dp"
+                    android:layout_marginTop="447dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField17"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField18"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="112dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField20"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="226dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField13"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_greenfieldstart" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField12"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="441dp"
+                    android:layout_marginTop="112dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField31"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="1057dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="561dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField23"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="749dp"
+                    android:layout_marginTop="365dp"
+                    app:srcCompat="@drawable/ic_draw2field" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField16"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="612dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField35"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="943dp"
+                    android:layout_marginTop="675dp"
+                    app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/regularPlayingField21"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="669dp"
+                    android:layout_marginTop="283dp"
                     app:srcCompat="@drawable/ic_regularfield" />
 
             </RelativeLayout>
