@@ -29,30 +29,8 @@ public class Client extends WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-
+        // this method is overridden when we create the client
     }
-
-    /*    @Override
-    public void onMessage(String message) {
-        Message msg = gson.fromJson(message, Message.class);
-        switch (msg.getType()) {
-            case JOINED_LOBBY:
-                handleJoinedLobbyMessage(msg.getBody());
-                break;
-            case NEW_PLAYER_JOINED:
-                handleNewPlayerJoinedMessage(msg.getBody());
-        }
-    }
-
-    private void handleNewPlayerJoinedMessage(String body) {
-        var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
-        Log.d("player joined", "player " + payload.getPlayerName() + " joined your lobby");
-    }
-
-    private void handleJoinedLobbyMessage(String body) {
-        var payload = gson.fromJson(body, JoinedLobbyPayload.class);
-        Log.d("lobby", "Joined lobby with id: " + payload.getLobbyId());
-    }*/
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
