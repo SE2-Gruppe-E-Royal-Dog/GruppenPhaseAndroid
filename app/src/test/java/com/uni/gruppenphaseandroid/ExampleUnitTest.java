@@ -1,4 +1,4 @@
-package com.example.gruppenphaseandroid;
+package com.uni.gruppenphaseandroid;
 
 import org.junit.Test;
 
