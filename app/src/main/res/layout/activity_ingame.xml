@@ -34,7 +34,7 @@
                 android:id="@+id/playingFieldBackground"
                 android:layout_width="1130dp"
                 android:layout_height="1130dp"
-                android:src="@drawable/ic_playingfieldbackground"
+                app:srcCompat="@drawable/ic_playingfieldbackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
