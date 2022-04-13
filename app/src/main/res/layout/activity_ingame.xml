@@ -38,7 +38,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <RelativeLayout
                 android:id="@+id/playingFieldRelativeLayout"
@@ -138,6 +138,70 @@
                     android:layout_marginLeft="669dp"
                     android:layout_marginTop="1067dp"
                     app:srcCompat="@drawable/ic_redfieldstart" />
+
+                <ImageView
+                    android:id="@+id/redStartingArea4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="726dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redStartingArea3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="783dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redStartingArea2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="840dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redStartingArea1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="897dp"
+                    android:layout_marginTop="1067dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redGoalField1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="600dp"
+                    android:layout_marginTop="1000dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redGoalField2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="580dp"
+                    android:layout_marginTop="943dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redGoalField3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="580dp"
+                    android:layout_marginTop="886dp"
+                    app:srcCompat="@drawable/ic_redfield" />
+
+                <ImageView
+                    android:id="@+id/redGoalField4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="580dp"
+                    android:layout_marginTop="829dp"
+                    app:srcCompat="@drawable/ic_redfield" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField47"
@@ -268,6 +332,70 @@
                     app:srcCompat="@drawable/ic_bluefieldstart" />
 
                 <ImageView
+                    android:id="@+id/blueStartigArea4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="732dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueStartigArea3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="789dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueStartigArea2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="846dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueStartigArea1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="903dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueGoalField1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginTop="606dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueGoalField2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="176dp"
+                    android:layout_marginTop="586dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueGoalField4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="233dp"
+                    android:layout_marginTop="586dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
+                    android:id="@+id/blueGoalField4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="290dp"
+                    android:layout_marginTop="586dp"
+                    app:srcCompat="@drawable/ic_bluefield" />
+
+                <ImageView
                     android:id="@+id/regularPlayingField63"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -330,6 +458,70 @@
                     android:layout_marginLeft="1057dp"
                     android:layout_marginTop="447dp"
                     app:srcCompat="@drawable/ic_yellowfieldstart" />
+
+                <ImageView
+                    android:id="@+id/yellowStartingArea4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="390dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowStartingArea3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="333dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowStartingArea2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="276dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowStartingArea1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1057dp"
+                    android:layout_marginTop="219dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowGoalField1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="989dp"
+                    android:layout_marginTop="515dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowGoalField2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="932dp"
+                    android:layout_marginTop="535dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowGoalField3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="875dp"
+                    android:layout_marginTop="535dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
+
+                <ImageView
+                    android:id="@+id/yellowGoalField4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="819dp"
+                    android:layout_marginTop="535dp"
+                    app:srcCompat="@drawable/ic_yellowfield" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField22"
@@ -523,6 +715,70 @@
                     android:layout_marginLeft="441dp"
                     android:layout_marginTop="55dp"
                     app:srcCompat="@drawable/ic_greenfieldstart" />
+
+                <ImageView
+                    android:id="@+id/greenStartingArea4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="384dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenStartingArea3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="327dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenStartingArea2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="270dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenStartingArea1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="213dp"
+                    android:layout_marginTop="55dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenGoalField1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="509dp"
+                    android:layout_marginTop="123dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenGoalField2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="529dp"
+                    android:layout_marginTop="180dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenGoalField3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="529dp"
+                    android:layout_marginTop="237dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
+
+                <ImageView
+                    android:id="@+id/greenGoalField4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="529dp"
+                    android:layout_marginTop="294dp"
+                    app:srcCompat="@drawable/ic_greenfield" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField12"
