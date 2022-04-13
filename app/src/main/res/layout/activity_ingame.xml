@@ -380,7 +380,7 @@
                     app:srcCompat="@drawable/ic_bluefield" />
 
                 <ImageView
-                    android:id="@+id/blueGoalField4"
+                    android:id="@+id/blueGoalField3"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="233dp"
