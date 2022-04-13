@@ -4,14 +4,16 @@ public class Field {
 
     private Field nextField;
     private Field previousField;
+    private int fieldID;
 
     //private Figure currentFigure
     private FieldUI fieldUIobject;
 
-    public Field(FieldUI fieldUIobject, Field nextField, Field previousField){
+    public Field(FieldUI fieldUIobject, Field nextField, Field previousField, int fieldID){
         this.fieldUIobject = fieldUIobject;
         this.nextField = nextField;
         this.previousField = previousField;
+        this.fieldID = fieldID;
     }
 
     public Field(){
@@ -20,9 +22,20 @@ public class Field {
 
     protected void triggerSpecialFieldEffect(){ }
 
-    public void moveFigureToNextField(int numberOfStepsLeft){
+    public Field getFieldAtDistance(int distance, Color color){
+        return getFieldAtDistanceRecursive(distance, color, this);
+    }
 
-        //TODO: move figure
+    protected Field getFieldAtDistanceRecursive(int remainingDistance, Color color, Field originField){
+        if(remainingDistance == 0){
+            return this;
+        }
+        else if(remainingDistance < 0){
+            return getPreviousField().getFieldAtDistanceRecursive(remainingDistance+1, color, originField);
+        }
+        else {//remainingFields > 0
+            return getNextField().getFieldAtDistanceRecursive(remainingDistance-1, color, originField);
+        }
     }
 
     public Field getNextField() {
@@ -47,5 +60,9 @@ public class Field {
 
     public void setFieldUIobject(FieldUI fieldUIobject) {
         this.fieldUIobject = fieldUIobject;
+    }
+
+    public int getFieldID() {
+        return fieldID;
     }
 }
