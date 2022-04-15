@@ -6,6 +6,7 @@ plugins {
 
 sonarqube {
     properties {
+        property "sonar.exclusions", "src/main/java/com/se2/communication/dto/*"
         property "sonar.projectKey", "SE2-Gruppe-E-Royal-Dog_GruppenPhaseAndroid"
         property "sonar.organization", "se2-gruppe-e-royal-dog"
         property "sonar.host.url", "https://sonarcloud.io"
