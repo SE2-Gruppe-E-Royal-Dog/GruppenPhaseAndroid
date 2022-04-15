@@ -1,8 +1,8 @@
-package com.uni.gruppenphaseandroid.communication.dto;
+package com.se2.communication.dto;
 
 public class Message {
     private MessageType type;
-    private String body;
+    private String payload;
 
     public Message() {
     }
@@ -15,12 +15,12 @@ public class Message {
         this.type = type;
     }
 
-    public String getBody() {
-        return body;
+    public String getPayload() {
+        return payload;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setPayload(String payload) {
+        this.payload = payload;
     }
 }
 

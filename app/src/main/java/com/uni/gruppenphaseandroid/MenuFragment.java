@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.communication.Client;
-import com.uni.gruppenphaseandroid.communication.dto.Message;
-import com.uni.gruppenphaseandroid.communication.dto.MessageType;
-import com.uni.gruppenphaseandroid.communication.dto.NewPlayerPayload;
+import com.se2.communication.Client;
+import com.se2.communication.dto.Message;
+import com.se2.communication.dto.MessageType;
+import com.se2.communication.dto.NewPlayerPayload;
 
 public class MenuFragment extends Fragment {
     private Client websocketClient;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public View onCreateView(
@@ -41,7 +41,7 @@ public class MenuFragment extends Fragment {
 
             var payload = new NewPlayerPayload(playerName.getText().toString());
 
-            message.setBody(gson.toJson(payload));
+            message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
             NavHostFragment.findNavController(MenuFragment.this)

@@ -5,16 +5,15 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
-import com.uni.gruppenphaseandroid.communication.Client;
+import com.se2.communication.Client;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class WebSocketService extends Service {
-    private Client client;
-    private WebSocketBinder binder = new WebSocketBinder();
+    private final Client client;
 
-    public WebSocketService() throws InterruptedException, URISyntaxException {
+    public WebSocketService() throws URISyntaxException {
         client = new Client(new URI("ws://10.0.2.2:8080/dog-royal")) {
             @Override
             public void onMessage(String message) {
@@ -27,7 +26,12 @@ public class WebSocketService extends Service {
         };
     }
 
-    public Client getClient() {
+    public Client getClient() throws InterruptedException {
+        if (client.isOpen()) {
+            return client;
+        }
+
+        client.connectToServer();
         return client;
     }
 

@@ -18,10 +18,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.communication.Client;
-import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
-import com.uni.gruppenphaseandroid.communication.dto.Message;
-import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
+import com.se2.communication.Client;
+import com.se2.communication.dto.JoinedLobbyPayload;
+import com.se2.communication.dto.Message;
+import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
             Log.i("MainActivity", "service bound successfully");
             binder = (WebSocketService.WebSocketBinder) iBinder;
             service = binder.getService();
-            websocketClient = service.getClient();
+            try {
+                websocketClient = service.getClient();
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Unable to get client", e);
+            }
         }
 
         @Override
@@ -103,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
         Message msg = gson.fromJson(message, Message.class);
         switch (msg.getType()) {
             case JOINED_LOBBY:
-                handleJoinedLobbyMessage(msg.getBody());
+                handleJoinedLobbyMessage(msg.getPayload());
                 break;
             case NEW_PLAYER_JOINED:
-                handleNewPlayerJoinedMessage(msg.getBody());
+                handleNewPlayerJoinedMessage(msg.getPayload());
         }
     }
 
@@ -128,7 +132,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        websocketClient.close();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     public Client getWebsocketClient() {

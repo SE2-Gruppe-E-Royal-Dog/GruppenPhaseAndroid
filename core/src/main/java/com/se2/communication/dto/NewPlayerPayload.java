@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid.communication.dto;
+package com.se2.communication.dto;
 
 public class NewPlayerPayload {
     String playerName;

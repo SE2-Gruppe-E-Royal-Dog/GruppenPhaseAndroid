@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid.communication.dto;
+package com.se2.communication.dto;
 
 public class JoinedLobbyPayload {
     String lobbyId;
@@ -10,4 +10,5 @@ public class JoinedLobbyPayload {
     public String getLobbyId() {
         return lobbyId;
     }
+
 }

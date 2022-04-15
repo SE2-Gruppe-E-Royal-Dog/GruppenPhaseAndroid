@@ -1,20 +1,24 @@
-package com.uni.gruppenphaseandroid.communication;
-
-import android.util.Log;
+package com.se2.communication;
 
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.se2.communication.dto.Message;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
 public class Client extends WebSocketClient {
+    private static final Logger logger = LoggerFactory.getLogger(Client.class);
     private final Gson gson = new Gson();
 
-    public Client(URI serverUri) throws InterruptedException {
+    public Client(URI serverUri) {
         super(serverUri);
+    }
+
+    public void connectToServer() throws InterruptedException {
         connectBlocking();
     }
 
@@ -24,7 +28,7 @@ public class Client extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshakedata) {
-        Log.d("websocket", "Connection opened");
+        logger.info("Connection opened");
     }
 
     @Override
@@ -34,11 +38,11 @@ public class Client extends WebSocketClient {
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        Log.d("websocket", "Connection closed" + code);
+        logger.info("Connection closed {} ", code);
     }
 
     @Override
     public void onError(Exception e) {
-        Log.d("websocket", "Error: ", e);
+        logger.error("Error: ", e);
     }
 }
