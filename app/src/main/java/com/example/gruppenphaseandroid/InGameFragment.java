@@ -9,7 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.gruppenphaseandroid.playingfield.PlayingField;
+
 public class InGameFragment extends Fragment {
+
+    PlayingField playingField;
 
     @Override
     public View onCreateView(
@@ -22,6 +26,8 @@ public class InGameFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        playingField = new PlayingField(view);
 
         view.findViewById(R.id.inGameButton).setOnClickListener(new View.OnClickListener() {
             @Override
