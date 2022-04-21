@@ -1,10 +1,7 @@
-package com.example.gruppenphaseandroid.playingfield;
+package com.uni.gruppenphaseandroid.playingfield;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.example.gruppenphaseandroid.R;
 
 public class FieldUIimpl extends FieldUI{
 

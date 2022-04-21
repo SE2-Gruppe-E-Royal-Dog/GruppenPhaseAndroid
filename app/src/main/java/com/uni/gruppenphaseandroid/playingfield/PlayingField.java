@@ -1,9 +1,6 @@
-package com.example.gruppenphaseandroid.playingfield;
+package com.uni.gruppenphaseandroid.playingfield;
 
 import android.view.View;
-import android.widget.ImageView;
-
-import java.util.zip.Inflater;
 
 public class PlayingField {
 

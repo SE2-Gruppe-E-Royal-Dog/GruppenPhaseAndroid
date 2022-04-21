@@ -1,4 +1,4 @@
-package com.example.gruppenphaseandroid.playingfield;
+package com.uni.gruppenphaseandroid.playingfield;
 
 public class GoalField extends Field{
 

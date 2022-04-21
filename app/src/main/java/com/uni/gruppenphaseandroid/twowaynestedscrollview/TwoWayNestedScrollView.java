@@ -16,7 +16,7 @@
  */
 
 
-package com.example.gruppenphaseandroid.twowaynestedscrollview;
+package com.uni.gruppenphaseandroid.twowaynestedscrollview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

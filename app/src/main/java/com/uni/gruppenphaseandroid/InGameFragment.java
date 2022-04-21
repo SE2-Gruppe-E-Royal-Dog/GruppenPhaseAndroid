@@ -1,4 +1,4 @@
-package com.example.gruppenphaseandroid;
+package com.uni.gruppenphaseandroid;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment {
 
@@ -28,13 +28,5 @@ public class InGameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         playingField = new PlayingField(view);
-
-        view.findViewById(R.id.inGameButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(InGameFragment.this)
-                        .navigate(R.id.action_IngameFragment_to_SecondFragment);
-            }
-        });
     }
 }
