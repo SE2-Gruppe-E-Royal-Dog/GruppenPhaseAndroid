@@ -7,38 +7,17 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.gruppenphaseandroid.FirstFragment"
+        android:name="com.uni.gruppenphaseandroid.MenuFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/menu_fragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.gruppenphaseandroid.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_IngameFragment"
-            app:destination="@+id/InGameFragment">
-
-        </action>
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/InGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/InGameFragment"
-        android:name="com.example.gruppenphaseandroid.InGameFragment"
+        android:name="com.uni.gruppenphaseandroid.InGameFragment"
         android:label="In-Game Fragment"
-        tools:layout="@layout/activity_ingame">
-        <action
-            android:id="@+id/action_IngameFragment_to_SecondFragment"
-            app:destination="@+id/SecondFragment"
-            />
-        >
-    </fragment>
+        tools:layout="@layout/activity_ingame"/>
 </navigation>

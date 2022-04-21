@@ -6,6 +6,7 @@ plugins {
 
 sonarqube {
     properties {
+        property "sonar.exclusions", "src/main/java/com/se2/communication/dto/*"
         property "sonar.projectKey", "SE2-Gruppe-E-Royal-Dog_GruppenPhaseAndroid"
         property "sonar.organization", "se2-gruppe-e-royal-dog"
         property "sonar.host.url", "https://sonarcloud.io"
@@ -13,8 +14,6 @@ sonarqube {
     }
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
@@ -24,6 +23,11 @@ repositories {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation('org.assertj:assertj-core:3.22.0')
+    implementation "org.java-websocket:Java-WebSocket:1.5.1"
+    implementation("com.google.code.gson:gson:2.9.0")
+    testImplementation "org.mockito:mockito-core:4.0.0"
+
 }
 
 jacocoTestReport {
@@ -34,4 +38,9 @@ jacocoTestReport {
 
 test{
     useJUnitPlatform()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
