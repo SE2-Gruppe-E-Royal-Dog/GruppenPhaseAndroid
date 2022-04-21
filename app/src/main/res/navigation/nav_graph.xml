@@ -22,7 +22,23 @@
         tools:layout="@layout/fragment_second">
 
         <action
+            android:id="@+id/action_SecondFragment_to_IngameFragment"
+            app:destination="@+id/InGameFragment">
+
+        </action>
+        <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/InGameFragment"
+        android:name="com.example.gruppenphaseandroid.InGameFragment"
+        android:label="In-Game Fragment"
+        tools:layout="@layout/activity_ingame">
+        <action
+            android:id="@+id/action_IngameFragment_to_SecondFragment"
+            app:destination="@+id/SecondFragment"
+            />
+        >
     </fragment>
 </navigation>
