@@ -47,5 +47,13 @@ public class MenuFragment extends Fragment {
             NavHostFragment.findNavController(MenuFragment.this)
                     .navigate(R.id.action_FirstFragment_to_SecondFragment);
         });
+
+        view.findViewById(R.id.secondFragmentNextButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_IngameFragment);
+            }
+        });
     }
 }
