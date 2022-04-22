@@ -9,14 +9,11 @@ Spielmaterial:
 1 Spielplan
 110 Spielkarten (je 10x die 11 und 13, je 7x 2, 3, 4,
 5, 6, 1-7, 8, 9, 10, 12, = und Tauscher, 6x Magnet)
-24 Spielfiguren (pro Farbe 4 Figuren (König, Ritter,
+16 Spielfiguren (pro Farbe 4 Figuren (König, Ritter,
 Bürger und Narr))
 
 Spielziel:
-Bei 4 Spielern sitzen sich immer jeweils zwei
-Personen, die zusammen spielen, gegenüber und bilden ein
-Team. Alle Spieler versuchen die eigenen 4 Spielsteine so schnell wie möglich vom Start ins Ziel zu bringen. Bewegt werden die Spielfiguren durch das Ausspielen von Karten. Es ist nicht möglich, als einzelner Spieler zu gewinnen. Wenn ein Spieler alle eigenen Steine im Ziel hat, hilft er seinem Teampartner dessen Steine ins Ziel zu bringen. Erst wenn alle 8 Spielsteine eines Teams im
-Ziel sind, hat das Team gewonnen. Zwischen den Partnern darf im Verlaufe des Spiels keine Kommunikation über Handkarten oder Spielzüge erfolgen.
+Gewonnen hat der erste Spieler, der alle 4 Steine in seinem Zielbereich hat.
 
 Spielvorbereitung:
 Das Spielbrett wird für alle gut erreichbar in die Tischmitte
@@ -190,4 +187,4 @@ Verlaufe des Spiels darf der Narr auf der umlaufenden Bahn – wie alle anderen 
 keine Punkte verfallen lassen.
 
 Schummelfunktion:
-Es werden unteschiedliche Schummelfunktion welche auf den Bewegungssensor und den Lichtsensor des Handys reagieren eingebaut. Alle fünf Runden soll es möglich sein, einmal zu schummeln und einmal das Schummmeln zu entlarven.
+Es werden unteschiedliche Schummelfunktion, welche auf den Bewegungssensor und den Lichtsensor des Handys reagieren eingebaut. Alle fünf Runden soll es möglich sein, einmal zu schummeln und einmal das Schummmeln zu entlarven.
