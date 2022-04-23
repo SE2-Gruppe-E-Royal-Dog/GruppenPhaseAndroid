@@ -5,14 +5,16 @@ public class Field {
     private Field nextField;
     private Field previousField;
     private int fieldID;
+    private Figure currentFigure;
 
     //private Figure currentFigure
     private FieldUI fieldUIobject;
 
-    public Field(FieldUI fieldUIobject, Field nextField, Field previousField, int fieldID){
+    public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID){
         this.fieldUIobject = fieldUIobject;
         this.nextField = nextField;
         this.previousField = previousField;
+        this.currentFigure = currentFigure;
         this.fieldID = fieldID;
     }
 

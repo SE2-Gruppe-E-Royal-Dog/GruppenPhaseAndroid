@@ -4,8 +4,8 @@ public class GoalField extends Field{
 
     private Color color;
 
-    public GoalField(FieldUI fieldUIobject, Field nextField, Field previousField, int fieldID, Color color) {
-        super(fieldUIobject, nextField, previousField,fieldID);
+    public GoalField(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID, Color color) {
+        super(fieldUIobject, nextField, previousField, currentFigure, fieldID);
         this.color = color;
     }
 
