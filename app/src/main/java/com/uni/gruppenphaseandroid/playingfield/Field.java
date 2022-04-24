@@ -6,8 +6,6 @@ public class Field {
     private Field previousField;
     private int fieldID;
     private Figure currentFigure;
-
-    //private Figure currentFigure
     private FieldUI fieldUIobject;
 
     public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID){
@@ -67,4 +65,10 @@ public class Field {
     public int getFieldID() {
         return fieldID;
     }
+
+    public void setFieldID(int fieldID) { this.fieldID = fieldID; }
+
+    public Figure getCurrentFigure() { return currentFigure; }
+
+    public void setCurrentFigure(Figure currentFigure) { this.currentFigure = currentFigure; }
 }
