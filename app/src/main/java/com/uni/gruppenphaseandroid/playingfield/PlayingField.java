@@ -206,4 +206,25 @@ public class PlayingField {
     public StartingField getBlueStartingField() {
         return blueStartingField;
     }
+
+    public Field getRightStartingAreaField(Color color){
+        Field startingAreaField;
+        if(color == Color.GREEN){
+            startingAreaField = greenStartingField.getPreviousStartingArea();
+        } else if(color == Color.YELLOW){
+            startingAreaField = yellowStartingField.getPreviousStartingArea();
+        }else if(color == Color.RED){
+            startingAreaField = redStartingField.getPreviousStartingArea();
+        }else {
+            startingAreaField = blueStartingField.getPreviousStartingArea();
+        }
+
+        while (startingAreaField != null){
+            startingAreaField = startingAreaField.getPreviousField();
+            if(startingAreaField.getCurrentFigure() != null){
+                break;
+            }
+        }
+        return startingAreaField;
+    }
 }
