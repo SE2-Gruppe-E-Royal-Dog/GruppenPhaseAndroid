@@ -3,21 +3,26 @@ package com.uni.gruppenphaseandroid.playingfield;
 public class Figure {
     private int id;
     private Color color;
+    private Field currentField;
+    private PlayingField playingField;
 
-    public Figure(int id, Color color) {
+    public Figure(int id, Color color, Field currentField, PlayingField playingField) {
         this.id = id;
         this.color = color;
+        this.currentField = currentField;
+        this.playingField = playingField;
     }
 
-    public Field move (Field field, int fieldsToMove) { // Input von Karten: wie viel fahren
-        Field newPosition = field.getFieldAtDistance(fieldsToMove, color);
-            if (newPosition.getCurrentFigure() == null) {
-                newPosition.setCurrentFigure(this);
-            } else {
+    public Field move (int fieldsToMove) { // Input von Karten: wie viel fahren
+        Field newPosition = currentField.getFieldAtDistance(fieldsToMove, color);
+            if (newPosition.getCurrentFigure() != null) {
                 Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
-                beaten.getRightStartingArea(field);
+                beaten.currentField = playingField.getRightStartingAreaField(beaten.color);
             }
-        return field;
+            newPosition.setCurrentFigure(this);
+            this.currentField = newPosition;
+
+        return currentField;
     }
 
     public Field getRightStartingArea (Field field) { // if figure is beaten: find an empty space in the right Starting Area
@@ -59,18 +64,7 @@ public class Figure {
             default:
                 throw new IllegalStateException("Unexpected value: " + color);
         }
-
-        /*for (int i = 0 ; i < 4; i++) {
-            field.setFieldID(id);
-            if (field.getCurrentFigure() == null) {
-                field.setCurrentFigure(this);
-            } else {
-                field.getFieldAtDistance(1,color);
-            }
-        }
-
-         */
-        return field;
+        return currentField;
     }
 
     public int getId() { return id; }
