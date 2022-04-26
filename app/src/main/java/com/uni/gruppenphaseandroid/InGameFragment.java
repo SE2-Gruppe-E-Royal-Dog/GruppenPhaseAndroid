@@ -28,5 +28,6 @@ public class InGameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         playingField = new PlayingField(view);
+        //TODO: create figures
     }
 }
