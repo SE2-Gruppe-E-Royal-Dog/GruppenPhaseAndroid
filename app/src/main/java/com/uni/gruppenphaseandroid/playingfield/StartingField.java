@@ -6,8 +6,8 @@ public class StartingField extends Field{
     private StartingAreaField previousStartingArea;
     private Color color;
 
-    public StartingField(FieldUI fieldUIobject, Field nextField, Field previousField, GoalField nextGoalField, StartingAreaField previousStartingArea, int fieldID, Color color) {
-        super(fieldUIobject, nextField, previousField, fieldID);
+    public StartingField(FieldUI fieldUIobject, Field nextField, Field previousField, GoalField nextGoalField, Figure currentFigure, StartingAreaField previousStartingArea, int fieldID, Color color) {
+        super(fieldUIobject, nextField, previousField, currentFigure, fieldID);
         this.nextGoalField = nextGoalField;
         this.previousStartingArea = previousStartingArea;
         this.color = color;
