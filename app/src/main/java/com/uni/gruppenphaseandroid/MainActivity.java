@@ -140,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
         int numberOfPlayers = Integer.parseInt(splitString[0]);
         int playerTurnNumber = Integer.parseInt(splitString[1]);
         //start game
-        new GameManager().startGame(numberOfPlayers, playerTurnNumber, null);
+        GameManager.getInstance().startGame(numberOfPlayers, playerTurnNumber);
+
     }
 
     @Override

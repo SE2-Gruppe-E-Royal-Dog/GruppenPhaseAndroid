@@ -9,11 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment {
-
-    PlayingField playingField;
 
     @Override
     public View onCreateView(
@@ -27,6 +26,9 @@ public class InGameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //playingField = new PlayingField(view);
+        GameManager.getInstance().setPlayingField(new PlayingField(view));
+        GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
+
+        //detect button inputs and send signal to gamemananger
     }
 }
