@@ -22,6 +22,8 @@ import com.se2.communication.Client;
 import com.se2.communication.dto.JoinedLobbyPayload;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {
@@ -111,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case NEW_PLAYER_JOINED:
                 handleNewPlayerJoinedMessage(msg.getPayload());
+                break;
+            case START_GAME:
+                handleStartGame(msg.getPayload());
         }
     }
 
@@ -127,6 +132,15 @@ public class MainActivity extends AppCompatActivity {
     private void handleJoinedLobbyMessage(String body) {
         var payload = gson.fromJson(body, JoinedLobbyPayload.class);
         Log.d("lobby", "Joined lobby with id: " + payload.getLobbyId());
+    }
+
+    private void handleStartGame(String body){
+
+        String[] splitString = body.split("_");
+        int numberOfPlayers = Integer.parseInt(splitString[0]);
+        int playerTurnNumber = Integer.parseInt(splitString[1]);
+        //start game
+        new GameManager().startGame(numberOfPlayers, playerTurnNumber, null);
     }
 
     @Override

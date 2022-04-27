@@ -27,7 +27,6 @@ public class InGameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        playingField = new PlayingField(view);
-        //TODO: create figures
+        //playingField = new PlayingField(view);
     }
 }
