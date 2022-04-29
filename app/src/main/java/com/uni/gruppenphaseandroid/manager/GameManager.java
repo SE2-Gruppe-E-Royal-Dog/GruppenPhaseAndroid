@@ -22,6 +22,7 @@ public class GameManager {
     private int numberOfPlayers;
     private int myTurnNumber;
     private WebSocketClient webSocketClient;
+    private LastTurn lastTurn;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber){
         this.numberOfPlayers = numberOfPlayers;
@@ -85,5 +86,13 @@ public class GameManager {
 
     public void setWebSocketClient(WebSocketClient webSocketClient) {
         this.webSocketClient = webSocketClient;
+    }
+
+    public LastTurn getLastTurn() {
+        return lastTurn;
+    }
+
+    public void setLastTurn(LastTurn lastTurn) {
+        this.lastTurn = lastTurn;
     }
 }
