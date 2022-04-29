@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+import java.util.Random;
+
 public class Field {
 
     private Field nextField;
@@ -71,4 +73,32 @@ public class Field {
     public Figure getCurrentFigure() { return currentFigure; }
 
     public void setCurrentFigure(Figure currentFigure) { this.currentFigure = currentFigure; }
+
+    public void moveWormholeToRandomPosition(Wormhole wormhole){
+        int min = 1;
+        int max = 64;
+        Random random = new Random();
+        int value = random.nextInt(max + min) + min;
+
+
+        wormhole.getFieldAtDistance(value, Color.BLACK);
+      if ( wormhole instanceof GoalField) {
+          Random random1 = new Random();
+          int value1 = random.nextInt(max + min) + min;
+          wormhole.getFieldAtDistance(value1, Color.BLACK);
+          else if (wormhole instanceof StartingField){
+              Random random2 = new Random();
+              int value2 = random.nextInt(max + min) + min;
+              wormhole.getFieldAtDistance(value2, Color.BLACK);
+          } else {
+              Field helpField = nextField;
+              nextField = previousField;
+              previousField = helpField;
+          }
+      }
+
+
+        
+    }
+
 }
