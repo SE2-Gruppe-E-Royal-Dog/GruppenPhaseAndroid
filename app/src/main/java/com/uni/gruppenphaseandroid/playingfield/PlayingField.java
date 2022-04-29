@@ -227,4 +227,62 @@ public class PlayingField {
         }
         return startingAreaField;
     }
+
+    public Field move (Figure figure, int fieldsToMove) { // Input von Karten: wie viel fahren
+        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // => noch auf volle Distanz! Ändern
+        if (newPosition.getCurrentFigure() != null) {
+            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
+            beaten.setCurrentField(getRightStartingAreaField(beaten.getColor()));
+        }
+        newPosition.setCurrentFigure(figure);
+        figure.setCurrentField(newPosition);
+
+        return newPosition;
+    }
+
+    public Field getRightStartingArea (Figure figure, Field field, Color color) { // if figure is beaten: find an empty space in the right Starting Area
+        int id;
+        switch (color) {
+            case GREEN: id = 68;
+                break;
+            case YELLOW: id = 72;
+                break;
+            case RED: id = 76;
+                break;
+            case BLUE: id = 80;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + color);
+        }
+        for (int i = 0 ; i < 4; i++) {
+            field.setFieldID(id);
+            if (field.getCurrentFigure() == null) {
+                field.setCurrentFigure(figure);
+            } else {
+                field.getFieldAtDistance(1,color);
+            }
+        }
+        return field;
+    }
+
+    public Field getRightGoalArea (Figure figure, Field field, Color color) { // if figure finished: find an empty space in the right Goal Area
+        int id;
+        switch (color) {
+            case GREEN: id = 81;
+                break;
+            case YELLOW: id = 85;
+                break;
+            case RED: id = 89;
+                break;
+            case BLUE: id = 93;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + color);
+        }
+
+        //offen: benötigt?
+
+
+        return figure.getCurrentField();
+    }
 }
