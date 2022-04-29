@@ -57,7 +57,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="669dp"
                     android:layout_marginTop="169dp"
-                    android:tag="19"
+                    android:tag="f19"
                     app:srcCompat="@drawable/ic_regularfield" />
 
                 <ImageView
