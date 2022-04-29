@@ -10,12 +10,14 @@ public class Field {
     private Figure currentFigure;
     private FieldUI fieldUIobject;
 
+
     public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID){
         this.fieldUIobject = fieldUIobject;
         this.nextField = nextField;
         this.previousField = previousField;
         this.currentFigure = currentFigure;
         this.fieldID = fieldID;
+
     }
 
     public Field(){
@@ -81,12 +83,11 @@ public class Field {
         int value = random.nextInt(max + min) + min;
 
 
-        wormhole.getFieldAtDistance(value, Color.BLACK);
-      if ( wormhole instanceof GoalField) {
+      if ( wormhole.getFieldAtDistance(value, Color.BLACK) instanceof GoalField) {
           Random random1 = new Random();
           int value1 = random.nextInt(max + min) + min;
           wormhole.getFieldAtDistance(value1, Color.BLACK);
-          else if (wormhole instanceof StartingField){
+      } else if (( wormhole.getFieldAtDistance(value, Color.BLACK) instanceof StartingField)){
               Random random2 = new Random();
               int value2 = random.nextInt(max + min) + min;
               wormhole.getFieldAtDistance(value2, Color.BLACK);

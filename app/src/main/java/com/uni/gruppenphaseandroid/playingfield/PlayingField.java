@@ -11,6 +11,7 @@ public class PlayingField {
     private StartingField blueStartingField;
     private View view;
 
+
     public PlayingField(View view) {
         this.view = view;
         generateRegularFields();
