@@ -13,6 +13,10 @@ public class Figure {
         this.playingField = playingField;
     }
 
+    public Figure(){
+
+    }
+
     public Field move (int fieldsToMove) { // Input von Karten: wie viel fahren
         Field newPosition = currentField.getFieldAtDistance(fieldsToMove, color);
             if (newPosition.getCurrentFigure() != null) {
