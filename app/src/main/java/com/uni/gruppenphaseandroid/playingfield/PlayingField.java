@@ -234,103 +234,50 @@ public class PlayingField {
         return startingAreaField;
     }
 
-    public Field move (Figure figure, int fieldsToMove) throws Exception { // Input von Karten: wie viel fahren
-        Field currentPosition = figure.getCurrentField();
-
-        for (int i = 0; i < fieldsToMove - 2; i++) {
-            Field nextPosition = currentPosition.getNextField();
-            if (nextPosition.getCurrentFigure() != null) {
-                Figure occupied = nextPosition.getCurrentFigure();
-                checkOvertaking(figure); // check if figure is allowed to overtake own figure
-                if (!checkOvertaking(figure)) {
-                    throw new Exception("Overtaking not allowed. Please choose another figure.");
-                }
-            }
+    public Field move (Figure figure, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren => Card card
+        Field newPosition =  figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
+        if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
+            Figure beaten = newPosition.getCurrentFigure();
+            beaten.setCurrentField(getRightStartingAreaField(beaten.getColor()));
         }
-
-        Field newPosition = currentPosition.getFieldAtDistance(fieldsToMove, figure.getColor());
-        if (newPosition.getCurrentFigure() != null) {
-            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
-            if (beaten.getTyp() == Typ.KING && figure.getTyp() != Typ.KING) {
-                throw new Exception("A King can only be beaten by another King. Please choose another figure.");
-            }
-            beaten.setCurrentField(getRightStartingAreaField(beaten.getColor())); // ABÄNDERN!
-        }
-        // right Goal Area einbauen?
         newPosition.setCurrentFigure(figure);
         figure.setCurrentField(newPosition);
         return newPosition;
     }
 
-    public boolean checkOvertaking (Figure figure) {
-        Typ typ = figure.getTyp();
-        switch (typ) {
-            case JERK:
-                Jerk jerk = new Jerk(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
-                jerk.checkJerk(figure);
-                break;
-            case CITIZEN:
-                Citizen citizen = new Citizen(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
-                citizen.checkCitizen(figure);
-                break;
-            case KNIGHT:
-                Knight knight = new Knight(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
-                knight.checkKnight(figure);
-                break;
-            case KING:
-                King king = new King(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
-                king.checkKing(figure);
-                break;
+    public boolean checkMovingPossible (Figure figure, int fieldsToMove) { // TODO: bei GameManager einbauen
+        Field originField = figure.getCurrentField();
+
+        for (int i = 0; i < fieldsToMove - 1; i++) {// TODO: Spezialfall CheckOvertaking wenn Goalfield
+            if (figure.getCurrentField().getNextField().getCurrentFigure() != null) {
+                if (!checkOvertakingPossible(figure)) { // check if figure is allowed to overtake own figure
+                    return false;
+                }
+            }
+            if (figure.getCurrentField() instanceof StartingField) {
+                if (((StartingField) figure.getCurrentField()).getColor() == figure.getColor()) {
+                    GoalField goalfield = ((StartingField) figure.getCurrentField()).getNextGoalField();
+                    if (fieldsToMove <= 4) {
+                        figure.setCurrentField(goalfield);
+                        continue;
+                    }
+                }
+            }
+            figure.setCurrentField(figure.getCurrentField().getFieldAtDistance(1, figure.getColor()));
+        }
+        figure.setCurrentField(originField);
+
+        Field newPosition =  figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // TODO: Check ob newPosition ist Starting Field oder Goal Field => beaten not allowed!
+        if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
+            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
+            if (beaten.getTyp() == Typ.KING && figure.getTyp() != Typ.KING) {
+                return false;
+            }
         }
         return true;
     }
 
-    /*
-    public Field getRightStartingArea (Figure figure, Field field, Color color) { // if figure is beaten: find an empty space in the right Starting Area
-        int id;
-        switch (color) {
-            case GREEN: id = 68;
-                break;
-            case YELLOW: id = 72;
-                break;
-            case RED: id = 76;
-                break;
-            case BLUE: id = 80;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + color);
-        }
-        for (int i = 0 ; i < 4; i++) {
-            field.setFieldID(id);
-            if (field.getCurrentFigure() == null) {
-                field.setCurrentFigure(figure);
-            } else {
-                field.getFieldAtDistance(1,color);
-            }
-        }
-        return field;
+    public boolean checkOvertakingPossible (Figure figure) {
+        return figure.checkOvertaking();
     }
-
-    public Field getRightGoalArea (Figure figure, Field field, Color color) { // if figure finished: find an empty space in the right Goal Area
-        int id;
-        switch (color) {
-            case GREEN: id = 81;
-                break;
-            case YELLOW: id = 85;
-                break;
-            case RED: id = 89;
-                break;
-            case BLUE: id = 93;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + color);
-        }
-
-        //offen: benötigt?
-
-
-        return figure.getCurrentField();
-    }
-
-     */
 }

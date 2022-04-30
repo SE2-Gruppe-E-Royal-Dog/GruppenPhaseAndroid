@@ -5,12 +5,22 @@ public class Figure {
     private Color color;
     private Field currentField;
     private Typ typ;
+    private FigureUI figureUI;
 
-    public Figure(int id, Color color, Field currentField, Typ typ) {
+    public Figure(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         this.id = id;
         this.color = color;
         this.currentField = currentField;
         this.typ = typ;
+        this.figureUI = figureUI;
+    }
+
+    public Figure() {
+
+    }
+
+    public boolean checkOvertaking() {
+        return true;
     }
 
     public int getId() {
@@ -43,5 +53,13 @@ public class Figure {
 
     public void setTyp(Typ typ) {
         this.typ = typ;
+    }
+
+    public FigureUI getFigureUI() {
+        return figureUI;
+    }
+
+    public void setFigureUI(FigureUI figureUI) {
+        this.figureUI = figureUI;
     }
 }

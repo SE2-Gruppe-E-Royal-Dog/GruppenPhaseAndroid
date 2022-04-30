@@ -1,17 +1,17 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
 public class Jerk extends Figure {
-    private String jerkGreen;
-    private String jerkRed;
-    private String jerkYellow;
-    private String jerkBlue;
 
-    public Jerk(int id, Color color, Field currentField, Typ typ) {
-        super(id, color, currentField, typ);
+    public Jerk(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
+        super(id, color, currentField, typ, figureUI);
     }
 
-    public boolean checkJerk(Figure figure) {
-        Field newPosition = figure.getCurrentField().getNextField();
+    public Jerk() {
+    }
+
+    @Override
+    public boolean checkOvertaking() {
+        Field newPosition = getCurrentField().getNextField();
         Figure occupied = newPosition.getCurrentFigure();
         if (occupied.getTyp() != Typ.JERK) {
             return false;
