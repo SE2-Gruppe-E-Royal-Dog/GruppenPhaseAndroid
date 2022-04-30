@@ -11,8 +11,8 @@ public class Citizen extends Figure {
     }
 
     public boolean checkCitizen(Figure figure) {
-        Field newPosition = figure.getCurrentField().getNextField();
-        Figure occupied = newPosition.getCurrentFigure();
+        Field nextPosition = figure.getCurrentField().getNextField();
+        Figure occupied = nextPosition.getCurrentFigure();
         if (occupied.getTyp() != Typ.JERK || occupied.getTyp() != Typ.CITIZEN) {
             return false;
         }

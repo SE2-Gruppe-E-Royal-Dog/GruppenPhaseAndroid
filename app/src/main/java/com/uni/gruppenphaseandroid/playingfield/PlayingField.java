@@ -234,31 +234,29 @@ public class PlayingField {
         return startingAreaField;
     }
 
-    public Field move (Figure figure, int fieldsToMove) { // Input von Karten: wie viel fahren
+    public Field move (Figure figure, int fieldsToMove) throws Exception { // Input von Karten: wie viel fahren
         Field currentPosition = figure.getCurrentField();
-        Field newPosition;
-        Figure occupied;
-        Figure beaten;
 
         for (int i = 0; i < fieldsToMove - 2; i++) {
-            newPosition = currentPosition.getNextField();
-            if (newPosition.getCurrentFigure() != null) {
-                occupied = newPosition.getCurrentFigure();
-                if (occupied.getColor() == figure.getColor()) {
-                    checkOvertaking(figure); // check if figure is allowed to overtake own figure
-                    if (!checkOvertaking(figure)) {
-                        System.out.println("Overtaking not allowed. Please choose another figure.");
-                        break;
-                    }
+            Field nextPosition = currentPosition.getNextField();
+            if (nextPosition.getCurrentFigure() != null) {
+                Figure occupied = nextPosition.getCurrentFigure();
+                checkOvertaking(figure); // check if figure is allowed to overtake own figure
+                if (!checkOvertaking(figure)) {
+                    throw new Exception("Overtaking not allowed. Please choose another figure.");
                 }
             }
         }
 
-        newPosition = currentPosition.getFieldAtDistance(fieldsToMove, figure.getColor());
+        Field newPosition = currentPosition.getFieldAtDistance(fieldsToMove, figure.getColor());
         if (newPosition.getCurrentFigure() != null) {
-            beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
-            beaten.setCurrentField(getRightStartingAreaField(beaten.getColor()));
+            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
+            if (beaten.getTyp() == Typ.KING && figure.getTyp() != Typ.KING) {
+                throw new Exception("A King can only be beaten by another King. Please choose another figure.");
+            }
+            beaten.setCurrentField(getRightStartingAreaField(beaten.getColor())); // ABÄNDERN!
         }
+        // right Goal Area einbauen?
         newPosition.setCurrentFigure(figure);
         figure.setCurrentField(newPosition);
         return newPosition;
