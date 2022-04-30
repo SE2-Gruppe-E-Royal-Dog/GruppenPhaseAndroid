@@ -10,6 +10,7 @@ public class PlayingField {
     private StartingField redStartingField;
     private StartingField blueStartingField;
     private View view;
+    private Figure figure;
 
     public PlayingField(View view) {
         this.view = view;
@@ -234,17 +235,59 @@ public class PlayingField {
     }
 
     public Field move (Figure figure, int fieldsToMove) { // Input von Karten: wie viel fahren
-        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // => noch auf volle Distanz! Ändern
+        Field currentPosition = figure.getCurrentField();
+        Field newPosition;
+        Figure occupied;
+        Figure beaten;
+
+        for (int i = 0; i < fieldsToMove - 2; i++) {
+            newPosition = currentPosition.getNextField();
+            if (newPosition.getCurrentFigure() != null) {
+                occupied = newPosition.getCurrentFigure();
+                if (occupied.getColor() == figure.getColor()) {
+                    checkOvertaking(figure); // check if figure is allowed to overtake own figure
+                    if (!checkOvertaking(figure)) {
+                        System.out.println("Overtaking not allowed. Please choose another figure.");
+                        break;
+                    }
+                }
+            }
+        }
+
+        newPosition = currentPosition.getFieldAtDistance(fieldsToMove, figure.getColor());
         if (newPosition.getCurrentFigure() != null) {
-            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
+            beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
             beaten.setCurrentField(getRightStartingAreaField(beaten.getColor()));
         }
         newPosition.setCurrentFigure(figure);
         figure.setCurrentField(newPosition);
-
         return newPosition;
     }
 
+    public boolean checkOvertaking (Figure figure) {
+        Typ typ = figure.getTyp();
+        switch (typ) {
+            case JERK:
+                Jerk jerk = new Jerk(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
+                jerk.checkJerk(figure);
+                break;
+            case CITIZEN:
+                Citizen citizen = new Citizen(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
+                citizen.checkCitizen(figure);
+                break;
+            case KNIGHT:
+                Knight knight = new Knight(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
+                knight.checkKnight(figure);
+                break;
+            case KING:
+                King king = new King(figure.getId(), figure.getColor(), figure.getCurrentField(), figure.getTyp());
+                king.checkKing(figure);
+                break;
+        }
+        return true;
+    }
+
+    /*
     public Field getRightStartingArea (Figure figure, Field field, Color color) { // if figure is beaten: find an empty space in the right Starting Area
         int id;
         switch (color) {
@@ -290,4 +333,6 @@ public class PlayingField {
 
         return figure.getCurrentField();
     }
+
+     */
 }
