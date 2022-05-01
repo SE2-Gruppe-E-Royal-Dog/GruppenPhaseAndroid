@@ -43,8 +43,8 @@ public class PlayingField {
     private void generateWormholeFields(){
         wormholeList = new ArrayList<>();
 
-        for (int i = 1; i<=4; i++){
-            Field fieldToChange = rootField.getFieldAtDistance(10*i, Color.BLACK);
+        for (int i = 0; i<4; i++){
+            Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
             Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField(), fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
             fieldToChange.switchField(wormhole);
 
@@ -57,7 +57,11 @@ public class PlayingField {
         wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
 
 
-
+        /** für Testzwecke **/
+        for (int j = 0; j<4; j++){
+            wormholeList.get(j).moveWormholeToRandomPosition();
+        }
+      //  wormholeList.get(0).moveWormholeToRandomPosition(); für Testzwecke
 
 
     }

@@ -94,6 +94,8 @@ public class Field {
         helpField.setPreviousField(this);
         helpField_2.setNextField(this);
 
+        fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
+
     }
 
 
