@@ -6,6 +6,8 @@ public class Figure {
     private Field currentField;
     private PlayingField playingField;
 
+
+
     public Figure(int id, Color color, Field currentField, PlayingField playingField) {
         this.id = id;
         this.color = color;
@@ -26,8 +28,13 @@ public class Figure {
             newPosition.setCurrentFigure(this);
             this.currentField = newPosition;
 
+
         return currentField;
     }
+
+
+
+
 
     public Field getRightStartingArea (Field field) { // if figure is beaten: find an empty space in the right Starting Area
         int id;

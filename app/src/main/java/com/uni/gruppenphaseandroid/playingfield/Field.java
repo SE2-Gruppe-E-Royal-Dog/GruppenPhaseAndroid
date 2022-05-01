@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+import java.util.Random;
+
 public class Field {
 
     private Field nextField;
@@ -8,12 +10,18 @@ public class Field {
     private Figure currentFigure;
     private FieldUI fieldUIobject;
 
+
+
+
+
+
     public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID){
         this.fieldUIobject = fieldUIobject;
         this.nextField = nextField;
         this.previousField = previousField;
         this.currentFigure = currentFigure;
         this.fieldID = fieldID;
+
     }
 
     public Field(){
@@ -71,4 +79,41 @@ public class Field {
     public Figure getCurrentFigure() { return currentFigure; }
 
     public void setCurrentFigure(Figure currentFigure) { this.currentFigure = currentFigure; }
-}
+
+    public void switchField(Field targetField){
+
+        Field currentNextField = getNextField();
+        Field currentPreviousField = getPreviousField();
+        Field targetNextField = targetField.getNextField();
+        Field targetPreviousField = targetField.getPreviousField();
+
+        targetField.setNextField(currentNextField);
+        targetField.setPreviousField(currentPreviousField);
+
+        setNextField(targetNextField);
+        setPreviousField(targetPreviousField);
+
+        currentNextField.setPreviousField(targetField);
+        currentPreviousField.setNextField(targetField);
+
+
+        if (targetNextField != null && targetPreviousField != null) {
+            targetNextField.setPreviousField(this);
+            targetPreviousField.setNextField(this);
+        }
+
+   //     fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
+
+        int helpID = targetField.getFieldID();
+        targetField.setFieldID(getFieldID());
+        setFieldID(helpID);
+
+    }
+
+
+
+
+
+    }
+
+
