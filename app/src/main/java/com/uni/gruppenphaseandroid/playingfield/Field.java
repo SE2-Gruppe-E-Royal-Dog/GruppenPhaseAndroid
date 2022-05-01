@@ -96,6 +96,10 @@ public class Field {
 
         fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
 
+        int helpID = targetField.getFieldID();
+        targetField.setFieldID(getFieldID());
+        setFieldID(helpID);
+
     }
 
 
