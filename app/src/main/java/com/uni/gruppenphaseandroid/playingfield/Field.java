@@ -82,18 +82,24 @@ public class Field {
 
     public void switchField(Field targetField){
 
-        Field helpField = getNextField();
-        Field helpField_2 = getPreviousField();
+        Field currentNextField = getNextField();
+        Field currentPreviousField = getPreviousField();
+        Field targetNextField = targetField.getNextField();
+        Field targetPreviousField = targetField.getPreviousField();
 
-        helpField.setPreviousField(targetField);
-        helpField_2.setNextField(targetField);
+        targetField.setNextField(currentNextField);
+        targetField.setPreviousField(currentPreviousField);
 
-        helpField = targetField.getNextField();
-        helpField_2 = targetField.getPreviousField();
+        setNextField(targetNextField);
+        setPreviousField(targetPreviousField);
 
-        if (helpField == null && helpField_2 == null) {
-            helpField.setPreviousField(this);
-            helpField_2.setNextField(this);
+        currentNextField.setPreviousField(targetField);
+        currentPreviousField.setNextField(targetField);
+
+
+        if (targetNextField == null && targetPreviousField == null) {
+            targetNextField.setPreviousField(this);
+            targetPreviousField.setNextField(this);
         }
 
    //     fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
