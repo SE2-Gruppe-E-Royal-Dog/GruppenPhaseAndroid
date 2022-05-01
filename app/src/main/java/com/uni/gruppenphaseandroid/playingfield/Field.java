@@ -9,7 +9,7 @@ public class Field {
     private int fieldID;
     private Figure currentFigure;
     private FieldUI fieldUIobject;
-    private Field wormholeField;
+
 
 
 
@@ -80,36 +80,26 @@ public class Field {
 
     public void setCurrentFigure(Figure currentFigure) { this.currentFigure = currentFigure; }
 
+    public void switchField(Field targetField){
+
+        Field helpField = getNextField();
+        Field helpField_2 = getPreviousField();
+
+        helpField.setPreviousField(targetField);
+        helpField_2.setNextField(targetField);
+
+        helpField = targetField.getNextField();
+        helpField_2 = targetField.getPreviousField();
+
+        helpField.setPreviousField(this);
+        helpField_2.setNextField(this);
+
+    }
 
 
-    public void moveWormholeToRandomPosition(Wormhole wormhole){
-        int min = 1;
-        int max = 64;
-        Random random = new Random();
-        int value = random.nextInt(max + min) + min;
-
-        Field targetField = wormhole.getFieldAtDistance(value, Color.BLACK);
-
-        while ( targetField instanceof StartingField) {
-         value = random.nextInt(max + min) + min;
-
-       while (( targetField instanceof GoalField)){
-             value = random.nextInt(max + min) + min;
-
-        while ((currentFigure != null))
-            value = random.nextInt(max + min) + min;
-          }
-            targetField = wormhole.getFieldAtDistance(value, Color.BLACK);
-
-              Field helpField = nextField;
-              nextField = previousField;
-              previousField = helpField;
-          }
-
-      }
 
 
-        
+
     }
 
 

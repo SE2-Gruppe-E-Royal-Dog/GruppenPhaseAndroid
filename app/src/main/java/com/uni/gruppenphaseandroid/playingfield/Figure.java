@@ -6,10 +6,7 @@ public class Figure {
     private Field currentField;
     private PlayingField playingField;
 
-    private Field wormholeField_1;
-    private Field wormholeField_2;
-    private Field worhmholeField_3;
-    private Field worhmholeField_4;
+
 
     public Figure(int id, Color color, Field currentField, PlayingField playingField) {
         this.id = id;
@@ -31,12 +28,6 @@ public class Figure {
             newPosition.setCurrentFigure(this);
             this.currentField = newPosition;
 
-            if(currentField ==  wormholeField_1) {
-                currentField = wormholeField_2;
-                if(currentField ==  worhmholeField_3){
-                    currentField = worhmholeField_4;
-                }
-            }
 
         return currentField;
     }

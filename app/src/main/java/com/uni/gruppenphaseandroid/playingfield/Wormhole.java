@@ -3,26 +3,47 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.hardware.camera2.params.BlackLevelPattern;
 
+import java.util.Random;
+
 public class Wormhole extends Field {
 
+    Wormhole partnerWormhole;
 
-    Field wormhole;
-    Field wormholeField_1;
-    Field wormholeField_2;
-    Field wormholeField_3;
-    Field wormholeField_4;
+    public Wormhole getPartnerWormhole() {
+        return partnerWormhole;
+    }
 
-    public static void main(String[] args) {
-
-
-        //TODO wenn Nachricht von Server kommt, Sensor 0 dann müssen sich die Felder in Random ändern
-
-        Field wormholeField_1 = wormholeField_1.moveWormholeToRandomPosition();
-        Field wormholeField_2 = wormholeField_2.moveWormholeToRandomPosition();
-        Field wormholeField_3 = wormholeField_3.moveWormholeToRandomPosition();
-        Field wormholeField_4 = wormholeField_4.moveWormholeToRandomPosition();
+    public void setPartnerWormhole(Wormhole partnerWormhole) {
+        this.partnerWormhole = partnerWormhole;
+    }
 
 
+
+    public Wormhole(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID) {
+        super (fieldUIobject, nextField, previousField, currentFigure, fieldID);
 
     }
+
+
+    public void moveWormholeToRandomPosition(){
+        int min = 1;
+        int max = 64;
+        Random random = new Random();
+        int value = random.nextInt(max + min) + min;
+
+        Field targetField = getFieldAtDistance(value, Color.BLACK);
+
+        while ( targetField instanceof StartingField || targetField instanceof GoalField || targetField.getCurrentFigure() != null) {
+            value = random.nextInt(max + min) + min;
+
+            targetField = getFieldAtDistance(value, Color.BLACK);
+
+        }
+
+        switchField(targetField);
+
+    }
+
+
+
 }
