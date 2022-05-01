@@ -45,7 +45,7 @@ public class PlayingField {
 
         for (int i = 0; i<4; i++){
             Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
-            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField(), fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), null , null, fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
             fieldToChange.switchField(wormhole);
 
             wormholeList.add(wormhole);

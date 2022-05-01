@@ -91,8 +91,10 @@ public class Field {
         helpField = targetField.getNextField();
         helpField_2 = targetField.getPreviousField();
 
-        helpField.setPreviousField(this);
-        helpField_2.setNextField(this);
+        if (helpField == null && helpField_2 == null) {
+            helpField.setPreviousField(this);
+            helpField_2.setNextField(this);
+        }
 
    //     fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
 
