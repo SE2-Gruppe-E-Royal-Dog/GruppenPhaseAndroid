@@ -97,7 +97,7 @@ public class Field {
         currentPreviousField.setNextField(targetField);
 
 
-        if (targetNextField == null && targetPreviousField == null) {
+        if (targetNextField != null && targetPreviousField != null) {
             targetNextField.setPreviousField(this);
             targetPreviousField.setNextField(this);
         }
