@@ -82,24 +82,24 @@ public class Field {
         Random random = new Random();
         int value = random.nextInt(max + min) + min;
 
+        Field targetField = wormhole.getFieldAtDistance(value, Color.BLACK);
 
-      if ( wormhole.getFieldAtDistance(value, Color.BLACK) instanceof GoalField) {
-          Random random1 = new Random();
-          int value1 = random.nextInt(max + min) + min;
-          wormhole.getFieldAtDistance(value1, Color.BLACK);
-      } else if (( wormhole.getFieldAtDistance(value, Color.BLACK) instanceof StartingField)){
-              Random random2 = new Random();
-              int value2 = random.nextInt(max + min) + min;
-              wormhole.getFieldAtDistance(value2, Color.BLACK);
-          } else {
+        while ( targetField instanceof GoalField) {
+         value = random.nextInt(max + min) + min;
+
+       while (( targetField instanceof StartingField)){
+             value = random.nextInt(max + min) + min;
+
+          }
               Field helpField = nextField;
               nextField = previousField;
               previousField = helpField;
           }
+
       }
 
 
         
     }
 
-}
+
