@@ -5,6 +5,7 @@ import android.view.View;
 public class PlayingField {
 
     private Field rootField;
+
     private StartingField greenStartingField;
     private StartingField yellowStartingField;
     private StartingField redStartingField;
@@ -33,6 +34,16 @@ public class PlayingField {
         }
         lastField.setNextField(rootField);
         rootField.setPreviousField(lastField);
+    }
+
+    private void generateWormholeFields(){
+     //   wormholeField = new Field (new FieldUIimpl(view), null, null, null, 10);
+        Field wormholeField_1 = rootField.getFieldAtDistance(10, Color.BLACK);
+        Field wormholeField_2 = rootField.getFieldAtDistance(20, Color.BLACK);
+        Field wormholeField_3 = rootField.getFieldAtDistance(30, Color.BLACK);
+        Field wormholeField_4 = rootField.getFieldAtDistance(40, Color.BLACK);
+
+
     }
 
     private void generateStartingFields() {

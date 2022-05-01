@@ -9,6 +9,10 @@ public class Field {
     private int fieldID;
     private Figure currentFigure;
     private FieldUI fieldUIobject;
+    private Field wormholeField;
+
+
+
 
 
     public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID){
@@ -76,6 +80,8 @@ public class Field {
 
     public void setCurrentFigure(Figure currentFigure) { this.currentFigure = currentFigure; }
 
+
+
     public void moveWormholeToRandomPosition(Wormhole wormhole){
         int min = 1;
         int max = 64;
@@ -84,13 +90,14 @@ public class Field {
 
         Field targetField = wormhole.getFieldAtDistance(value, Color.BLACK);
 
-        while ( targetField instanceof GoalField) {
+        while ( targetField instanceof StartingField) {
          value = random.nextInt(max + min) + min;
 
-
-       while (( targetField instanceof StartingField)){
+       while (( targetField instanceof GoalField)){
              value = random.nextInt(max + min) + min;
 
+        while ((currentFigure != null))
+            value = random.nextInt(max + min) + min;
           }
             targetField = wormhole.getFieldAtDistance(value, Color.BLACK);
 
