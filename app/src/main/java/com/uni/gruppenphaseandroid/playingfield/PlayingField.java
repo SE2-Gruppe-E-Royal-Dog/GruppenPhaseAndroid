@@ -59,7 +59,7 @@ public class PlayingField {
 
         /** für Testzwecke **/
         for (int j = 0; j<4; j++){
-            wormholeList.get(j).moveWormholeToRandomPosition();
+       //     wormholeList.get(j).moveWormholeToRandomPosition();
         }
       //  wormholeList.get(0).moveWormholeToRandomPosition(); für Testzwecke
 
