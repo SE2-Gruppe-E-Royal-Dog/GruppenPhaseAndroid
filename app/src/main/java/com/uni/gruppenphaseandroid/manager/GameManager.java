@@ -23,6 +23,8 @@ public class GameManager {
     private int myTurnNumber;
     private WebSocketClient webSocketClient;
     private LastTurn lastTurn;
+    //cardmanager
+    //figuremanager
 
     public void startGame(int numberOfPlayers, int playerTurnNumber){
         this.numberOfPlayers = numberOfPlayers;
@@ -68,7 +70,16 @@ public class GameManager {
         if(currentTurnPhase == TurnPhase.CHOOSEFIGURE && myTurnNumber == currentTurnPlayerNumber){
             currentTurnPhase = TurnPhase.CURRENTLYMOVING;
             //send message to server
+            webSocketClient.send(lastTurn.generateServerMessage());
 
+        }
+    }
+
+    public void updateBoard(String[] serverMessage){
+        if(currentTurnPhase == TurnPhase.CURRENTLYMOVING){
+            //update figures
+            //update card UI
+            //next turn
         }
     }
 

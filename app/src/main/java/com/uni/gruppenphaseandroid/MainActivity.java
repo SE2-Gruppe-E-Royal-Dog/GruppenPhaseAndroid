@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case START_GAME:
                 handleStartGame(msg.getPayload());
+                break;
+            case UPDATEBOARD:
+                handleUpdateBoard(msg.getPayload());
+
         }
     }
 
@@ -142,6 +146,11 @@ public class MainActivity extends AppCompatActivity {
         //start game
         GameManager.getInstance().startGame(numberOfPlayers, playerTurnNumber);
 
+    }
+
+    private void handleUpdateBoard(String body){
+        String[] splitString = body.split("_");
+        GameManager.getInstance().updateBoard(splitString);
     }
 
     @Override

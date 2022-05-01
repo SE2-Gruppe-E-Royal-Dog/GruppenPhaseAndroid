@@ -7,5 +7,6 @@ public enum MessageType {
     CHEATING_TILT_RIGHT,
     CHEATING_TILT_LEFT,
     CHEATING_LIGHT,
-    START_GAME
+    START_GAME,
+    UPDATEBOARD
 }
