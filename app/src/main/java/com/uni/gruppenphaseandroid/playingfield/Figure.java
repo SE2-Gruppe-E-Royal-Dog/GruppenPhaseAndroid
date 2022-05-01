@@ -62,4 +62,5 @@ public class Figure {
     public void setFigureUI(FigureUI figureUI) {
         this.figureUI = figureUI;
     }
+
 }
