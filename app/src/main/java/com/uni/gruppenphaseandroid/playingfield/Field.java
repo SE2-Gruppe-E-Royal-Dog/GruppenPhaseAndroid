@@ -87,10 +87,13 @@ public class Field {
         while ( targetField instanceof GoalField) {
          value = random.nextInt(max + min) + min;
 
+
        while (( targetField instanceof StartingField)){
              value = random.nextInt(max + min) + min;
 
           }
+            targetField = wormhole.getFieldAtDistance(value, Color.BLACK);
+
               Field helpField = nextField;
               nextField = previousField;
               previousField = helpField;
