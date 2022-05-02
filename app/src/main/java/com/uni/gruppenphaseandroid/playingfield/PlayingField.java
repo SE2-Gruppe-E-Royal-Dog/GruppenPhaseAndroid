@@ -59,11 +59,9 @@ public class PlayingField {
 
         /** für Testzwecke **/
         for (int j = 0; j<4; j++){
-       //     wormholeList.get(j).moveWormholeToRandomPosition();
+            wormholeList.get(j).moveWormholeToRandomPosition();
+            repairRootField();
         }
-      //  wormholeList.get(0).moveWormholeToRandomPosition(); für Testzwecke
-
-
     }
 
     private void generateStartingFields() {
@@ -263,5 +261,24 @@ public class PlayingField {
             startingAreaField = blueStartingField;
         }
         return startingAreaField;
+    }
+
+    public Field getFieldWithUI(int ID){
+        if(ID < 1 || ID > 64){
+            return null;
+        }
+        else {
+            Field targetField = rootField;
+            while(targetField.getFieldID() != ID){
+                targetField = targetField.getNextField();
+            }
+            return targetField;
+        }
+    }
+
+    public void repairRootField(){
+        if(rootField.getFieldID() != 1){
+            rootField = getFieldWithUI(1);
+        }
     }
 }
