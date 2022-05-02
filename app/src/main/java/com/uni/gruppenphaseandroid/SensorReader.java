@@ -2,7 +2,6 @@ package com.uni.gruppenphaseandroid;
 
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -17,7 +16,7 @@ import com.se2.communication.Client;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.MessageType;
 
-import org.java_websocket.WebSocket;
+
 
 import java.util.EventListener;
 
