@@ -2,15 +2,19 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class PlayingField {
 
     private Field rootField;
+
     private StartingField greenStartingField;
     private StartingField yellowStartingField;
     private StartingField redStartingField;
     private StartingField blueStartingField;
     private View view;
     private Figure figure;
+    private ArrayList<Wormhole> wormholeList;
 
     public PlayingField(View view) {
         this.view = view;
@@ -18,6 +22,7 @@ public class PlayingField {
         generateStartingFields();
         generateStartingAreaFields();
         generateGoalFields();
+        generateWormholeFields();
     }
 
     private void generateRegularFields() {
@@ -33,6 +38,30 @@ public class PlayingField {
         }
         lastField.setNextField(rootField);
         rootField.setPreviousField(lastField);
+    }
+
+    private void generateWormholeFields(){
+        wormholeList = new ArrayList<>();
+
+        for (int i = 0; i<4; i++){
+            Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), null , null, fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+            fieldToChange.switchField(wormhole);
+
+            wormholeList.add(wormhole);
+        }
+
+        wormholeList.get(0).setPartnerWormhole(wormholeList.get(1));
+        wormholeList.get(1).setPartnerWormhole(wormholeList.get(0));
+        wormholeList.get(2).setPartnerWormhole(wormholeList.get(3));
+        wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
+
+
+        /** für Testzwecke **/
+        for (int j = 0; j<4; j++){
+            wormholeList.get(j).moveWormholeToRandomPosition();
+            repairRootField();
+        }
     }
 
     private void generateStartingFields() {
@@ -286,5 +315,23 @@ public class PlayingField {
 
     public boolean checkOvertakingPossible (Figure figure) {
         return figure.checkOvertaking();
+
+    public Field getFieldWithUI(int ID){
+        if(ID < 1 || ID > 64){
+            return null;
+        }
+        else {
+            Field targetField = rootField;
+            while(targetField.getFieldID() != ID){
+                targetField = targetField.getNextField();
+            }
+            return targetField;
+        }
+    }
+
+    public void repairRootField(){
+        if(rootField.getFieldID() != 1){
+            rootField = getFieldWithUI(1);
+        }
     }
 }

@@ -1,10 +1,10 @@
 package com.se2.communication.dto;
 
-public class JoinedLobbyPayload {
+public class LeaveLobbyPayload {
     String lobbyId;
     String playerId;
 
-    public JoinedLobbyPayload(String lobbyId, String playerId) {
+    public LeaveLobbyPayload(String lobbyId, String playerId) {
         this.lobbyId = lobbyId;
         this.playerId = playerId;
     }

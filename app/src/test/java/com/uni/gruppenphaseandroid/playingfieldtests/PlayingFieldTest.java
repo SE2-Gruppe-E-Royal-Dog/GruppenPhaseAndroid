@@ -1,6 +1,7 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
@@ -26,11 +27,18 @@ public class PlayingFieldTest {
     FigureUI figureUI1;
     Figure figure2;
     FigureUI figureUI2;
+    ImageView imageView;
 
     @Before
     public void setUp(){
         view = mock(View.class);
+        imageView = mock(ImageView.class);
+        when(view.findViewWithTag(anyString())).thenReturn(imageView);
+
         playingField = new PlayingField(view);
+
+        verify(imageView, times(16)).setImageDrawable(any());
+        verify(imageView, times(16)).getDrawable();
 
         Field startingAreaField = playingField.getRedStartingField().getPreviousStartingArea();
         startingAreaField.setCurrentFigure(new Figure());
@@ -43,6 +51,7 @@ public class PlayingFieldTest {
     public void tearDown(){
         view = null;
         playingField = null;
+        imageView = null;
     }
 
     @Test
@@ -51,6 +60,7 @@ public class PlayingFieldTest {
         Field expectedRootField = playingField.getRootField().getFieldAtDistance(64, Color.GREEN);
         Assert.assertEquals(playingField.getRootField(), expectedRootField);
         verify(view, times(96)).findViewWithTag(any());
+
     }
 
     @Test
