@@ -1,13 +1,16 @@
 package com.uni.gruppenphaseandroid;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cheater {
 
     private int roundIndex;
     private int currentRoundIndex;
-    private String playerID;
+    private String playerID;                    //for now - String evtl in int ändern
     private boolean cheatingAllowed;
+    private static List<Cheater> cheaters = new ArrayList<>();
 
 
     public Cheater() {
@@ -23,13 +26,49 @@ public class Cheater {
     /**
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
-    public boolean cheatingAllowed(){
-        if ((getCurrentRoundIndex()-getRoundIndex()) >= 5)
+    public boolean cheatingAllowed(String playerID){
+        if (getlastCheat(playerID) == 0){
             setCheatingAllowed(true);
+        }else {
+            if ((getlastCheat(playerID) - getRoundIndex()) >= 5) {
+                setCheatingAllowed(true);
+            }else {
+                setCheatingAllowed(false);
+            }
+        }
+
 
         return isCheatingAllowed();
     }
 
+    public void cheating (Cheater c){
+        //TODO koppel with move methode
+        noteCheating(c);
+    }
+
+    public static void noteCheating (Cheater cheater){
+        cheaters.add(cheater);
+        cheater.setCheatingAllowed(false);
+
+    }
+
+    public int getlastCheat (String playerID){
+
+        int round = 0;
+        if (!cheaters.isEmpty()) {
+            for (Cheater c : cheaters) {
+                if (c.getPlayerID().equals(playerID)) {
+                    round = c.getRoundIndex();
+                }
+            }
+        }
+        return round;
+    }
+
+
+    public static void emptyCheaters(){
+        cheaters.clear();
+    }
 
 
 
@@ -65,4 +104,10 @@ public class Cheater {
     public void setCheatingAllowed(boolean cheatingAllowed) {
         this.cheatingAllowed = cheatingAllowed;
     }
+
+    public static List<Cheater> getCheaters() {
+        return cheaters;
+    }
+
+
 }
