@@ -4,4 +4,6 @@ public abstract class FigureUI {
 
     public FigureUI() {
     }
+
+    public abstract void moveFigureToPosition(FieldUI targetFieldUI);
 }

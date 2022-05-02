@@ -9,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.uni.gruppenphaseandroid.playingfield.Color;
+import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment {
 
     PlayingField playingField;
+    FigureManager figureManager;
 
     @Override
     public View onCreateView(
@@ -28,5 +31,10 @@ public class InGameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         playingField = new PlayingField(view);
+        figureManager = new FigureManager();
+        figureManager.createFigureSetOfColor(Color.GREEN, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
+        figureManager.createFigureSetOfColor(Color.BLUE, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
+        figureManager.createFigureSetOfColor(Color.YELLOW, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
+        figureManager.createFigureSetOfColor(Color.RED, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
     }
 }

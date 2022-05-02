@@ -11,6 +11,7 @@ public class Figure {
         this.id = id;
         this.color = color;
         this.currentField = currentField;
+        currentField.setCurrentFigure(this);
         this.typ = typ;
         this.figureUI = figureUI;
     }
