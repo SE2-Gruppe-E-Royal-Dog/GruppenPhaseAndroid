@@ -102,7 +102,7 @@ public class Field {
             targetPreviousField.setNextField(this);
         }
 
-   //     fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
+        fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
 
         int helpID = targetField.getFieldID();
         targetField.setFieldID(getFieldID());

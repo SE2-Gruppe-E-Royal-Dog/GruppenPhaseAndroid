@@ -26,15 +26,15 @@ public class Wormhole extends Field {
 
 
     public void moveWormholeToRandomPosition(){
-        int min = 1;
-        int max = 64;
+        int min = 2;
+        int max = 63;
         Random random = new Random();
-        int value = random.nextInt(max + min) + min;
+        int value = random.nextInt(max - min) + min;
 
         Field targetField = getFieldAtDistance(value, Color.BLACK);
 
         while ( targetField instanceof StartingField || targetField instanceof GoalField || targetField.getCurrentFigure() != null) {
-            value = random.nextInt(max + min) + min;
+            value = random.nextInt(max - min) + min;
 
             targetField = getFieldAtDistance(value, Color.BLACK);
 
