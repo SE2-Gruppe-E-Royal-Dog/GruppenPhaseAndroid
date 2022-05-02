@@ -14,9 +14,9 @@ public class Cheater {
     }
 
     public Cheater(String playerID, int roundIndex){
-        this.playerID = playerID;                             //bis jetzt nur am Server
-        this.roundIndex = 5;                                  //cheating nur alle 5 runden --> wird jede runde -1 gesetzt
-        setCheatingAllowed(false);                            //constructor --> erstes mal schummeln -->
+        this.playerID = playerID;                             //bis jetzt nur am Server --> von gameManager?
+        this.roundIndex = roundIndex;                         //merkt sich die Runde, in der geschummelt wurde
+        setCheatingAllowed(false);                            //constructor --> erstes mal schummeln --> daher für nächsten runden false
     }
 
 
