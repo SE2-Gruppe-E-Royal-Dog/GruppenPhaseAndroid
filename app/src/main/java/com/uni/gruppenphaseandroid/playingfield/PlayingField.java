@@ -315,6 +315,7 @@ public class PlayingField {
 
     public boolean checkOvertakingPossible (Figure figure) {
         return figure.checkOvertaking();
+    }
 
     public Field getFieldWithUI(int ID){
         if(ID < 1 || ID > 64){
