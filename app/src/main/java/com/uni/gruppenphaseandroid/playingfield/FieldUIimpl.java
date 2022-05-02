@@ -1,8 +1,12 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+
+import android.app.ActionBar;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class FieldUIimpl extends FieldUI{
 
@@ -24,6 +28,16 @@ public class FieldUIimpl extends FieldUI{
     public FieldUIimpl(){};
 
 
+    @Override
+    public int getMarginTop(){
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) fieldImageView.getLayoutParams();
+        return layoutParams.topMargin;
+    }
+
+    public int getMarginLeft(){
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) fieldImageView.getLayoutParams();
+        return layoutParams.leftMargin;
+    }
 
     @Override
     public void changeAppearance(int resourceID) {
