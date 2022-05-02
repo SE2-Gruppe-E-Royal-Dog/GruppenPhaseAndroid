@@ -13,7 +13,6 @@ public class PlayingField {
     private StartingField redStartingField;
     private StartingField blueStartingField;
     private View view;
-    private Figure figure;
     private ArrayList<Wormhole> wormholeList;
 
     public PlayingField(View view) {
@@ -270,8 +269,10 @@ public class PlayingField {
                 Figure beaten = newPosition.getCurrentFigure();
                 beaten.setCurrentField(getRightStartingAreaField(beaten.getColor()));
             }
+            figure.getCurrentField().setCurrentFigure(null);
             newPosition.setCurrentFigure(figure);
             figure.setCurrentField(newPosition);
+            figure.getFigureUI().moveFigureToPosition(newPosition.getFieldUIobject());
             // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
             return newPosition;
