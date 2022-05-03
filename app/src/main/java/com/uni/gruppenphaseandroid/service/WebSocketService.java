@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.se2.communication.Client;
 
@@ -26,12 +27,16 @@ public class WebSocketService extends Service {
         };
     }
 
-    public Client getClient() throws InterruptedException {
+    public Client getClient() {
         if (client.isOpen()) {
             return client;
         }
 
-        client.connectToServer();
+        try {
+            client.connectToServer();
+        } catch (InterruptedException e) {
+            Log.d("websocket", "Unable to get client", e);
+        }
         return client;
     }
 
