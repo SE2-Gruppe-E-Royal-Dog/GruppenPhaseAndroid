@@ -19,5 +19,9 @@
         android:id="@+id/InGameFragment"
         android:name="com.uni.gruppenphaseandroid.InGameFragment"
         android:label="In-Game Fragment"
-        tools:layout="@layout/activity_ingame"/>
+        tools:layout="@layout/activity_ingame">
+        <action
+            android:id="@+id/action_InGameFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 </navigation>

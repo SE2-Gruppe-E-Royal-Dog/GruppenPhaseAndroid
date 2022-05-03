@@ -22,14 +22,20 @@ import com.se2.communication.Client;
 import com.se2.communication.dto.JoinedLobbyPayload;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
+
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+
+import com.se2.communication.dto.PlayerLeftLobbyPayload;
+
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {
     private Client websocketClient;
     private WebSocketService.WebSocketBinder binder;
     private WebSocketService service;
+    private String lobbyId;
+    private String playerId;
     private final Gson gson = new Gson();
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
@@ -38,11 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("MainActivity", "service bound successfully");
             binder = (WebSocketService.WebSocketBinder) iBinder;
             service = binder.getService();
-            try {
-                websocketClient = service.getClient();
-            } catch (InterruptedException e) {
-                throw new RuntimeException("Unable to get client", e);
-            }
+            websocketClient = service.getClient();
         }
 
         @Override
@@ -119,23 +121,36 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case UPDATEBOARD:
                 handleUpdateBoard(msg.getPayload());
-
+            case PLAYER_LEFT_LOBBY:
+                handlePlayerLeftMessage(msg.getPayload());
         }
+    }
+
+    private void handlePlayerLeftMessage(String body) {
+        var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
+
+        showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
     }
 
     private void handleNewPlayerJoinedMessage(String body) {
         var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
 
-        var toast = Toast.makeText(getApplicationContext(),
-                "Player " + payload.getPlayerName() + " joined your lobby",
-                Toast.LENGTH_LONG);
-
-        toast.show();
+        showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
     }
 
     private void handleJoinedLobbyMessage(String body) {
         var payload = gson.fromJson(body, JoinedLobbyPayload.class);
-        Log.d("lobby", "Joined lobby with id: " + payload.getLobbyId());
+        lobbyId = payload.getLobbyId();
+        playerId = payload.getPlayerId();
+        Log.d("lobby", "Joined lobby with id: " + playerId);
+    }
+
+    private void showPlayerToast(String message) {
+        var toast = Toast.makeText(getApplicationContext(),
+                message,
+                Toast.LENGTH_LONG);
+
+        toast.show();
     }
 
     private void handleStartGame(String body){
@@ -165,5 +180,17 @@ public class MainActivity extends AppCompatActivity {
 
     public Client getWebsocketClient() {
         return websocketClient;
+    }
+
+    public WebSocketService getService() {
+        return service;
+    }
+
+    public String getLobbyId() {
+        return lobbyId;
+    }
+
+    public String getPlayerId() {
+        return playerId;
     }
 }

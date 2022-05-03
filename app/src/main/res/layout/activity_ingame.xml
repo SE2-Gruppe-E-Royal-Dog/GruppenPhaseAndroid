@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/inGameButton"
+        android:id="@+id/bttn_leave_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Previous"
+        android:text="@string/leave_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +48,10 @@
                 android:layout_marginBottom="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.222"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.65">
 
                 <ImageView
                     android:id="@+id/regularPlayingField19"
@@ -57,7 +59,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="669dp"
                     android:layout_marginTop="169dp"
-                    android:tag="19"
+                    android:tag="f19"
                     app:srcCompat="@drawable/ic_regularfield" />
 
                 <ImageView
