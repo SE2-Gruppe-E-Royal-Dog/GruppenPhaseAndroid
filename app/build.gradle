@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.gruppenphaseandroid"
-        minSdkVersion 16
+        minSdkVersion 22
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
@@ -43,4 +43,5 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("org.slf4j:slf4j-android:1.7.36")
     testImplementation("org.mockito:mockito-core:3.+")
+    implementation 'com.github.ultimate-deej:twowaynestedscrollview:0.1'
 }

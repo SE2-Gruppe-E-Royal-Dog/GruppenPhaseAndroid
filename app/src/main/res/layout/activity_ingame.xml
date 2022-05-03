@@ -17,7 +17,7 @@
         app:layout_constraintVertical_bias="0.92" />
 
 
-    <com.uni.gruppenphaseandroid.twowaynestedscrollview.TwoWayNestedScrollView
+    <org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView
         android:id="@+id/twoWayScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -923,7 +923,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.uni.gruppenphaseandroid.twowaynestedscrollview.TwoWayNestedScrollView>
+    </org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
