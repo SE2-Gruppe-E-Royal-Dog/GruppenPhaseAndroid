@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
@@ -20,6 +21,7 @@ import com.se2.communication.dto.LeaveLobbyPayload;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.MessageType;
 import com.se2.communication.dto.NewPlayerPayload;
+
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 import org.java_websocket.client.WebSocketClient;
@@ -29,7 +31,6 @@ public class InGameFragment extends Fragment {
     private PlayingField playingField;
     private Client websocketClient;
     private Gson gson = new Gson();
-
 
     @Override
     public View onCreateView(
@@ -42,6 +43,12 @@ public class InGameFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        GameManager.getInstance().setPlayingField(new PlayingField(view));
+        GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
+
+        //detect button inputs and send signal to gamemananger
 
         playingField = new PlayingField(view);
 
