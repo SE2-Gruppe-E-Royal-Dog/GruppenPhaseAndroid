@@ -8,7 +8,7 @@ public class Handcards {
     private static Handcards hand;
     private LinkedList<Card> myCards;
 
-    public Handcards getInstance(){
+    public static Handcards getInstance(){
         if(hand==null){
             hand = new Handcards();
         }

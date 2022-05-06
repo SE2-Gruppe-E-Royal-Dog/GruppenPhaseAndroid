@@ -9,4 +9,8 @@ public class SendCardsPayload extends Payload {
         super(lobbyID, playerID);
         this.cards = cards;
     }
+
+    public LinkedList getCards() {
+        return cards;
+    }
 }

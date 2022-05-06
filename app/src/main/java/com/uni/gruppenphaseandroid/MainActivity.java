@@ -25,7 +25,9 @@ import com.se2.communication.dto.MessageType;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
 
 import com.se2.communication.dto.Payload;
+import com.se2.communication.dto.SendCardsPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 import com.se2.communication.dto.PlayerLeftLobbyPayload;
@@ -125,7 +127,15 @@ public class MainActivity extends AppCompatActivity {
                 handleUpdateBoard(msg.getPayload());
             case PLAYER_LEFT_LOBBY:
                 handlePlayerLeftMessage(msg.getPayload());
+            case SEND_CARDS:
+                handleSendCardsMessage(msg.getPayload());
         }
+    }
+
+    private void handleSendCardsMessage(String sendCardsPayload){
+        var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
+
+        Handcards.getInstance().addCardToHand(payload.getCards());
     }
 
     private void handlePlayerLeftMessage(String body) {
