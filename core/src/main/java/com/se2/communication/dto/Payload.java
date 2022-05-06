@@ -8,4 +8,12 @@ public abstract class Payload {
         this.lobbyID = lobbyID;
         this.playerID = playerID;
     }
+
+    public int getLobbyID() {
+        return lobbyID;
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
 }
