@@ -11,5 +11,6 @@ public enum MessageType {
     CHEATING_LIGHT,
     START_GAME,
     UPDATEBOARD,
-    REQUEST_CARDS
+    REQUEST_CARDS,
+    SEND_CARDS
 }
