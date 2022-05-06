@@ -15,14 +15,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.se2.communication.Client;
 import com.se2.communication.dto.JoinedLobbyPayload;
+import com.se2.communication.dto.LeaveLobbyPayload;
 import com.se2.communication.dto.Message;
+import com.se2.communication.dto.MessageType;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
 
+import com.se2.communication.dto.Payload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
@@ -192,5 +196,15 @@ public class MainActivity extends AppCompatActivity {
 
     public String getPlayerId() {
         return playerId;
+    }
+
+    public void sendMessage(MessageType messageType, Payload payload){
+        websocketClient = getService().getClient();
+        var message = new Message();
+        message.setType(MessageType.LEAVE_LOBBY);
+
+        message.setPayload(gson.toJson(payload));
+
+        websocketClient.send(message);
     }
 }
