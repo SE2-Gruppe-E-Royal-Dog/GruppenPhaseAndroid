@@ -8,6 +8,11 @@ import java.util.Random;
 public class Wormhole extends Field {
 
     Wormhole partnerWormhole;
+    static Random random = new Random();
+
+    public Wormhole() {
+
+    }
 
     public Wormhole getPartnerWormhole() {
         return partnerWormhole;
@@ -26,24 +31,36 @@ public class Wormhole extends Field {
 
 
     public void moveWormholeToRandomPosition(){
-        int min = 2;
-        int max = 63;
-        Random random = new Random();
-        int value = random.nextInt(max - min) + min;
 
-        Field targetField = getFieldAtDistance(value, Color.BLACK);
+        int value = generateRandomNumber();
 
-        while ( targetField instanceof StartingField || targetField instanceof GoalField || targetField.getCurrentFigure() != null) {
-            value = random.nextInt(max - min) + min;
-
-            targetField = getFieldAtDistance(value, Color.BLACK);
-
-        }
+        Field targetField = getNewFieldforWormholeSwitch(value);
 
         switchField(targetField);
 
     }
 
+    public int generateRandomNumber(){
+        int min = 2;
+        int max = 63;
+
+        return random.nextInt(max - min) + min;
+
+    }
+
+    public Field getNewFieldforWormholeSwitch(int value) {
+        Field targetField = getFieldAtDistance(value, Color.BLACK);
+
+        while (targetField instanceof StartingField || targetField instanceof GoalField || targetField.getCurrentFigure() != null) {
+            value = generateRandomNumber();
+
+            targetField = getFieldAtDistance(value, Color.BLACK);
+
+
+        }
+        return targetField;
+
+    }
 
 
 }

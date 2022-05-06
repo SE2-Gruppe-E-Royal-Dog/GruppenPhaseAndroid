@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_ingame.xml" value="0.36041666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/menu_fragment.xml" value="0.36041666666666666" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluecitizen.xml" value="0.1565" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluefield.xml" value="0.1565" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_draw2field.xml" value="0.156" />
