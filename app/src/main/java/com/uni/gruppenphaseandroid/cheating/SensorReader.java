@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid;
+package com.uni.gruppenphaseandroid.cheating;
 
 
 
@@ -7,19 +7,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.widget.TextView;
 
 
-import androidx.fragment.app.Fragment;
-
-import com.se2.communication.Client;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.MessageType;
-
-
-
-import java.util.EventListener;
+import com.uni.gruppenphaseandroid.MainActivity;
+import com.uni.gruppenphaseandroid.cheating.Cheater;
 
 /**
  *
@@ -38,6 +29,7 @@ public class SensorReader {//implements EventListener, SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
     Context context;
+    Cheater cheater;
 
 
     public SensorReader (MainActivity context){
@@ -66,6 +58,7 @@ public class SensorReader {//implements EventListener, SensorEventListener {
                 if (Math.abs(x) > Math.abs(y)) {
                     if (x < 0) { //tilt to right
                         //TODO Manipulate move -1
+                        //TODO cheater.cheatingAllowed(GameManager.getInstance().*playerID*);
 
                     } else {
                         if (x > 0) { //tilt to right
