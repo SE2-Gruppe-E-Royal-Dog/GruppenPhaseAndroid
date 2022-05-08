@@ -134,10 +134,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleSendCardsMessage(String sendCardsPayload){
         var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
-
-        if(payload.getLobbyID().equals(lobbyId) && payload.getPlayerID().equals(playerId)){
+        
             Handcards.getInstance().addCardToHand(payload.getCards());
-        }
     }
 
     private void handlePlayerLeftMessage(String body) {
