@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.uni.gruppenphaseandroid.playingfield.Color;
+
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.FieldUIimpl;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
