@@ -15,7 +15,7 @@ sonarqube {
 }
 
 jacoco {
-    toolVersion = '0.8.1' //Use latest version
+    toolVersion = "0.8.6"
 }
 
 tasks.withType(Test) {
@@ -50,13 +50,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
-    }
-    testOptions {
-        execution 'ANDROID_TEST_ORCHESTRATOR'
-        animationsDisabled true
-        unitTests {
-            includeAndroidResources = true
-        }
     }
 }
 
