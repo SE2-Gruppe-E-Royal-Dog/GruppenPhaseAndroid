@@ -23,5 +23,13 @@
         <action
             android:id="@+id/action_InGameFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_InGameFragment_to_cardViewFragment2"
+            app:destination="@id/cardViewFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/cardViewFragment2"
+        android:name="com.uni.gruppenphaseandroid.cardViewFragment"
+        android:label="fragment_card_view"
+        tools:layout="@layout/fragment_card_view" />
 </navigation>

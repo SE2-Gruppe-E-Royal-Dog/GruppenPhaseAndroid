@@ -72,5 +72,11 @@ public class InGameFragment extends Fragment {
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
+
+
+        view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> {
+            NavHostFragment.findNavController(InGameFragment.this)
+                    .navigate(R.id.action_InGameFragment_to_cardViewFragment2);
+        });
     }
 }

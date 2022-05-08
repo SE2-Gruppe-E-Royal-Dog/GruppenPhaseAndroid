@@ -3,6 +3,7 @@ package com.uni.gruppenphaseandroid;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,12 @@ public class cardViewFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+       /* getView().findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> {
+            NavHostFragment.findNavController(cardViewFragment.this)
+                    .navigate(R.id.action_cardViewFragment2_to_InGameFragment);
+
+        });*/
     }
 
     @Override
