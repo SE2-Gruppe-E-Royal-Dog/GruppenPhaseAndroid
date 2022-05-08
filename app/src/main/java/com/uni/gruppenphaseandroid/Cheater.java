@@ -1,16 +1,23 @@
 package com.uni.gruppenphaseandroid;
 
 
+import androidx.fragment.app.Fragment;
+
+import com.se2.communication.Client;
+import com.se2.communication.dto.Message;
+import com.se2.communication.dto.MessageType;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cheater {
+public class Cheater extends Fragment {
 
     private int roundIndex;
     private int currentRoundIndex;
     private String playerID;                    //for now - String evtl in int ändern
     private boolean cheatingAllowed;
     private static List<Cheater> cheaters = new ArrayList<>();
+    private Client websocketClient;
 
 
     public Cheater() {
@@ -64,6 +71,18 @@ public class Cheater {
         }
         return round;
     }
+
+    public void noteServer(){
+        //TODO make it work T-T
+        websocketClient = ((MainActivity) getContext()).getService().getClient();
+        var message = new Message();
+        message.setType(MessageType.CHEATING_TILT_RIGHT);
+        //or
+        message.setType(MessageType.CHEATING_TILT_LEFT);
+        websocketClient.send(message);
+
+    }
+
 
 
     public static void emptyCheaters(){

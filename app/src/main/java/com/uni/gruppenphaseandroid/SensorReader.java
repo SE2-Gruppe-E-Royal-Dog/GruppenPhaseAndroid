@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.TextView;
 
 
 import androidx.fragment.app.Fragment;
@@ -20,60 +21,67 @@ import com.se2.communication.dto.MessageType;
 
 import java.util.EventListener;
 
+/**
+ *
+ * how to call on the class:
+ *
+ * SensorReader sensorReader;
+ * sensorReader.registerUnregister(false);
+ * sensorReader= new SensorReader(context, DEFAULT_SAMPLE_NUMBER);
+ * sensorReader.registerUnregister(true);
+ *
+ */
 
-public class SensorReader extends Fragment implements EventListener, SensorEventListener {
 
-    private Client websocketClient;
+public class SensorReader {//implements EventListener, SensorEventListener {
+
     private SensorManager sensorManager;
     private Sensor sensor;
+    Context context;
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        websocketClient = ((MainActivity) getContext()).getWebsocketClient();
+    public SensorReader (MainActivity context){
+        this.context = context;
 
         //declaring Sensor Manager and sensor type
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor arg0, int arg1) {
+    public void registerUnregister (boolean register){
+        if (register)
+            sensorManager.registerListener(mSensorListener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+        else
+            sensorManager.unregisterListener(mSensorListener);
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
-        float y = event.values[1];
-        var message = new Message();
-        if (Math.abs(x) > Math.abs(y)) {
-            if (x < 0) { //tilt to right
-                //TODO Manipulate move -1
-                message.setType(MessageType.CHEATING_TILT_RIGHT);
+    private final SensorEventListener mSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
 
-            } else {
-                if (x > 0) { //tilt to right
-                    //TODO Manipulate move +1
-                    message.setType(MessageType.CHEATING_TILT_LEFT);
-                }
+                float x = event.values[0];
+                float y = event.values[1];
+
+
+                if (Math.abs(x) > Math.abs(y)) {
+                    if (x < 0) { //tilt to right
+                        //TODO Manipulate move -1
+
+                    } else {
+                        if (x > 0) { //tilt to right
+                            //TODO Manipulate move +1
+
+                        }
+                    }
+                }else
+                    registerUnregister(false);
+
             }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
         }
-        websocketClient.send(message);
-    }
+    };
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        //unregister Sensor listener
-        sensorManager.unregisterListener(this);
-    }
 }
 
