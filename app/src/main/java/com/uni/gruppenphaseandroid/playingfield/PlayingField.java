@@ -57,10 +57,10 @@ public class PlayingField {
 
 
         /** für Testzwecke **/
-        for (int j = 0; j<4; j++){
+       /** for (int j = 0; j<4; j++){
             wormholeList.get(j).moveWormholeToRandomPosition();
             repairRootField();
-        }
+        }**/
     }
 
     private void generateStartingFields() {
