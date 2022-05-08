@@ -18,4 +18,19 @@ public class King extends Figure {
         }
         return true;
     }
+
+    @Override
+    public boolean checkBeaten() {
+        Field currentPosition = getCurrentField();
+
+
+        return true;
+    }
+
+    @Override
+    public boolean checkMoving() {
+
+
+        return true;
+    }
 }

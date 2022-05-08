@@ -2,6 +2,9 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.view.View;
 
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
+
 import java.util.ArrayList;
 
 public class PlayingField {
@@ -14,6 +17,7 @@ public class PlayingField {
     private StartingField blueStartingField;
     private View view;
     private ArrayList<Wormhole> wormholeList;
+    private Card card;
 
     public PlayingField(View view) {
         this.view = view;
@@ -262,23 +266,33 @@ public class PlayingField {
         return startingAreaField;
     }
 
-    public Field move (Figure figure, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren
-        Field newPosition =  figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
+    public Field move (Figure figure1, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren
+        Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+        Figure figure2;
+
         try {
-            if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
-                Figure beaten = newPosition.getCurrentFigure();
-                beaten.setCurrentField(getRightStartingAreaField(beaten.getColor()));
+            if (newPositionFigure1.getCurrentFigure() != null) { // TODO: Checks für Goal Area
+                figure2 = newPositionFigure1.getCurrentFigure();
+                figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
+                figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
+            } else {
+                figure2 = null;
             }
-            figure.getCurrentField().setCurrentFigure(null);
-            newPosition.setCurrentFigure(figure);
-            figure.setCurrentField(newPosition);
-            figure.getFigureUI().moveFigureToPosition(newPosition.getFieldUIobject());
+            figure1.getCurrentField().setCurrentFigure(null);
+            newPositionFigure1.setCurrentFigure(figure1);
+            figure1.setCurrentField(newPositionFigure1);
+            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
+
             // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
-            return newPosition;
+            // TODO: Karten: Figuren tauschen
+
+            LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove, card.getCardID());
+
+            return newPositionFigure1;
         } catch (Exception e) {
             e.getMessage();
-            return figure.getCurrentField();
+            return figure1.getCurrentField();
         }
     }
 
@@ -316,6 +330,10 @@ public class PlayingField {
 
     public boolean checkOvertakingPossible (Figure figure) {
         return figure.checkOvertaking();
+    }
+
+    public boolean checkBeatenPossible (Figure figure) {
+        return figure.checkBeaten();
     }
 
     public Field getFieldWithUI(int ID){

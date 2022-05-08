@@ -17,4 +17,18 @@ public class Citizen extends Figure {
         }
         return true;
     }
+
+    @Override
+    public boolean checkBeaten() {
+
+
+        return true;
+    }
+
+    @Override
+    public boolean checkMoving() {
+
+
+        return true;
+    }
 }

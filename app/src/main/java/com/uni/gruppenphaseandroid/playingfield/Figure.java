@@ -22,7 +22,14 @@ public class Figure {
 
     public boolean checkOvertaking() {
         return true;
-    }
+    } // TODO: grüne Karte => overtaking Regeln außer Kraft gesetzt
+
+    public boolean checkBeaten() { return true; } //TODO: König kann nur von KÖnig geschlagen werden
+
+    public boolean checkMoving() { return true; }
+
+
+    // Getter and Setter
 
     public int getId() {
         return id;
