@@ -34,17 +34,18 @@ public class GameManager {
     FigureManager figuremanager;
     private Card selectedCard;
 
+
     public void startGame(int numberOfPlayers, int playerTurnNumber){
-        //deactivate start game button / end game button
+        //deactivate start game button
         playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
-        playingField.getView().findViewById(R.id.bttn_leave_game).setVisibility(View.INVISIBLE);
+
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
         figuremanager = new FigureManager();
         for(int i = 0; i<numberOfPlayers; i++){
             createFigureSet(Color.values()[i]);
         }
-        currentTurnPlayerNumber = 0;
+        currentTurnPlayerNumber = numberOfPlayers-1;
         nextTurn();
     }
 
@@ -71,14 +72,14 @@ public class GameManager {
     }
 
     public void cardGotPlayed(Card card){
-        if(currentTurnPhase == TurnPhase.CHOOSECARD && myTurnNumber == currentTurnPlayerNumber){
+        if(currentTurnPhase == TurnPhase.CHOOSECARD && isItMyTurn()){
             currentTurnPhase = TurnPhase.CHOOSEFIGURE;
             selectedCard = card;
         }
     }
 
     public void figureGotSelected(Figure figure){
-        if(currentTurnPhase == TurnPhase.CHOOSEFIGURE && myTurnNumber == currentTurnPlayerNumber){
+        if(currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn()){
 
             if(!checkIfMoveIsPossible(figure, selectedCard)){
                 //show feedback
@@ -96,7 +97,7 @@ public class GameManager {
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload){
         if(currentTurnPhase == TurnPhase.CURRENTLYMOVING){
-            if(currentTurnPlayerNumber != myTurnNumber){ //for the turnplayer, the update took place already
+            if(!isItMyTurn()){ //for the turnplayer, the update took place already
                 //update figures
                 Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
                 Figure figure2 = figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
@@ -124,6 +125,10 @@ public class GameManager {
             //... other cases
         }
         return false;
+    }
+
+    private boolean isItMyTurn(){
+        return (currentTurnPlayerNumber == myTurnNumber);
     }
 
 
