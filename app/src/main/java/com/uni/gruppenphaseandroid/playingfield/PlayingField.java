@@ -61,6 +61,7 @@ public class PlayingField {
             wormholeList.get(j).moveWormholeToRandomPosition();
             repairRootField();
         }**/
+
     }
 
     private void generateStartingFields() {
@@ -336,4 +337,10 @@ public class PlayingField {
             rootField = getFieldWithUI(1);
         }
     }
+
+    public ArrayList<Wormhole> getWormholeList() {
+        return wormholeList;
+    }
+
+
 }

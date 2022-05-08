@@ -38,6 +38,17 @@ public class Wormhole extends Field {
 
     }
 
+    @Override
+    public void switchField(Field targetField) {
+
+        Wormhole targetFieldCopy = new Wormhole(targetField.getFieldUIobject(), null , null, targetField.getCurrentFigure(), targetField.getFieldID());
+        Field targetFieldCopy_Field = new Field(this.getFieldUIobject(), null , null, this.getCurrentFigure(), this.getFieldID());
+        super.switchField(targetFieldCopy);
+
+
+
+    }
+
     public Wormhole getPartnerWormhole() {
         return partnerWormhole;
     }
@@ -55,6 +66,7 @@ public class Wormhole extends Field {
 
 
     public void moveWormholeToRandomPosition(){
+
 
         int value = generateRandomNumber();
 
