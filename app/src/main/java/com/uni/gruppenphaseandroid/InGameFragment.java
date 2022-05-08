@@ -9,20 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
-import com.google.gson.Gson;
-
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
-import org.java_websocket.client.WebSocketClient;
-   
 public class InGameFragment extends Fragment {
     FigureManager figureManager;
     private PlayingField playingField;
