@@ -14,6 +14,30 @@ public class Wormhole extends Field {
 
     }
 
+    @Override
+    protected void triggerSpecialFieldEffect() {
+        Figure myFigure;
+        Figure partnerFigure;
+
+        myFigure = getCurrentFigure();
+        myFigure.setCurrentField(partnerWormhole);
+
+        partnerFigure = partnerWormhole.getCurrentFigure();
+        setCurrentFigure(partnerFigure);
+
+        partnerWormhole.setCurrentFigure(myFigure);
+
+        if (partnerFigure != null) {
+            partnerFigure.setCurrentField(this);
+            partnerFigure.getFigureUI().moveFigureToPosition(getFieldUIobject());
+        }
+
+        myFigure.getFigureUI().moveFigureToPosition(partnerWormhole.getFieldUIobject());
+
+
+
+    }
+
     public Wormhole getPartnerWormhole() {
         return partnerWormhole;
     }

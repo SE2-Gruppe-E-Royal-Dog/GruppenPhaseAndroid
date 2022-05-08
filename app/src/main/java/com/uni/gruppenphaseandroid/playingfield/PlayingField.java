@@ -273,7 +273,7 @@ public class PlayingField {
             newPosition.setCurrentFigure(figure);
             figure.setCurrentField(newPosition);
             figure.getFigureUI().moveFigureToPosition(newPosition.getFieldUIobject());
-            // TODO: Wurmlöcher einfügen
+            newPosition.triggerSpecialFieldEffect();
             // TODO: Schummeln einfügen
             return newPosition;
         } catch (Exception e) {
