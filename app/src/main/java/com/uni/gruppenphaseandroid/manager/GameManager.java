@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.view.View;
+
 import com.se2.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
@@ -33,6 +35,9 @@ public class GameManager {
     private Card selectedCard;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber){
+        //deactivate start game button / end game button
+        playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+        playingField.getView().findViewById(R.id.bttn_leave_game).setVisibility(View.INVISIBLE);
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
         figuremanager = new FigureManager();

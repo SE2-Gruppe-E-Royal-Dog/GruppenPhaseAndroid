@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.se2.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -61,6 +62,21 @@ public class InGameFragment extends Fragment {
             websocketClient.send(message);
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
+        });
+
+        view.findViewById(R.id.start_game_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                websocketClient = ((MainActivity) getContext()).getService().getClient();
+                var lobbyId = ((MainActivity) getContext()).getLobbyId();
+                var message = new Message();
+                message.setType(MessageType.START_GAME);
+
+                var payload = new StartGamePayload(lobbyId, 0, 0);
+                message.setPayload(gson.toJson(payload));
+
+                websocketClient.send(message);
+            }
         });
     }
 }

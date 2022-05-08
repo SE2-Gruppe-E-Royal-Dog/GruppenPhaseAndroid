@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
@@ -23,9 +24,9 @@ import com.se2.communication.dto.JoinedLobbyPayload;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
 
+import com.se2.communication.dto.StartGamePayload;
 import com.se2.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 import com.se2.communication.dto.PlayerLeftLobbyPayload;
 
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             case START_GAME:
                 handleStartGame(msg.getPayload());
                 break;
-            case UPDATEBOARD:
+            case UPDATE_BOARD:
                 handleUpdateBoard(msg.getPayload());
             case PLAYER_LEFT_LOBBY:
                 handlePlayerLeftMessage(msg.getPayload());
@@ -156,12 +157,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleStartGame(String body){
 
-        String[] splitString = body.split("_");
-        int numberOfPlayers = Integer.parseInt(splitString[0]);
-        int playerTurnNumber = Integer.parseInt(splitString[1]);
+        var payload = gson.fromJson(body, StartGamePayload.class);
         //start game
-        GameManager.getInstance().startGame(numberOfPlayers, playerTurnNumber);
-
+        System.out.println("Server message received!!!!!!");
+        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber());
     }
 
     private void handleUpdateBoard(String body){
