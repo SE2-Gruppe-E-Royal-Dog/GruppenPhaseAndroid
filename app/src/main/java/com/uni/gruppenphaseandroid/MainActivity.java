@@ -23,6 +23,7 @@ import com.se2.communication.dto.JoinedLobbyPayload;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
 
+import com.se2.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
@@ -164,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleUpdateBoard(String body){
-        String[] splitString = body.split("_");
-        GameManager.getInstance().updateBoard(splitString);
+        var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
+        GameManager.getInstance().updateBoard(updateBoardPayload);
     }
 
     @Override

@@ -77,4 +77,13 @@ public class FigureManager {
         }
         return 0;
     }
+
+    public Figure getFigureWithID(int id){
+        for (Figure figure: figureList) {
+            if(figure.getId() == id){
+                return figure;
+            }
+        }
+        return null;
+    }
 }

@@ -1,7 +1,12 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import com.uni.gruppenphaseandroid.MainActivity;
+import com.se2.communication.dto.UpdateBoardPayload;
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.playingfield.Color;
+import com.uni.gruppenphaseandroid.playingfield.Figure;
+import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 import org.java_websocket.client.WebSocketClient;
@@ -24,32 +29,32 @@ public class GameManager {
     private WebSocketClient webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
-    //figuremanager
+    FigureManager figuremanager;
+    private Card selectedCard;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber){
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
-        //TODO: create figures
+        figuremanager = new FigureManager();
         for(int i = 0; i<numberOfPlayers; i++){
             createFigureSet(Color.values()[i]);
         }
         currentTurnPlayerNumber = 0;
-        initializeCardDeck();
         nextTurn();
     }
 
-    void initializeCardDeck(){
-
-        //synchronize with server so that every client shuffles the same way
-    }
 
     void createFigureSet(Color color){
-
+        figuremanager.createFigureSetOfColor(color, playingField, playingField.getView().findViewById(R.id.playingFieldRelativeLayout));
     }
 
     void nextTurn(){
 
         currentTurnPlayerNumber += 1 % numberOfPlayers;
+
+        if(!doesAnyoneHaveCardsLeftInHand()){
+            everyOneDraws5Cards();
+        }
         currentTurnPhase = TurnPhase.CHOOSECARD;
 
         if(myTurnNumber == currentTurnPlayerNumber){
@@ -60,28 +65,62 @@ public class GameManager {
         }
     }
 
-    public void cardGotPlayed(){
+    public void cardGotPlayed(Card card){
         if(currentTurnPhase == TurnPhase.CHOOSECARD && myTurnNumber == currentTurnPlayerNumber){
             currentTurnPhase = TurnPhase.CHOOSEFIGURE;
+            selectedCard = card;
         }
     }
 
-    public void figureGotSelected(){
+    public void figureGotSelected(Figure figure){
         if(currentTurnPhase == TurnPhase.CHOOSEFIGURE && myTurnNumber == currentTurnPlayerNumber){
+
+            if(!checkIfMoveIsPossible(figure, selectedCard)){
+                //show feedback
+                currentTurnPhase = TurnPhase.CHOOSECARD;
+                return;
+            }
             currentTurnPhase = TurnPhase.CURRENTLYMOVING;
+            int effect = 1;//TODO: set effect
+            selectedCard.playCard(effect, figure, null);
             //send message to server
             webSocketClient.send(lastTurn.generateServerMessage());
 
         }
     }
 
-    public void updateBoard(String[] serverMessage){
+    public void updateBoard(UpdateBoardPayload updateBoardPayload){
         if(currentTurnPhase == TurnPhase.CURRENTLYMOVING){
-            //update figures
-            //update card UI
-            //next turn
+            if(currentTurnPlayerNumber != myTurnNumber){ //for the turnplayer, the update took place already
+                //update figures
+                Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
+                Figure figure2 = figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
+                lastTurn = new LastTurn(figure1, figure2, playingField.getFieldWithID(updateBoardPayload.getNewField1ID()), playingField.getFieldWithID(updateBoardPayload.getNewField2ID()), 0, Cardtype.values()[updateBoardPayload.getCardType()]);
+                int effect = 1; //TODO: figure out which effect
+                new Card(Cardtype.values()[updateBoardPayload.getCardType()], -1).playCard(effect, figure1, figure2);
+                //update card UI
+            }
+            nextTurn();
         }
     }
+
+    public boolean doesAnyoneHaveCardsLeftInHand(){
+        return true;
+    }
+
+    private void everyOneDraws5Cards(){
+
+    }
+
+    private boolean checkIfMoveIsPossible(Figure figure, Card card){
+
+        switch (card.getCardtype()){
+            case TWO: return playingField.checkMovingPossible(figure, 2);
+            //... other cases
+        }
+        return false;
+    }
+
 
     public PlayingField getPlayingField() {
         return playingField;

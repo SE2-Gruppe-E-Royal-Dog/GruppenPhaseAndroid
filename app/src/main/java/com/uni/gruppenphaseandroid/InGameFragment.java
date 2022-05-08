@@ -44,19 +44,9 @@ public class InGameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        GameManager.getInstance().setPlayingField(new PlayingField(view));
-        GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
-
-        //detect button inputs and send signal to gamemananger
-
         playingField = new PlayingField(view);
-
-        figureManager = new FigureManager();
-        figureManager.createFigureSetOfColor(Color.GREEN, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
-        figureManager.createFigureSetOfColor(Color.BLUE, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
-        figureManager.createFigureSetOfColor(Color.YELLOW, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
-        figureManager.createFigureSetOfColor(Color.RED, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
+        GameManager.getInstance().setPlayingField(playingField);
+        GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();

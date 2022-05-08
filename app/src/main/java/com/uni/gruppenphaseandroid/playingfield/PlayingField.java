@@ -318,7 +318,7 @@ public class PlayingField {
         return figure.checkOvertaking();
     }
 
-    public Field getFieldWithUI(int ID){
+    public Field getFieldWithID(int ID){
         if(ID < 1 || ID > 64){
             return null;
         }
@@ -333,7 +333,13 @@ public class PlayingField {
 
     public void repairRootField(){
         if(rootField.getFieldID() != 1){
-            rootField = getFieldWithUI(1);
+            rootField = getFieldWithID(1);
         }
     }
+
+
+    public View getView() {
+        return view;
+    }
+
 }
