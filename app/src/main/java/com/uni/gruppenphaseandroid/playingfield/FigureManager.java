@@ -83,7 +83,14 @@ public class FigureManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void moveFigureTest_2(PlayingField playingField){
+        try{
+            playingField.move(figureList.get(2), 3);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

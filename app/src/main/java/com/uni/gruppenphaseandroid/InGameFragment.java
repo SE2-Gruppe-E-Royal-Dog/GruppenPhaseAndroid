@@ -73,10 +73,19 @@ public class InGameFragment extends Fragment {
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
+
         view.findViewById(R.id.move_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 figureManager.moveFigureTest(playingField);
+            }
+        });
+
+
+        view.findViewById(R.id.move2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                figureManager.moveFigureTest_2(playingField);
             }
         });
     }
