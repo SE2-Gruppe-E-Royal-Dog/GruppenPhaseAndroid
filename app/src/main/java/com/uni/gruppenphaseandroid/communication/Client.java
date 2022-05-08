@@ -1,7 +1,7 @@
-package com.se2.communication;
+package com.uni.gruppenphaseandroid.communication;
 
 import com.google.gson.Gson;
-import com.se2.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;

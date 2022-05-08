@@ -1,26 +1,23 @@
 package com.uni.gruppenphaseandroid;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.uni.gruppenphaseandroid.communication.Client;
+import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.google.gson.Gson;
-import com.se2.communication.Client;
-import com.se2.communication.dto.LeaveLobbyPayload;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.MessageType;
-import com.se2.communication.dto.NewPlayerPayload;
 
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 

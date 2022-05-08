@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.se2.communication.Client;
+import com.uni.gruppenphaseandroid.communication.Client;
 
 import java.net.URI;
 import java.net.URISyntaxException;

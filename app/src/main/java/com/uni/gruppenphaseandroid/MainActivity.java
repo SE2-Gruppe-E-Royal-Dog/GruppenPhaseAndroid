@@ -18,16 +18,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.se2.communication.Client;
-import com.se2.communication.dto.JoinedLobbyPayload;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
-
-import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.playingfield.PlayingField;
-
-import com.se2.communication.dto.PlayerLeftLobbyPayload;
-
+import com.uni.gruppenphaseandroid.communication.Client;
+import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.PlayerLeftLobbyPayload;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {

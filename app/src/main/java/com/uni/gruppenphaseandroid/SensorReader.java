@@ -12,9 +12,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.se2.communication.Client;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.Client;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 
 
 
