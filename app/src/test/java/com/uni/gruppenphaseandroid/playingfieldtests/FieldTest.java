@@ -115,6 +115,21 @@ public class FieldTest {
 
         verify(field2UI,times(1)).switchFieldUI(field6UI);
 
+        int fieldstraversed = 0;
+        Field currentField = field1;
+        while(currentField != null ){
+            fieldstraversed++;
+            currentField = currentField.getNextField();
+        }
+        Assert.assertEquals(7, fieldstraversed);
+
+        fieldstraversed = 0;
+        currentField = field7;
+        while(currentField != null ){
+            fieldstraversed++;
+            currentField = currentField.getPreviousField();
+        }
+        Assert.assertEquals(7, fieldstraversed);
     }
 
 
