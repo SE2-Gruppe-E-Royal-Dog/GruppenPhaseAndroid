@@ -67,5 +67,5 @@ dependencies {
     implementation("org.slf4j:slf4j-android:1.7.36")
     testImplementation("org.mockito:mockito-core:4.0.0")
     testImplementation("org.assertj:assertj-core:3.22.0")
-
+    implementation 'com.github.ultimate-deej:twowaynestedscrollview:0.1'
 }
