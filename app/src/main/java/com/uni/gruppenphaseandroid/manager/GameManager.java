@@ -117,11 +117,9 @@ public class GameManager {
 
     public void moveWormholes(){
         //TODO check if it's my turn
+        playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-        for(int i= 0; i<wormholeList.size(); i++){
-            wormholeList.get(i).moveWormholeToRandomPosition();
-        }
        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);

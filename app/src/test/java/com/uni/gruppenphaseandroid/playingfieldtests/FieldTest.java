@@ -113,7 +113,7 @@ public class FieldTest {
         Assert.assertEquals(17, field2.getFieldID());
         Assert.assertEquals(10, field6.getFieldID());
 
-        verify(field2UI,times(1)).switchFieldUI(field6UI);
+        verify(field2UI,times(1)).turnIntoRegularField();
 
         int fieldstraversed = 0;
         Field currentField = field1;
