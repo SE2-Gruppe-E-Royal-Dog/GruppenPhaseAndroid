@@ -51,7 +51,7 @@ public class Wormhole extends Field {
     public Field getNewFieldforWormholeSwitch(int value) {
         Field targetField = getFieldAtDistance(value, Color.BLACK);
 
-        while (targetField instanceof StartingField || targetField instanceof GoalField || targetField.getCurrentFigure() != null) {
+        while (targetField instanceof StartingField || targetField instanceof GoalField || targetField instanceof  Wormhole || targetField.getCurrentFigure() != null) {
             value = generateRandomNumber();
 
             targetField = getFieldAtDistance(value, Color.BLACK);
