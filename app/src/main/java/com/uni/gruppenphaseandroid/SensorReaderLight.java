@@ -26,9 +26,7 @@ public class SensorReaderLight extends Fragment implements EventListener, Sensor
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-
             websocketClient = ((MainActivity) getContext()).getWebsocketClient();
-
 
             sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
