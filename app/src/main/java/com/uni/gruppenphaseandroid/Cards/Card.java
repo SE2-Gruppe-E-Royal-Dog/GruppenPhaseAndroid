@@ -4,19 +4,13 @@ import com.uni.gruppenphaseandroid.playingfield.Figure;
 
 public class Card {
     private Cardtype cardtype;
-    private int cardID;
 
-    public Card(Cardtype cardtype, int cardID) {
+    public Card(Cardtype cardtype) {
         this.cardtype = cardtype;
-        this.cardID = cardID;
     }
 
     public Cardtype getCardtype() {
         return cardtype;
-    }
-
-    public int getCardID() {
-        return cardID;
     }
 
     public void playCard(int effect, Figure myFigure, Figure targetFigure) {
