@@ -2,7 +2,7 @@ package com.uni.gruppenphaseandroid.communication.dto;
 
 import java.util.LinkedList;
 
-public class SendCardsPayload{
+public class SendCardsPayload {
     private String lobbyID;
     private String playerID;
     private LinkedList cards;

@@ -11,11 +11,7 @@ public class Field {
     private FieldUI fieldUIobject;
 
 
-
-
-
-
-    public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID){
+    public Field(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID) {
         this.fieldUIobject = fieldUIobject;
         this.nextField = nextField;
         this.previousField = previousField;
@@ -24,25 +20,24 @@ public class Field {
 
     }
 
-    public Field(){
+    public Field() {
 
     }
 
-    protected void triggerSpecialFieldEffect(){ }
+    protected void triggerSpecialFieldEffect() {
+    }
 
-    public Field getFieldAtDistance(int distance, Color color){
+    public Field getFieldAtDistance(int distance, Color color) {
         return getFieldAtDistanceRecursive(distance, color, this);
     }
 
-    protected Field getFieldAtDistanceRecursive(int remainingDistance, Color color, Field originField){
-        if(remainingDistance == 0){
+    protected Field getFieldAtDistanceRecursive(int remainingDistance, Color color, Field originField) {
+        if (remainingDistance == 0) {
             return this;
-        }
-        else if(remainingDistance < 0){
-            return getPreviousField().getFieldAtDistanceRecursive(remainingDistance+1, color, originField);
-        }
-        else {//remainingFields > 0
-            return getNextField().getFieldAtDistanceRecursive(remainingDistance-1, color, originField);
+        } else if (remainingDistance < 0) {
+            return getPreviousField().getFieldAtDistanceRecursive(remainingDistance + 1, color, originField);
+        } else {//remainingFields > 0
+            return getNextField().getFieldAtDistanceRecursive(remainingDistance - 1, color, originField);
         }
     }
 
@@ -74,13 +69,19 @@ public class Field {
         return fieldID;
     }
 
-    public void setFieldID(int fieldID) { this.fieldID = fieldID; }
+    public void setFieldID(int fieldID) {
+        this.fieldID = fieldID;
+    }
 
-    public Figure getCurrentFigure() { return currentFigure; }
+    public Figure getCurrentFigure() {
+        return currentFigure;
+    }
 
-    public void setCurrentFigure(Figure currentFigure) { this.currentFigure = currentFigure; }
+    public void setCurrentFigure(Figure currentFigure) {
+        this.currentFigure = currentFigure;
+    }
 
-    public void switchField(Field targetField){
+    public void switchField(Field targetField) {
 
         Field currentNextField = getNextField();
         Field currentPreviousField = getPreviousField();
@@ -111,9 +112,6 @@ public class Field {
     }
 
 
-
-
-
-    }
+}
 
 

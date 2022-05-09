@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        private void handleSendCardsMessage(String sendCardsPayload){
+        private void handleSendCardsMessage(String sendCardsPayload) {
             var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
 
             Handcards.getInstance().addCardToHand(payload.getCards());
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         return playerId;
     }
 
-    public void sendMessage(MessageType messageType, Payload payload){
+    public void sendMessage(MessageType messageType, Payload payload) {
         websocketClient = getService().getClient();
         var message = new Message();
         message.setType(messageType);

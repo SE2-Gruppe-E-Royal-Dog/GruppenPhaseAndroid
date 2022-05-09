@@ -24,7 +24,7 @@ public class Cheater extends Fragment {
     public Cheater() {
     }
 
-    public Cheater(String playerID, int roundIndex){
+    public Cheater(String playerID, int roundIndex) {
         this.playerID = playerID;                             //bis jetzt nur am Server --> von gameManager?
         this.roundIndex = roundIndex;                         //merkt sich die Runde, in der geschummelt wurde
         setCheatingAllowed(false);                            //constructor --> erstes mal schummeln --> daher für nächsten runden false
@@ -34,13 +34,13 @@ public class Cheater extends Fragment {
     /**
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
-    public boolean cheatingAllowed(String playerID){
-        if (getlastCheat(playerID) == 0){       //TODO bedinung prüfen
+    public boolean cheatingAllowed(String playerID) {
+        if (getlastCheat(playerID) == 0) {       //TODO bedinung prüfen
             setCheatingAllowed(true);
-        }else {
+        } else {
             if ((getlastCheat(playerID) - getRoundIndex()) >= 5) {
                 setCheatingAllowed(true);
-            }else {
+            } else {
                 setCheatingAllowed(false);
             }
         }
@@ -49,18 +49,18 @@ public class Cheater extends Fragment {
         return isCheatingAllowed();
     }
 
-    public void cheating (Cheater c){
+    public void cheating(Cheater c) {
         //TODO koppel with move methode
         noteCheating(c);
     }
 
-    public static void noteCheating (Cheater cheater){
+    public static void noteCheating(Cheater cheater) {
         cheaters.add(cheater);
         cheater.setCheatingAllowed(false);
 
     }
 
-    public int getlastCheat (String playerID){
+    public int getlastCheat(String playerID) {
 
         int round = 0;
         if (!cheaters.isEmpty()) {
@@ -73,7 +73,7 @@ public class Cheater extends Fragment {
         return round;
     }
 
-    public void noteServer(){
+    public void noteServer() {
         //TODO make it work T-T
         websocketClient = ((MainActivity) getContext()).getService().getClient();
         var message = new Message();
@@ -85,11 +85,9 @@ public class Cheater extends Fragment {
     }
 
 
-
-    public static void emptyCheaters(){
+    public static void emptyCheaters() {
         cheaters.clear();
     }
-
 
 
     //getter setter

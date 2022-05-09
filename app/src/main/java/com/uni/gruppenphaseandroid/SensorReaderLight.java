@@ -15,51 +15,51 @@ import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 
 import java.util.EventListener;
 
-public class SensorReaderLight extends Fragment implements EventListener, SensorEventListener{
+public class SensorReaderLight extends Fragment implements EventListener, SensorEventListener {
 
-        private Client websocketClient;
-        private SensorManager sensorManager;
-        private Sensor sensor;
-
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            websocketClient = ((MainActivity) getContext()).getWebsocketClient();
-
-            sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
+    private Client websocketClient;
+    private SensorManager sensorManager;
+    private Sensor sensor;
 
 
-        }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        @Override
-        public void onAccuracyChanged(Sensor arg0, int arg1) {
-        }
+        websocketClient = ((MainActivity) getContext()).getWebsocketClient();
 
-        @Override
-        public void onSensorChanged(SensorEvent event) {
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
 
-            if (event.values[0] <= event.values[0]){
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor arg0, int arg1) {
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        if (event.values[0] <= event.values[0]) {
               /*  var message = new Message();
                 message.setType(MessageType.CHEATING_LIGHT);
                 websocketClient.send(message);
             */
-                //TODO send message to GameManager (prüft vorab ob schummeln möglich ist, wenn ja wird die Message den Server geschickt)
-            }
+            //TODO send message to GameManager (prüft vorab ob schummeln möglich ist, wenn ja wird die Message den Server geschickt)
         }
+    }
 
-        @Override
-        public void onResume() {
-            super.onResume();
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
 
-        @Override
-        public void onPause() {
-            super.onPause();
-            sensorManager.unregisterListener(this);
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
 
 }

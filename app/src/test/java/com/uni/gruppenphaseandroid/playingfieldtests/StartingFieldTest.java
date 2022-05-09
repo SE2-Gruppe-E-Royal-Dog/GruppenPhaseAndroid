@@ -22,7 +22,7 @@ public class StartingFieldTest {
     StartingAreaField startingAreaField;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         field1 = new Field();
         field2 = new StartingField();
         field3 = new Field();
@@ -43,7 +43,7 @@ public class StartingFieldTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         field1 = null;
         field2 = null;
         field3 = null;
@@ -54,37 +54,37 @@ public class StartingFieldTest {
     }
 
     @Test
-    public void testGoIntoGoalArea(){
+    public void testGoIntoGoalArea() {
         Field destinationField = field1.getFieldAtDistance(2, Color.GREEN);
         Assert.assertEquals(goalField, destinationField);
     }
 
     @Test
-    public void testNonMatchingColor(){
+    public void testNonMatchingColor() {
         Field destinationField = field1.getFieldAtDistance(2, Color.BLUE);
         Assert.assertEquals(field3, destinationField);
     }
 
     @Test
-    public void testGoTooFarForGoalField(){
+    public void testGoTooFarForGoalField() {
         Field destinationField = field1.getFieldAtDistance(3, Color.GREEN);
         Assert.assertEquals(field4, destinationField);
     }
 
     @Test
-    public void testGoBackwardsPastStart(){
+    public void testGoBackwardsPastStart() {
         Field destinationField = field3.getFieldAtDistance(-2, Color.GREEN);
         Assert.assertEquals(field1, destinationField);
     }
 
     @Test
-    public void testBeginAtStartingField(){
+    public void testBeginAtStartingField() {
         Field destinationField = field2.getFieldAtDistance(1, Color.GREEN);
         Assert.assertEquals(field3, destinationField);
     }
 
     @Test
-    public void test0Distance(){
+    public void test0Distance() {
         Field destinationField = field2.getFieldAtDistance(0, Color.GREEN);
         Assert.assertEquals(field2, destinationField);
     }

@@ -27,10 +27,12 @@ public class Client extends WebSocketClient {
     }
 
     @Override
-    public void onOpen(ServerHandshake handshakedata) {}
+    public void onOpen(ServerHandshake handshakedata) {
+    }
 
     @Override
-    public void onMessage(String message) {}
+    public void onMessage(String message) {
+    }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {

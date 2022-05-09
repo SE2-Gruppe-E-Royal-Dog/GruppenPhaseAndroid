@@ -9,8 +9,9 @@ import org.java_websocket.client.WebSocketClient;
 public class GameManager {
 
     public static GameManager instance;
-    public static GameManager getInstance(){
-        if(instance == null){
+
+    public static GameManager getInstance() {
+        if (instance == null) {
             instance = new GameManager();
         }
         return instance;
@@ -26,11 +27,11 @@ public class GameManager {
     //cardmanager
     //figuremanager
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber){
+    public void startGame(int numberOfPlayers, int playerTurnNumber) {
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
         //TODO: create figures
-        for(int i = 0; i<numberOfPlayers; i++){
+        for (int i = 0; i < numberOfPlayers; i++) {
             createFigureSet(Color.values()[i]);
         }
         currentTurnPlayerNumber = 0;
@@ -38,36 +39,35 @@ public class GameManager {
         nextTurn();
     }
 
-    void initializeCardDeck(){
+    void initializeCardDeck() {
 
         //synchronize with server so that every client shuffles the same way
     }
 
-    void createFigureSet(Color color){
+    void createFigureSet(Color color) {
 
     }
 
-    void nextTurn(){
+    void nextTurn() {
 
         currentTurnPlayerNumber += 1 % numberOfPlayers;
         currentTurnPhase = TurnPhase.CHOOSECARD;
 
-        if(myTurnNumber == currentTurnPlayerNumber){
+        if (myTurnNumber == currentTurnPlayerNumber) {
             //my turn, do stuff
-        }
-        else {
+        } else {
             //other's turn, wait
         }
     }
 
-    public void cardGotPlayed(){
-        if(currentTurnPhase == TurnPhase.CHOOSECARD && myTurnNumber == currentTurnPlayerNumber){
+    public void cardGotPlayed() {
+        if (currentTurnPhase == TurnPhase.CHOOSECARD && myTurnNumber == currentTurnPlayerNumber) {
             currentTurnPhase = TurnPhase.CHOOSEFIGURE;
         }
     }
 
-    public void figureGotSelected(){
-        if(currentTurnPhase == TurnPhase.CHOOSEFIGURE && myTurnNumber == currentTurnPlayerNumber){
+    public void figureGotSelected() {
+        if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && myTurnNumber == currentTurnPlayerNumber) {
             currentTurnPhase = TurnPhase.CURRENTLYMOVING;
             //send message to server
             webSocketClient.send(lastTurn.generateServerMessage());
@@ -75,8 +75,8 @@ public class GameManager {
         }
     }
 
-    public void updateBoard(String[] serverMessage){
-        if(currentTurnPhase == TurnPhase.CURRENTLYMOVING){
+    public void updateBoard(String[] serverMessage) {
+        if (currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             //update figures
             //update card UI
             //next turn

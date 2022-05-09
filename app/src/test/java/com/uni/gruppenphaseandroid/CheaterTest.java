@@ -18,13 +18,13 @@ public class CheaterTest {
 
 
     @Before
-    public void emptyList(){
+    public void emptyList() {
         Cheater.emptyCheaters();
     }
 
 
     @Test
-    public void cheatingAllowed(){
+    public void cheatingAllowed() {
     }
 
 
@@ -48,12 +48,12 @@ public class CheaterTest {
     }
 
     @Test
-    public void noteCheater2(){
+    public void noteCheater2() {
 
         playerID = "3";
         currentRound = 2;
         cheater = new Cheater(playerID, currentRound);
-        if (cheater.cheatingAllowed(playerID)){
+        if (cheater.cheatingAllowed(playerID)) {
             Cheater.noteCheating(cheater);
         }
 
@@ -61,34 +61,34 @@ public class CheaterTest {
         playerID = "3";
         currentRound = 4;
         cheater = new Cheater(playerID, currentRound);
-        if (cheater.cheatingAllowed(playerID)){
+        if (cheater.cheatingAllowed(playerID)) {
             Cheater.noteCheating(cheater);
         }
 
 
         cheater = new Cheater(playerID, currentRound);
-        if (cheater.cheatingAllowed(playerID)){
+        if (cheater.cheatingAllowed(playerID)) {
             Cheater.noteCheating(cheater);
         }
 
         assertTrue(Cheater.getCheaters().size() == 1);
     }
 
-  @Test
-    public void isCheatingAllowed1 (){
+    @Test
+    public void isCheatingAllowed1() {
         currentRound = 10;
         playerID = "3";
 
         cheater = new Cheater(playerID, currentRound);
         cheater.setRoundIndex(currentRound);
 
-boolean hija = cheater.cheatingAllowed(playerID);
+        boolean hija = cheater.cheatingAllowed(playerID);
         assertTrue(cheater.cheatingAllowed(playerID));
 
     }
 
     @Test
-    public void isCheatingAllowed2 (){
+    public void isCheatingAllowed2() {
         int previousRound = 2;
         currentRound = 8;
         playerID = "3";
@@ -98,7 +98,7 @@ boolean hija = cheater.cheatingAllowed(playerID);
         assertTrue(cheater.cheatingAllowed(playerID));
 
 
-        cheater2 = new Cheater(playerID,currentRound);
+        cheater2 = new Cheater(playerID, currentRound);
         cheater2.setRoundIndex(currentRound);
 
 

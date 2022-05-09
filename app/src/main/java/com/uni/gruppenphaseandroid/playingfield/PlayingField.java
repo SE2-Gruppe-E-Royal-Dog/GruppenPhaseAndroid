@@ -39,12 +39,12 @@ public class PlayingField {
         rootField.setPreviousField(lastField);
     }
 
-    private void generateWormholeFields(){
+    private void generateWormholeFields() {
         wormholeList = new ArrayList<>();
 
-        for (int i = 0; i<4; i++){
-            Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
-            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), null , null, fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+        for (int i = 0; i < 4; i++) {
+            Field fieldToChange = rootField.getFieldAtDistance(6 + 16 * i, Color.BLACK);
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), null, null, fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
             fieldToChange.switchField(wormhole);
 
             wormholeList.add(wormhole);
@@ -57,7 +57,7 @@ public class PlayingField {
 
 
         /** für Testzwecke **/
-        for (int j = 0; j<4; j++){
+        for (int j = 0; j < 4; j++) {
             wormholeList.get(j).moveWormholeToRandomPosition();
             repairRootField();
         }
@@ -98,16 +98,16 @@ public class PlayingField {
         int blueID = 80;
 
         for (int i = 0; i < 4; i++) {
-            StartingAreaField startingAreaFieldGreen = new StartingAreaField(new FieldUIimpl(view), nextFieldGreen, null, null,greenID - i, Color.GREEN);
+            StartingAreaField startingAreaFieldGreen = new StartingAreaField(new FieldUIimpl(view), nextFieldGreen, null, null, greenID - i, Color.GREEN);
             startingAreaFieldGreen.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.GREEN, 4 - i));
 
             StartingAreaField startingAreaFieldYellow = new StartingAreaField(new FieldUIimpl(view), nextFieldYellow, null, null, yellowID - i, Color.YELLOW);
             startingAreaFieldYellow.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.YELLOW, 4 - i));
 
-            StartingAreaField startingAreaFieldRed = new StartingAreaField(new FieldUIimpl(view), nextFieldRed, null, null,redID - i, Color.RED);
+            StartingAreaField startingAreaFieldRed = new StartingAreaField(new FieldUIimpl(view), nextFieldRed, null, null, redID - i, Color.RED);
             startingAreaFieldRed.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.RED, 4 - i));
 
-            StartingAreaField startingAreaFieldBlue = new StartingAreaField(new FieldUIimpl(view), nextFieldBlue, null, null,blueID - i, Color.BLUE);
+            StartingAreaField startingAreaFieldBlue = new StartingAreaField(new FieldUIimpl(view), nextFieldBlue, null, null, blueID - i, Color.BLUE);
             startingAreaFieldBlue.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.BLUE, 4 - i));
 
             if (i == 0) {
@@ -143,13 +143,13 @@ public class PlayingField {
             GoalField goalFieldGreen = new GoalField(new FieldUIimpl(view), null, previousGreenField, null, greenID + i, Color.GREEN);
             goalFieldGreen.getFieldUIobject().registerUIobject(generateGoalTag(Color.GREEN, i + 1));
 
-            GoalField goalFieldYellow = new GoalField(new FieldUIimpl(view), null, previousYellowField, null,yellowID + i, Color.YELLOW);
+            GoalField goalFieldYellow = new GoalField(new FieldUIimpl(view), null, previousYellowField, null, yellowID + i, Color.YELLOW);
             goalFieldYellow.getFieldUIobject().registerUIobject(generateGoalTag(Color.YELLOW, i + 1));
 
-            GoalField goalFieldRed = new GoalField(new FieldUIimpl(view), null, previousRedField, null,redID + i, Color.RED);
+            GoalField goalFieldRed = new GoalField(new FieldUIimpl(view), null, previousRedField, null, redID + i, Color.RED);
             goalFieldRed.getFieldUIobject().registerUIobject(generateGoalTag(Color.RED, i + 1));
 
-            GoalField goalFieldBlue = new GoalField(new FieldUIimpl(view), null, previousBlueField, null,blueID + i, Color.BLUE);
+            GoalField goalFieldBlue = new GoalField(new FieldUIimpl(view), null, previousBlueField, null, blueID + i, Color.BLUE);
             goalFieldBlue.getFieldUIobject().registerUIobject(generateGoalTag(Color.BLUE, i + 1));
 
             if (i == 0) {
@@ -236,11 +236,11 @@ public class PlayingField {
         return blueStartingField;
     }
 
-    public Field getRightStartingAreaField(Color color){
-        Field startingAreaField = ((StartingField)getStartingFieldWithColor(color)).getPreviousStartingArea();
+    public Field getRightStartingAreaField(Color color) {
+        Field startingAreaField = ((StartingField) getStartingFieldWithColor(color)).getPreviousStartingArea();
 
-        while (startingAreaField != null){
-            if(startingAreaField.getCurrentFigure() == null){
+        while (startingAreaField != null) {
+            if (startingAreaField.getCurrentFigure() == null) {
                 break;
             }
             startingAreaField = startingAreaField.getPreviousField();
@@ -248,22 +248,22 @@ public class PlayingField {
         return startingAreaField;
     }
 
-    public Field getStartingFieldWithColor(Color color){
+    public Field getStartingFieldWithColor(Color color) {
         Field startingAreaField;
-        if(color == Color.GREEN){
+        if (color == Color.GREEN) {
             startingAreaField = greenStartingField;
-        } else if(color == Color.YELLOW){
+        } else if (color == Color.YELLOW) {
             startingAreaField = yellowStartingField;
-        }else if(color == Color.RED){
+        } else if (color == Color.RED) {
             startingAreaField = redStartingField;
-        }else {
+        } else {
             startingAreaField = blueStartingField;
         }
         return startingAreaField;
     }
 
-    public Field move (Figure figure, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren
-        Field newPosition =  figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
+    public Field move(Figure figure, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren
+        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
         try {
             if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
                 Figure beaten = newPosition.getCurrentFigure();
@@ -282,7 +282,7 @@ public class PlayingField {
         }
     }
 
-    public boolean checkMovingPossible (Figure figure, int fieldsToMove) { // TODO: Übergabe Kartenwert bei GameManager/KartenManager einbauen
+    public boolean checkMovingPossible(Figure figure, int fieldsToMove) { // TODO: Übergabe Kartenwert bei GameManager/KartenManager einbauen
         Field originField = figure.getCurrentField();
 
         for (int i = 0; i < fieldsToMove - 1; i++) {// TODO: Spezialfall CheckOvertaking wenn Goalfield erlauben?
@@ -304,7 +304,7 @@ public class PlayingField {
         }
         figure.setCurrentField(originField);
 
-        Field newPosition =  figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // TODO: Check ob newPosition ist Starting Field oder Goal Field => beaten not allowed!
+        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // TODO: Check ob newPosition ist Starting Field oder Goal Field => beaten not allowed!
         if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
             Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
             if (beaten.getTyp() == Typ.KING && figure.getTyp() != Typ.KING) {
@@ -314,25 +314,24 @@ public class PlayingField {
         return true;
     }
 
-    public boolean checkOvertakingPossible (Figure figure) {
+    public boolean checkOvertakingPossible(Figure figure) {
         return figure.checkOvertaking();
     }
 
-    public Field getFieldWithUI(int ID){
-        if(ID < 1 || ID > 64){
+    public Field getFieldWithUI(int ID) {
+        if (ID < 1 || ID > 64) {
             return null;
-        }
-        else {
+        } else {
             Field targetField = rootField;
-            while(targetField.getFieldID() != ID){
+            while (targetField.getFieldID() != ID) {
                 targetField = targetField.getNextField();
             }
             return targetField;
         }
     }
 
-    public void repairRootField(){
-        if(rootField.getFieldID() != 1){
+    public void repairRootField() {
+        if (rootField.getFieldID() != 1) {
             rootField = getFieldWithUI(1);
         }
     }

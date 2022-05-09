@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-public class FieldUIimpl extends FieldUI{
+public class FieldUIimpl extends FieldUI {
 
     public ImageView getFieldImageView() {
         return fieldImageView;
@@ -17,24 +17,27 @@ public class FieldUIimpl extends FieldUI{
     private ImageView fieldImageView;
     private View view;
 
-    public FieldUIimpl(ImageView fieldImageView){
+    public FieldUIimpl(ImageView fieldImageView) {
         this.fieldImageView = fieldImageView;
     }
 
-    public FieldUIimpl(View view){
+    public FieldUIimpl(View view) {
         this.view = view;
     }
 
-    public FieldUIimpl(){};
+    public FieldUIimpl() {
+    }
+
+    ;
 
 
     @Override
-    public int getMarginTop(){
+    public int getMarginTop() {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) fieldImageView.getLayoutParams();
         return layoutParams.topMargin;
     }
 
-    public int getMarginLeft(){
+    public int getMarginLeft() {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) fieldImageView.getLayoutParams();
         return layoutParams.leftMargin;
     }
@@ -52,12 +55,12 @@ public class FieldUIimpl extends FieldUI{
 
     @Override
     public void switchFieldUI(FieldUI fieldUI) {
-        Drawable helpDrawable = ((FieldUIimpl)fieldUI).getImageResource();
-        ((FieldUIimpl)fieldUI).getFieldImageView().setImageDrawable(getImageResource());
+        Drawable helpDrawable = ((FieldUIimpl) fieldUI).getImageResource();
+        ((FieldUIimpl) fieldUI).getFieldImageView().setImageDrawable(getImageResource());
         fieldImageView.setImageDrawable(helpDrawable);
     }
 
-    public Drawable getImageResource(){
+    public Drawable getImageResource() {
         return fieldImageView.getDrawable();
     }
 }

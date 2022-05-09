@@ -30,7 +30,7 @@ public class PlayingFieldTest {
     ImageView imageView;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         view = mock(View.class);
         imageView = mock(ImageView.class);
         when(view.findViewWithTag(anyString())).thenReturn(imageView);
@@ -48,14 +48,14 @@ public class PlayingFieldTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         view = null;
         playingField = null;
         imageView = null;
     }
 
     @Test
-    public void regularFieldsConnectedTest(){
+    public void regularFieldsConnectedTest() {
 
         Field expectedRootField = playingField.getRootField().getFieldAtDistance(64, Color.GREEN);
         Assert.assertEquals(playingField.getRootField(), expectedRootField);
@@ -64,16 +64,16 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void testRegularIDs(){
+    public void testRegularIDs() {
         Field currentField = playingField.getRootField();
-        for(int i = 1; i <= 64;i++){
+        for (int i = 1; i <= 64; i++) {
             Assert.assertEquals(i, currentField.getFieldID());
             currentField = currentField.getNextField();
         }
     }
 
     @Test
-    public void startingFieldsTest(){
+    public void startingFieldsTest() {
         Assert.assertTrue(playingField.getBlueStartingField() instanceof StartingField);
         Assert.assertTrue(playingField.getRedStartingField() instanceof StartingField);
         Assert.assertTrue(playingField.getYellowStartingField() instanceof StartingField);
@@ -81,7 +81,7 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void getStartFieldWithColorTest(){
+    public void getStartFieldWithColorTest() {
         Field expectedStartingArea = playingField.getBlueStartingField();
         Assert.assertEquals(expectedStartingArea, playingField.getStartingFieldWithColor(Color.BLUE));
 
@@ -96,13 +96,13 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void getRightStartingAreaFieldTest(){
+    public void getRightStartingAreaFieldTest() {
         Field expectedField = playingField.getRedStartingField().getPreviousStartingArea().getFieldAtDistance(-2, Color.RED);
         Assert.assertEquals(expectedField, playingField.getRightStartingAreaField(Color.RED));
     }
 
     @Test
-    public void getRightStartingAreaFieldTestAllAvailable(){
+    public void getRightStartingAreaFieldTestAllAvailable() {
         Field expectedField = playingField.getGreenStartingField().getPreviousStartingArea();
         Assert.assertEquals(expectedField, playingField.getRightStartingAreaField(Color.GREEN));
     }
@@ -110,13 +110,13 @@ public class PlayingFieldTest {
     @Test
     public void checkMoveKing() throws Exception {
         Field expectedField = playingField.getRootField().getNextField().getNextField();
-        Assert.assertEquals(expectedField, playingField.move(figure2,1));
+        Assert.assertEquals(expectedField, playingField.move(figure2, 1));
     }
 
     @Test
     public void checkMoveJerk() throws Exception {
         Field expectedField = playingField.getRootField().getNextField();
-        Assert.assertEquals(expectedField, playingField.move(figure1,1));
+        Assert.assertEquals(expectedField, playingField.move(figure1, 1));
     }
 
     @Test

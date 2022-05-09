@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-public class StartingField extends Field{
+public class StartingField extends Field {
 
     private GoalField nextGoalField;
     private StartingAreaField previousStartingArea;
@@ -13,15 +13,15 @@ public class StartingField extends Field{
         this.color = color;
     }
 
-    public StartingField(){
+    public StartingField() {
 
     }
 
     @Override
     protected Field getFieldAtDistanceRecursive(int remainingDistance, Color color, Field originField) {
-        if (originField != this && getColor() == color && remainingDistance > 0){//path toward goalFields
-            Field destinationField = getNextGoalField().getFieldAtDistanceRecursive(remainingDistance -1, color, originField);
-            if(destinationField != null){
+        if (originField != this && getColor() == color && remainingDistance > 0) {//path toward goalFields
+            Field destinationField = getNextGoalField().getFieldAtDistanceRecursive(remainingDistance - 1, color, originField);
+            if (destinationField != null) {
                 return destinationField;
             }
         }

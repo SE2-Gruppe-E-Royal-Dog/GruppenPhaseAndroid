@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.communication.dto;
 
-public class RequestCardsPayload extends Payload{
+public class RequestCardsPayload extends Payload {
     boolean sendAll;
     int numOfRequestedCards;
 

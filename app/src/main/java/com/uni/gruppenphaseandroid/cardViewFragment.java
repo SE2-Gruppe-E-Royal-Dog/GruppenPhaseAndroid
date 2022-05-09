@@ -29,8 +29,7 @@ public class cardViewFragment extends Fragment implements EventListener, SensorE
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_card_view, container, false);
@@ -48,7 +47,7 @@ public class cardViewFragment extends Fragment implements EventListener, SensorE
     }
 
     @Override
-    public void onCreate (Bundle saveInstanceState){
+    public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
         //initialization of sensor
@@ -69,65 +68,63 @@ public class cardViewFragment extends Fragment implements EventListener, SensorE
     }
 
     @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
+    public void onSensorChanged(SensorEvent sensorEvent) {
 
-            textView = getView().findViewById(R.id.tv_cheater);
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
+        textView = getView().findViewById(R.id.tv_cheater);
+        float x = sensorEvent.values[0];
+        float y = sensorEvent.values[1];
 
-            if (Math.abs(x) > Math.abs(y)) {
-                if (x < 0) { //tilt to right
-                    //TODO Manipulate move -1
-                    //TODO check cheating
+        if (Math.abs(x) > Math.abs(y)) {
+            if (x < 0) { //tilt to right
+                //TODO Manipulate move -1
+                //TODO check cheating
 
-                    textView.setText("Cheater Cheater -1");
+                textView.setText("Cheater Cheater -1");
+                textView.setVisibility(View.VISIBLE);
+
+
+                //shows a textView that is gone after 5 seconds
+                CountDownTimer timer = new CountDownTimer(3000, 1000) {
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        textView.setVisibility(View.INVISIBLE); //(or GONE)
+                    }
+                }.start();
+
+            } else {
+                if (x > 0) { //tilt to left
+                    //TODO Manipulate move +1
+                    textView.setText("Cheater Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
-
 
                     //shows a textView that is gone after 5 seconds
                     CountDownTimer timer = new CountDownTimer(3000, 1000) {
-
                         @Override
                         public void onTick(long millisUntilFinished) {
                         }
 
                         @Override
                         public void onFinish() {
-                        textView.setVisibility(View.INVISIBLE); //(or GONE)
+                            textView.setVisibility(View.INVISIBLE); //(or GONE)
                         }
                     }.start();
-
-                } else {
-                    if (x > 0) { //tilt to left
-                        //TODO Manipulate move +1
-                        textView.setText("Cheater Cheater + 1");
-                        textView.setVisibility(View.VISIBLE);
-
-                         //shows a textView that is gone after 5 seconds
-                        CountDownTimer timer = new CountDownTimer(3000, 1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                            }
-
-                            @Override
-                            public void onFinish() {
-                            textView.setVisibility(View.INVISIBLE); //(or GONE)
-                             }
-                        }.start();
-                    }
-
                 }
+
             }
-
-        }
-        @Override
-        public void onAccuracyChanged(Sensor arg0, int arg1) {
-
-
         }
 
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor arg0, int arg1) {
 
 
+    }
 
 
 }
