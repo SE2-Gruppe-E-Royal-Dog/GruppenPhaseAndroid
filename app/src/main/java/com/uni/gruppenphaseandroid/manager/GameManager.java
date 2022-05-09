@@ -1,10 +1,18 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import com.google.gson.Gson;
+import com.se2.communication.dto.LeaveLobbyPayload;
+import com.se2.communication.dto.Message;
+import com.se2.communication.dto.MessageType;
+import com.se2.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.MainActivity;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
+
+import java.util.List;
 
 public class GameManager {
 
@@ -105,5 +113,18 @@ public class GameManager {
 
     public void setLastTurn(LastTurn lastTurn) {
         this.lastTurn = lastTurn;
+    }
+
+    public void moveWormholes(){
+        //TODO check if it's my turn
+        playingField.moveAllWormholesRandomly();
+        List<Wormhole> wormholeList = playingField.getWormholeList();
+
+       var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
+        var message = new Message();
+        message.setType(MessageType.WORMHOLE_MOVE);
+        message.setPayload(new Gson().toJson(payload));
+        webSocketClient.send(String.valueOf(message));
+
     }
 }
