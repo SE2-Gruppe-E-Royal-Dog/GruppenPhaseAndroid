@@ -15,8 +15,7 @@ import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 
 import java.util.EventListener;
 
-public class SensorReader_Light extends Fragment implements EventListener, SensorEventListener{
-
+public class SensorReaderLight extends Fragment implements EventListener, SensorEventListener{
 
         private Client websocketClient;
         private SensorManager sensorManager;

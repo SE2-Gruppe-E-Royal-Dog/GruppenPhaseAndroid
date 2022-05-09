@@ -34,6 +34,7 @@ public class InGameFragment extends Fragment {
         return inflater.inflate(R.layout.activity_ingame, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

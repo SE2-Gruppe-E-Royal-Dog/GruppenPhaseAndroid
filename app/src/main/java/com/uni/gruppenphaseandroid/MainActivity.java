@@ -105,85 +105,75 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             handleMessage(intent.getStringExtra("message"));
         }
-    }
 
-    private void handleMessage(String message) {
-        Message msg = gson.fromJson(message, Message.class);
-        switch (msg.getType()) {
-            case JOINED_LOBBY:
-                handleJoinedLobbyMessage(msg.getPayload());
-                break;
-            case NEW_PLAYER_JOINED:
-                handleNewPlayerJoinedMessage(msg.getPayload());
-                break;
-            case START_GAME:
-                handleStartGame(msg.getPayload());
-                break;
-            case UPDATEBOARD:
-                handleUpdateBoard(msg.getPayload());
-            case PLAYER_LEFT_LOBBY:
-                handlePlayerLeftMessage(msg.getPayload());
-            case SEND_CARDS:
-                handleSendCardsMessage(msg.getPayload());
+        private void handleMessage(String message) {
+            Message msg = gson.fromJson(message, Message.class);
+            switch (msg.getType()) {
+                case JOINED_LOBBY:
+                    handleJoinedLobbyMessage(msg.getPayload());
+                    break;
+                case NEW_PLAYER_JOINED:
+                    handleNewPlayerJoinedMessage(msg.getPayload());
+                    break;
+                case START_GAME:
+                    handleStartGame(msg.getPayload());
+                    break;
+                case UPDATEBOARD:
+                    handleUpdateBoard(msg.getPayload());
+                case PLAYER_LEFT_LOBBY:
+                    handlePlayerLeftMessage(msg.getPayload());
+                case SEND_CARDS:
+                    handleSendCardsMessage(msg.getPayload());
+            }
         }
-    }
 
-    private void handleSendCardsMessage(String sendCardsPayload){
-        var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
-        
+        private void handleSendCardsMessage(String sendCardsPayload){
+            var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
+
             Handcards.getInstance().addCardToHand(payload.getCards());
-    }
+        }
 
-    private void handlePlayerLeftMessage(String body) {
-        var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
+        private void handlePlayerLeftMessage(String body) {
+            var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
 
-        showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
-    }
+            showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
+        }
 
-    private void handleNewPlayerJoinedMessage(String body) {
-        var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
+        private void handleNewPlayerJoinedMessage(String body) {
+            var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
 
-        showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
-    }
+            showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
+        }
 
-    private void handleJoinedLobbyMessage(String body) {
-        var payload = gson.fromJson(body, JoinedLobbyPayload.class);
-        lobbyId = payload.getLobbyId();
-        playerId = payload.getPlayerId();
-        Log.d("lobby", "Joined lobby with id: " + playerId);
-    }
+        private void handleJoinedLobbyMessage(String body) {
+            var payload = gson.fromJson(body, JoinedLobbyPayload.class);
+            lobbyId = payload.getLobbyId();
+            playerId = payload.getPlayerId();
+            Log.d("lobby", "Joined lobby with id: " + playerId);
+        }
 
-    private void showPlayerToast(String message) {
-        var toast = Toast.makeText(getApplicationContext(),
-                message,
-                Toast.LENGTH_LONG);
+        private void showPlayerToast(String message) {
+            var toast = Toast.makeText(getApplicationContext(),
+                    message,
+                    Toast.LENGTH_LONG);
 
-        toast.show();
-    }
+            toast.show();
+        }
 
-    private void handleStartGame(String body) {
+        private void handleStartGame(String body) {
 
-        String[] splitString = body.split("_");
-        int numberOfPlayers = Integer.parseInt(splitString[0]);
-        int playerTurnNumber = Integer.parseInt(splitString[1]);
-        //start game
-        GameManager.getInstance().startGame(numberOfPlayers, playerTurnNumber);
+            String[] splitString = body.split("_");
+            int numberOfPlayers = Integer.parseInt(splitString[0]);
+            int playerTurnNumber = Integer.parseInt(splitString[1]);
+            //start game
+            GameManager.getInstance().startGame(numberOfPlayers, playerTurnNumber);
 
-    }
+        }
 
-    private void handleUpdateBoard(String body) {
-        String[] splitString = body.split("_");
-        GameManager.getInstance().updateBoard(splitString);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+        private void handleUpdateBoard(String body) {
+            String[] splitString = body.split("_");
+            GameManager.getInstance().updateBoard(splitString);
+        }
     }
 
     public Client getWebsocketClient() {

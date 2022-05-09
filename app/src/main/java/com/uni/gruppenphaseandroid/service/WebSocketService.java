@@ -36,6 +36,7 @@ public class WebSocketService extends Service {
             client.connectToServer();
         } catch (InterruptedException e) {
             Log.d("websocket", "Unable to get client", e);
+            throw new RuntimeException(e);
         }
         return client;
     }
