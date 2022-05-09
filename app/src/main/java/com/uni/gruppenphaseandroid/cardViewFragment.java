@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.uni.gruppenphaseandroid.cheating.SensorReader;
+
 
 public class cardViewFragment extends Fragment {
 
@@ -25,9 +27,17 @@ public class cardViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+            SensorReader sensorReader;
+            sensorReader= new SensorReader((MainActivity) getContext());
+            sensorReader.registerUnregister(true);
+
+
+
             view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> {
                     NavHostFragment.findNavController(cardViewFragment.this)
                             .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
             });
     }
+
+
 }

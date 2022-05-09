@@ -7,9 +7,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.CountDownTimer;
+import android.view.View;
 
+import android.widget.TextView;
 
 import com.uni.gruppenphaseandroid.MainActivity;
+import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 
 /**
@@ -30,6 +34,7 @@ public class SensorReader {//implements EventListener, SensorEventListener {
     private Sensor sensor;
     Context context;
     Cheater cheater;
+    TextView textView;
 
 
     public SensorReader (MainActivity context){
@@ -48,6 +53,7 @@ public class SensorReader {//implements EventListener, SensorEventListener {
     }
 
     private final SensorEventListener mSensorListener = new SensorEventListener() {
+
         @Override
         public void onSensorChanged(SensorEvent event) {
 
@@ -59,6 +65,23 @@ public class SensorReader {//implements EventListener, SensorEventListener {
                     if (x < 0) { //tilt to right
                         //TODO Manipulate move -1
                         //TODO cheater.cheatingAllowed(GameManager.getInstance().*playerID*);
+
+
+                        //shows a textView that is gone after 5 seconds
+                        textView.findViewById(R.id.tv_cheater);
+                        CountDownTimer timer = new CountDownTimer(5000, 1000) {
+
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                textView .setVisibility(View.INVISIBLE); //(or GONE)
+                            }
+                        }.start();
+
+
 
                     } else {
                         if (x > 0) { //tilt to right
