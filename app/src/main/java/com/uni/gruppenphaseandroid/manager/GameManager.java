@@ -98,13 +98,11 @@ public class GameManager {
     public void updateBoard(UpdateBoardPayload updateBoardPayload){
         if(currentTurnPhase == TurnPhase.CURRENTLYMOVING){
             if(!isItMyTurn()){ //for the turnplayer, the update took place already
-                //update figures
                 Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
                 Figure figure2 = figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
                 lastTurn = new LastTurn(figure1, figure2, playingField.getFieldWithID(updateBoardPayload.getNewField1ID()), playingField.getFieldWithID(updateBoardPayload.getNewField2ID()), 0, Cardtype.values()[updateBoardPayload.getCardType()]);
-                int effect = 1; //TODO: figure out which effect
-                new Card(Cardtype.values()[updateBoardPayload.getCardType()], -1).playCard(effect, figure1, figure2);
-                //update card UI
+                //TODO: play the card
+                //TODO: update card UI
             }
             nextTurn();
         }

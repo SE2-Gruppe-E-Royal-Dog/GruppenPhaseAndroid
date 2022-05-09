@@ -78,12 +78,12 @@ public class FigureManager {
         return 0;
     }
 
-    public Figure getFigureWithID(int id){
+    public Figure getFigureWithID(int id) throws IllegalArgumentException{
         for (Figure figure: figureList) {
             if(figure.getId() == id){
                 return figure;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 }
