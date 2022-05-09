@@ -45,11 +45,11 @@
                 android:id="@+id/playingFieldBackground"
                 android:layout_width="1130dp"
                 android:layout_height="1130dp"
+                app:srcCompat="@drawable/ic_playingfieldbackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_playingfieldbackground" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <RelativeLayout
                 android:id="@+id/playingFieldRelativeLayout"
@@ -62,7 +62,7 @@
                 app:layout_constraintHorizontal_bias="0.057"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintVertical_bias="0.65">
 
                 <ImageView
                     android:id="@+id/regularPlayingField19"
