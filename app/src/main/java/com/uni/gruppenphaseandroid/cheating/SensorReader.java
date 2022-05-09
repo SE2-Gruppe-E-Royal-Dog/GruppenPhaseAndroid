@@ -16,6 +16,8 @@ import com.uni.gruppenphaseandroid.MainActivity;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 
+import java.util.EventListener;
+
 /**
  *
  * how to call on the class:
@@ -55,10 +57,10 @@ public class SensorReader {//implements EventListener, SensorEventListener {
     private final SensorEventListener mSensorListener = new SensorEventListener() {
 
         @Override
-        public void onSensorChanged(SensorEvent event) {
+        public void onSensorChanged(SensorEvent sensorEvent) {
 
-                float x = event.values[0];
-                float y = event.values[1];
+                float x = sensorEvent.values[0];
+                float y = sensorEvent.values[1];
 
 
                 if (Math.abs(x) > Math.abs(y)) {
@@ -98,6 +100,7 @@ public class SensorReader {//implements EventListener, SensorEventListener {
 
         }
     };
+
 
 }
 
