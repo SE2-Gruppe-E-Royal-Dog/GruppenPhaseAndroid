@@ -9,25 +9,30 @@ public class Jerk extends Figure {
     public Jerk() {
     }
 
+    /**
+     * Degree has to be considered.
+     * @param figure1 - figure who moves
+     * @return true if overtaking possible
+     */
     @Override
-    public boolean checkOvertaking() {
-        Field newPosition = getCurrentField().getNextField();
-        Figure occupied = newPosition.getCurrentFigure();
-        if (occupied.getTyp() != Typ.JERK) {
+    public boolean checkOvertaking(Figure figure1) {
+        Field newPosition = figure1.getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
+        if (figure2.getTyp() != Typ.JERK) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Jerk is allowed to move up to 2 fields less than displayed on the card,
+     * if he is moving into the goal area.
+     * @param figure1 - figure who moves
+     * @param fieldsToMove
+     * @return true if moving possible
+     */
     @Override
-    public boolean checkBeaten() {
-
-
-        return true;
-    }
-
-    @Override
-    public boolean checkMoving() {
+    public boolean checkMoving(Figure figure1, int fieldsToMove) { // TODO: Button implementieren für wieviele Punkte verfallen lassen
 
 
         return true;

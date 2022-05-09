@@ -20,13 +20,44 @@ public class Figure {
 
     }
 
-    public boolean checkOvertaking() {
+    /**
+     * A figure cannot be overtaken by another one (no matter which color),
+     * if its current position is the own starting field.
+     * Exception: Knight is allowed to overtake but has to consider degree.
+     * @param figure1 - figure who moves
+     * figure 2 - figure to be overtaken
+     * @return true if overtaking possible
+     */
+    public boolean checkOvertaking(Figure figure1) { // TODO: offen ob in Goal Area nicht erlauben
         return true;
-    } // TODO: grüne Karte => overtaking Regeln außer Kraft gesetzt
+    } // TODO: STandardfall implementieren
 
-    public boolean checkBeaten() { return true; } //TODO: König kann nur von KÖnig geschlagen werden
+    /**
+     *  A figure cannot be beaten by another one (no matter which color),
+     *  if its current position is the own starting field or the own goal area.
+     * @param figure1 - figure who moves
+     * figure2 - figure to be beaten
+     * @return true if beating is possible
+     */
+    public boolean checkBeaten(Figure figure1) { //TODO: Goal Area einbauen
+        Field newPosition = figure1.getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
 
-    public boolean checkMoving() { return true; }
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * A figure cannot be changed with another one (no matter which color),
+     * if its current position is the own starting field or own goal area.
+     * @param figure1 - figure who moves
+     * @param fieldsToMove
+     * @return true if moving is possible
+     */
+    public boolean checkMoving(Figure figure1, int fieldsToMove) { return true; } // TODO: Standardfall einbauen
 
 
     // Getter and Setter

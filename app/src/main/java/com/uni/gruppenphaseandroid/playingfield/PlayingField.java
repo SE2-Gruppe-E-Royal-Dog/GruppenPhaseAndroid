@@ -328,12 +328,25 @@ public class PlayingField {
         return true;
     }
 
-    public boolean checkOvertakingPossible (Figure figure) {
-        return figure.checkOvertaking();
+    public boolean checkOvertakingPossible (Figure figure1) {
+        if (checkGreenCard(card)) {
+            return true;
+        } else {
+            return figure1.checkOvertaking(figure1);
+        }
     }
 
-    public boolean checkBeatenPossible (Figure figure) {
-        return figure.checkBeaten();
+    public boolean checkGreenCard(Card card) {
+        //if (card.getColor() == GREEN) { // TODO: Farbe Karte einbauen
+            //return true;
+        //} else {
+            return false;
+        //}
+
+    }
+
+    public boolean checkBeatenPossible (Figure figure1) {
+        return figure1.checkBeaten(figure1);
     }
 
     public Field getFieldWithUI(int ID){
