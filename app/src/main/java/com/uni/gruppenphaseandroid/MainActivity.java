@@ -22,11 +22,16 @@ import com.google.gson.Gson;
 import com.se2.communication.Client;
 import com.se2.communication.dto.JoinedLobbyPayload;
 import com.se2.communication.dto.Message;
+import com.se2.communication.dto.MessageType;
 import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
 
 import com.se2.communication.dto.StartGamePayload;
 import com.se2.communication.dto.UpdateBoardPayload;
+import com.se2.communication.dto.Payload;
+import com.se2.communication.dto.SendCardsPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.Handcards;
+import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 import com.se2.communication.dto.PlayerLeftLobbyPayload;
 
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         var fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
+
     }
 
     @Override
@@ -125,7 +131,15 @@ public class MainActivity extends AppCompatActivity {
                 handleUpdateBoard(msg.getPayload());
             case PLAYER_LEFT_LOBBY:
                 handlePlayerLeftMessage(msg.getPayload());
+            case SEND_CARDS:
+                handleSendCardsMessage(msg.getPayload());
         }
+    }
+
+    private void handleSendCardsMessage(String sendCardsPayload){
+        var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
+
+            Handcards.getInstance().addCardToHand(payload.getCards());
     }
 
     private void handlePlayerLeftMessage(String body) {
@@ -192,5 +206,15 @@ public class MainActivity extends AppCompatActivity {
 
     public String getPlayerId() {
         return playerId;
+    }
+
+    public void sendMessage(MessageType messageType, Payload payload){
+        websocketClient = getService().getClient();
+        var message = new Message();
+        message.setType(messageType);
+
+        message.setPayload(gson.toJson(payload));
+
+        websocketClient.send(message);
     }
 }

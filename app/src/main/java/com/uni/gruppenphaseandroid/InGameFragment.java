@@ -64,6 +64,12 @@ public class InGameFragment extends Fragment {
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
+
+        view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> {
+            NavHostFragment.findNavController(InGameFragment.this)
+                    .navigate(R.id.action_InGameFragment_to_cardViewFragment2);
+        });
+
         view.findViewById(R.id.start_game_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
