@@ -7,6 +7,7 @@ import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureUI;
+import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.StartingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
@@ -40,6 +41,8 @@ public class PlayingFieldTest {
         Field startingAreaField = playingField.getRedStartingField().getPreviousStartingArea();
         startingAreaField.setCurrentFigure(new Figure());
         startingAreaField.getPreviousField().setCurrentFigure(new Figure());
+        figureUI1 = mock(FigureUIimpl.class);
+        figureUI2 = mock(FigureUIimpl.class);
         figure1 = new Figure(1, Color.RED, playingField.getRootField(), Typ.JERK, figureUI1);
         figure2 = new Figure(2, Color.BLUE, playingField.getRootField().getNextField(), Typ.KING, figureUI2);
     }
@@ -113,7 +116,7 @@ public class PlayingFieldTest {
     @Test
     public void checkMoveJerk() throws Exception {
         Field expectedField = playingField.getRootField().getNextField();
-        Assert.assertEquals(expectedField, playingField.move(figure1,1));
+        Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1,1).getFieldID());
     }
 
     @Test
