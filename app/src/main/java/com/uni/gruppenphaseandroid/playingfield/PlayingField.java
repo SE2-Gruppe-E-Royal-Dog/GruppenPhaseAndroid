@@ -285,7 +285,7 @@ public class PlayingField {
             // TODO: Schummeln einfügen
             // TODO: Karten: Figuren tauschen
 
-            LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove, card.getCardID());
+            LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);
 
             return newPositionFigure1;
         } catch (Exception e) {
