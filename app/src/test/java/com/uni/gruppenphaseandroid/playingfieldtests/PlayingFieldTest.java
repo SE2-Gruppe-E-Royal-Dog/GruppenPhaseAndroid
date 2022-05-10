@@ -38,9 +38,6 @@ public class PlayingFieldTest {
 
         playingField = new PlayingField(view);
 
-        verify(imageView, times(16)).setImageDrawable(any());
-        verify(imageView, times(16)).getDrawable();
-
         Field startingAreaField = playingField.getRedStartingField().getPreviousStartingArea();
         startingAreaField.setCurrentFigure(new Figure());
         startingAreaField.getPreviousField().setCurrentFigure(new Figure());

@@ -48,9 +48,9 @@ public class PlayingField {
 
         for (int i = 0; i<4; i++){
             Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
-            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), null , null, fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
-            fieldToChange.switchField(wormhole);
-
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField() , fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+            fieldToChange.getPreviousField().setNextField(wormhole);
+            fieldToChange.getNextField().setPreviousField(wormhole);
             wormholeList.add(wormhole);
         }
 
@@ -59,12 +59,8 @@ public class PlayingField {
         wormholeList.get(2).setPartnerWormhole(wormholeList.get(3));
         wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
 
+        moveAllWormholesRandomly();
 
-        /** für Testzwecke **/
-        for (int j = 0; j<4; j++){
-            wormholeList.get(j).moveWormholeToRandomPosition();
-            repairRootField();
-        }
     }
 
     private void generateStartingFields() {
@@ -278,12 +274,14 @@ public class PlayingField {
             } else {
                 figure2 = null;
             }
+
             figure1.getCurrentField().setCurrentFigure(null);
             newPositionFigure1.setCurrentFigure(figure1);
             figure1.setCurrentField(newPositionFigure1);
-            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
-
-            // TODO: Wurmlöcher einfügen
+            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board                    
+            newPositionFigure1.triggerSpecialFieldEffect();
+          
+            // TODO: Wurmlöcher einfügen  
             // TODO: Schummeln einfügen
             // TODO: Karten: Figuren tauschen
 
@@ -349,7 +347,16 @@ public class PlayingField {
         return figure1.checkBeaten(figure1);
     }
 
-    public Field getFieldWithUI(int ID){
+    public void moveAllWormholesRandomly(){
+        for (int j = 0; j<4; j++){
+            wormholeList.get(j).moveWormholeToRandomPosition();
+            repairRootField();
+        }
+
+        repairWormholeVisuals();
+    }
+
+    public Field getFieldWithID(int ID){
         if(ID < 1 || ID > 64){
             return null;
         }
@@ -364,7 +371,21 @@ public class PlayingField {
 
     public void repairRootField(){
         if(rootField.getFieldID() != 1){
-            rootField = getFieldWithUI(1);
+            rootField = getFieldWithID(1);
         }
     }
+
+    public void repairWormholeVisuals(){
+        for(int i = 1; i <=64;i++){
+            if(getFieldWithID(i).getClass() != Wormhole.class){
+                getFieldWithID(i).getFieldUIobject().turnIntoRegularField();
+            }
+        }
+    }
+
+    public ArrayList<Wormhole> getWormholeList() {
+        return wormholeList;
+    }
+
+
 }

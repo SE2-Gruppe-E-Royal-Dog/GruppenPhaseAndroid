@@ -72,5 +72,30 @@ public class InGameFragment extends Fragment {
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
+      
+        view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> {
+            NavHostFragment.findNavController(InGameFragment.this)
+                    .navigate(R.id.action_InGameFragment_to_cardViewFragment2);
+
+        });
+
+
+        view.findViewById(R.id.move_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                figureManager.moveFigureTest(playingField);
+            }
+        });
+
+
+        view.findViewById(R.id.move2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                figureManager.moveFigureTest_2(playingField);
+            }
+          });
+
+        
     }
+
 }
