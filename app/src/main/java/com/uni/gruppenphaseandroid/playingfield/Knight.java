@@ -9,13 +9,32 @@ public class Knight extends Figure {
     public Knight() {
     }
 
+    /**
+     * Degree has to be considered.
+     * @param figure1 - figure who moves
+     * figure 2 - figure to be overtaken
+     * @return true if overtaking possible
+     */
     @Override
-    public boolean checkOvertaking() {
-        Field newPosition = getCurrentField().getNextField();
-        Figure occupied = newPosition.getCurrentFigure();
-        if (occupied.getTyp() != Typ.JERK || occupied.getTyp() != Typ.CITIZEN || occupied.getTyp() != Typ.KNIGHT) {
+    public boolean checkOvertaking(Figure figure1) { // TODO: Ausnahme implementieren
+        Field newPosition = figure1.getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
+        if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
             return false;
         }
+        return true;
+    }
+
+    /**
+     *
+     * @param figure1 - figure who moves
+     * @param fieldsToMove
+     * @return true if moving possible
+     */
+    @Override
+    public boolean checkMoving(Figure figure1, int fieldsToMove) { //TODO: Check Regelwerk
+
+
         return true;
     }
 

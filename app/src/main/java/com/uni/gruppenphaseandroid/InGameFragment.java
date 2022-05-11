@@ -49,6 +49,7 @@ public class InGameFragment extends Fragment {
         GameManager.getInstance().setPlayingField(playingField);
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
+
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
@@ -68,7 +69,26 @@ public class InGameFragment extends Fragment {
         view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> {
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_cardViewFragment2);
+
         });
+
+
+        view.findViewById(R.id.move_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                figureManager.moveFigureTest(playingField);
+            }
+        });
+
+
+        view.findViewById(R.id.move2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                figureManager.moveFigureTest_2(playingField);
+            }
+          });
+
+
 
         view.findViewById(R.id.start_game_button).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,21 +12,21 @@ public class LastTurn {
     private Field newFigure2Field;
     private int distanceMovedByFigure1;
     private Cardtype cardtype;
+    //private int cardPlayedID;
 
     public String generateServerMessage(){
         String figure2ID = (figure2 == null)?"-1":""+figure2.getId();
         String newFigure2FieldID = (newFigure2Field == null)?"-1":""+newFigure2Field.getFieldID();
 
-        return figure1.getId() + "_" + newFigure1Field.getFieldID() + "_" + figure2ID + "_" + newFigure2FieldID + "_" + cardtype.ordinal();
+        return figure1.getId() + "_" + newFigure1Field.getFieldID() + "_" + figure2ID + "_" + newFigure2FieldID;
     }
 
-    public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field, int distanceMovedByFigure1, Cardtype cardtype) {
+    public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field, int distanceMovedByFigure1) {
         this.figure1 = figure1;
         this.figure2 = figure2;
         this.newFigure1Field = newFigure1Field;
         this.newFigure2Field = newFigure2Field;
         this.distanceMovedByFigure1 = distanceMovedByFigure1;
-        this.cardtype = cardtype;
     }
 
     public Figure getFigure1() {
