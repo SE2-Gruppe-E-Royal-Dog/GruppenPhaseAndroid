@@ -86,20 +86,5 @@ public class FigureManager {
         }
         throw new IllegalArgumentException();
     }
-    public void moveFigureTest(PlayingField playingField){
-        try {
-            playingField.move(figureList.get(0),1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void moveFigureTest_2(PlayingField playingField){
-        try{
-            playingField.move(figureList.get(2), 3);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 }

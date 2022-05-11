@@ -76,7 +76,7 @@ public class InGameFragment extends Fragment {
         view.findViewById(R.id.move_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                figureManager.moveFigureTest(playingField);
+                GameManager.getInstance().moveFigureShowcase(1, 1);
             }
         });
 
@@ -84,7 +84,7 @@ public class InGameFragment extends Fragment {
         view.findViewById(R.id.move2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                figureManager.moveFigureTest_2(playingField);
+                GameManager.getInstance().moveFigureShowcase(3, 3);
             }
           });
 

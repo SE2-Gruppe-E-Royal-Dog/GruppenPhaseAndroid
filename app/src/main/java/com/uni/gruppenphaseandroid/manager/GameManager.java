@@ -40,7 +40,7 @@ public class GameManager {
     private WebSocketClient webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
-    FigureManager figuremanager;
+    private FigureManager figuremanager;
     private Card selectedCard;
 
 
@@ -109,7 +109,7 @@ public class GameManager {
             if(!isItMyTurn()){ //for the turnplayer, the update took place already
                 Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
                 Figure figure2 = figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
-                lastTurn = new LastTurn(figure1, figure2, playingField.getFieldWithID(updateBoardPayload.getNewField1ID()), playingField.getFieldWithID(updateBoardPayload.getNewField2ID()), 0, Cardtype.values()[updateBoardPayload.getCardType()]);
+                lastTurn = new LastTurn(figure1, figure2, playingField.getFieldWithID(updateBoardPayload.getNewField1ID()), playingField.getFieldWithID(updateBoardPayload.getNewField2ID()), 0);
                 //TODO: play the card
                 //TODO: update card UI
             }
@@ -174,5 +174,14 @@ public class GameManager {
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(String.valueOf(message));
 
+    }
+
+
+    public void moveFigureShowcase(int figureID, int distance){
+        try {
+            playingField.move(figuremanager.getFigureWithID(figureID),distance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
