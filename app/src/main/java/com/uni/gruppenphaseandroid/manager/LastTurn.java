@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 
@@ -10,6 +11,7 @@ public class LastTurn {
     private Field newFigure1Field;
     private Field newFigure2Field;
     private int distanceMovedByFigure1;
+    private Cardtype cardtype;
     //private int cardPlayedID;
 
     public String generateServerMessage(){
@@ -25,7 +27,6 @@ public class LastTurn {
         this.newFigure1Field = newFigure1Field;
         this.newFigure2Field = newFigure2Field;
         this.distanceMovedByFigure1 = distanceMovedByFigure1;
-        //this.cardPlayedID = cardPlayedID;
     }
 
     public Figure getFigure1() {
@@ -68,13 +69,4 @@ public class LastTurn {
         this.distanceMovedByFigure1 = distanceMovedByFigure1;
     }
 
-    /*public int getCardPlayedID() {
-        return cardPlayedID;
-    }
-
-    public void setCardPlayedID(int cardPlayedID) {
-        this.cardPlayedID = cardPlayedID;
-    }
-
-     */
 }

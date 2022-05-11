@@ -278,10 +278,10 @@ public class PlayingField {
             figure1.getCurrentField().setCurrentFigure(null);
             newPositionFigure1.setCurrentFigure(figure1);
             figure1.setCurrentField(newPositionFigure1);
-            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board                    
+            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
             newPositionFigure1.triggerSpecialFieldEffect();
-          
-            // TODO: Wurmlöcher einfügen  
+
+            // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
             // TODO: Karten: Figuren tauschen
 
@@ -387,5 +387,11 @@ public class PlayingField {
         return wormholeList;
     }
 
+
+
+
+    public View getView() {
+        return view;
+    }
 
 }

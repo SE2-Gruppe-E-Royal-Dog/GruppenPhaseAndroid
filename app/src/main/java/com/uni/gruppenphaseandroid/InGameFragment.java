@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.se2.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -44,19 +45,10 @@ public class InGameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        GameManager.getInstance().setPlayingField(new PlayingField(view));
+        playingField = new PlayingField(view);
+        GameManager.getInstance().setPlayingField(playingField);
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
-        //detect button inputs and send signal to gamemananger
-
-        playingField = new PlayingField(view);
-
-        figureManager = new FigureManager();
-        figureManager.createFigureSetOfColor(Color.GREEN, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
-        figureManager.createFigureSetOfColor(Color.BLUE, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
-        figureManager.createFigureSetOfColor(Color.YELLOW, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
-        figureManager.createFigureSetOfColor(Color.RED, playingField, view.findViewById(R.id.playingFieldRelativeLayout));
 
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
@@ -72,7 +64,8 @@ public class InGameFragment extends Fragment {
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
-      
+
+
         view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> {
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_cardViewFragment2);
@@ -83,7 +76,7 @@ public class InGameFragment extends Fragment {
         view.findViewById(R.id.move_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                figureManager.moveFigureTest(playingField);
+                GameManager.getInstance().moveFigureShowcase(1, 1);
             }
         });
 
@@ -91,11 +84,25 @@ public class InGameFragment extends Fragment {
         view.findViewById(R.id.move2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                figureManager.moveFigureTest_2(playingField);
+                GameManager.getInstance().moveFigureShowcase(3, 3);
             }
           });
 
-        
-    }
 
+
+        view.findViewById(R.id.start_game_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                websocketClient = ((MainActivity) getContext()).getService().getClient();
+                var lobbyId = ((MainActivity) getContext()).getLobbyId();
+                var message = new Message();
+                message.setType(MessageType.START_GAME);
+
+                var payload = new StartGamePayload(lobbyId, 0, 0);
+                message.setPayload(gson.toJson(payload));
+
+                websocketClient.send(message);
+            }
+        });
+    }
 }
