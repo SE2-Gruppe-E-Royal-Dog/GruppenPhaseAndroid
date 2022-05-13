@@ -163,16 +163,20 @@ public class GameManager {
         this.lastTurn = lastTurn;
     }
 
-    public void moveWormholes(){
-        //TODO check if it's my turn
-        playingField.moveAllWormholesRandomly();
-        List<Wormhole> wormholeList = playingField.getWormholeList();
+    public void moveWormholes() {
+        if (isItMyTurn() == true || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
+            return;
+        }
 
-       var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
-        var message = new Message();
-        message.setType(MessageType.WORMHOLE_MOVE);
-        message.setPayload(new Gson().toJson(payload));
-        webSocketClient.send(String.valueOf(message));
+            playingField.moveAllWormholesRandomly();
+            List<Wormhole> wormholeList = playingField.getWormholeList();
+
+            var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
+            var message = new Message();
+            message.setType(MessageType.WORMHOLE_MOVE);
+            message.setPayload(new Gson().toJson(payload));
+            webSocketClient.send(String.valueOf(message));
+
 
     }
 
