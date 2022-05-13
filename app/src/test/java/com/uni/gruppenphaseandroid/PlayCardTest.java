@@ -58,7 +58,90 @@ public class PlayCardTest {
         Field expected = figure1.getCurrentField().getNextField().getNextField();
         Card card = new Card(Cardtype.TWO);
 
+        card.playCard(figure1, -1, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playFOUR_PLUSMINUS_effect1() throws Exception {
+        Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField().getNextField();
+        Card card = new Card(Cardtype.FOUR_PLUSMINUS);
+
+        card.playCard(figure1, 1, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playFOUR_PLUSMINUS_effect2() throws Exception {
+        Field expected = figure1.getCurrentField().getPreviousField().getPreviousField().getPreviousField().getPreviousField();
+        Card card = new Card(Cardtype.FOUR_PLUSMINUS);
+
+        card.playCard(figure1, 2, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playONETOSEVEN() throws Exception {
+        Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField();
+        Card card = new Card(Cardtype.ONETOSEVEN);
+
+        card.playCard(figure1, 3, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playONETOELEVEN_START_effect1() throws Exception {
+        figure1.setCurrentField(playingField.getRootField());
+        Field expected = playingField.getRedStartingField();
+
+        Card card = new Card(Cardtype.ONEORELEVEN_START);
+
         card.playCard(figure1, 0, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playONETOELEVEN_START_effect2() throws Exception {
+        Field expected = figure1.getCurrentField().getNextField();
+        Card card = new Card(Cardtype.ONEORELEVEN_START);
+
+        card.playCard(figure1, 1, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playONETOELEVEN_START_effect3() throws Exception {
+        Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField();
+        Card card = new Card(Cardtype.ONEORELEVEN_START);
+
+        card.playCard(figure1, 2, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playTHIRTEEN_START_effect1() throws Exception {
+        Field expected = playingField.getRedStartingField();
+        figure1.setCurrentField(playingField.getRootField());
+        Card card = new Card(Cardtype.THIRTEEN_START);
+
+        card.playCard(figure1, 0, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playTHIRTEEN_START_effect2() throws Exception {
+        Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField();
+        Card card = new Card(Cardtype.THIRTEEN_START);
+
+        card.playCard(figure1, 1, null);
 
         Assert.assertEquals(expected, figure1.getCurrentField());
     }
