@@ -129,44 +129,29 @@ public class PlayingField {
         }
     }
 
+
     private void generateGoalFields() {
-        Field previousGreenField = greenStartingField;
-        int greenID = 81;
-        Field previousYellowField = yellowStartingField;
-        int yellowID = 85;
-        Field previousRedField = redStartingField;
-        int redID = 89;
-        Field previousBlueField = blueStartingField;
-        int blueID = 93;
 
-        for (int i = 0; i < 4; i++) {
-            GoalField goalFieldGreen = new GoalField(new FieldUIimpl(view), null, previousGreenField, null, greenID + i, Color.GREEN);
-            goalFieldGreen.getFieldUIobject().registerUIobject(generateGoalTag(Color.GREEN, i + 1));
+        generateGoalFieldsOfColor(greenStartingField, 81, Color.GREEN);
+        generateGoalFieldsOfColor(yellowStartingField, 85, Color.YELLOW);
+        generateGoalFieldsOfColor(redStartingField, 89, Color.RED);
+        generateGoalFieldsOfColor(blueStartingField, 93, Color.BLUE);
+    }
 
-            GoalField goalFieldYellow = new GoalField(new FieldUIimpl(view), null, previousYellowField, null,yellowID + i, Color.YELLOW);
-            goalFieldYellow.getFieldUIobject().registerUIobject(generateGoalTag(Color.YELLOW, i + 1));
 
-            GoalField goalFieldRed = new GoalField(new FieldUIimpl(view), null, previousRedField, null,redID + i, Color.RED);
-            goalFieldRed.getFieldUIobject().registerUIobject(generateGoalTag(Color.RED, i + 1));
 
-            GoalField goalFieldBlue = new GoalField(new FieldUIimpl(view), null, previousBlueField, null,blueID + i, Color.BLUE);
-            goalFieldBlue.getFieldUIobject().registerUIobject(generateGoalTag(Color.BLUE, i + 1));
-
-            if (i == 0) {
-                greenStartingField.setNextGoalField(goalFieldGreen);
-                yellowStartingField.setNextGoalField(goalFieldYellow);
-                redStartingField.setNextGoalField(goalFieldRed);
-                blueStartingField.setNextGoalField(goalFieldBlue);
-            } else {
-                previousGreenField.setNextField(goalFieldGreen);
-                previousYellowField.setNextField(goalFieldYellow);
-                previousRedField.setNextField(goalFieldRed);
-                previousBlueField.setNextField(goalFieldBlue);
+    private void generateGoalFieldsOfColor(Field startingField, int id, Color color){
+        Field previousField = startingField;
+        for(int i = 0; i < 4; i++){
+            GoalField goalField = new GoalField(new FieldUIimpl(view), null, previousField, null, id + i, color);
+            goalField.getFieldUIobject().registerUIobject(generateGoalTag(color, i + 1));
+            if(i==0){
+                ((StartingField)startingField).setNextGoalField(goalField);
+            }else{
+                previousField.setNextField(goalField);
             }
-            previousGreenField = goalFieldGreen;
-            previousYellowField = goalFieldYellow;
-            previousRedField = goalFieldRed;
-            previousBlueField = goalFieldBlue;
+
+            previousField = goalField;
         }
     }
 

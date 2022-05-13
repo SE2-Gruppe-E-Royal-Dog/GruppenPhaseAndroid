@@ -19,29 +19,27 @@ public class FigureManager {
 
     public void createFigureSetOfColor(Color color, PlayingField playingField, RelativeLayout relativeLayout){
 
+        createSingleFigure(color, playingField, relativeLayout, Typ.JERK);
+        createSingleFigure(color, playingField, relativeLayout, Typ.CITIZEN);
+        createSingleFigure(color, playingField, relativeLayout, Typ.KNIGHT);
+        createSingleFigure(color, playingField, relativeLayout, Typ.KING);
+    }
+
+    public void createSingleFigure(Color color, PlayingField playingField, RelativeLayout relativeLayout, Typ typ){
         FigureUIimpl figureUIimpl = new FigureUIimpl();
-        Jerk jerk = new Jerk(figureList.size()+1, color, playingField.getRightStartingAreaField(color), Typ.JERK, figureUIimpl);
-        figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(color, Typ.JERK));
-        figureList.add(jerk);
-        figureUIimpl.moveFigureToPosition(jerk.getCurrentField().getFieldUIobject());
-
-        figureUIimpl = new FigureUIimpl();
-        Citizen citizen = new Citizen(figureList.size()+1, color, playingField.getRightStartingAreaField(color), Typ.CITIZEN, figureUIimpl);
-        figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(color, Typ.CITIZEN));
-        figureList.add(citizen);
-        figureUIimpl.moveFigureToPosition(citizen.getCurrentField().getFieldUIobject());
-
-        figureUIimpl = new FigureUIimpl();
-        Knight knight = new Knight(figureList.size()+1, color, playingField.getRightStartingAreaField(color), Typ.KNIGHT, figureUIimpl);
-        figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(color, Typ.KNIGHT));
-        figureList.add(knight);
-        figureUIimpl.moveFigureToPosition(knight.getCurrentField().getFieldUIobject());
-
-        figureUIimpl = new FigureUIimpl();
-        King king = new King(figureList.size()+1, color, playingField.getRightStartingAreaField(color), Typ.KING, figureUIimpl);
-        figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(color, Typ.KING));
-        figureList.add(king);
-        figureUIimpl.moveFigureToPosition(king.getCurrentField().getFieldUIobject());
+        Figure figure = null;
+        switch (typ){
+            case JERK: figure = new Jerk(figureList.size()+1, color, playingField.getRightStartingAreaField(color), typ, figureUIimpl);
+            break;
+            case CITIZEN: figure = new Citizen(figureList.size()+1, color, playingField.getRightStartingAreaField(color), typ, figureUIimpl);
+            break;
+            case KNIGHT: figure = new Knight(figureList.size()+1, color, playingField.getRightStartingAreaField(color), typ, figureUIimpl);
+            break;
+            case KING: figure = new King(figureList.size()+1, color, playingField.getRightStartingAreaField(color), typ, figureUIimpl);
+        }
+        figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(color, typ));
+        figureList.add(figure);
+        figureUIimpl.moveFigureToPosition(figure.getCurrentField().getFieldUIobject());
     }
 
     private int createRightDrawable(Color color, Typ typ){
