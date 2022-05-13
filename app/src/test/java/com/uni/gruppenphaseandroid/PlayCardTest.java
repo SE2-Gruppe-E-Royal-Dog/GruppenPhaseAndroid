@@ -62,4 +62,30 @@ public class PlayCardTest {
 
         Assert.assertEquals(expected, figure1.getCurrentField());
     }
+
+    @Test
+    public void playMAGNET() throws Exception {
+        figure2.setCurrentField(playingField.getBlueStartingField());
+        figure1.setCurrentField(playingField.getRedStartingField());
+        Field expected = figure2.getCurrentField().getPreviousField();
+        Card card = new Card(Cardtype.MAGNET);
+
+        card.playCard(figure1, 0, figure2);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playSWITCH() throws Exception {
+        figure2.setCurrentField(playingField.getBlueStartingField());
+        figure1.setCurrentField(playingField.getRedStartingField());
+        Field expected1 = figure2.getCurrentField();
+        Field expected2 = figure1.getCurrentField();
+        Card card = new Card(Cardtype.SWITCH);
+
+        card.playCard(figure1, 0, figure2);
+
+        Assert.assertEquals(expected1, figure1.getCurrentField());
+        Assert.assertEquals(expected2, figure2.getCurrentField());
+    }
 }
