@@ -13,7 +13,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.se2.communication.Client;
 import com.se2.communication.dto.Message;
 import com.se2.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
+import java.sql.SQLOutput;
 import java.util.EventListener;
 
 public class SensorReader_Light extends Fragment implements EventListener, SensorEventListener{
@@ -46,11 +48,8 @@ public class SensorReader_Light extends Fragment implements EventListener, Senso
         public void onSensorChanged(SensorEvent event) {
 
             if (event.values[0] <= event.values[0]){
-              /*  var message = new Message();
-                message.setType(MessageType.CHEATING_LIGHT);
-                websocketClient.send(message);
-            */
-                //TODO send message to GameManager (prüft vorab ob schummeln möglich ist, wenn ja wird die Message den Server geschickt)
+                System.out.println("sensor_light");
+                GameManager.getInstance().moveWormholes();
             }
         }
 

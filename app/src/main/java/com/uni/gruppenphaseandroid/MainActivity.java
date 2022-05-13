@@ -29,6 +29,7 @@ import com.se2.communication.dto.StartGamePayload;
 import com.se2.communication.dto.UpdateBoardPayload;
 import com.se2.communication.dto.Payload;
 import com.se2.communication.dto.SendCardsPayload;
+import com.se2.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
@@ -75,8 +76,9 @@ public class MainActivity extends AppCompatActivity {
         doRegisterReceiver();
 
         var fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+      /**  fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());**/
+      fab.setOnClickListener(view -> GameManager.getInstance().moveWormholes());
 
     }
 
@@ -129,10 +131,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case UPDATE_BOARD:
                 handleUpdateBoard(msg.getPayload());
+                break;
             case PLAYER_LEFT_LOBBY:
                 handlePlayerLeftMessage(msg.getPayload());
+                break;
             case SEND_CARDS:
                 handleSendCardsMessage(msg.getPayload());
+                break;
+            case WORMHOLE_MOVE:
+                handleMoveWormholes(msg.getPayload());
+                break;
+            default:
+                break;
         }
     }
 
@@ -216,5 +226,10 @@ public class MainActivity extends AppCompatActivity {
         message.setPayload(gson.toJson(payload));
 
         websocketClient.send(message);
+    }
+    private void handleMoveWormholes(String body){
+        var moveWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
+        int[] newFieldIDs = {moveWormholePayload.getNewWormholeFieldPosition_1(), moveWormholePayload.getNewWormholeFieldPosition_2(), moveWormholePayload.getNewWormholeFieldPosition_3(), moveWormholePayload.getNewWormholeFieldPosition_4()};
+        GameManager.getInstance().moveWormholes(newFieldIDs);
     }
 }
