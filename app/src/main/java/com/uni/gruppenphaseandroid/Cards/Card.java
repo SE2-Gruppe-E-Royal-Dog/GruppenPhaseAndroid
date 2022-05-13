@@ -56,7 +56,7 @@ public class Card {
             throw new IllegalArgumentException("myFigure cannot be null");
         }
 
-        if(effect==0 && targetFigure==null){
+        if(effect==-1 && targetFigure==null){
             playNumCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
             playEffectCards(myFigure, effect);
