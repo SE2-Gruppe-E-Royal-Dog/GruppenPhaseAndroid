@@ -63,6 +63,9 @@ public class FieldTest {
 
         field2.setFieldUIobject(field2UI);
         field6.setFieldUIobject(field6UI);
+
+        field2.setFieldID(10);
+        field6.setFieldID(17);
     }
 
     @After
@@ -97,10 +100,6 @@ public class FieldTest {
 
     @Test
     public void switchField() {
-        field2.setFieldID(10);
-
-        field6.setFieldID(17);
-
         Field field3 = field2.getNextField();
         Field field5 = field6.getPreviousField();
 
@@ -109,16 +108,23 @@ public class FieldTest {
         Assert.assertEquals(field2, field5.getNextField());
         Assert.assertEquals(field6, field3.getPreviousField());
 
+        verify(field2UI, times(1)).turnIntoRegularField();
+
+    }
+    @Test
+    public void switchField_ID(){
+        field6.switchField(field2);
 
         Assert.assertEquals(17, field2.getFieldID());
         Assert.assertEquals(10, field6.getFieldID());
 
-        verify(field2UI, times(1)).turnIntoRegularField();
+        verify(field6UI, times(1)).turnIntoRegularField();
 
     }
 
+
         @Test
-        public void switchField_firstField() {
+        public void testFieldStructure_firstField() {
 
             int fieldstraversed = 0;
             Field currentField = field1;
@@ -131,7 +137,7 @@ public class FieldTest {
         }
 
         @Test
-                public void switchField_lastField(){
+                public void testFieldStructure_lastField(){
             int fieldstraversed = 0;
             Field currentField = field7;
             while (currentField != null) {
