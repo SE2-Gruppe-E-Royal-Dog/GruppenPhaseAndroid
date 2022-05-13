@@ -171,4 +171,18 @@ public class PlayCardTest {
         Assert.assertEquals(expected1, figure1.getCurrentField());
         Assert.assertEquals(expected2, figure2.getCurrentField());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalCombinationOfValues() throws Exception {
+        Card card = new Card(Cardtype.TWO);
+
+        card.playCard(figure1, -1, figure2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void myFigureIsNull() throws Exception {
+        Card card = new Card(Cardtype.TWO);
+
+        card.playCard(null, 0, null);
+    }
 }
