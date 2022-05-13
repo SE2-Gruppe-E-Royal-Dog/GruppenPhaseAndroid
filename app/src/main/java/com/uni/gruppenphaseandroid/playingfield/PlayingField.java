@@ -262,6 +262,33 @@ public class PlayingField {
         return startingAreaField;
     }
 
+    public Field moveToStart(Figure figure){
+        Field newField;
+        switch (figure.getColor()){
+            case BLUE:newField = blueStartingField;
+            break;
+            case RED:newField = redStartingField;
+            break;
+            case GREEN:newField = greenStartingField;
+            break;
+            case YELLOW:newField = yellowStartingField;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + figure.getColor());
+        }
+        figure.setCurrentField(newField);
+        return newField;
+    }
+
+    public Field switchPositions(Figure figure1, Figure figure2){
+        Field current1 = figure1.getCurrentField();
+        Field current2 = figure2.getCurrentField();
+
+        figure1.setCurrentField(current2);
+        figure2.setCurrentField(current1);
+        return figure1.getCurrentField();
+    }
+
     public Field move (Figure figure1, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren
         Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
         Figure figure2;
