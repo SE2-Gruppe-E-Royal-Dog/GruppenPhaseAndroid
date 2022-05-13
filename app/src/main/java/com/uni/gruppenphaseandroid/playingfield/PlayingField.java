@@ -59,7 +59,7 @@ public class PlayingField {
         wormholeList.get(2).setPartnerWormhole(wormholeList.get(3));
         wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
 
-        moveAllWormholesRandomly();
+      //  moveAllWormholesRandomly(); just show effect
 
     }
 
