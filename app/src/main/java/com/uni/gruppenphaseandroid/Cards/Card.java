@@ -15,11 +15,11 @@ public class Card {
         return cardtype;
     }
 
-    private void playNumCard(Figure myFigure) throws Exception {
+    private void playNumCard(Figure myFigure) {
             GameManager.getInstance().getPlayingField().move(myFigure, getCardtype().getValue());
     }
 
-    private void playEffectCards(Figure myFigure, int effect) throws Exception {
+    private void playEffectCards(Figure myFigure, int effect) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()) {
             case FOUR_PLUSMINUS:
@@ -40,7 +40,7 @@ public class Card {
         }
     }
 
-    private void playSpecialCards(Figure myFigure, Figure targetFigure) throws Exception {
+    private void playSpecialCards(Figure myFigure, Figure targetFigure) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()) {
             case MAGNET:
@@ -51,7 +51,7 @@ public class Card {
         }
     }
 
-    public void playCard(Figure myFigure, int effect, Figure targetFigure) throws Exception {
+    public void playCard(Figure myFigure, int effect, Figure targetFigure) {
         if(myFigure==null){
             throw new IllegalArgumentException("myFigure cannot be null");
         }
