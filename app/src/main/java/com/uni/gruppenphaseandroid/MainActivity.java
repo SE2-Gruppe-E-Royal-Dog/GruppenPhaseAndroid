@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
@@ -18,20 +19,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.se2.communication.Client;
-import com.se2.communication.dto.JoinedLobbyPayload;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.MessageType;
-import com.se2.communication.dto.NewPlayerJoinedLobbyPayload;
-
-import com.se2.communication.dto.Payload;
-import com.se2.communication.dto.SendCardsPayload;
+import com.uni.gruppenphaseandroid.communication.Client;
+import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.Payload;
+import com.uni.gruppenphaseandroid.communication.dto.PlayerLeftLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.SendCardsPayload;
+import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
+import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
-import com.uni.gruppenphaseandroid.playingfield.PlayingField;
-
-import com.se2.communication.dto.PlayerLeftLobbyPayload;
-
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bindService();
         doRegisterReceiver();
-
-        var fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
-
     }
 
     @Override
@@ -99,97 +93,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void doRegisterReceiver() {
-        var chatMessageReceiver = new MessageReceiver();
-        IntentFilter filter = new IntentFilter("com.xch.servicecallback.content");
-        registerReceiver(chatMessageReceiver, filter);
-    }
-
-    public class MessageReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            handleMessage(intent.getStringExtra("message"));
-        }
-    }
-
-    private void handleMessage(String message) {
-        Message msg = gson.fromJson(message, Message.class);
-        switch (msg.getType()) {
-            case JOINED_LOBBY:
-                handleJoinedLobbyMessage(msg.getPayload());
-                break;
-            case NEW_PLAYER_JOINED:
-                handleNewPlayerJoinedMessage(msg.getPayload());
-                break;
-            case START_GAME:
-                handleStartGame(msg.getPayload());
-                break;
-            case UPDATEBOARD:
-                handleUpdateBoard(msg.getPayload());
-            case PLAYER_LEFT_LOBBY:
-                handlePlayerLeftMessage(msg.getPayload());
-            case SEND_CARDS:
-                handleSendCardsMessage(msg.getPayload());
-        }
-    }
-
-    private void handleSendCardsMessage(String sendCardsPayload){
-        var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
-        
-            Handcards.getInstance().addCardToHand(payload.getCards());
-    }
-
-    private void handlePlayerLeftMessage(String body) {
-        var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
-
-        showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
-    }
-
-    private void handleNewPlayerJoinedMessage(String body) {
-        var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
-
-        showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
-    }
-
-    private void handleJoinedLobbyMessage(String body) {
-        var payload = gson.fromJson(body, JoinedLobbyPayload.class);
-        lobbyId = payload.getLobbyId();
-        playerId = payload.getPlayerId();
-        Log.d("lobby", "Joined lobby with id: " + playerId);
-    }
-
-    private void showPlayerToast(String message) {
-        var toast = Toast.makeText(getApplicationContext(),
-                message,
-                Toast.LENGTH_LONG);
-
-        toast.show();
-    }
-
-    private void handleStartGame(String body){
-
-        String[] splitString = body.split("_");
-        int numberOfPlayers = Integer.parseInt(splitString[0]);
-        int playerTurnNumber = Integer.parseInt(splitString[1]);
-        //start game
-        GameManager.getInstance().startGame(numberOfPlayers, playerTurnNumber);
-
-    }
-
-    private void handleUpdateBoard(String body){
-        String[] splitString = body.split("_");
-        GameManager.getInstance().updateBoard(splitString);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 
     public Client getWebsocketClient() {
         return websocketClient;
@@ -207,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         return playerId;
     }
 
-    public void sendMessage(MessageType messageType, Payload payload){
+    public void sendMessage(MessageType messageType, Payload payload) {
         websocketClient = getService().getClient();
         var message = new Message();
         message.setType(messageType);
@@ -215,5 +118,90 @@ public class MainActivity extends AppCompatActivity {
         message.setPayload(gson.toJson(payload));
 
         websocketClient.send(message);
+    }
+
+    private void doRegisterReceiver() {
+        var chatMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter("com.xch.servicecallback.content");
+        registerReceiver(chatMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            handleMessage(intent.getStringExtra("message"));
+        }
+
+        private void handleMessage(String message) {
+            Message msg = gson.fromJson(message, Message.class);
+            switch (msg.getType()) {
+                case JOINED_LOBBY:
+                    handleJoinedLobbyMessage(msg.getPayload());
+                    break;
+                case NEW_PLAYER_JOINED:
+                    handleNewPlayerJoinedMessage(msg.getPayload());
+                    break;
+                case START_GAME:
+                    handleStartGame(msg.getPayload());
+                    break;
+                case UPDATE_BOARD:
+                    handleUpdateBoard(msg.getPayload());
+                    break;
+                case PLAYER_LEFT_LOBBY:
+                    handlePlayerLeftMessage(msg.getPayload());
+                    break;
+                case SEND_CARDS:
+                    handleSendCardsMessage(msg.getPayload());
+                    break;
+                default:
+                    Log.d("message_handler", "Unknown MessageType: " + msg.getType());
+            }
+        }
+
+        private void handleSendCardsMessage(String sendCardsPayload) {
+            var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
+
+            Handcards.getInstance().addCardToHand(payload.getCards());
+        }
+
+        private void handlePlayerLeftMessage(String body) {
+            var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
+
+            showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
+        }
+
+        private void handleNewPlayerJoinedMessage(String body) {
+            var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
+
+            showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
+        }
+
+        private void handleJoinedLobbyMessage(String body) {
+            var payload = gson.fromJson(body, JoinedLobbyPayload.class);
+            lobbyId = payload.getLobbyId();
+            playerId = payload.getPlayerId();
+            Log.d("lobby", "Joined lobby with id: " + playerId);
+        }
+
+        private void showPlayerToast(String message) {
+            var toast = Toast.makeText(getApplicationContext(),
+                    message,
+                    Toast.LENGTH_LONG);
+
+            toast.show();
+        }
+
+        private void handleStartGame(String body) {
+
+            var payload = gson.fromJson(body, StartGamePayload.class);
+            //start game
+            Log.d("server_communication", "Server message received!!!!!!");
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber());
+        }
+
+        private void handleUpdateBoard(String body) {
+            var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
+            GameManager.getInstance().updateBoard(updateBoardPayload);
+        }
     }
 }

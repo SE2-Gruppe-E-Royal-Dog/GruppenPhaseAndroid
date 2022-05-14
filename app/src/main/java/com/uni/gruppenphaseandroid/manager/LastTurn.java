@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 
@@ -10,11 +11,11 @@ public class LastTurn {
     private Field newFigure1Field;
     private Field newFigure2Field;
     private int distanceMovedByFigure1;
-    //private int cardPlayedID;
+    private Cardtype cardtype;
 
-    public String generateServerMessage(){
-        String figure2ID = (figure2 == null)?"-1":""+figure2.getId();
-        String newFigure2FieldID = (newFigure2Field == null)?"-1":""+newFigure2Field.getFieldID();
+    public String generateServerMessage() {
+        String figure2ID = (figure2 == null) ? "-1" : "" + figure2.getId();
+        String newFigure2FieldID = (newFigure2Field == null) ? "-1" : "" + newFigure2Field.getFieldID();
 
         return figure1.getId() + "_" + newFigure1Field.getFieldID() + "_" + figure2ID + "_" + newFigure2FieldID;
     }
@@ -25,7 +26,6 @@ public class LastTurn {
         this.newFigure1Field = newFigure1Field;
         this.newFigure2Field = newFigure2Field;
         this.distanceMovedByFigure1 = distanceMovedByFigure1;
-        //this.cardPlayedID = cardPlayedID;
     }
 
     public Figure getFigure1() {
@@ -68,13 +68,4 @@ public class LastTurn {
         this.distanceMovedByFigure1 = distanceMovedByFigure1;
     }
 
-    /*public int getCardPlayedID() {
-        return cardPlayedID;
-    }
-
-    public void setCardPlayedID(int cardPlayedID) {
-        this.cardPlayedID = cardPlayedID;
-    }
-
-     */
 }

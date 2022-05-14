@@ -1,9 +1,9 @@
-package com.se2.communication.dto;
+package com.uni.gruppenphaseandroid.communication.dto;
 
-public class PlayerLeftLobbyPayload {
+public class NewPlayerPayload {
     String playerName;
 
-    public PlayerLeftLobbyPayload(String playerName) {
+    public NewPlayerPayload(String playerName) {
         this.playerName = playerName;
     }
 

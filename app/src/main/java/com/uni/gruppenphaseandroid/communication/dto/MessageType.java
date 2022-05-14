@@ -1,4 +1,4 @@
-package com.se2.communication.dto;
+package com.uni.gruppenphaseandroid.communication.dto;
 
 public enum MessageType {
     JOIN_LOBBY,
@@ -10,6 +10,7 @@ public enum MessageType {
     CHEATING_TILT_LEFT,
     CHEATING_LIGHT,
     START_GAME,
+    UPDATE_BOARD,
     UPDATEBOARD,
     WORMHOLE_MOVE,
     REQUEST_CARDS,
