@@ -27,6 +27,8 @@ import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload
 import com.uni.gruppenphaseandroid.communication.dto.Payload;
 import com.uni.gruppenphaseandroid.communication.dto.PlayerLeftLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.SendCardsPayload;
+import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
+import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
@@ -96,6 +98,33 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public Client getWebsocketClient() {
+        return websocketClient;
+    }
+
+    public WebSocketService getService() {
+        return service;
+    }
+
+    public String getLobbyId() {
+        return lobbyId;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void sendMessage(MessageType messageType, Payload payload) {
+        websocketClient = getService().getClient();
+        var message = new Message();
+        message.setType(messageType);
+
+        message.setPayload(gson.toJson(payload));
+
+        websocketClient.send(message);
+    }
+
     private void doRegisterReceiver() {
         var chatMessageReceiver = new MessageReceiver();
         IntentFilter filter = new IntentFilter("com.xch.servicecallback.content");
@@ -108,28 +137,29 @@ public class MainActivity extends AppCompatActivity {
             handleMessage(intent.getStringExtra("message"));
         }
 
-    private void handleMessage(String message) {
-        Message msg = gson.fromJson(message, Message.class);
-        switch (msg.getType()) {
-            case JOINED_LOBBY:
-                handleJoinedLobbyMessage(msg.getPayload());
-                break;
-            case NEW_PLAYER_JOINED:
-                handleNewPlayerJoinedMessage(msg.getPayload());
-                break;
-            case START_GAME:
-                handleStartGame(msg.getPayload());
-                break;
-            case UPDATE_BOARD:
-                handleUpdateBoard(msg.getPayload());
-            case PLAYER_LEFT_LOBBY:
-                handlePlayerLeftMessage(msg.getPayload());
-            case SEND_CARDS:
-                handleSendCardsMessage(msg.getPayload());
+        private void handleMessage(String message) {
+            Message msg = gson.fromJson(message, Message.class);
+            switch (msg.getType()) {
+                case JOINED_LOBBY:
+                    handleJoinedLobbyMessage(msg.getPayload());
+                    break;
+                case NEW_PLAYER_JOINED:
+                    handleNewPlayerJoinedMessage(msg.getPayload());
+                    break;
+                case START_GAME:
+                    handleStartGame(msg.getPayload());
+                    break;
+                case UPDATE_BOARD:
+                    handleUpdateBoard(msg.getPayload());
+                case PLAYER_LEFT_LOBBY:
+                    handlePlayerLeftMessage(msg.getPayload());
+                case SEND_CARDS:
+                    handleSendCardsMessage(msg.getPayload());
+            }
         }
 
-    private void handleSendCardsMessage(String sendCardsPayload){
-        var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
+        private void handleSendCardsMessage(String sendCardsPayload) {
+            var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
 
             Handcards.getInstance().addCardToHand(payload.getCards());
         }
@@ -163,40 +193,15 @@ public class MainActivity extends AppCompatActivity {
 
         private void handleStartGame(String body) {
 
-        var payload = gson.fromJson(body, StartGamePayload.class);
-        //start game
-        System.out.println("Server message received!!!!!!");
-        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber());
-    }
+            var payload = gson.fromJson(body, StartGamePayload.class);
+            //start game
+            System.out.println("Server message received!!!!!!");
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber());
+        }
 
-    private void handleUpdateBoard(String body){
-        var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
-        GameManager.getInstance().updateBoard(updateBoardPayload);
-    }
-
-    public Client getWebsocketClient() {
-        return websocketClient;
-    }
-
-    public WebSocketService getService() {
-        return service;
-    }
-
-    public String getLobbyId() {
-        return lobbyId;
-    }
-
-    public String getPlayerId() {
-        return playerId;
-    }
-
-    public void sendMessage(MessageType messageType, Payload payload) {
-        websocketClient = getService().getClient();
-        var message = new Message();
-        message.setType(messageType);
-
-        message.setPayload(gson.toJson(payload));
-
-        websocketClient.send(message);
+        private void handleUpdateBoard(String body) {
+            var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
+            GameManager.getInstance().updateBoard(updateBoardPayload);
+        }
     }
 }

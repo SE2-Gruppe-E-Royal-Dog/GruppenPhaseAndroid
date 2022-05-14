@@ -14,9 +14,8 @@ import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
-import com.se2.communication.dto.StartGamePayload;
+import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
