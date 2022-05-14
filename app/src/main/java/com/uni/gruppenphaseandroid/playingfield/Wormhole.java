@@ -14,6 +14,30 @@ public class Wormhole extends Field {
 
     }
 
+    @Override
+    protected void triggerSpecialFieldEffect() {
+        Figure myFigure;
+        Figure partnerFigure;
+
+        myFigure = getCurrentFigure();
+        myFigure.setCurrentField(partnerWormhole);
+
+        partnerFigure = partnerWormhole.getCurrentFigure();
+        setCurrentFigure(partnerFigure);
+
+        partnerWormhole.setCurrentFigure(myFigure);
+
+        if (partnerFigure != null) {
+            partnerFigure.setCurrentField(this);
+            partnerFigure.getFigureUI().moveFigureToPosition(getFieldUIobject());
+        }
+
+        myFigure.getFigureUI().moveFigureToPosition(partnerWormhole.getFieldUIobject());
+
+
+
+    }
+
     public Wormhole getPartnerWormhole() {
         return partnerWormhole;
     }
@@ -31,8 +55,8 @@ public class Wormhole extends Field {
 
     public void moveWormholeToRandomPosition() {
 
-        int value = generateRandomNumber();
 
+        int value = generateRandomNumber();
         Field targetField = getNewFieldforWormholeSwitch(value);
 
         switchField(targetField);
@@ -50,7 +74,7 @@ public class Wormhole extends Field {
     public Field getNewFieldforWormholeSwitch(int value) {
         Field targetField = getFieldAtDistance(value, Color.BLACK);
 
-        while (targetField instanceof StartingField || targetField instanceof GoalField || targetField.getCurrentFigure() != null) {
+        while (targetField instanceof StartingField || targetField instanceof GoalField || targetField instanceof  Wormhole || targetField.getCurrentFigure() != null) {
             value = generateRandomNumber();
 
             targetField = getFieldAtDistance(value, Color.BLACK);
@@ -60,6 +84,5 @@ public class Wormhole extends Field {
         return targetField;
 
     }
-
 
 }

@@ -1,5 +1,9 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+import android.view.View;
+
+import com.uni.gruppenphaseandroid.manager.GameManager;
+
 import java.util.Random;
 
 public class Field {
@@ -103,7 +107,13 @@ public class Field {
             targetPreviousField.setNextField(this);
         }
 
-        fieldUIobject.switchFieldUI(targetField.getFieldUIobject());
+        FieldUI fieldUIimpl = getFieldUIobject();
+        setFieldUIobject(targetField.getFieldUIobject());
+        targetField.setFieldUIobject(fieldUIimpl);
+
+        targetField.getFieldUIobject().turnIntoRegularField();
+        getFieldUIobject().turnIntoWormhole();
+
 
         int helpID = targetField.getFieldID();
         targetField.setFieldID(getFieldID());

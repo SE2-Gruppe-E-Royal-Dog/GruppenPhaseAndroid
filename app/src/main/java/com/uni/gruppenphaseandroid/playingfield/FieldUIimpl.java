@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-public class FieldUIimpl extends FieldUI {
+import com.uni.gruppenphaseandroid.R;
+
+public class FieldUIimpl extends FieldUI{
 
     public ImageView getFieldImageView() {
         return fieldImageView;
@@ -60,7 +62,17 @@ public class FieldUIimpl extends FieldUI {
         fieldImageView.setImageDrawable(helpDrawable);
     }
 
-    public Drawable getImageResource() {
+    @Override
+    public void turnIntoWormhole() {
+        changeAppearance(R.drawable.ic_draw2field);
+    }
+
+    @Override
+    public void turnIntoRegularField() {
+        changeAppearance(R.drawable.ic_regularfield);
+    }
+
+    public Drawable getImageResource(){
         return fieldImageView.getDrawable();
     }
 }

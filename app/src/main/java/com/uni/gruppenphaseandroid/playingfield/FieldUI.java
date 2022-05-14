@@ -11,4 +11,6 @@ public abstract class FieldUI {
     public abstract int getMarginLeft();
 
     public abstract void switchFieldUI(FieldUI fieldUI);
+    public abstract void turnIntoWormhole();
+    public abstract void turnIntoRegularField();
 }
