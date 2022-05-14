@@ -79,23 +79,19 @@ public class InGameFragment extends Fragment {
             public void onClick(View view) {
                 GameManager.getInstance().moveFigureShowcase(3, 3);
             }
-          });
+        });
 
 
+        view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
+            websocketClient = ((MainActivity) getContext()).getService().getClient();
+            var lobbyId = ((MainActivity) getContext()).getLobbyId();
+            var message = new Message();
+            message.setType(MessageType.START_GAME);
 
-        view.findViewById(R.id.start_game_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                websocketClient = ((MainActivity) getContext()).getService().getClient();
-                var lobbyId = ((MainActivity) getContext()).getLobbyId();
-                var message = new Message();
-                message.setType(MessageType.START_GAME);
+            var payload = new StartGamePayload(lobbyId, 0, 0);
+            message.setPayload(gson.toJson(payload));
 
-                var payload = new StartGamePayload(lobbyId, 0, 0);
-                message.setPayload(gson.toJson(payload));
-
-                websocketClient.send(message);
-            }
+            websocketClient.send(message);
         });
     }
 }

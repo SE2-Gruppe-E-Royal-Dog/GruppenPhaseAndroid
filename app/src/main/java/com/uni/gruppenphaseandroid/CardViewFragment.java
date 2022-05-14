@@ -6,21 +6,20 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import java.util.EventListener;
 
 
-public class cardViewFragment extends Fragment implements EventListener, SensorEventListener {
+public class CardViewFragment extends Fragment implements EventListener, SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
@@ -35,15 +34,12 @@ public class cardViewFragment extends Fragment implements EventListener, SensorE
         return inflater.inflate(R.layout.fragment_card_view, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> {
-            NavHostFragment.findNavController(cardViewFragment.this)
-                    .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
-        });
-
-
+        view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
+                .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
     }
 
     @Override
@@ -84,7 +80,7 @@ public class cardViewFragment extends Fragment implements EventListener, SensorE
 
 
                 //shows a textView that is gone after 5 seconds
-                CountDownTimer timer = new CountDownTimer(3000, 1000) {
+                new CountDownTimer(3000, 1000) {
 
                     @Override
                     public void onTick(long millisUntilFinished) {
@@ -114,17 +110,11 @@ public class cardViewFragment extends Fragment implements EventListener, SensorE
                         }
                     }.start();
                 }
-
             }
         }
-
     }
 
     @Override
     public void onAccuracyChanged(Sensor arg0, int arg1) {
-
-
     }
-
-
 }

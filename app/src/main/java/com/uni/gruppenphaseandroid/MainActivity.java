@@ -69,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bindService();
         doRegisterReceiver();
-
-        var fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
-
     }
 
     @Override
@@ -151,10 +146,15 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case UPDATE_BOARD:
                     handleUpdateBoard(msg.getPayload());
+                    break;
                 case PLAYER_LEFT_LOBBY:
                     handlePlayerLeftMessage(msg.getPayload());
+                    break;
                 case SEND_CARDS:
                     handleSendCardsMessage(msg.getPayload());
+                    break;
+                default:
+                    Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
         }
 

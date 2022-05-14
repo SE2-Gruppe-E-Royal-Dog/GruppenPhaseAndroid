@@ -38,11 +38,7 @@ public class Cheater extends Fragment {
         if (getlastCheat(playerID) == 0) {       //TODO bedinung prüfen
             setCheatingAllowed(true);
         } else {
-            if ((getlastCheat(playerID) - getRoundIndex()) >= 5) {
-                setCheatingAllowed(true);
-            } else {
-                setCheatingAllowed(false);
-            }
+            setCheatingAllowed((getlastCheat(playerID) - getRoundIndex()) >= 5);
         }
 
 
