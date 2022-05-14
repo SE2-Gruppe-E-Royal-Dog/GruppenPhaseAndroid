@@ -1,16 +1,14 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
 
-import android.app.ActionBar;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.uni.gruppenphaseandroid.R;
 
-public class FieldUIimpl extends FieldUI{
+public class FieldUIimpl implements FieldUI {
 
     public ImageView getFieldImageView() {
         return fieldImageView;
@@ -29,9 +27,6 @@ public class FieldUIimpl extends FieldUI{
 
     public FieldUIimpl() {
     }
-
-    ;
-
 
     @Override
     public int getMarginTop() {
@@ -72,7 +67,7 @@ public class FieldUIimpl extends FieldUI{
         changeAppearance(R.drawable.ic_regularfield);
     }
 
-    public Drawable getImageResource(){
+    public Drawable getImageResource() {
         return fieldImageView.getDrawable();
     }
 }

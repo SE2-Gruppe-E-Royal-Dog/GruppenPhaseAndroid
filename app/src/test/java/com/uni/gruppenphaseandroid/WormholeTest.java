@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid;
 
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -33,8 +34,6 @@ public class WormholeTest {
 
     }
 
-
-    @Ignore
     @Test
     public void getNewFieldforWormholeSwitchTest() {
         Field wormhole = playingField.getRootField();
@@ -45,8 +44,8 @@ public class WormholeTest {
         }
 
         wormhole = ((Wormhole) wormhole).getNewFieldforWormholeSwitch(((Wormhole) wormhole).generateRandomNumber());
-        Assert.assertFalse(wormhole instanceof Wormhole);
-        Assert.assertFalse(wormhole instanceof StartingField);
+        assertFalse(wormhole instanceof Wormhole);
+        assertFalse(wormhole instanceof StartingField);
     }
 
 }

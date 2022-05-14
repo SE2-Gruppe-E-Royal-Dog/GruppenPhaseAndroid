@@ -21,7 +21,7 @@ import java.util.List;
 
 public class GameManager {
 
-    public static GameManager instance;
+    private static GameManager instance;
 
     public static GameManager getInstance() {
         if (instance == null) {

@@ -99,7 +99,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
                     textView.setVisibility(View.VISIBLE);
 
                     //shows a textView that is gone after 5 seconds
-                    CountDownTimer timer = new CountDownTimer(3000, 1000) {
+                    new CountDownTimer(3000, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
                         }

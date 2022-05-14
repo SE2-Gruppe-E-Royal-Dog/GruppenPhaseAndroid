@@ -21,9 +21,8 @@ import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment {
     FigureManager figureManager;
-    private PlayingField playingField;
     private Client websocketClient;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public View onCreateView(
@@ -38,7 +37,7 @@ public class InGameFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        playingField = new PlayingField(view);
+        PlayingField playingField = new PlayingField(view);
         GameManager.getInstance().setPlayingField(playingField);
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
@@ -59,27 +58,14 @@ public class InGameFragment extends Fragment {
         });
 
 
-        view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> {
-            NavHostFragment.findNavController(InGameFragment.this)
-                    .navigate(R.id.action_InGameFragment_to_cardViewFragment2);
-
-        });
+        view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> NavHostFragment.findNavController(InGameFragment.this)
+                .navigate(R.id.action_InGameFragment_to_cardViewFragment2));
 
 
-        view.findViewById(R.id.move_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameManager.getInstance().moveFigureShowcase(1, 1);
-            }
-        });
+        view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
 
 
-        view.findViewById(R.id.move2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameManager.getInstance().moveFigureShowcase(3, 3);
-            }
-        });
+        view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
 
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {

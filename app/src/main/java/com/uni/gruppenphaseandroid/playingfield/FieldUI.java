@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-public abstract class FieldUI {
+public interface FieldUI {
 
     public abstract void changeAppearance(int resourceID);
 

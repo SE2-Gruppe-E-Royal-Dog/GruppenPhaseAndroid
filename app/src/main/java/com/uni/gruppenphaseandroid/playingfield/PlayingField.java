@@ -46,9 +46,9 @@ public class PlayingField {
     private void generateWormholeFields() {
         wormholeList = new ArrayList<>();
 
-        for (int i = 0; i<4; i++){
-            Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
-            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField() , fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+        for (int i = 0; i < 4; i++) {
+            Field fieldToChange = rootField.getFieldAtDistance(6 + 16 * i, Color.BLACK);
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField(), fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
             fieldToChange.getPreviousField().setNextField(wormhole);
             fieldToChange.getNextField().setPreviousField(wormhole);
             wormholeList.add(wormhole);
@@ -59,7 +59,7 @@ public class PlayingField {
         wormholeList.get(2).setPartnerWormhole(wormholeList.get(3));
         wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
 
-      //  moveAllWormholesRandomly(); just show effect
+        //  moveAllWormholesRandomly(); just show effect
 
     }
 
@@ -262,7 +262,7 @@ public class PlayingField {
         return startingAreaField;
     }
 
-    public Field move (Figure figure1, int fieldsToMove) throws Exception { // TODO: Input von Karten: wie viel fahren
+    public Field move(Figure figure1, int fieldsToMove) { // TODO: Input von Karten: wie viel fahren
         Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
         Figure figure2;
 
@@ -298,18 +298,15 @@ public class PlayingField {
         Field originField = figure.getCurrentField();
 
         for (int i = 0; i < fieldsToMove - 1; i++) {// TODO: Spezialfall CheckOvertaking wenn Goalfield erlauben?
-            if (figure.getCurrentField().getNextField().getCurrentFigure() != null) {
-                if (!checkOvertakingPossible(figure)) { // check if figure is allowed to overtake own figure
-                    return false;
-                }
+            if (figure.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure)) { // check if figure is allowed to overtake own figure
+                return false;
             }
-            if (figure.getCurrentField() instanceof StartingField) {
-                if (((StartingField) figure.getCurrentField()).getColor() == figure.getColor()) {
-                    GoalField goalfield = ((StartingField) figure.getCurrentField()).getNextGoalField();
-                    if (fieldsToMove <= 4) {
-                        figure.setCurrentField(goalfield);
-                        continue;
-                    }
+
+            if (figure.getCurrentField() instanceof StartingField && ((StartingField) figure.getCurrentField()).getColor() == figure.getColor()) {
+                GoalField goalfield = ((StartingField) figure.getCurrentField()).getNextGoalField();
+                if (fieldsToMove <= 4) {
+                    figure.setCurrentField(goalfield);
+                    continue;
                 }
             }
             figure.setCurrentField(figure.getCurrentField().getFieldAtDistance(1, figure.getColor()));
@@ -319,14 +316,12 @@ public class PlayingField {
         Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // TODO: Check ob newPosition ist Starting Field oder Goal Field => beaten not allowed!
         if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
             Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
-            if (beaten.getTyp() == Typ.KING && figure.getTyp() != Typ.KING) {
-                return false;
-            }
+            return beaten.getTyp() != Typ.KING || figure.getTyp() == Typ.KING;
         }
         return true;
     }
 
-    public boolean checkOvertakingPossible (Figure figure1) {
+    public boolean checkOvertakingPossible(Figure figure1) {
         if (checkGreenCard(card)) {
             return true;
         } else {
@@ -336,19 +331,19 @@ public class PlayingField {
 
     public boolean checkGreenCard(Card card) {
         //if (card.getColor() == GREEN) { // TODO: Farbe Karte einbauen
-            //return true;
+        //return true;
         //} else {
-            return false;
+        return false;
         //}
 
     }
 
-    public boolean checkBeatenPossible (Figure figure1) {
+    public boolean checkBeatenPossible(Figure figure1) {
         return figure1.checkBeaten(figure1);
     }
 
-    public void moveAllWormholesRandomly(){
-        for (int j = 0; j<4; j++){
+    public void moveAllWormholesRandomly() {
+        for (int j = 0; j < 4; j++) {
             wormholeList.get(j).moveWormholeToRandomPosition();
             repairRootField();
         }
@@ -356,8 +351,8 @@ public class PlayingField {
         repairWormholeVisuals();
     }
 
-    public Field getFieldWithID(int ID){
-        if(ID < 1 || ID > 64){
+    public Field getFieldWithID(int ID) {
+        if (ID < 1 || ID > 64) {
             return null;
         } else {
             Field targetField = rootField;
@@ -368,15 +363,15 @@ public class PlayingField {
         }
     }
 
-    public void repairRootField(){
-        if(rootField.getFieldID() != 1){
+    public void repairRootField() {
+        if (rootField.getFieldID() != 1) {
             rootField = getFieldWithID(1);
         }
     }
 
-    public void repairWormholeVisuals(){
-        for(int i = 1; i <=64;i++){
-            if(getFieldWithID(i).getClass() != Wormhole.class){
+    public void repairWormholeVisuals() {
+        for (int i = 1; i <= 64; i++) {
+            if (getFieldWithID(i).getClass() != Wormhole.class) {
                 getFieldWithID(i).getFieldUIobject().turnIntoRegularField();
             }
         }
@@ -385,8 +380,6 @@ public class PlayingField {
     public ArrayList<Wormhole> getWormholeList() {
         return wormholeList;
     }
-
-
 
 
     public View getView() {

@@ -12,7 +12,6 @@ public class LastTurn {
     private Field newFigure2Field;
     private int distanceMovedByFigure1;
     private Cardtype cardtype;
-    //private int cardPlayedID;
 
     public String generateServerMessage() {
         String figure2ID = (figure2 == null) ? "-1" : "" + figure2.getId();
