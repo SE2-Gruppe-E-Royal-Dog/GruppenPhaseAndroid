@@ -1,27 +1,28 @@
-package com.se2.communication;
+package com.uni.gruppenphaseandroid.communication;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import com.google.gson.Gson;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.MessageType;
-import com.se2.communication.dto.NewPlayerPayload;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.dto.NewPlayerPayload;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-class ClientTest {
+public class ClientTest {
     private final Gson gson = new Gson();
 
     @Test
-    void givenSendJoinLobbyMessage_expectSendIsCalledWithCorrectString() throws URISyntaxException {
+    public void givenSendJoinLobbyMessage_expectSendIsCalledWithCorrectString() throws URISyntaxException {
         var client = new Client(new URI("test"));
         var clientSpy = spy(client);
         doNothing().when(clientSpy).send(anyString());
@@ -38,11 +39,11 @@ class ClientTest {
 
         verify(clientSpy).send(captor.capture());
 
-        assertThat(captor.getValue()).isEqualTo("{\"type\":\"JOIN_LOBBY\",\"payload\":\"{\\\"playerName\\\":\\\"player-1\\\"}\"}");
+        assertEquals("{\"type\":\"JOIN_LOBBY\",\"payload\":\"{\\\"playerName\\\":\\\"player-1\\\"}\"}", captor.getValue());
     }
 
     @Test
-    void givenConnectToServerIsCalled_expectConnectBlockingIsCalled() throws URISyntaxException, InterruptedException {
+    public void givenConnectToServerIsCalled_expectConnectBlockingIsCalled() throws URISyntaxException, InterruptedException {
         var client = new Client(new URI("test"));
         var clientSpy = spy(client);
         doReturn(true).when(clientSpy).connectBlocking();

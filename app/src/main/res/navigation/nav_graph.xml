@@ -29,9 +29,9 @@
     </fragment>
     <fragment
         android:id="@+id/cardViewFragment2"
-        android:name="com.uni.gruppenphaseandroid.cardViewFragment"
+        android:name="com.uni.gruppenphaseandroid.CardViewFragment"
         android:label="fragment_card_view"
-        tools:layout="@layout/fragment_card_view" >
+        tools:layout="@layout/fragment_card_view">
         <action
             android:id="@+id/action_cardViewFragment2_to_InGameFragment2"
             app:destination="@id/InGameFragment" />

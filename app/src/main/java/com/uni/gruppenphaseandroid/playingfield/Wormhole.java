@@ -47,14 +47,13 @@ public class Wormhole extends Field {
     }
 
 
-
     public Wormhole(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID) {
-        super (fieldUIobject, nextField, previousField, currentFigure, fieldID);
+        super(fieldUIobject, nextField, previousField, currentFigure, fieldID);
 
     }
 
 
-    public void moveWormholeToRandomPosition(){
+    public void moveWormholeToRandomPosition() {
 
 
         int value = generateRandomNumber();
@@ -64,7 +63,7 @@ public class Wormhole extends Field {
 
     }
 
-    public int generateRandomNumber(){
+    public int generateRandomNumber() {
         int min = 2;
         int max = 63;
 
