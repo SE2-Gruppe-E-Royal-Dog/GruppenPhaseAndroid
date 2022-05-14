@@ -54,7 +54,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playNumberCard() throws Exception {
+    public void playNumberCard() {
         Field expected = figure1.getCurrentField().getNextField().getNextField();
         Card card = new Card(Cardtype.TWO);
 
@@ -64,7 +64,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playFOUR_PLUSMINUS_effect1() throws Exception {
+    public void playFOUR_PLUSMINUS_effect1() {
         Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField().getNextField();
         Card card = new Card(Cardtype.FOUR_PLUSMINUS);
 
@@ -74,7 +74,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playFOUR_PLUSMINUS_effect2() throws Exception {
+    public void playFOUR_PLUSMINUS_effect2() {
         Field expected = figure1.getCurrentField().getPreviousField().getPreviousField().getPreviousField().getPreviousField();
         Card card = new Card(Cardtype.FOUR_PLUSMINUS);
 
@@ -84,7 +84,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playONETOSEVEN() throws Exception {
+    public void playONETOSEVEN() {
         Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField();
         Card card = new Card(Cardtype.ONETOSEVEN);
 
@@ -94,7 +94,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playONETOELEVEN_START_effect1() throws Exception {
+    public void playONETOELEVEN_START_effect1() {
         figure1.setCurrentField(playingField.getRootField());
         Field expected = playingField.getRedStartingField();
 
@@ -106,7 +106,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playONETOELEVEN_START_effect2() throws Exception {
+    public void playONETOELEVEN_START_effect2() {
         Field expected = figure1.getCurrentField().getNextField();
         Card card = new Card(Cardtype.ONEORELEVEN_START);
 
@@ -116,7 +116,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playONETOELEVEN_START_effect3() throws Exception {
+    public void playONETOELEVEN_START_effect3() {
         Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField();
         Card card = new Card(Cardtype.ONEORELEVEN_START);
 
@@ -126,7 +126,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playTHIRTEEN_START_effect1() throws Exception {
+    public void playTHIRTEEN_START_effect1() {
         Field expected = playingField.getRedStartingField();
         figure1.setCurrentField(playingField.getRootField());
         Card card = new Card(Cardtype.THIRTEEN_START);
@@ -137,7 +137,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playTHIRTEEN_START_effect2() throws Exception {
+    public void playTHIRTEEN_START_effect2() {
         Field expected = figure1.getCurrentField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField().getNextField();
         Card card = new Card(Cardtype.THIRTEEN_START);
 
@@ -147,7 +147,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playMAGNET() throws Exception {
+    public void playMAGNET() {
         figure2.setCurrentField(playingField.getBlueStartingField());
         figure1.setCurrentField(playingField.getRedStartingField());
         Field expected = figure2.getCurrentField().getPreviousField();
@@ -159,7 +159,7 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playSWITCH() throws Exception {
+    public void playSWITCH() {
         figure2.setCurrentField(playingField.getBlueStartingField());
         figure1.setCurrentField(playingField.getRedStartingField());
         Field expected1 = figure2.getCurrentField();
@@ -173,14 +173,14 @@ public class PlayCardTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void illegalCombinationOfValues() throws Exception {
+    public void illegalCombinationOfValues() {
         Card card = new Card(Cardtype.TWO);
 
         card.playCard(figure1, -1, figure2);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void myFigureIsNull() throws Exception {
+    public void myFigureIsNull() {
         Card card = new Card(Cardtype.TWO);
 
         card.playCard(null, 0, null);
