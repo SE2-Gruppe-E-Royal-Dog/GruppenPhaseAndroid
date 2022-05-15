@@ -12,11 +12,10 @@ public class LastTurn {
     private Field newFigure2Field;
     private int distanceMovedByFigure1;
     private Cardtype cardtype;
-    //private int cardPlayedID;
 
-    public String generateServerMessage(){
-        String figure2ID = (figure2 == null)?"-1":""+figure2.getId();
-        String newFigure2FieldID = (newFigure2Field == null)?"-1":""+newFigure2Field.getFieldID();
+    public String generateServerMessage() {
+        String figure2ID = (figure2 == null) ? "-1" : "" + figure2.getId();
+        String newFigure2FieldID = (newFigure2Field == null) ? "-1" : "" + newFigure2Field.getFieldID();
 
         return figure1.getId() + "_" + newFigure1Field.getFieldID() + "_" + figure2ID + "_" + newFigure2FieldID;
     }

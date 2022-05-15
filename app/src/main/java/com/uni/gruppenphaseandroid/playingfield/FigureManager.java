@@ -17,7 +17,7 @@ public class FigureManager {
         this.figureList = new ArrayList<>();
     }
 
-    public void createFigureSetOfColor(Color color, PlayingField playingField, RelativeLayout relativeLayout){
+    public void createFigureSetOfColor(Color color, PlayingField playingField, RelativeLayout relativeLayout) {
 
         createFigureObjects(color, playingField);
 
@@ -55,7 +55,7 @@ public class FigureManager {
         figure.setFigureUI(figureUIimpl);
     }
 
-    private int createRightDrawable(Color color, Typ typ){
+    private int createRightDrawable(Color color, Typ typ) {
 
         if(color == Color.BLUE){
             switch (typ){
