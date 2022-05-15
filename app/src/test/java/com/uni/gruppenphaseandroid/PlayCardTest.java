@@ -14,6 +14,8 @@ import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureUI;
+import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
+import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
@@ -42,6 +44,8 @@ public class PlayCardTest {
         Field startingAreaField = playingField.getRedStartingField().getPreviousStartingArea();
         startingAreaField.setCurrentFigure(new Figure());
         startingAreaField.getPreviousField().setCurrentFigure(new Figure());
+        figureUI1 = mock(FigureUIimpl.class);
+        figureUI2 = mock(FigureUIimpl.class);
         figure1 = new Figure(1, Color.RED, playingField.getRedStartingField(), Typ.JERK, figureUI1);
         figure2 = new Figure(2, Color.BLUE, playingField.getBlueStartingField().getNextField(), Typ.KING, figureUI2);
     }

@@ -276,7 +276,13 @@ public class PlayingField {
             default:
                 throw new IllegalStateException("Unexpected value: " + figure.getColor());
         }
+
+        figure.getCurrentField().setCurrentFigure(null);
+        newField.setCurrentFigure(figure);
         figure.setCurrentField(newField);
+        figure.getFigureUI().moveFigureToPosition(newField.getFieldUIobject());
+        newField.triggerSpecialFieldEffect();
+
         return newField;
     }
 
@@ -285,7 +291,15 @@ public class PlayingField {
         Field current2 = figure2.getCurrentField();
 
         figure1.setCurrentField(current2);
+        current2.setCurrentFigure(figure1);
+        figure1.getFigureUI().moveFigureToPosition(current2.getFieldUIobject());
+        current2.triggerSpecialFieldEffect();
+
         figure2.setCurrentField(current1);
+        current1.setCurrentFigure(figure2);
+        figure2.getFigureUI().moveFigureToPosition(current1.getFieldUIobject());
+        current1.triggerSpecialFieldEffect();
+
         return figure1.getCurrentField();
     }
 
