@@ -10,11 +10,16 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.CardUiIimpl;
 
 import java.util.EventListener;
 
@@ -24,6 +29,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     private SensorManager sensorManager;
     private Sensor sensor;
     TextView textView;
+    private View view;
 
 
     @Override
@@ -38,8 +44,12 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.view = view;
+
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
+
+
     }
 
     @Override
@@ -75,8 +85,10 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
                 //TODO Manipulate move -1
                 //TODO check cheating
 
+
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
+
 
 
                 //shows a textView that is gone after 5 seconds
@@ -117,4 +129,5 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     @Override
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
+
 }
