@@ -1,11 +1,12 @@
 package com.se2.communication.dto;
 
-public class WormholeSwitchPayload {
-    String lobbyID;
+public class WormholeSwitchPayload{
+
     int newWormholeFieldPosition_1;
     int newWormholeFieldPosition_2;
     int newWormholeFieldPosition_3;
     int newWormholeFieldPosition_4;
+    String lobbyID;
 
     public WormholeSwitchPayload(int newWormholeFieldPosition_1, int newWormholeFieldPosition_2, int newWormholeFieldPosition_3, int newWormholeFieldPosition_4, String lobbyID) {
         this.newWormholeFieldPosition_1 = newWormholeFieldPosition_1;

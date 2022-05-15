@@ -2,6 +2,8 @@ package com.uni.gruppenphaseandroid.manager;
 
 import android.view.View;
 
+import com.se2.communication.Client;
+import com.se2.communication.dto.JoinedLobbyPayload;
 import com.se2.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
@@ -38,16 +40,17 @@ public class GameManager {
     private PlayingField playingField;
     private int numberOfPlayers;
     private int myTurnNumber;
-    private WebSocketClient webSocketClient;
+    private Client webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
 
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber){
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID){
         //deactivate start game button
         playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+        this.lobbyID = lobbyID;
 
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
@@ -152,7 +155,7 @@ public class GameManager {
         return webSocketClient;
     }
 
-    public void setWebSocketClient(WebSocketClient webSocketClient) {
+    public void setWebSocketClient(Client webSocketClient) {
         this.webSocketClient = webSocketClient;
     }
 
@@ -171,12 +174,13 @@ public class GameManager {
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-       var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(), lobbyID);
+        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(), lobbyID);
+        System.out.println(payload.getLobbyID()+ ", " + payload.getNewWormholeFieldPosition_1() + ", " + payload.getNewWormholeFieldPosition_2() + ", "+ payload.getNewWormholeFieldPosition_3() + ", "+payload.getNewWormholeFieldPosition_4());
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
-        message.setPayload(new Gson().toJson(payload));
-        webSocketClient.send(String.valueOf(message));
-
+        Gson gson = new Gson();
+        message.setPayload(gson.toJson(payload));
+        webSocketClient.send(message);
     }
 
 

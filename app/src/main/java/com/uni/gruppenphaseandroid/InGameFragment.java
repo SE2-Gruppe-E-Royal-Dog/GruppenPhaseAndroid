@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.se2.communication.dto.StartGamePayload;
+import com.se2.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -24,9 +25,12 @@ import com.se2.communication.dto.MessageType;
 import com.se2.communication.dto.NewPlayerPayload;
 
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
-   
+
+import java.util.List;
+
 public class InGameFragment extends Fragment {
     FigureManager figureManager;
     private PlayingField playingField;

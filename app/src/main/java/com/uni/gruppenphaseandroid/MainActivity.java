@@ -183,8 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
         var payload = gson.fromJson(body, StartGamePayload.class);
         //start game
-        System.out.println("Server message received!!!!!!");
-        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber());
+        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), payload.getLobbyID());
     }
 
     private void handleUpdateBoard(String body){
@@ -219,10 +218,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMessage(MessageType messageType, Payload payload){
-        websocketClient = getService().getClient();
         var message = new Message();
         message.setType(messageType);
-
         message.setPayload(gson.toJson(payload));
 
         websocketClient.send(message);
