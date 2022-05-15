@@ -123,4 +123,31 @@ public class PlayingFieldTest {
     public void checkIfMovingPossibleKing() {
         Assert.assertTrue(playingField.checkMovingPossible(figure2, 1));
     }
+
+    @Test
+    public void moveToBlueStart(){
+        figure1.setColor(Color.BLUE);
+        Field expected = playingField.getBlueStartingField();
+        playingField.moveToStart(figure1);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void moveToYellowStart(){
+        figure1.setColor(Color.YELLOW);
+        Field expected = playingField.getYellowStartingField();
+        playingField.moveToStart(figure1);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void moveToGreenStart(){
+        figure1.setColor(Color.GREEN);
+        Field expected = playingField.getGreenStartingField();
+        playingField.moveToStart(figure1);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
 }
