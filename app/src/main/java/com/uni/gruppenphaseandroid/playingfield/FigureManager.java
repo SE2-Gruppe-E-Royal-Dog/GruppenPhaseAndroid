@@ -33,7 +33,7 @@ public class FigureManager {
         figureList.add(createSingleFigure(color, playingField, Typ.KING));
     }
 
-    public Figure createSingleFigure(Color color, PlayingField playingField, Typ typ){
+    private Figure createSingleFigure(Color color, PlayingField playingField, Typ typ){
 
         Figure figure = null;
         switch (typ){
