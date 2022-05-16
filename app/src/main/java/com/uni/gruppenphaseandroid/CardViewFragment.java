@@ -10,16 +10,13 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.CardUiIimpl;
+import com.uni.gruppenphaseandroid.Cards.CardUI;
 
 import java.util.EventListener;
 
@@ -30,7 +27,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     private Sensor sensor;
     TextView textView;
     private View view;
-    CardUiIimpl hand;
+    CardUI hand;
 
 
     @Override
@@ -64,7 +61,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        hand = new CardUiIimpl(getActivity(), view);
+        hand = new CardUI(getActivity(), view);
     }
 
 
