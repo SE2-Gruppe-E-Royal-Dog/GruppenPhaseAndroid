@@ -393,15 +393,37 @@ public class PlayingField {
     }
 
     public Field getFieldWithID(int ID) {
-        if (ID < 1 || ID > 64) {
+        if (ID < 1 || ID > 96) {
             return null;
         } else {
             Field targetField = rootField;
             while (targetField.getFieldID() != ID) {
                 targetField = targetField.getNextField();
+                if(targetField instanceof StartingField){
+                    Field goalOrStartingField = getFieldWithStartingAndGoalID((StartingField) targetField, ID);
+                    if(goalOrStartingField != null){
+                        return goalOrStartingField;
+                    }
+                }
             }
             return targetField;
         }
+    }
+
+    private Field getFieldWithStartingAndGoalID(StartingField startingField, int ID){
+        Field goalField = startingField.getNextGoalField();
+        Field startingAreaField = startingField.getPreviousStartingArea();
+        for(int i = 0; i< 4;i++){
+            if(goalField.getFieldID() == ID){
+                return goalField;
+            }
+            if(startingAreaField.getFieldID() == ID){
+                return startingAreaField;
+            }
+            goalField = goalField.getNextField();
+            startingAreaField = startingAreaField.getPreviousField();
+        }
+        return null;
     }
 
     public void repairRootField() {
