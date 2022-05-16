@@ -55,7 +55,7 @@ public class FigureManager {
         figure.setFigureUI(figureUIimpl);
     }
 
-    private int createRightDrawable(Color color, Typ typ) {
+    public int createRightDrawable(Color color, Typ typ) {
 
         if(color == Color.BLUE){
             switch (typ){
@@ -78,7 +78,7 @@ public class FigureManager {
                 case KNIGHT: return R.drawable.ic_redknight;
                 case KING: return R.drawable.ic_redking;
             }
-        }else {
+        }else if(color == Color.YELLOW){
             switch (typ){
                 case JERK: return R.drawable.ic_yellowjester;
                 case CITIZEN: return R.drawable.ic_yellowcitizen;
