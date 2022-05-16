@@ -16,7 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.CardUI;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 
 import java.util.EventListener;
 
@@ -48,6 +50,14 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
 
 
+        /*//TODO on click show button play card
+
+        view.findViewById(R.id.linlayout_cardHolder).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
     }
 
 
@@ -58,10 +68,12 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         super.onCreate(saveInstanceState);
 
         //initialization of sensor
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        hand = new CardUI(getActivity(), view);
+        try {
+            sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
 

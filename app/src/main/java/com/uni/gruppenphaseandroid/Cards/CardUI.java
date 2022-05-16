@@ -6,16 +6,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.manager.Handcards;
+
+import java.util.LinkedList;
 
 public class CardUI {
 
-    private static LinearLayout linearLayout;
+    private LinearLayout linearLayout;
     private View view;
-    private Context context;
+    private static CardUI cardUI;
+
+    public static CardUI getInstance() {
+        if (cardUI == null) {
+            cardUI = new CardUI();
+        }
+        return cardUI;
+    }
 
 
-    public CardUI(Context context, View view) {
-        this.context = context;
+    public CardUI(View view) {
         this.view = view;
         linearLayout = view.findViewById(R.id.linlayout_cardHolder);
     }
@@ -24,13 +33,12 @@ public class CardUI {
     }
 
 
-    public void sortCardOnHandUI(){
-        //TODO or not
+    public void addCardToHand() {
+        LinkedList<Card> cards = Handcards.getInstance().getMyCards();
 
-    }
-
-    public void addCardToHand(Card card) {
-        linearLayout.addView(findImageView(card));
+        for (Card c : cards){
+        linearLayout.addView(findImageView(c));
+        }
     }
 
     private ImageView findImageView (Card card) {
@@ -95,6 +103,12 @@ public class CardUI {
     public void removeFromHand (ImageView view){
         linearLayout.removeView(view);
     }
+
+    public void removeAllFromHand (){
+        linearLayout.removeAllViews();
+    }
+
+
 }
 
 
