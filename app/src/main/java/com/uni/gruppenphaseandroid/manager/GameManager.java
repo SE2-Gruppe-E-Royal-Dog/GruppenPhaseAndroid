@@ -4,12 +4,15 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.playingfield.Color;
+import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
@@ -35,7 +38,7 @@ public class GameManager {
     private PlayingField playingField;
     private int numberOfPlayers;
     private int myTurnNumber;
-    private WebSocketClient webSocketClient;
+    private Client webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
     private FigureManager figuremanager;
@@ -96,8 +99,8 @@ public class GameManager {
             int effect = 1;//TODO: set effect
             selectedCard.playCard(figure, effect, null);
             //send message to server
+            lastTurn.setCardtype(selectedCard.getCardtype());
             webSocketClient.send(lastTurn.generateServerMessage());
-
         }
     }
 
@@ -105,9 +108,19 @@ public class GameManager {
         if (currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             if (!isItMyTurn()) { //for the turnplayer, the update took place already
                 Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
-                Figure figure2 = figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
-                lastTurn = new LastTurn(figure1, figure2, playingField.getFieldWithID(updateBoardPayload.getNewField1ID()), playingField.getFieldWithID(updateBoardPayload.getNewField2ID()), 0);
+                Figure figure2 = (updateBoardPayload.getFigure2ID() == -1)?null:figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
+                Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
+                Field figure2newField = (updateBoardPayload.getNewField2ID() == -1)?null:playingField.getFieldWithID(updateBoardPayload.getNewField2ID());;
+                lastTurn = new LastTurn(figure1, figure2,figure1newField , figure2newField, 0);
+
+                playingField.moveFigureToField(figure1, figure1newField);
+
+                if(figure2 != null && figure2newField != null){
+                    playingField.moveFigureToField(figure2, figure2newField);
+                }
+
                 //TODO: play the card
+                lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
                 //TODO: update card UI
             }
             nextTurn();
@@ -149,7 +162,7 @@ public class GameManager {
         return webSocketClient;
     }
 
-    public void setWebSocketClient(WebSocketClient webSocketClient) {
+    public void setWebSocketClient(Client webSocketClient) {
         this.webSocketClient = webSocketClient;
     }
 
@@ -173,9 +186,7 @@ public class GameManager {
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
-        webSocketClient.send(String.valueOf(message));
-
-
+        webSocketClient.send(message);
     }
 
 

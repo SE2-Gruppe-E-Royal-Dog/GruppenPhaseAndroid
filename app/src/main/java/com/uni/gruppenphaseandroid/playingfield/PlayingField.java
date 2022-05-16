@@ -427,4 +427,11 @@ public class PlayingField {
         return view;
     }
 
+    public void moveFigureToField(Figure figure, Field field){
+        figure.getCurrentField().setCurrentFigure(null);
+        figure.setCurrentField(field);
+        field.setCurrentFigure(figure);
+        figure.getFigureUI().moveFigureToPosition(field.getFieldUIobject());
+    }
+
 }
