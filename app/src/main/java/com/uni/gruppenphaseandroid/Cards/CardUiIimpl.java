@@ -10,11 +10,12 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.uni.gruppenphaseandroid.R;
 
+import java.util.LinkedList;
+
 public class CardUiIimpl implements CardUI {
 
     private ImageView cardImageView;
     private static LinearLayout linearLayout;
-    private Drawable drawable;
     private View view;
     private Context context;
 
@@ -22,23 +23,74 @@ public class CardUiIimpl implements CardUI {
     public CardUiIimpl(Context context, View view) {
         this.context = context;
         this.view = view;
+        linearLayout = view.findViewById(R.id.linlayout_cardHolder);
     }
 
     public CardUiIimpl() {
     }
 
-    @Override
-    public void createCardUI(){
-        linearLayout = view.findViewById(R.id.linlayout_cardHolder);
-        Resources res = context.getResources();
-        drawable = ResourcesCompat.getDrawable(res, R.drawable.ic_card_2, null);
-        cardImageView = new ImageView(view.getContext());
-        cardImageView.setBackgroundResource(R.drawable.ic_card_2);  //drawable);
-        linearLayout.addView(cardImageView);
+
+    public void sortCardOnHandUI(){
 
     }
 
-    public void addCardToHand(Card card) {
+    public void addCardToHand(ImageView card) {
+        linearLayout.addView(card);
+    }
+
+    private ImageView findImageView (Card card) {
+        ImageView cardIV;
+        cardIV = new ImageView(view.getContext());
+
+
+        switch (card.getCardtype()) {
+            case TWO:
+                cardIV.setBackgroundResource(R.drawable.ic_card_2);
+                return cardIV;
+            case THREE:
+                cardIV.setBackgroundResource(R.drawable.ic_card_3);
+                return cardIV;
+            case FIVE:
+                cardIV.setBackgroundResource(R.drawable.ic_card_5);
+                return cardIV;
+            case SIX:
+                cardIV.setBackgroundResource(R.drawable.ic_card_6);
+                return cardIV;
+            case EIGTH:
+                cardIV.setBackgroundResource(R.drawable.ic_card_8);
+                return cardIV;
+            case NINE:
+                cardIV.setBackgroundResource(R.drawable.ic_card_9);
+                return cardIV;
+            case TEN:
+                cardIV.setBackgroundResource(R.drawable.ic_card_10);
+                return cardIV;
+            case TWELVE:
+                cardIV.setBackgroundResource(R.drawable.ic_card_12);
+                return cardIV;
+            case EQUAL:
+                cardIV.setBackgroundResource(R.drawable.ic_card_copy);
+                return cardIV;
+            case FOUR_PLUSMINUS:
+                cardIV.setBackgroundResource(R.drawable.ic_card_4);
+                return cardIV;
+            case ONETOSEVEN:
+                cardIV.setBackgroundResource(R.drawable.ic_card_7);
+                return cardIV;
+            case ONEORELEVEN_START:
+                cardIV.setBackgroundResource(R.drawable.ic_card_11);
+                return cardIV;
+            case THIRTEEN_START:
+                cardIV.setBackgroundResource(R.drawable.ic_card_13);
+                return cardIV;
+            case MAGNET:
+                cardIV.setBackgroundResource(R.drawable.ic_card_magnet);
+                return cardIV;
+            case SWITCH:
+                cardIV.setBackgroundResource(R.drawable.ic_card_switch);
+                return cardIV;
+        }
+        return null;
     }
 }
 

@@ -5,6 +5,5 @@ import android.widget.RelativeLayout;
 
 public interface CardUI {
 
-    public void createCardUI();//View view); // String tag);//, RelativeLayout relativeLayout, int imgResource);
 
 }

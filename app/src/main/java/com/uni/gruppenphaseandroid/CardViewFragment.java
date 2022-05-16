@@ -85,7 +85,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
                 //TODO Manipulate move -1
                 //TODO check cheating
 
-
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
 
