@@ -1,18 +1,13 @@
 package com.uni.gruppenphaseandroid.Cards;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.uni.gruppenphaseandroid.R;
 
-import java.util.LinkedList;
-
-public class CardUiIimpl implements CardUI {
+public class CardUiIimpl {
 
     private ImageView cardImageView;
     private static LinearLayout linearLayout;
@@ -31,11 +26,12 @@ public class CardUiIimpl implements CardUI {
 
 
     public void sortCardOnHandUI(){
+        //TODO or not
 
     }
 
-    public void addCardToHand(ImageView card) {
-        linearLayout.addView(card);
+    public void addCardToHand(Card card) {
+        linearLayout.addView(findImageView(card));
     }
 
     private ImageView findImageView (Card card) {

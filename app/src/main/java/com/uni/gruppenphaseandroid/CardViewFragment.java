@@ -30,6 +30,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     private Sensor sensor;
     TextView textView;
     private View view;
+    CardUiIimpl hand;
 
 
     @Override
@@ -52,6 +53,9 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
 
     }
 
+
+    //on create --> creats seonsorListener
+    //creats "hand" --> where cards will be stored --> dunno if it's the smartes way
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -59,8 +63,12 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         //initialization of sensor
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        hand = new CardUiIimpl(getActivity(), view);
     }
 
+
+    //if in CardViewFragment --> listen, otherwise sensor on pause
     @Override
     public void onResume() {
         super.onResume();
@@ -73,6 +81,8 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         super.onPause();
     }
 
+
+    //What happens if sensor change detected
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
