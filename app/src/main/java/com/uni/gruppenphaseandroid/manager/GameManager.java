@@ -72,12 +72,6 @@ public class GameManager {
             everyOneDraws5Cards();
         }
         currentTurnPhase = TurnPhase.CHOOSECARD;
-
-        if (myTurnNumber == currentTurnPlayerNumber) {
-            //my turn, do stuff
-        } else {
-            //other's turn, wait
-        }
     }
 
     public void cardGotPlayed(Card card) {
@@ -106,25 +100,24 @@ public class GameManager {
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
+            Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
+            Figure figure2 = (updateBoardPayload.getFigure2ID() == -1)?null:figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
+            Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
+            Field figure2newField = (updateBoardPayload.getNewField2ID() == -1)?null:playingField.getFieldWithID(updateBoardPayload.getNewField2ID());;
+            lastTurn = new LastTurn(figure1, figure2,figure1newField , figure2newField, 0);
+
             if (!isItMyTurn()) { //for the turnplayer, the update took place already
-                Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
-                Figure figure2 = (updateBoardPayload.getFigure2ID() == -1)?null:figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
-                Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
-                Field figure2newField = (updateBoardPayload.getNewField2ID() == -1)?null:playingField.getFieldWithID(updateBoardPayload.getNewField2ID());;
-                lastTurn = new LastTurn(figure1, figure2,figure1newField , figure2newField, 0);
-
                 playingField.moveFigureToField(figure1, figure1newField);
-
                 if(figure2 != null && figure2newField != null){
                     playingField.moveFigureToField(figure2, figure2newField);
                 }
-
-                //TODO: play the card
-                lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
-                //TODO: update card UI
             }
+            //play the card
+            lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
+            //TODO: update card UI
             nextTurn();
         }
+
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
