@@ -88,12 +88,19 @@ public class InGameFragment extends Fragment implements SensorEventListener {
             message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
+            NavHostFragment.findNavController(InGameFragment.this)
+                    .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
     }
-
 
 
     @Override
@@ -121,4 +128,6 @@ public class InGameFragment extends Fragment implements SensorEventListener {
         super.onPause();
         sensorManager.unregisterListener(this);
     }
+
+
 }

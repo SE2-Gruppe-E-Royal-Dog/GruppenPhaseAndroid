@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
+                    break;
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
