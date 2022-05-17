@@ -8,12 +8,12 @@ public class Handcards {
     private static Handcards hand;
     private LinkedList<Card> myCards;
 
-    private Handcards(){
+    private Handcards() {
         myCards = new LinkedList<>();
     }
 
-    public static Handcards getInstance(){
-        if(hand==null){
+    public static Handcards getInstance() {
+        if (hand == null) {
             hand = new Handcards();
         }
         return hand;
@@ -23,7 +23,7 @@ public class Handcards {
         return myCards;
     }
 
-    public void addCardToHand(LinkedList<Card> cards){
+    public void addCardToHand(LinkedList<Card> cards) {
         myCards.addAll(cards);
     }
 }

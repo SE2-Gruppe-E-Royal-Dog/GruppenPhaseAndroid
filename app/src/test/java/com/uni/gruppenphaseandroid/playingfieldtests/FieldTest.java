@@ -30,9 +30,8 @@ public class FieldTest {
     FieldUIimpl field6UI;
 
 
-
     @Before
-    public void setUp(){
+    public void setUp() {
 
         field2UI = mock(FieldUIimpl.class);
         field6UI = mock(FieldUIimpl.class);
@@ -69,7 +68,7 @@ public class FieldTest {
     }
 
     @After
-   public void tearDown(){
+    public void tearDown() {
         field1 = null;
         field2 = null;
         field3 = null;
@@ -81,19 +80,19 @@ public class FieldTest {
 
 
     @Test
-    public void getFieldAtDistanceTestPositive(){
+    public void getFieldAtDistanceTestPositive() {
         Field destinationField = field1.getFieldAtDistance(3, Color.GREEN);
         Assert.assertEquals(field4, destinationField);
     }
 
     @Test
-    public void getFieldAtDistanceTestNegative(){
+    public void getFieldAtDistanceTestNegative() {
         Field destinationField = field4.getFieldAtDistance(-2, Color.BLUE);
         Assert.assertEquals(field2, destinationField);
     }
 
     @Test
-    public void getFieldAtDistanceWith0(){
+    public void getFieldAtDistanceWith0() {
         Field destinationField = field1.getFieldAtDistance(0, Color.RED);
         Assert.assertEquals(field1, destinationField);
     }

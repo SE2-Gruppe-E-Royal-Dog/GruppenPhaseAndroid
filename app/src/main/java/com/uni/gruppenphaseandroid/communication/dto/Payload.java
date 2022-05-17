@@ -1,4 +1,4 @@
-package com.se2.communication.dto;
+package com.uni.gruppenphaseandroid.communication.dto;
 
 public abstract class Payload {
     private String lobbyID;

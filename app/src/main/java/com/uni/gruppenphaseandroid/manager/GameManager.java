@@ -40,17 +40,16 @@ public class GameManager {
     private PlayingField playingField;
     private int numberOfPlayers;
     private int myTurnNumber;
-    private Client webSocketClient;
+    private WebSocketClient webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
 
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID){
+    public void startGame(int numberOfPlayers, int playerTurnNumber){
         //deactivate start game button
         playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
-        this.lobbyID = lobbyID;
 
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
@@ -155,7 +154,7 @@ public class GameManager {
         return webSocketClient;
     }
 
-    public void setWebSocketClient(Client webSocketClient) {
+    public void setWebSocketClient(WebSocketClient webSocketClient) {
         this.webSocketClient = webSocketClient;
     }
 
@@ -178,9 +177,10 @@ public class GameManager {
         System.out.println(payload.getLobbyID()+ ", " + payload.getNewWormholeFieldPosition_1() + ", " + payload.getNewWormholeFieldPosition_2() + ", "+ payload.getNewWormholeFieldPosition_3() + ", "+payload.getNewWormholeFieldPosition_4());
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
-        Gson gson = new Gson();
-        message.setPayload(gson.toJson(payload));
-        webSocketClient.send(message);
+        message.setPayload(new Gson().toJson(payload));
+        webSocketClient.send(String.valueOf(message));
+
+
     }
 
 

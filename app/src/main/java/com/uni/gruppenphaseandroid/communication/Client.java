@@ -1,7 +1,7 @@
-package com.se2.communication;
+package com.uni.gruppenphaseandroid.communication;
 
 import com.google.gson.Gson;
-import com.se2.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -27,10 +27,12 @@ public class Client extends WebSocketClient {
     }
 
     @Override
-    public void onOpen(ServerHandshake handshakedata) {}
+    public void onOpen(ServerHandshake handshakedata) {
+    }
 
     @Override
-    public void onMessage(String message) {}
+    public void onMessage(String message) {
+    }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {

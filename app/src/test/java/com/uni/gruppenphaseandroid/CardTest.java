@@ -13,17 +13,17 @@ public class CardTest {
     private Card card;
 
     @Before
-    public void setup(){
+    public void setup() {
         card = new Card(Cardtype.TWO);
     }
 
     @After
-    public void cleanup(){
+    public void cleanup() {
         card = null;
     }
 
     @Test
-    public void getCardtypeTest(){
+    public void getCardtypeTest() {
         Assert.assertEquals(Cardtype.TWO, card.getCardtype());
     }
 }

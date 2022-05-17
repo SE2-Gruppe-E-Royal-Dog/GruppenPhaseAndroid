@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
-import com.se2.communication.Client;
-import com.se2.communication.dto.Message;
-import com.se2.communication.dto.MessageType;
-import com.se2.communication.dto.NewPlayerPayload;
+import com.uni.gruppenphaseandroid.communication.Client;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.dto.NewPlayerPayload;
 
 public class MenuFragment extends Fragment {
     private Client websocketClient;
@@ -29,6 +29,7 @@ public class MenuFragment extends Fragment {
         return inflater.inflate(R.layout.menu_fragment, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);

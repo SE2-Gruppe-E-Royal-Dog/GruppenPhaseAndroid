@@ -10,7 +10,7 @@ public class FigureUIimpl extends FigureUI {
 
     private ImageView imageView;
 
-    public void createFigureUI(View view, String tag, RelativeLayout relativeLayout, int imageResource){
+    public void createFigureUI(View view, String tag, RelativeLayout relativeLayout, int imageResource) {
         imageView = new ImageButton(view.getContext());
         imageView.setLayoutParams(new RelativeLayout.LayoutParams(140, 140));
         relativeLayout.addView(imageView);
@@ -22,7 +22,7 @@ public class FigureUIimpl extends FigureUI {
     public void moveFigureToPosition(FieldUI targetFieldUI) {
 
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
-        marginLayoutParams.setMargins(targetFieldUI.getMarginLeft(),targetFieldUI.getMarginTop(),0,0);
+        marginLayoutParams.setMargins(targetFieldUI.getMarginLeft(), targetFieldUI.getMarginTop(), 0, 0);
         imageView.setLayoutParams(marginLayoutParams);
     }
 }
