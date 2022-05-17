@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,8 +29,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     private SensorManager sensorManager;
     private Sensor sensor;
     TextView textView;
-    private View view;
-    CardUI hand;
 
 
     @Override
@@ -44,20 +43,21 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.view = view;
-
+        //return to board button
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
 
+        //set view in cardUi fpr linearlayout
+        CardUI.getInstance().setView(view);
 
-        /*//TODO on click show button play card
-
+        //TODO on click show button play card
         view.findViewById(R.id.linlayout_cardHolder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
             }
-        });*/
+        });
     }
 
 

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.uni.gruppenphaseandroid.CardViewFragment;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
@@ -24,12 +25,11 @@ public class CardUI {
     }
 
 
-    public CardUI(View view) {
-        this.view = view;
-        linearLayout = view.findViewById(R.id.linlayout_cardHolder);
+    public CardUI() {
     }
 
-    public CardUI() {
+    public void setView (View view){
+        this.view = view;
     }
 
 
@@ -37,7 +37,7 @@ public class CardUI {
         LinkedList<Card> cards = Handcards.getInstance().getMyCards();
 
         for (Card c : cards){
-        linearLayout.addView(findImageView(c));
+            linearLayout.addView(findImageView(c));
         }
     }
 
@@ -107,7 +107,6 @@ public class CardUI {
     public void removeAllFromHand (){
         linearLayout.removeAllViews();
     }
-
 
 }
 
