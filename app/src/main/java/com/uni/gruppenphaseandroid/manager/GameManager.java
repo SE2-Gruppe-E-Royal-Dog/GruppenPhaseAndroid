@@ -2,10 +2,10 @@ package com.uni.gruppenphaseandroid.manager;
 
 import android.view.View;
 
+import com.google.android.gms.nearby.messages.Message;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.R;
-import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;

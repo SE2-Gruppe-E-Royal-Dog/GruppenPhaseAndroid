@@ -16,9 +16,10 @@ public class Knight extends Figure {
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) { // TODO: Ausnahme implementieren
+    public boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
+// auf super8() zugreifen => wenn true dann weiter
         if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
             return false;
         }

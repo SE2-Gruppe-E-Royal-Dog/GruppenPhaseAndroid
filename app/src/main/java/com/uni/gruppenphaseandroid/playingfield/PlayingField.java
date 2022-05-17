@@ -338,7 +338,7 @@ public class PlayingField {
     public boolean checkMovingPossible(Figure figure, int fieldsToMove) { // TODO: Übergabe Kartenwert bei GameManager/KartenManager einbauen
         Field originField = figure.getCurrentField();
 
-        for (int i = 0; i < fieldsToMove - 1; i++) {// TODO: Spezialfall CheckOvertaking wenn Goalfield erlauben?
+        for (int i = 0; i < fieldsToMove - 1; i++) {
             if (figure.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure)) { // check if figure is allowed to overtake own figure
                 return false;
             }
@@ -354,8 +354,8 @@ public class PlayingField {
         }
         figure.setCurrentField(originField);
 
-        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // TODO: Check ob newPosition ist Starting Field oder Goal Field => beaten not allowed!
-        if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
+        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
+        if (newPosition.getCurrentFigure() != null) {
             Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
             return beaten.getTyp() != Typ.KING || figure.getTyp() == Typ.KING;
         }

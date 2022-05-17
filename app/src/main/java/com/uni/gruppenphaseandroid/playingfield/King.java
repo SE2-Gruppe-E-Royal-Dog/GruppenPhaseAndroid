@@ -19,6 +19,7 @@ public class King extends Figure {
     public boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
+
         if (figure2.getTyp() == Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT || figure2.getTyp() != Typ.KING) { // all 4 cases covered => but default value set to false
             return false;
         }
@@ -35,10 +36,10 @@ public class King extends Figure {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() && figure1.getTyp() != Typ.KING) {
-            return false;
-        } else {
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() != figure2.getColor() || figure1.getTyp() == Typ.KING) {
             return true;
+        } else {
+            return false;
         }
     }
 

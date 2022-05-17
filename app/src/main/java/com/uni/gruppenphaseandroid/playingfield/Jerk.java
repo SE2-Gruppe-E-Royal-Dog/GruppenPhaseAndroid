@@ -18,6 +18,7 @@ public class Jerk extends Figure {
     public boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
+
         if (figure2.getTyp() != Typ.JERK) {
             return false;
         }

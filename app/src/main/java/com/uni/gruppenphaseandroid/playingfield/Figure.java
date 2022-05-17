@@ -28,9 +28,20 @@ public class Figure {
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
-    public boolean checkOvertaking(Figure figure1) { // TODO: offen ob in Goal Area nicht erlauben
-        return true;
-    } // TODO: STandardfall implementieren
+    public boolean checkOvertaking(Figure figure1) { // so richtig??? ansonsten fertig
+        Field newPosition = figure1.getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
+
+        if (figure1.getTyp() == Typ.KNIGHT) {
+            return true;
+        } else {
+            if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
 
     /**
      *  A figure cannot be beaten by another one (no matter which color),
@@ -39,11 +50,11 @@ public class Figure {
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    public boolean checkBeaten(Figure figure1) { //TODO: Goal Area einbauen
+    public boolean checkBeaten(Figure figure1) { // fertig!
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) {
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
             return false;
         } else {
             return true;
@@ -60,7 +71,7 @@ public class Figure {
     public boolean checkMoving(Figure figure1, int fieldsToMove) { return true; } // TODO: Standardfall einbauen
 
 
-    // Getter and Setter
+    // Getter and Setter:
 
     public int getId() {
         return id;
