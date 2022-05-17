@@ -29,6 +29,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     private SensorManager sensorManager;
     private Sensor sensor;
     TextView textView;
+    LinearLayout ll;
 
 
     @Override
@@ -47,13 +48,15 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
 
-        //set view in cardUi fpr linearlayout
+        //set view in cardUi for linearlayout
         CardUI.getInstance().setView(view);
 
         //TODO on click show button play card
         view.findViewById(R.id.linlayout_cardHolder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
 
             }
@@ -75,6 +78,11 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * sensorlistener bits
+     */
 
 
     //if in CardViewFragment --> listen, otherwise sensor on pause

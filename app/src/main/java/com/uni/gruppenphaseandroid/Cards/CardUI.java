@@ -16,6 +16,7 @@ public class CardUI {
     private LinearLayout linearLayout;
     private View view;
     private static CardUI cardUI;
+    int tag;
 
     public static CardUI getInstance() {
         if (cardUI == null) {
@@ -35,13 +36,16 @@ public class CardUI {
 
     public void addCardToHand() {
         LinkedList<Card> cards = Handcards.getInstance().getMyCards();
+        linearLayout.findViewById(R.id.linlayout_cardHolder);
 
+        tag = 0;
         for (Card c : cards){
-            linearLayout.addView(findImageView(c));
+            linearLayout.addView(findImageView(c, tag));
+            tag++;
         }
     }
 
-    private ImageView findImageView (Card card) {
+    private ImageView findImageView (Card card, int tag) {
         ImageView cardIV;
         cardIV = new ImageView(view.getContext());
 
@@ -50,54 +54,55 @@ public class CardUI {
             switch (card.getCardtype()) {
                 case TWO:
                     cardIV.setBackgroundResource(R.drawable.ic_card_2);
-                    return cardIV;
+                    break;
                 case THREE:
                     cardIV.setBackgroundResource(R.drawable.ic_card_3);
-                    return cardIV;
+                    break;
                 case FIVE:
                     cardIV.setBackgroundResource(R.drawable.ic_card_5);
-                    return cardIV;
+                    break;
                 case SIX:
                     cardIV.setBackgroundResource(R.drawable.ic_card_6);
-                    return cardIV;
+                    break;
                 case EIGTH:
                     cardIV.setBackgroundResource(R.drawable.ic_card_8);
-                    return cardIV;
+                    break;
                 case NINE:
                     cardIV.setBackgroundResource(R.drawable.ic_card_9);
-                    return cardIV;
+                    break;
                 case TEN:
                     cardIV.setBackgroundResource(R.drawable.ic_card_10);
-                    return cardIV;
+                    break;
                 case TWELVE:
                     cardIV.setBackgroundResource(R.drawable.ic_card_12);
-                    return cardIV;
+                    break;
                 case EQUAL:
                     cardIV.setBackgroundResource(R.drawable.ic_card_copy);
-                    return cardIV;
+                    break;
                 case FOUR_PLUSMINUS:
                     cardIV.setBackgroundResource(R.drawable.ic_card_4);
-                    return cardIV;
+                    break;
                 case ONETOSEVEN:
                     cardIV.setBackgroundResource(R.drawable.ic_card_7);
-                    return cardIV;
+                    break;
                 case ONEORELEVEN_START:
                     cardIV.setBackgroundResource(R.drawable.ic_card_11);
-                    return cardIV;
+                    break;
                 case THIRTEEN_START:
                     cardIV.setBackgroundResource(R.drawable.ic_card_13);
-                    return cardIV;
+                    break;
                 case MAGNET:
                     cardIV.setBackgroundResource(R.drawable.ic_card_magnet);
-                    return cardIV;
+                    break;
                 case SWITCH:
                     cardIV.setBackgroundResource(R.drawable.ic_card_switch);
-                    return cardIV;
+                    break;
             }
         }catch (NullPointerException e){
             e.printStackTrace();
         }
-        return null;
+        cardIV.setTag(tag);
+        return cardIV;
     }
 
     public void removeFromHand (ImageView view){
