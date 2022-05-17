@@ -84,7 +84,7 @@ public class GameManager {
         }
     }
 
-    public void figureGotSelected(Figure figure) {
+    public void figureGotSelected(Figure figure) throws Exception {
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn()) {
 
             if (!checkIfMoveIsPossible(figure, selectedCard)) {
@@ -94,7 +94,7 @@ public class GameManager {
             }
             currentTurnPhase = TurnPhase.CURRENTLYMOVING;
             int effect = 1;//TODO: set effect
-            selectedCard.playCard(effect, figure, null);
+            selectedCard.playCard(figure, effect, null);
             //send message to server
             webSocketClient.send(lastTurn.generateServerMessage());
 
