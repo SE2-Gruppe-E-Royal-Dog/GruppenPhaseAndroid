@@ -29,12 +29,13 @@ import com.uni.gruppenphaseandroid.communication.dto.PlayerLeftLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.SendCardsPayload;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
+import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {
-    private Client websocketClient;
+   private Client websocketClient;
     private WebSocketService.WebSocketBinder binder;
     private WebSocketService service;
     private String lobbyId;
@@ -153,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
                 case SEND_CARDS:
                     handleSendCardsMessage(msg.getPayload());
                     break;
+                case WORMHOLE_MOVE:
+                    handleWormholeMove(msg.getPayload());
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
@@ -203,5 +206,12 @@ public class MainActivity extends AppCompatActivity {
             var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
             GameManager.getInstance().updateBoard(updateBoardPayload);
         }
+
+        private void handleWormholeMove(String body) {
+            var updateWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
+        }
+
     }
+
+
 }

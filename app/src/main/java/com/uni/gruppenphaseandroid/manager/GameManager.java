@@ -40,6 +40,7 @@ public class GameManager {
     //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
+    private String lobbyID;
 
 
     public void startGame(int numberOfPlayers, int playerTurnNumber) {
@@ -169,7 +170,7 @@ public class GameManager {
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
+        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(),  lobbyID);
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));

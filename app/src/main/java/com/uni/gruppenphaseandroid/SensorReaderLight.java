@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
 
@@ -41,12 +42,9 @@ public class SensorReaderLight extends Fragment implements EventListener, Sensor
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        if (event.values[0] <= event.values[0]) {
-              /*  var message = new Message();
-                message.setType(MessageType.CHEATING_LIGHT);
-                websocketClient.send(message);
-            */
-            //TODO send message to GameManager (prüft vorab ob schummeln möglich ist, wenn ja wird die Message den Server geschickt)
+        if (event.values[0] <= event.values[0]){
+            System.out.println("sensor_light");
+            GameManager.getInstance().moveWormholes();
         }
     }
 
