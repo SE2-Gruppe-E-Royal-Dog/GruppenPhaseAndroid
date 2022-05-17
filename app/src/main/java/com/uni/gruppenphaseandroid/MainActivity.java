@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bindService();
         doRegisterReceiver();
+
     }
 
     @Override
