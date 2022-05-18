@@ -42,8 +42,11 @@ public class Jerk extends Figure {
      */
     @Override
     public boolean checkMoving(Figure figure1, Card card) { // TODO: Button implementieren für wieviele Punkte verfallen lassen => offen
+        if(super.checkMoving(figure1, card) == true &&) { // noch offen
+            return true;
+        } else {
+            return false;
+        }
 
-
-        return true;
     }
 }

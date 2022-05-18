@@ -1,6 +1,7 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 
 public class King extends Figure {
 
@@ -53,7 +54,7 @@ public class King extends Figure {
     }
 
     /**
-     * King can only move 1-7 fields and use starting card, magnet card and changer card.
+     * King can only move 1-7 fields and use starting card, magnet card and switch card.
      * Copy card is only allowed, if previous move was also allowed for the king.
      * Starting is allowed with 13 or 1/11.
      * @param figure1 - figure who moves
@@ -61,9 +62,11 @@ public class King extends Figure {
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, Card card) { // TODO: Verknüpfung mit Karten und Effekt
-
-
-        return true;
+    public boolean checkMoving(Figure figure1, Card card) { // TODO: Copy Card für Zug des vorherigen Spielers
+        if(super.checkMoving(figure1, card) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
