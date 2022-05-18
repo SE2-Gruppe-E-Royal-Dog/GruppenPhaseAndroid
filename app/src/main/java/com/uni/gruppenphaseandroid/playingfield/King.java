@@ -13,6 +13,7 @@ public class King extends Figure {
      * Degree has to be considered.
      * King can only be overtaken by another king.
      * @param figure1 - figure who moves
+     * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
     @Override
@@ -20,15 +21,21 @@ public class King extends Figure {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (figure2.getTyp() == Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT || figure2.getTyp() != Typ.KING) { // all 4 cases covered => but default value set to false
+        if(super.checkOvertaking(figure1) == true) {
+            if (figure2.getTyp() == Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT || figure2.getTyp() != Typ.KING) { // all 4 cases covered => but default value set to false
+                return false;
+            } else {
+                return true;
+            }
+        } else {
             return false;
         }
-        return true;
     }
 
     /**
      * King can only be beaten by another king, except on the starting field of another color.
      * @param figure1 - figure who moves
+     * figure 2 - figure to be beaten
      * @return true if beating is possible
      */
     @Override

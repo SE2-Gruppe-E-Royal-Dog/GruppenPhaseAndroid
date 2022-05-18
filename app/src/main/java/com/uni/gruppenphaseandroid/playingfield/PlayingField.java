@@ -3,6 +3,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 import android.view.View;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 
 import java.util.ArrayList;
@@ -356,8 +357,7 @@ public class PlayingField {
 
         Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
         if (newPosition.getCurrentFigure() != null) {
-            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
-            return beaten.getTyp() != Typ.KING || figure.getTyp() == Typ.KING;
+            checkBeatenPossible(figure); // TODO: check richtig?
         }
         return true;
     }
@@ -370,13 +370,12 @@ public class PlayingField {
         }
     }
 
-    public boolean checkGreenCard(Card card) {
-        //if (card.getColor() == GREEN) { // TODO: Farbe Karte einbauen
-        //return true;
-        //} else {
-        return false;
-        //}
-
+    public boolean checkGreenCard(Card card) { // Cancels overtaking rules
+        if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean checkBeatenPossible(Figure figure1) {

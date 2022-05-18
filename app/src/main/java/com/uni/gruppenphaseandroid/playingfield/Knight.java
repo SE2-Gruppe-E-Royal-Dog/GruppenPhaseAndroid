@@ -19,11 +19,16 @@ public class Knight extends Figure {
     public boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
-// auf super8() zugreifen => wenn true dann weiter
-        if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
+
+        if(super.checkOvertaking(figure1) == true) {
+            if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
             return false;
         }
-        return true;
     }
 
     /**
