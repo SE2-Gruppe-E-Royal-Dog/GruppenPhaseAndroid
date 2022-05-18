@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-public class Knight extends Figure {
+public class Knight extends Figure { // fertig
 
     public Knight(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -30,18 +30,4 @@ public class Knight extends Figure {
             return false;
         }
     }
-
-    /**
-     *
-     * @param figure1 - figure who moves
-     * @param fieldsToMove
-     * @return true if moving possible
-     */
-    @Override
-    public boolean checkMoving(Figure figure1, int fieldsToMove) { //TODO: Check Regelwerk
-
-
-        return true;
-    }
-
 }

@@ -304,13 +304,13 @@ public class PlayingField {
         return figure1.getCurrentField();
     }
 
-  public Field move(Figure figure1, int fieldsToMove) { // TODO: Input von Karten: wie viel fahren
+  public Field move(Figure figure1, int fieldsToMove) { // TODO: int fieldsToMove = card.getCardtype().getValue(); und stattdessen Card card einbauen
         Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
         Figure figure2;
 
         try {
             if (newPositionFigure1.getCurrentFigure() != null) { // TODO: Checks für Goal Area
-                figure2 = newPositionFigure1.getCurrentFigure();
+                figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
                 figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
                 figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
             } else {
@@ -336,46 +336,8 @@ public class PlayingField {
         }
     }
 
-    public boolean checkMovingPossible(Figure figure, int fieldsToMove) { // TODO: Übergabe Kartenwert bei GameManager/KartenManager einbauen
-        Field originField = figure.getCurrentField();
-
-        for (int i = 0; i < fieldsToMove - 1; i++) {
-            if (figure.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure)) { // check if figure is allowed to overtake own figure
-                return false;
-            }
-
-            if (figure.getCurrentField() instanceof StartingField && ((StartingField) figure.getCurrentField()).getColor() == figure.getColor()) {
-                GoalField goalfield = ((StartingField) figure.getCurrentField()).getNextGoalField();
-                if (fieldsToMove <= 4) {
-                    figure.setCurrentField(goalfield);
-                    continue;
-                }
-            }
-            figure.setCurrentField(figure.getCurrentField().getFieldAtDistance(1, figure.getColor()));
-        }
-        figure.setCurrentField(originField);
-
-        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor());
-        if (newPosition.getCurrentFigure() != null) {
-            checkBeatenPossible(figure); // TODO: check richtig?
-        }
-        return true;
-    }
-
-    public boolean checkOvertakingPossible(Figure figure1) {
-        if (checkGreenCard(card)) {
-            return true;
-        } else {
-            return figure1.checkOvertaking(figure1);
-        }
-    }
-
-    public boolean checkGreenCard(Card card) { // Cancels overtaking rules
-        if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean checkMovingPossible(Figure figure, Card card) {
+        return figure.checkMoving(figure, card);
     }
 
     public boolean checkBeatenPossible(Figure figure1) {

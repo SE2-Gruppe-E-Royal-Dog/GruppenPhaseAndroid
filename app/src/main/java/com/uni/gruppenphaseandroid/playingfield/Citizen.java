@@ -1,6 +1,8 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-public class Citizen extends Figure {
+import com.uni.gruppenphaseandroid.Cards.Card;
+
+public class Citizen extends Figure { // fertig
 
     public Citizen(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -36,11 +38,11 @@ public class Citizen extends Figure {
      * citizen is allowed to jump to the next special field -
      * no matter of blocked starting fields or higher degree.
      * @param figure1 - figure who moves
-     * @param fieldsToMove
+     * @param card - card which is played
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, int fieldsToMove) { // TODO: Switch Methode einbauen
+    public boolean checkMoving(Figure figure1, Card card) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
 
 
         return true;

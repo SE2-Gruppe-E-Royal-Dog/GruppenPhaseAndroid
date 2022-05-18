@@ -126,7 +126,7 @@ public class GameManager {
 
         switch (card.getCardtype()) {
             case TWO:
-                return playingField.checkMovingPossible(figure, 2);
+                return playingField.checkMovingPossible(figure, card);
             //... other cases
         }
         return false;

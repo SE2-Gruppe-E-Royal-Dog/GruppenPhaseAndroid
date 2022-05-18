@@ -3,6 +3,8 @@ package com.uni.gruppenphaseandroid.playingfieldtests;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -29,6 +31,7 @@ public class PlayingFieldTest {
     Figure figure2;
     FigureUI figureUI2;
     ImageView imageView;
+    Card card;
 
     @Before
     public void setUp() {
@@ -119,9 +122,10 @@ public class PlayingFieldTest {
         Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1,1).getFieldID());
     }
 
-    @Test
+    @Test // TODO: Test OFFEN
     public void checkIfMovingPossibleKing() {
-        Assert.assertTrue(playingField.checkMovingPossible(figure2, 1));
+        card = new Card(Cardtype.TWO);
+        Assert.assertTrue(playingField.checkMovingPossible(figure2, card));
     }
 
     @Test

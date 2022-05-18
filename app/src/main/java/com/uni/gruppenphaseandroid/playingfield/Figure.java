@@ -1,5 +1,8 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
+
 public class Figure {
     private int id;
     private Color color;
@@ -44,6 +47,27 @@ public class Figure {
     }
 
     /**
+     * Green Card (4 +/- and 10) cancel overtaking rules.
+     * @param card
+     * @return true if overtaking possible
+     */
+    public boolean checkGreenCard(Card card) {
+        if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkOvertakingPossible(Figure figure1, Card card) {
+        if (checkGreenCard(card)) {
+            return true;
+        } else {
+            return figure1.checkOvertaking(figure1);
+        }
+    }
+
+    /**
      *  A figure cannot be beaten by another one (no matter which color),
      *  if its current position is the own starting field or the own goal area.
      * @param figure1 - figure who moves
@@ -65,10 +89,35 @@ public class Figure {
      * A figure cannot be changed with another one (no matter which color),
      * if its current position is the own starting field or own goal area.
      * @param figure1 - figure who moves
-     * @param fieldsToMove
+     * @param card which is played
      * @return true if moving is possible
      */
-    public boolean checkMoving(Figure figure1, int fieldsToMove) { return true; } // TODO: Standardfall einbauen
+    public boolean checkMoving(Figure figure1, Card card) {
+        Field originField = figure1.getCurrentField();
+        int fieldsToMove = card.getCardtype().getValue();
+
+        for (int i = 0; i < fieldsToMove - 1; i++) {
+            if (figure1.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure1, card)) { // check if figure is allowed to overtake figure
+                return false;
+            }
+
+            if (figure1.getCurrentField() instanceof StartingField && ((StartingField) figure1.getCurrentField()).getColor() == figure1.getColor()) {
+                GoalField goalfield = ((StartingField) figure1.getCurrentField()).getNextGoalField();
+                if (fieldsToMove <= 4) {
+                    figure1.setCurrentField(goalfield);
+                    continue;
+                }
+            }
+            figure1.setCurrentField(figure1.getCurrentField().getFieldAtDistance(1, figure1.getColor()));
+        }
+        figure1.setCurrentField(originField);
+
+        Field newPosition = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+        if (newPosition.getCurrentFigure() != null) {
+            checkBeaten(figure1);
+        }
+        return true;
+    }
 
 
     // Getter and Setter:
