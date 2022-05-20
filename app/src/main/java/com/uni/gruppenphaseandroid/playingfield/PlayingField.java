@@ -303,6 +303,20 @@ public class PlayingField {
         return figure1.getCurrentField();
     }
 
+    public Field moveToNextFigure(Figure myFigure) {
+        Field next = myFigure.getCurrentField().getNextField();
+        
+        while (!next.getCurrentFigure().equals(null)) {
+            myFigure.getCurrentField().setCurrentFigure(null);
+            next.setCurrentFigure(myFigure);
+            myFigure.setCurrentField(next);
+            myFigure.getFigureUI().moveFigureToPosition(next.getFieldUIobject());
+
+            next = myFigure.getCurrentField().getNextField();
+        }
+        return next;
+    }
+
   public Field move(Figure figure1, int fieldsToMove) { // TODO: Input von Karten: wie viel fahren
         Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
         Figure figure2;

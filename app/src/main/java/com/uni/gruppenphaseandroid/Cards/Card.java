@@ -44,7 +44,7 @@ public class Card {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()) {
             case MAGNET:
-                playingField.move(myFigure, targetFigure.getCurrentField().getFieldID() - myFigure.getCurrentField().getFieldID() - 1);
+                playingField.moveToNextFigure(myFigure);
                 return;
             case SWITCH:
                 playingField.switchPositions(myFigure, targetFigure);
