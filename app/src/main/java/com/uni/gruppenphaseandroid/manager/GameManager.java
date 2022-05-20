@@ -189,4 +189,11 @@ public class GameManager {
             e.printStackTrace();
         }
     }
+    public void moveWormholes(int [] newFieldIDs){
+        for(int i = 0; i<4; i++){
+            playingField.getWormholeList().get(i).switchField(playingField.getFieldWithID(newFieldIDs[i]));
+            playingField.repairRootField();
+        }
+        playingField.repairWormholeVisuals();
+    }
 }
