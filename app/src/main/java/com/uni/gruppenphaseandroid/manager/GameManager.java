@@ -43,7 +43,8 @@ public class GameManager {
     private String lobbyID;
 
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID) {
+        this.lobbyID = lobbyID;
         //deactivate start game button
         playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
 
