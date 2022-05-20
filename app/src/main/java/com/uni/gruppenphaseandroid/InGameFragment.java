@@ -20,7 +20,6 @@ import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment {
-    FigureManager figureManager;
     private Client websocketClient;
     private final Gson gson = new Gson();
 

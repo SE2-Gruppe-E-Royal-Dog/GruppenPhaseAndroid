@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
