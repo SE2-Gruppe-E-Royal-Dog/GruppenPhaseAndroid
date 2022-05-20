@@ -43,12 +43,12 @@ public class PlayingField {
         rootField.setPreviousField(lastField);
     }
 
-    private void generateWormholeFields() {
+    private void generateWormholeFields(){
         wormholeList = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
-            Field fieldToChange = rootField.getFieldAtDistance(6 + 16 * i, Color.BLACK);
-            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField(), fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+        for (int i = 0; i<4; i++){
+            Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField() , fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
             fieldToChange.getPreviousField().setNextField(wormhole);
             fieldToChange.getNextField().setPreviousField(wormhole);
             wormholeList.add(wormhole);
@@ -65,108 +65,71 @@ public class PlayingField {
 
     private void generateStartingFields() {
 
-        Field oldField = rootField.getFieldAtDistance(12, Color.GREEN);
-        greenStartingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), Color.GREEN);
-        oldField.getNextField().setPreviousField(greenStartingField);
-        oldField.getPreviousField().setNextField(greenStartingField);
+        greenStartingField = generateSingleStartField(12, Color.GREEN);
+        yellowStartingField = generateSingleStartField(28, Color.YELLOW);
+        redStartingField = generateSingleStartField(44, Color.RED);
+        blueStartingField = generateSingleStartField(60, Color.BLUE);
+    }
 
-        oldField = rootField.getFieldAtDistance(28, Color.YELLOW);
-        yellowStartingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), Color.YELLOW);
-        oldField.getNextField().setPreviousField(yellowStartingField);
-        oldField.getPreviousField().setNextField(yellowStartingField);
+    private StartingField generateSingleStartField(int distanceFromStart, Color color ){
+        Field oldField = rootField.getFieldAtDistance(distanceFromStart, color);
+        StartingField startingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), color);
+        oldField.getNextField().setPreviousField(startingField);
+        oldField.getPreviousField().setNextField(startingField);
+        oldField.setNextField(null);
+        oldField.setPreviousField(null);
 
-        oldField = rootField.getFieldAtDistance(44, Color.RED);
-        redStartingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), Color.RED);
-        oldField.getNextField().setPreviousField(redStartingField);
-        oldField.getPreviousField().setNextField(redStartingField);
-
-        oldField = rootField.getFieldAtDistance(60, Color.BLUE);
-        blueStartingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), Color.BLUE);
-        oldField.getNextField().setPreviousField(blueStartingField);
-        oldField.getPreviousField().setNextField(blueStartingField);
+        return startingField;
     }
 
     private void generateStartingAreaFields() {
 
-        Field nextFieldGreen = greenStartingField;
-        int greenID = 68;
-        Field nextFieldYellow = yellowStartingField;
-        int yellowID = 72;
-        Field nextFieldRed = redStartingField;
-        int redID = 76;
-        Field nextFieldBlue = blueStartingField;
-        int blueID = 80;
+        generateStartingAreasOfColor(greenStartingField, 68, Color.GREEN);
+        generateStartingAreasOfColor(yellowStartingField, 72, Color.YELLOW);
+        generateStartingAreasOfColor(redStartingField, 76, Color.RED);
+        generateStartingAreasOfColor(blueStartingField, 80, Color.BLUE);
+    }
 
-        for (int i = 0; i < 4; i++) {
-            StartingAreaField startingAreaFieldGreen = new StartingAreaField(new FieldUIimpl(view), nextFieldGreen, null, null, greenID - i, Color.GREEN);
-            startingAreaFieldGreen.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.GREEN, 4 - i));
+    private void generateStartingAreasOfColor(Field startingField, int id, Color color){
 
-            StartingAreaField startingAreaFieldYellow = new StartingAreaField(new FieldUIimpl(view), nextFieldYellow, null, null, yellowID - i, Color.YELLOW);
-            startingAreaFieldYellow.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.YELLOW, 4 - i));
+        Field nextField = startingField;
 
-            StartingAreaField startingAreaFieldRed = new StartingAreaField(new FieldUIimpl(view), nextFieldRed, null, null, redID - i, Color.RED);
-            startingAreaFieldRed.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.RED, 4 - i));
-
-            StartingAreaField startingAreaFieldBlue = new StartingAreaField(new FieldUIimpl(view), nextFieldBlue, null, null, blueID - i, Color.BLUE);
-            startingAreaFieldBlue.getFieldUIobject().registerUIobject(generateStartingAreaTag(Color.BLUE, 4 - i));
-
-            if (i == 0) {
-                greenStartingField.setPreviousStartingArea(startingAreaFieldGreen);
-                yellowStartingField.setPreviousStartingArea(startingAreaFieldYellow);
-                redStartingField.setPreviousStartingArea(startingAreaFieldRed);
-                blueStartingField.setPreviousStartingArea(startingAreaFieldBlue);
-            } else {
-                nextFieldGreen.setPreviousField(startingAreaFieldGreen);
-                nextFieldYellow.setPreviousField(startingAreaFieldYellow);
-                nextFieldRed.setPreviousField(startingAreaFieldRed);
-                nextFieldBlue.setPreviousField(startingAreaFieldBlue);
+        for(int i = 0; i < 4;i++){
+            StartingAreaField startingAreaField = new StartingAreaField(new FieldUIimpl(view), nextField, null, null,id - i, color);
+            startingAreaField.getFieldUIobject().registerUIobject(generateStartingAreaTag(color, 4 - i));
+            if(i==0){
+                ((StartingField)startingField).setPreviousStartingArea(startingAreaField);
             }
-            nextFieldGreen = startingAreaFieldGreen;
-            nextFieldYellow = startingAreaFieldYellow;
-            nextFieldRed = startingAreaFieldRed;
-            nextFieldBlue = startingAreaFieldBlue;
-
+            else{
+                nextField.setPreviousField(startingAreaField);
+            }
+            nextField = startingAreaField;
         }
     }
 
+
     private void generateGoalFields() {
-        Field previousGreenField = greenStartingField;
-        int greenID = 81;
-        Field previousYellowField = yellowStartingField;
-        int yellowID = 85;
-        Field previousRedField = redStartingField;
-        int redID = 89;
-        Field previousBlueField = blueStartingField;
-        int blueID = 93;
 
-        for (int i = 0; i < 4; i++) {
-            GoalField goalFieldGreen = new GoalField(new FieldUIimpl(view), null, previousGreenField, null, greenID + i, Color.GREEN);
-            goalFieldGreen.getFieldUIobject().registerUIobject(generateGoalTag(Color.GREEN, i + 1));
+        generateGoalFieldsOfColor(greenStartingField, 81, Color.GREEN);
+        generateGoalFieldsOfColor(yellowStartingField, 85, Color.YELLOW);
+        generateGoalFieldsOfColor(redStartingField, 89, Color.RED);
+        generateGoalFieldsOfColor(blueStartingField, 93, Color.BLUE);
+    }
 
-            GoalField goalFieldYellow = new GoalField(new FieldUIimpl(view), null, previousYellowField, null, yellowID + i, Color.YELLOW);
-            goalFieldYellow.getFieldUIobject().registerUIobject(generateGoalTag(Color.YELLOW, i + 1));
 
-            GoalField goalFieldRed = new GoalField(new FieldUIimpl(view), null, previousRedField, null, redID + i, Color.RED);
-            goalFieldRed.getFieldUIobject().registerUIobject(generateGoalTag(Color.RED, i + 1));
 
-            GoalField goalFieldBlue = new GoalField(new FieldUIimpl(view), null, previousBlueField, null, blueID + i, Color.BLUE);
-            goalFieldBlue.getFieldUIobject().registerUIobject(generateGoalTag(Color.BLUE, i + 1));
-
-            if (i == 0) {
-                greenStartingField.setNextGoalField(goalFieldGreen);
-                yellowStartingField.setNextGoalField(goalFieldYellow);
-                redStartingField.setNextGoalField(goalFieldRed);
-                blueStartingField.setNextGoalField(goalFieldBlue);
-            } else {
-                previousGreenField.setNextField(goalFieldGreen);
-                previousYellowField.setNextField(goalFieldYellow);
-                previousRedField.setNextField(goalFieldRed);
-                previousBlueField.setNextField(goalFieldBlue);
+    private void generateGoalFieldsOfColor(Field startingField, int id, Color color){
+        Field previousField = startingField;
+        for(int i = 0; i < 4; i++){
+            GoalField goalField = new GoalField(new FieldUIimpl(view), null, previousField, null, id + i, color);
+            goalField.getFieldUIobject().registerUIobject(generateGoalTag(color, i + 1));
+            if(i==0){
+                ((StartingField)startingField).setNextGoalField(goalField);
+            }else{
+                previousField.setNextField(goalField);
             }
-            previousGreenField = goalFieldGreen;
-            previousYellowField = goalFieldYellow;
-            previousRedField = goalFieldRed;
-            previousBlueField = goalFieldBlue;
+
+            previousField = goalField;
         }
     }
 
@@ -397,8 +360,8 @@ public class PlayingField {
         return figure1.checkBeaten(figure1);
     }
 
-    public void moveAllWormholesRandomly() {
-        for (int j = 0; j < 4; j++) {
+    public void moveAllWormholesRandomly(){
+        for (int j = 0; j<4; j++){
             wormholeList.get(j).moveWormholeToRandomPosition();
             repairRootField();
         }
@@ -406,27 +369,28 @@ public class PlayingField {
         repairWormholeVisuals();
     }
 
-    public Field getFieldWithID(int ID) {
-        if (ID < 1 || ID > 64) {
+    public Field getFieldWithID(int ID){
+        if(ID < 1 || ID > 64){
             return null;
-        } else {
+        }
+        else {
             Field targetField = rootField;
-            while (targetField.getFieldID() != ID) {
+            while(targetField.getFieldID() != ID){
                 targetField = targetField.getNextField();
             }
             return targetField;
         }
     }
 
-    public void repairRootField() {
-        if (rootField.getFieldID() != 1) {
+    public void repairRootField(){
+        if(rootField.getFieldID() != 1){
             rootField = getFieldWithID(1);
         }
     }
 
-    public void repairWormholeVisuals() {
-        for (int i = 1; i <= 64; i++) {
-            if (getFieldWithID(i).getClass() != Wormhole.class) {
+    public void repairWormholeVisuals(){
+        for(int i = 1; i <=64;i++){
+            if(getFieldWithID(i).getClass() != Wormhole.class){
                 getFieldWithID(i).getFieldUIobject().turnIntoRegularField();
             }
         }
