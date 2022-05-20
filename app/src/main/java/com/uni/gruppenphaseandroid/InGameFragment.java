@@ -25,7 +25,6 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
-public class InGameFragment extends Fragment {
 public class InGameFragment extends Fragment implements SensorEventListener {
     private Client websocketClient;
     private final Gson gson = new Gson();
@@ -104,7 +103,7 @@ public class InGameFragment extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
 
-        if (x < 40 && !GameManager.getInstance().isHasCheated()){
+        if (x < 40 && !GameManager.getInstance().isHasCheated()) {
             Log.e("Code", "sensor_light");
             GameManager.getInstance().moveWormholes();
 
@@ -115,6 +114,7 @@ public class InGameFragment extends Fragment implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
