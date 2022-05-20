@@ -65,9 +65,6 @@ public class GameManager {
 
         currentTurnPlayerNumber += 1 % numberOfPlayers;
 
-        if (!doesAnyoneHaveCardsLeftInHand()) {
-            everyOneDraws5Cards();
-        }
         currentTurnPhase = TurnPhase.CHOOSECARD;
 
         if (myTurnNumber == currentTurnPlayerNumber) {
@@ -112,14 +109,6 @@ public class GameManager {
             }
             nextTurn();
         }
-    }
-
-    public boolean doesAnyoneHaveCardsLeftInHand() {
-        return true;
-    }
-
-    private void everyOneDraws5Cards() {
-
     }
 
     private boolean checkIfMoveIsPossible(Figure figure, Card card) {
