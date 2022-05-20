@@ -43,6 +43,7 @@ public class GameManager {
     //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
+    private String lobbyID;
 
 
     public void startGame(int numberOfPlayers, int playerTurnNumber) {
@@ -190,4 +191,8 @@ public class GameManager {
             e.printStackTrace();
         }
     }
+    public String getLobbyID() {
+        return lobbyID;
+    }
+
 }

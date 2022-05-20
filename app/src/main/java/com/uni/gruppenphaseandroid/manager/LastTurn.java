@@ -23,7 +23,7 @@ public class LastTurn {
         message.setType(MessageType.UPDATE_BOARD);
         int figure2ID = (figure2 == null) ? -1 : figure2.getId();
         int newFigure2FieldID = (newFigure2Field == null) ? -1 : newFigure2Field.getFieldID();
-        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.getValue(), cheatModifier);
+        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.getValue(), cheatModifier, GameManager.getInstance().getLobbyID());
         message.setPayload(new Gson().toJson(payload));
         return message;
     }
