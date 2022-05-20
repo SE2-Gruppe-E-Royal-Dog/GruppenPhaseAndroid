@@ -6,6 +6,7 @@ public class Citizen extends Figure { // fertig
 
     public Citizen(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
+        typ = Typ.CITIZEN;
     }
 
     public Citizen() {

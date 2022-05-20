@@ -304,12 +304,13 @@ public class PlayingField {
         return figure1.getCurrentField();
     }
 
-  public Field move(Figure figure1, int fieldsToMove) { // TODO: int fieldsToMove = card.getCardtype().getValue(); und stattdessen Card card einbauen
-        Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+  public Field move(Figure figure1, int fieldsToMove) { // TODO: int fieldsToMove = card.getCardtype().getValue(); und stattdessen Card card einbauen;
+        fieldsToMove = card.getCardtype().getValue(); //TODO: Checks einbauen
+        Field newPositionFigure1 = setNewPosition(figure1, card);
         Figure figure2;
 
         try {
-            if (newPositionFigure1.getCurrentFigure() != null) { // TODO: Checks für Goal Area
+            if (newPositionFigure1.getCurrentFigure() != null) { //
                 figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
                 figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
                 figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
@@ -325,7 +326,7 @@ public class PlayingField {
 
             // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
-            // TODO: Karten: Figuren tauschen
+
 
             LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);
 
@@ -336,13 +337,15 @@ public class PlayingField {
         }
     }
 
-    public boolean checkMovingPossible(Figure figure, Card card) {
-        return figure.checkMoving(figure, card);
+    public Field setNewPosition(Figure figure, Card card) { // includes checks if moving possible
+        return figure.setNewPosition(figure, card);
     }
 
-    public boolean checkBeatenPossible(Figure figure1) {
+    /*public boolean checkBeatenPossible(Figure figure1) {
         return figure1.checkBeaten(figure1);
     }
+
+     */
 
     public void moveAllWormholesRandomly() {
         for (int j = 0; j < 4; j++) {

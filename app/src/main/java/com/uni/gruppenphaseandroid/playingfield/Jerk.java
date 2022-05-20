@@ -6,6 +6,7 @@ public class Jerk extends Figure {
 
     public Jerk(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
+        typ = Typ.JERK;
     }
 
     public Jerk() {
@@ -38,15 +39,28 @@ public class Jerk extends Figure {
      * if he is moving into the goal area.
      * @param figure1 - figure who moves
      * @param card which is played
-     * @return true if moving possible
+     * @return new Position of Jerk within Goal Area.
      */
     @Override
-    public boolean checkMoving(Figure figure1, Card card) { // TODO: Button implementieren für wieviele Punkte verfallen lassen => offen
-        if(super.checkMoving(figure1, card) == true &&) { // noch offen
-            return true;
-        } else {
-            return false;
-        }
+    public Field setNewPosition(Figure figure1, Card card) {
+        int fieldsToMove = card.getCardtype().getValue();
+        Field newPositionFigure1 = super.setNewPosition(figure1, card);
+
+        if (figure1.getCurrentField() instanceof StartingField && ((StartingField) figure1.getCurrentField()).getColor() == figure1.getColor()) {
+            GoalField goalfield = ((StartingField) figure1.getCurrentField()).getNextGoalField();
+            if (fieldsToMove <= 6) {
+                switch (fieldsToMove) {
+                    case 6:
+                        newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove - 2, figure1.getColor());
+                        break;
+                    case 5:
+                        newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove - 1, figure1.getColor());
+                        break;
+                    default:
+                        newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+                }
+            }
+        }    return newPositionFigure1;
 
     }
 }

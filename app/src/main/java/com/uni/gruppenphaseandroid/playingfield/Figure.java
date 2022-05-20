@@ -88,6 +88,8 @@ public class Figure {
     /**
      * A figure cannot be changed with another one (no matter which color),
      * if its current position is the own starting field or own goal area.
+     * Exception: Jerk is allowed to move up to 2 fields less than displayed on the card,
+     * if he is moving into the goal area.
      * @param figure1 - figure who moves
      * @param card which is played
      * @return true if moving is possible
@@ -103,7 +105,7 @@ public class Figure {
 
             if (figure1.getCurrentField() instanceof StartingField && ((StartingField) figure1.getCurrentField()).getColor() == figure1.getColor()) {
                 GoalField goalfield = ((StartingField) figure1.getCurrentField()).getNextGoalField();
-                if (fieldsToMove <= 4) {
+                if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
                     figure1.setCurrentField(goalfield);
                     continue;
                 }
@@ -117,6 +119,23 @@ public class Figure {
             checkBeaten(figure1);
         }
         return true;
+    }
+
+    /**
+     * Sets new Position of Figure.
+     * @param figure1 - figure who moves
+     * @param card which is played
+     * @return new Position Field
+     */
+
+    public Field setNewPosition(Figure figure1, Card card) throws IllegalArgumentException {
+        if (checkMoving(figure1, card)) { // check if moving possible
+            int fieldsToMove = card.getCardtype().getValue();
+            Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+            return newPositionFigure1;
+        } else {
+            throw new IllegalArgumentException("Moving not possible.");
+        }
     }
 
 
