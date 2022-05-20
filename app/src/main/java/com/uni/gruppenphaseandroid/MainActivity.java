@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             var payload = gson.fromJson(body, StartGamePayload.class);
             //start game
             Log.d("server_communication", "Server message received!!!!!!");
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber());
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId);
         }
 
         private void handleUpdateBoard(String body) {
