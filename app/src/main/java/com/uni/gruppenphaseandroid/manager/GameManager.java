@@ -45,7 +45,7 @@ public class GameManager {
     private FigureManager figuremanager;
     private Card selectedCard;
     private String lobbyID;
-
+    private boolean hasCheated = false;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID) {
         this.lobbyID = lobbyID;
@@ -98,6 +98,7 @@ public class GameManager {
             //send message to server
             lastTurn.setCardtype(selectedCard.getCardtype());
             webSocketClient.send(lastTurn.generateServerMessage());
+
         }
     }
 
@@ -120,7 +121,6 @@ public class GameManager {
             //TODO: update card UI
             nextTurn();
         }
-
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
@@ -128,7 +128,7 @@ public class GameManager {
     }
 
     private void everyOneDraws5Cards() {
-
+    hasCheated = false;
     }
 
     private boolean checkIfMoveIsPossible(Figure figure, Card card) {
@@ -174,15 +174,18 @@ public class GameManager {
         if (isItMyTurn() == true || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
+        hasCheated = true;
 
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
+        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(),  lobbyID);
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
+
+
     }
 
 
@@ -197,4 +200,15 @@ public class GameManager {
         return lobbyID;
     }
 
+    public void moveWormholes(int [] newFieldIDs){
+        for(int i = 0; i<4; i++){
+            playingField.getWormholeList().get(i).switchField(playingField.getFieldWithID(newFieldIDs[i]));
+            playingField.repairRootField();
+        }
+        playingField.repairWormholeVisuals();
+    }
+
+    public boolean isHasCheated() {
+        return hasCheated;
+    }
 }

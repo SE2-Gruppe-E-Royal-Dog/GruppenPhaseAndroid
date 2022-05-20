@@ -1,6 +1,12 @@
 package com.uni.gruppenphaseandroid;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +26,12 @@ import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment {
+public class InGameFragment extends Fragment implements SensorEventListener {
     private Client websocketClient;
     private final Gson gson = new Gson();
+    private SensorManager sensorManager;
+    private Sensor sensor;
+
 
     @Override
     public View onCreateView(
@@ -78,5 +88,44 @@ public class InGameFragment extends Fragment {
 
             websocketClient.send(message);
         });
+
+
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
+    }
+
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float x = event.values[0];
+
+        if (x < 40 && !GameManager.getInstance().isHasCheated()){
+            Log.e("Code", "sensor_light");
+            GameManager.getInstance().moveWormholes();
+
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+
 }
