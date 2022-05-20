@@ -5,6 +5,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
@@ -35,14 +36,16 @@ public class GameManager {
     private PlayingField playingField;
     private int numberOfPlayers;
     private int myTurnNumber;
-    private WebSocketClient webSocketClient;
+    private Client webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
+    private String lobbyID;
 
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID) {
+        this.lobbyID = lobbyID;
         //deactivate start game button
         playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
 
@@ -149,7 +152,7 @@ public class GameManager {
         return webSocketClient;
     }
 
-    public void setWebSocketClient(WebSocketClient webSocketClient) {
+    public void setWebSocketClient(Client webSocketClient) {
         this.webSocketClient = webSocketClient;
     }
 
@@ -169,11 +172,11 @@ public class GameManager {
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID());
+        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(),  lobbyID);
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
-        webSocketClient.send(String.valueOf(message));
+        webSocketClient.send(message);
 
 
     }
@@ -185,5 +188,12 @@ public class GameManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void moveWormholes(int [] newFieldIDs){
+        for(int i = 0; i<4; i++){
+            playingField.getWormholeList().get(i).switchField(playingField.getFieldWithID(newFieldIDs[i]));
+            playingField.repairRootField();
+        }
+        playingField.repairWormholeVisuals();
     }
 }
