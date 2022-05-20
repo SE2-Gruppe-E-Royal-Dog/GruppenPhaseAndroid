@@ -44,6 +44,9 @@ public class GameManager {
     private String lobbyID;
 
 
+    private boolean hasCheated = false;
+
+
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID) {
         this.lobbyID = lobbyID;
         //deactivate start game button
@@ -122,7 +125,7 @@ public class GameManager {
     }
 
     private void everyOneDraws5Cards() {
-
+    hasCheated = false;
     }
 
     private boolean checkIfMoveIsPossible(Figure figure, Card card) {
@@ -168,6 +171,7 @@ public class GameManager {
         if (isItMyTurn() == true || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
+        hasCheated = true;
 
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
@@ -195,5 +199,9 @@ public class GameManager {
             playingField.repairRootField();
         }
         playingField.repairWormholeVisuals();
+    }
+
+    public boolean isHasCheated() {
+        return hasCheated;
     }
 }
