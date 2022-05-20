@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
         private void handleWormholeMove(String body) {
             var updateWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
+            GameManager.getInstance().
         }
 
     }

@@ -5,6 +5,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
@@ -35,7 +36,7 @@ public class GameManager {
     private PlayingField playingField;
     private int numberOfPlayers;
     private int myTurnNumber;
-    private WebSocketClient webSocketClient;
+    private Client webSocketClient;
     private LastTurn lastTurn;
     //cardmanager
     private FigureManager figuremanager;
@@ -151,7 +152,7 @@ public class GameManager {
         return webSocketClient;
     }
 
-    public void setWebSocketClient(WebSocketClient webSocketClient) {
+    public void setWebSocketClient(Client webSocketClient) {
         this.webSocketClient = webSocketClient;
     }
 
@@ -175,7 +176,7 @@ public class GameManager {
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
-        webSocketClient.send(String.valueOf(message));
+        webSocketClient.send(message);
 
 
     }

@@ -31,6 +31,7 @@ public class InGameFragment extends Fragment implements SensorEventListener {
     private final Gson gson = new Gson();
     private SensorManager sensorManager;
     private Sensor sensor;
+    private boolean hasCheated = false;
 
     @Override
     public View onCreateView(
@@ -88,8 +89,8 @@ public class InGameFragment extends Fragment implements SensorEventListener {
             message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
-            NavHostFragment.findNavController(InGameFragment.this)
-                    .navigate(R.id.action_InGameFragment_to_FirstFragment);
+          //  NavHostFragment.findNavController(InGameFragment.this)
+           //         .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
 
@@ -107,9 +108,10 @@ public class InGameFragment extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
 
-        if (x < 40){
+        if (x < 40 && hasCheated == false ){
             Log.e("Code", "sensor_light");
             GameManager.getInstance().moveWormholes();
+            hasCheated = true;
         }
     }
 
