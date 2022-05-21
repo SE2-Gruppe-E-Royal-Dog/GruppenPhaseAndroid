@@ -19,7 +19,7 @@ public class Jerk extends Figure {
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) {
+    protected boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -42,7 +42,7 @@ public class Jerk extends Figure {
      * @return new Position of Jerk within Goal Area.
      */
     @Override
-    public Field setNewPosition(Figure figure1, Card card) {
+    protected Field setNewPosition(Figure figure1, Card card) {
         int fieldsToMove = card.getCardtype().getValue();
         Field newPositionFigure1 = super.setNewPosition(figure1, card);
 

@@ -122,11 +122,13 @@ public class PlayingFieldTest {
         Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1,1).getFieldID());
     }
 
-    @Test // TODO: Test OFFEN
+    /*@Test // TODO: Test OFFEN
     public void checkIfMovingPossibleKing() {
         card = new Card(Cardtype.TWO);
-        Assert.assertTrue(playingField.checkMovingPossible(figure2, card));
+        Assert.assertTrue(Figure.checkMoving(figure2, card));
     }
+
+     */
 
     @Test
     public void moveToBlueStart(){

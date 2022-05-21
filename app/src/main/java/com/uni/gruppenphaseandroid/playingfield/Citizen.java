@@ -2,7 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
 
-public class Citizen extends Figure { // fertig
+public class Citizen extends Figure { // TODO: Sonderfeld offen
 
     public Citizen(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -19,7 +19,7 @@ public class Citizen extends Figure { // fertig
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) {
+    protected boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -43,7 +43,7 @@ public class Citizen extends Figure { // fertig
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, Card card) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
+    protected boolean checkMoving(Figure figure1, Card card) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
 
 
         return true;

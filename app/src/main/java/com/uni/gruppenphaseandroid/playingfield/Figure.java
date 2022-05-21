@@ -31,7 +31,7 @@ public class Figure {
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
-    public boolean checkOvertaking(Figure figure1) { // fertig!
+    protected boolean checkOvertaking(Figure figure1) { // fertig!
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -51,7 +51,7 @@ public class Figure {
      * @param card
      * @return true if overtaking possible
      */
-    public boolean checkGreenCard(Card card) {
+    private boolean checkGreenCard(Card card) {
         if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
             return true;
         } else {
@@ -59,7 +59,7 @@ public class Figure {
         }
     }
 
-    public boolean checkOvertakingPossible(Figure figure1, Card card) {
+    private boolean checkOvertakingPossible(Figure figure1, Card card) {
         if (checkGreenCard(card)) {
             return true;
         } else {
@@ -74,7 +74,7 @@ public class Figure {
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    public boolean checkBeaten(Figure figure1) { // fertig!
+    protected boolean checkBeaten(Figure figure1) { // fertig!
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -94,12 +94,12 @@ public class Figure {
      * @param card which is played
      * @return true if moving is possible
      */
-    public boolean checkMoving(Figure figure1, Card card) {
+    protected boolean checkMoving(Figure figure1, Card card) {
         Field originField = figure1.getCurrentField();
         int fieldsToMove = card.getCardtype().getValue();
 
         for (int i = 0; i < fieldsToMove - 1; i++) {
-            if (figure1.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure1, card)) { // check if figure is allowed to overtake figure
+            if (figure1.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure1, card)) { // check if figure1 is allowed to overtake figure2
                 return false;
             }
 
@@ -116,7 +116,7 @@ public class Figure {
 
         Field newPosition = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
         if (newPosition.getCurrentFigure() != null) {
-            checkBeaten(figure1);
+            return checkBeaten(figure1); // check if figure2 can be beaten
         }
         return true;
     }
@@ -128,7 +128,7 @@ public class Figure {
      * @return new Position Field
      */
 
-    public Field setNewPosition(Figure figure1, Card card) throws IllegalArgumentException {
+    protected Field setNewPosition(Figure figure1, Card card) throws IllegalArgumentException {
         if (checkMoving(figure1, card)) { // check if moving possible
             int fieldsToMove = card.getCardtype().getValue();
             Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());

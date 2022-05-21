@@ -304,13 +304,13 @@ public class PlayingField {
         return figure1.getCurrentField();
     }
 
-  public Field move(Figure figure1, int fieldsToMove) { // TODO: int fieldsToMove = card.getCardtype().getValue(); und stattdessen Card card einbauen;
-        fieldsToMove = card.getCardtype().getValue(); //TODO: Checks einbauen
-        Field newPositionFigure1 = setNewPosition(figure1, card);
+  public Field move(Figure figure1, int fieldsToMove) { // TODO: Exception auch bei Cards einbauen
+        fieldsToMove = card.getCardtype().getValue();
+        Field newPositionFigure1 = setNewPosition(figure1, card); // includes all checks for moving to new Position incl. new position
         Figure figure2;
 
         try {
-            if (newPositionFigure1.getCurrentFigure() != null) { //
+            if (newPositionFigure1.getCurrentFigure() != null) {
                 figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
                 figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
                 figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
@@ -327,7 +327,6 @@ public class PlayingField {
             // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
 
-
             LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);
 
             return newPositionFigure1;
@@ -337,15 +336,9 @@ public class PlayingField {
         }
     }
 
-    public Field setNewPosition(Figure figure, Card card) { // includes checks if moving possible
+    private Field setNewPosition(Figure figure, Card card) { // includes all checks for overtaking, moving, beaten
         return figure.setNewPosition(figure, card);
     }
-
-    /*public boolean checkBeatenPossible(Figure figure1) {
-        return figure1.checkBeaten(figure1);
-    }
-
-     */
 
     public void moveAllWormholesRandomly() {
         for (int j = 0; j < 4; j++) {

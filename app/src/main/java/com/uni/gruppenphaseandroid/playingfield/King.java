@@ -3,7 +3,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
 
-public class King extends Figure {
+public class King extends Figure { // TODO: Copy Card
 
     public King(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -21,7 +21,7 @@ public class King extends Figure {
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) {
+    protected boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -43,7 +43,7 @@ public class King extends Figure {
      * @return true if beating is possible
      */
     @Override
-    public boolean checkBeaten(Figure figure1) {
+    protected boolean checkBeaten(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -63,7 +63,7 @@ public class King extends Figure {
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, Card card) { // TODO: Copy Card für Zug des vorherigen Spielers
+    protected boolean checkMoving(Figure figure1, Card card) { // TODO: Copy Card für Zug des vorherigen Spielers
         if(super.checkMoving(figure1, card) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
             return true;
         } else {

@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-public class Knight extends Figure { // fertig
+public class Knight extends Figure {
 
     public Knight(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -17,7 +17,7 @@ public class Knight extends Figure { // fertig
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) {
+    protected boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
