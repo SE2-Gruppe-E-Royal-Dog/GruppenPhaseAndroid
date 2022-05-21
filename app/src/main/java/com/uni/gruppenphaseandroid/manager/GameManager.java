@@ -71,9 +71,6 @@ public class GameManager {
 
         currentTurnPlayerNumber += 1 % numberOfPlayers;
 
-        if (!doesAnyoneHaveCardsLeftInHand()) {
-            everyOneDraws5Cards();
-        }
         currentTurnPhase = TurnPhase.CHOOSECARD;
 
         if (myTurnNumber == currentTurnPlayerNumber) {
