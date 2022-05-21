@@ -26,7 +26,6 @@ import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment implements SensorEventListener {
-    FigureManager figureManager;
     private Client websocketClient;
     private final Gson gson = new Gson();
     private SensorManager sensorManager;
@@ -51,7 +50,6 @@ public class InGameFragment extends Fragment implements SensorEventListener {
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
 
-
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
@@ -65,7 +63,6 @@ public class InGameFragment extends Fragment implements SensorEventListener {
             websocketClient.send(message);
             NavHostFragment.findNavController(InGameFragment.this)
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
-
         });
 
 
@@ -89,7 +86,6 @@ public class InGameFragment extends Fragment implements SensorEventListener {
             message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
-
         });
 
 
@@ -107,7 +103,7 @@ public class InGameFragment extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
 
-        if (x < 40 && !GameManager.getInstance().isHasCheated()){
+        if (x < 40 && !GameManager.getInstance().isHasCheated()) {
             Log.e("Code", "sensor_light");
             GameManager.getInstance().moveWormholes();
 
@@ -118,6 +114,7 @@ public class InGameFragment extends Fragment implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
     @Override
     public void onResume() {
         super.onResume();

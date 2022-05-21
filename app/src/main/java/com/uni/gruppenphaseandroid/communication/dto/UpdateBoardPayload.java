@@ -7,14 +7,16 @@ public class UpdateBoardPayload {
     int newField2ID;
     int cardType;
     int cheatModifier;
+    String lobbyID;
 
-    public UpdateBoardPayload(int figure1ID, int figure2ID, int newField1ID, int newField2ID, int cardType, int cheatModifier) {
+    public UpdateBoardPayload(int figure1ID, int figure2ID, int newField1ID, int newField2ID, int cardType, int cheatModifier, String lobbyID) {
         this.figure1ID = figure1ID;
         this.figure2ID = figure2ID;
         this.newField1ID = newField1ID;
         this.newField2ID = newField2ID;
         this.cardType = cardType;
         this.cheatModifier = cheatModifier;
+        this.lobbyID = lobbyID;
     }
 
     public int getFigure1ID() {
@@ -39,5 +41,13 @@ public class UpdateBoardPayload {
 
     public int getCheatModifier(){
         return cheatModifier;
+    }
+
+    public String getLobbyID() {
+        return lobbyID;
+    }
+
+    public void setLobbyID(String lobbyID) {
+        this.lobbyID = lobbyID;
     }
 }

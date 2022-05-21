@@ -2,6 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableContainer;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -22,7 +23,9 @@ public class FigureManager {
         createFigureObjects(color, playingField);
 
         for(Figure figure : figureList){
-            setUpSingleFigureUI(figure, relativeLayout);
+            if(figure.getColor()==color){
+                setUpSingleFigureUI(figure, relativeLayout);
+            }
         }
     }
 

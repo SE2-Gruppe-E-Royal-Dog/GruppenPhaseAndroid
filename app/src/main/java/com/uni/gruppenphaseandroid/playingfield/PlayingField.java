@@ -43,12 +43,12 @@ public class PlayingField {
         rootField.setPreviousField(lastField);
     }
 
-    private void generateWormholeFields(){
+    private void generateWormholeFields() {
         wormholeList = new ArrayList<>();
 
-        for (int i = 0; i<4; i++){
-            Field fieldToChange = rootField.getFieldAtDistance(6+16*i, Color.BLACK);
-            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField() , fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
+        for (int i = 0; i < 4; i++) {
+            Field fieldToChange = rootField.getFieldAtDistance(6 + 16 * i, Color.BLACK);
+            Wormhole wormhole = new Wormhole(fieldToChange.getFieldUIobject(), fieldToChange.getNextField(), fieldToChange.getPreviousField(), fieldToChange.getCurrentFigure(), fieldToChange.getFieldID());
             fieldToChange.getPreviousField().setNextField(wormhole);
             fieldToChange.getNextField().setPreviousField(wormhole);
             wormholeList.add(wormhole);
@@ -370,13 +370,19 @@ public class PlayingField {
     }
 
     public Field getFieldWithID(int ID){
-        if(ID < 1 || ID > 64){
+        if(ID < 1 || ID > 96){
             return null;
         }
         else {
             Field targetField = rootField;
             while(targetField.getFieldID() != ID){
                 targetField = targetField.getNextField();
+                if(targetField instanceof StartingField){
+                    Field goalOrStartingField = getFieldWithStartingAndGoalID((StartingField) targetField, ID);
+                    if(goalOrStartingField != null){
+                        return goalOrStartingField;
+                    }
+                }
             }
             return targetField;
         }
@@ -396,6 +402,22 @@ public class PlayingField {
         }
     }
 
+    private Field getFieldWithStartingAndGoalID(StartingField startingField, int ID){
+        Field goalField = startingField.getNextGoalField();
+        Field startingAreaField = startingField.getPreviousStartingArea();
+        for(int i = 0; i< 4;i++){
+            if(goalField.getFieldID() == ID){
+                return goalField;
+            }
+            if(startingAreaField.getFieldID() == ID){
+                return startingAreaField;
+            }
+            goalField = goalField.getNextField();
+            startingAreaField = startingAreaField.getPreviousField();
+        }
+        return null;
+    }
+
     public ArrayList<Wormhole> getWormholeList() {
         return wormholeList;
     }
@@ -403,6 +425,13 @@ public class PlayingField {
 
     public View getView() {
         return view;
+    }
+
+    public void moveFigureToField(Figure figure, Field field){
+        figure.getCurrentField().setCurrentFigure(null);
+        figure.setCurrentField(field);
+        field.setCurrentFigure(figure);
+        figure.getFigureUI().moveFigureToPosition(field.getFieldUIobject());
     }
 
 }

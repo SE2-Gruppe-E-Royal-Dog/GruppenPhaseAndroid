@@ -150,4 +150,35 @@ public class PlayingFieldTest {
 
         Assert.assertEquals(expected, figure1.getCurrentField());
     }
+
+    @Test
+    public void testGetFieldWithIDregular(){
+
+        Field actualField = playingField.getFieldWithID(37);
+        Assert.assertEquals(playingField.getRootField().getFieldAtDistance(36, Color.BLACK), actualField);
+    }
+    @Test
+    public void testGetFieldWithIDedgeCases1(){
+
+        Field actualField = playingField.getFieldWithID(1);
+        Assert.assertEquals(playingField.getRootField(), actualField);
+    }
+    @Test
+    public void testGetFieldWithIDedgeCases64(){
+
+        Field actualField = playingField.getFieldWithID(1);
+        Assert.assertEquals(playingField.getRootField().getFieldAtDistance(64, Color.BLACK), actualField);
+    }
+    @Test
+    public void testGetFieldWithIDGoal(){
+
+        Field actualField = playingField.getFieldWithID(82);
+        Assert.assertEquals(playingField.getGreenStartingField().getNextGoalField().getNextField(), actualField);
+    }
+
+    @Test
+    public void testGetFieldWithIDStartingArea(){
+        Field actualField = playingField.getFieldWithID(76);
+        Assert.assertEquals(playingField.getRedStartingField().getPreviousStartingArea(), actualField);
+    }
 }

@@ -1,6 +1,10 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 
@@ -12,12 +16,16 @@ public class LastTurn {
     private Field newFigure2Field;
     private int distanceMovedByFigure1;
     private Cardtype cardtype;
+    private int cheatModifier = 0;
 
-    public String generateServerMessage() {
-        String figure2ID = (figure2 == null) ? "-1" : "" + figure2.getId();
-        String newFigure2FieldID = (newFigure2Field == null) ? "-1" : "" + newFigure2Field.getFieldID();
-
-        return figure1.getId() + "_" + newFigure1Field.getFieldID() + "_" + figure2ID + "_" + newFigure2FieldID;
+    public Message generateServerMessage() {
+        Message message = new Message();
+        message.setType(MessageType.UPDATE_BOARD);
+        int figure2ID = (figure2 == null) ? -1 : figure2.getId();
+        int newFigure2FieldID = (newFigure2Field == null) ? -1 : newFigure2Field.getFieldID();
+        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.getValue(), cheatModifier, GameManager.getInstance().getLobbyID());
+        message.setPayload(new Gson().toJson(payload));
+        return message;
     }
 
     public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field, int distanceMovedByFigure1) {
@@ -67,5 +75,19 @@ public class LastTurn {
     public void setDistanceMovedByFigure1(int distanceMovedByFigure1) {
         this.distanceMovedByFigure1 = distanceMovedByFigure1;
     }
+    public Cardtype getCardtype() {
+        return cardtype;
+    }
 
+    public void setCardtype(Cardtype cardtype) {
+        this.cardtype = cardtype;
+    }
+
+    public int getCheatModifier() {
+        return cheatModifier;
+    }
+
+    public void setCheatModifier(int cheatModifier) {
+        this.cheatModifier = cheatModifier;
+    }
 }
