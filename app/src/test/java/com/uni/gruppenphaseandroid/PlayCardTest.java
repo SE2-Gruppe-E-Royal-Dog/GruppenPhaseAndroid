@@ -153,11 +153,13 @@ public class PlayCardTest {
     @Test
     public void playMAGNET() {
         figure2.setCurrentField(playingField.getBlueStartingField());
+        playingField.getBlueStartingField().setCurrentFigure(figure2);
         figure1.setCurrentField(playingField.getRedStartingField());
+        playingField.getRedStartingField().setCurrentFigure(figure1);
         Field expected = figure2.getCurrentField().getPreviousField();
         Card card = new Card(Cardtype.MAGNET);
 
-        card.playCard(figure1, 0, figure2);
+        card.playCard(figure1, -1, null);
 
         Assert.assertEquals(expected, figure1.getCurrentField());
     }
@@ -170,7 +172,7 @@ public class PlayCardTest {
         Field expected2 = figure1.getCurrentField();
         Card card = new Card(Cardtype.SWITCH);
 
-        card.playCard(figure1, 0, figure2);
+        card.playCard(figure1, -1, figure2);
 
         Assert.assertEquals(expected1, figure1.getCurrentField());
         Assert.assertEquals(expected2, figure2.getCurrentField());

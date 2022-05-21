@@ -15,11 +15,27 @@ public class Card {
         return cardtype;
     }
 
-    private void playNumCard(Figure myFigure) {
-            GameManager.getInstance().getPlayingField().move(myFigure, getCardtype().getValue());
+    private void playNonEffectCard(Figure myFigure) {
+        PlayingField playingField = GameManager.getInstance().getPlayingField();
+        switch (getCardtype()){
+            case MAGNET:
+                playingField.moveToNextFigure(myFigure);
+                return;
+            case TWO:
+            case THREE:
+            case FIVE:
+            case SIX:
+            case EIGTH:
+            case NINE:
+            case TEN:
+            case TWELVE:
+                playingField.move(myFigure, getCardtype().getValue());
+                break;
+            default:throw new IllegalArgumentException("Invalid Combination of values");
+        }
     }
 
-    private void playEffectCards(Figure myFigure, int effect) {
+    private void playEffectCard(Figure myFigure, int effect) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()) {
             case FOUR_PLUSMINUS:
@@ -37,17 +53,9 @@ public class Card {
             case THIRTEEN_START:
                 if (effect == 0) playingField.moveToStart(myFigure);
                 else playingField.move(myFigure, 13);
-        }
-    }
+                break;
+            default:throw new IllegalArgumentException("Invalid Combination of values");
 
-    private void playSpecialCards(Figure myFigure, Figure targetFigure) {
-        PlayingField playingField = GameManager.getInstance().getPlayingField();
-        switch (getCardtype()) {
-            case MAGNET:
-                playingField.move(myFigure, targetFigure.getCurrentField().getFieldID() - myFigure.getCurrentField().getFieldID() - 1);
-                return;
-            case SWITCH:
-                playingField.switchPositions(myFigure, targetFigure);
         }
     }
 
@@ -57,11 +65,16 @@ public class Card {
         }
 
         if(effect==-1 && targetFigure==null){
-            playNumCard(myFigure);
+            playNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
-            playEffectCards(myFigure, effect);
-        }else if(effect==0){
-            playSpecialCards(myFigure, targetFigure);
+            playEffectCard(myFigure, effect);
+        }else if(effect==-1 && targetFigure!=null){
+            //playSwitchCard
+            if(getCardtype()==Cardtype.SWITCH) {
+                GameManager.getInstance().getPlayingField().switchPositions(myFigure, targetFigure);
+            }else{
+                throw new IllegalArgumentException("Invalid Combination of values");
+            }
         }else{
             throw new IllegalArgumentException("Invalid Combination of values");
         }
