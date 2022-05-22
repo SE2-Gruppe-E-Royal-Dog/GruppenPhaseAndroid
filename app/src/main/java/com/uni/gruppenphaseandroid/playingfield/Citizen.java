@@ -43,7 +43,7 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
      * @return true if moving possible
      */
     @Override
-    protected boolean checkMoving(Figure figure1, Card card) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
+    public boolean checkMoving(Figure figure1, Card card) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
 
 
         return true;

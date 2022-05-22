@@ -3,7 +3,7 @@ package com.uni.gruppenphaseandroid.manager;
 import android.util.Log;
 import android.view.View;
 
-import com.google.android.gms.nearby.messages.Message;
+//import com.google.android.gms.nearby.messages.Message;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
@@ -133,7 +133,7 @@ public class GameManager {
 
         switch (card.getCardtype()) {
             case TWO:
-                return playingField.checkMovingPossible(figure, card);
+                return figure.checkMoving(figure, card);
             //... other cases
         }
         return false;
@@ -178,10 +178,12 @@ public class GameManager {
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
         var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(),  lobbyID);
-        var message = new Message();
+        /*var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
+
+         */
 
 
     }

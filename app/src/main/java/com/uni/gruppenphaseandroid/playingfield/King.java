@@ -63,7 +63,7 @@ public class King extends Figure { // TODO: Copy Card
      * @return true if moving possible
      */
     @Override
-    protected boolean checkMoving(Figure figure1, Card card) { // TODO: Copy Card für Zug des vorherigen Spielers
+    public boolean checkMoving(Figure figure1, Card card) { // TODO: Copy Card für Zug des vorherigen Spielers
         if(super.checkMoving(figure1, card) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
             return true;
         } else {

@@ -94,7 +94,7 @@ public class Figure {
      * @param card which is played
      * @return true if moving is possible
      */
-    protected boolean checkMoving(Figure figure1, Card card) {
+    public boolean checkMoving(Figure figure1, Card card) {
         Field originField = figure1.getCurrentField();
         int fieldsToMove = card.getCardtype().getValue();
 
