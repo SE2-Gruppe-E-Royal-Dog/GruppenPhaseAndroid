@@ -165,7 +165,7 @@ public class GameManager {
     hasCheated = false;
     }
 
-    private boolean isItMyTurn() {
+    public boolean isItMyTurn() {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
