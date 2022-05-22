@@ -59,6 +59,19 @@ public class Figure {
      */
     public boolean checkMoving(Figure figure1, int fieldsToMove) { return true; } // TODO: Standardfall einbauen
 
+    public boolean isOnStartingfield(){
+        if(getCurrentField().getClass().equals(StartingField.class)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isOnGoalfield(){
+        if(getCurrentField().getClass().equals(GoalField.class)){
+            return true;
+        }
+        return false;
+    }
 
     // Getter and Setter
 
