@@ -68,7 +68,7 @@ public class Card {
             playNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
             playEffectCard(myFigure, effect);
-        }else if(effect==-1 && targetFigure!=null){
+        }else if(effect==-1){
             //playSwitchCard
             if(getCardtype()==Cardtype.SWITCH) {
                 GameManager.getInstance().getPlayingField().switchPositions(myFigure, targetFigure);
@@ -90,7 +90,7 @@ public class Card {
             return checkNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
             return checkEffectCard(myFigure, effect);
-        }else if(effect==-1 && targetFigure!=null){
+        }else if(effect==-1){
             //playSwitchCard
             if(getCardtype()==Cardtype.SWITCH) {
                 return checkSwitchCardFigure1(myFigure) && checkSwitchCardFigure2(targetFigure);
