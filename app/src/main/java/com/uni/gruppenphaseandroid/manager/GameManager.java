@@ -93,13 +93,12 @@ public class GameManager {
     }
 
     private void figureSelectedNormalCase(Figure figure){
-        if(!doCheckAndShowFeedback(figure)){
-            return;
-        }
-
         if(selectedCard.getCardtype() == Cardtype.SWITCH){
             currentTurnPhase = TurnPhase.CHOOSESECONDFIGURE;
             currentlySelectedFigure = figure;
+            return;
+        }
+        else if(!doCheckAndShowFeedback(figure, null)){
             return;
         }
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
@@ -108,8 +107,9 @@ public class GameManager {
         //send message to server
         sendLastTurnServerMessage();
     }
+
     private void figureSelectedSwitchCase(Figure figure){
-        if(!doCheckAndShowFeedback(figure)){
+        if(!doCheckAndShowFeedback(currentlySelectedFigure, figure)){
             return;
         }
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
@@ -119,8 +119,8 @@ public class GameManager {
         sendLastTurnServerMessage();
     }
 
-    private boolean doCheckAndShowFeedback(Figure figure){
-        if (!selectedCard.checkIfCardIsPlayable(figure, currentEffect, null)) {
+    private boolean doCheckAndShowFeedback(Figure figure1, Figure figure2){
+        if (!selectedCard.checkIfCardIsPlayable(figure1, currentEffect, figure2)) {
             //show feedback
             currentTurnPhase = TurnPhase.CHOOSECARD;
             return false;

@@ -93,7 +93,7 @@ public class Card {
         }else if(effect==-1 && targetFigure!=null){
             //playSwitchCard
             if(getCardtype()==Cardtype.SWITCH) {
-                return checkSwitchCard(myFigure);
+                return checkSwitchCardFigure1(myFigure) && checkSwitchCardFigure2(targetFigure);
             }else{
                 throw new IllegalArgumentException("Invalid Combination of values");
             }
@@ -103,7 +103,6 @@ public class Card {
     }
 
     private boolean checkNonEffectCard(Figure figure){
-        PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()){
             case MAGNET:
                 return checkMagnet(figure);
@@ -153,9 +152,15 @@ public class Card {
         return true;
     }
 
-    private boolean checkSwitchCard(Figure figure){
+    private boolean checkSwitchCardFigure1(Figure figure){
 
-        //TODO: check if switch is possible
+        //TODO: check if switch is possible for figure 1
+        return true;
+    }
+
+    private boolean checkSwitchCardFigure2(Figure figure){
+
+        //TODO: check if switch is possible for figure 2
         return true;
     }
 }
