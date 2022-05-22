@@ -268,7 +268,7 @@ public class PlayingField {
 
     public Field moveToNextFigure(Figure myFigure) {
         Field current = myFigure.getCurrentField();
-        
+
         while (current.getNextField().getCurrentFigure()==null) {
             current = current.getNextField();
             myFigure.getCurrentField().setCurrentFigure(null);

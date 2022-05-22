@@ -68,9 +68,7 @@ public class GameManager {
     }
 
     void nextTurn() {
-
         currentTurnPlayerNumber += 1 % numberOfPlayers;
-
         currentTurnPhase = TurnPhase.CHOOSECARD;
     }
 
@@ -102,14 +100,15 @@ public class GameManager {
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
-            Figure figure2 = (updateBoardPayload.getFigure2ID() == -1)?null:figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
+            Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
             Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
-            Field figure2newField = (updateBoardPayload.getNewField2ID() == -1)?null:playingField.getFieldWithID(updateBoardPayload.getNewField2ID());;
-            lastTurn = new LastTurn(figure1, figure2,figure1newField , figure2newField, 0);
+            Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
+            ;
+            lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
 
             if (!isItMyTurn()) { //for the turnplayer, the update took place already
                 playingField.moveFigureToField(figure1, figure1newField);
-                if(figure2 != null && figure2newField != null){
+                if (figure2 != null && figure2newField != null) {
                     playingField.moveFigureToField(figure2, figure2newField);
                 }
             }
@@ -125,7 +124,7 @@ public class GameManager {
     }
 
     private void everyOneDraws5Cards() {
-    hasCheated = false;
+        hasCheated = false;
     }
 
     private boolean checkIfMoveIsPossible(Figure figure, Card card) {
@@ -176,7 +175,7 @@ public class GameManager {
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(),  lobbyID);
+        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(), lobbyID);
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
@@ -193,12 +192,13 @@ public class GameManager {
             Log.d("game_manager", "Exception in moveFigureShowcase", e);
         }
     }
+
     public String getLobbyID() {
         return lobbyID;
     }
 
-    public void moveWormholes(int [] newFieldIDs){
-        for(int i = 0; i<4; i++){
+    public void moveWormholes(int[] newFieldIDs) {
+        for (int i = 0; i < 4; i++) {
             playingField.getWormholeList().get(i).switchField(playingField.getFieldWithID(newFieldIDs[i]));
             playingField.repairRootField();
         }
