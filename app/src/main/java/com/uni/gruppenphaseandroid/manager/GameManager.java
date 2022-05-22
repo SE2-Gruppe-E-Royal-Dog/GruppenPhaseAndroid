@@ -216,10 +216,6 @@ public class GameManager {
     public void turnPlayerDiscardsCard(){
 
     }
-  
-    public boolean isItMyTurn() {
-        return (currentTurnPlayerNumber == myTurnNumber);
-    }
 
     public PlayingField getPlayingField() {
         return playingField;
