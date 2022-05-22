@@ -47,22 +47,9 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
                              Bundle savedInstanceState) {
 
         //set up recyclerview
-        View rootView = inflater.inflate(R.layout.fragment_card_view, container, false);
-
-        recyclerView = rootView.findViewById(R.id.hsv_cardholder);
-
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-
-        cardAdapter = new CardAdapter();
-        recyclerView.setAdapter(cardAdapter);
-
-         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
-                .findFirstCompletelyVisibleItemPosition());
 
 
-        // Inflate the layout for this fragment
-        return rootView;
+        return inflater.inflate(R.layout.fragment_card_view, container, false);
     }
 
     @Override
@@ -90,11 +77,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             e.printStackTrace();
         };
 
-        CardUI.getInstance().setView(getView());
-        CardUI.getInstance().addCardToHand();
 
-        recyclerView.findViewById(R.id.hsv_cardholder);
-        layoutManager = new LinearLayoutManager(getActivity());
     }
 
     
