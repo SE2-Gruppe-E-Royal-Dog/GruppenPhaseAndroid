@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -189,7 +190,7 @@ public class GameManager {
         try {
             playingField.move(figuremanager.getFigureWithID(figureID), distance);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("game_manager", "Exception in moveFigureShowcase", e);
         }
     }
     public String getLobbyID() {
