@@ -59,18 +59,25 @@ public class Figure {
      */
     public boolean checkMoving(Figure figure1, int fieldsToMove) { return true; } // TODO: Standardfall einbauen
 
-    public boolean isOnStartingfield(){
-        if(getCurrentField().getClass().equals(StartingField.class)){
+    public boolean isOnStartingAreaField(){
+        if(getCurrentField().getClass().equals(StartingAreaField.class)){
             return true;
         }
         return false;
     }
 
-    public boolean isOnGoalfield(){
+    public boolean isOnGoalField(){
         if(getCurrentField().getClass().equals(GoalField.class)){
             return true;
         }
         return false;
+    }
+
+    public boolean checkisOnNormalField(){
+        if(isOnStartingAreaField() || isOnGoalField()){
+            return false;
+        }
+        return true;
     }
 
     public boolean checkIfAnotherFigureOnPlayingfield(){
@@ -84,13 +91,6 @@ public class Figure {
             return true;
         }
         return false;
-    }
-
-    public boolean checkisOnNormalField(){
-        if(isOnStartingfield() || isOnGoalfield()){
-            return false;
-        }
-        return true;
     }
 
     // Getter and Setter
