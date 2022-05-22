@@ -55,6 +55,7 @@ public class FigureManager {
         FigureUIimpl figureUIimpl = new FigureUIimpl();
         figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(figure.getColor(), figure.getTyp()));
         figureUIimpl.moveFigureToPosition(figure.getCurrentField().getFieldUIobject());
+        figureUIimpl.setButtonClickBehaviour(figure);
         figure.setFigureUI(figureUIimpl);
     }
 

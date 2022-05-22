@@ -46,6 +46,7 @@ public class GameManager {
     private Card selectedCard;
     private String lobbyID;
     private boolean hasCheated = false;
+    private Figure currentlySelectedFigure;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID) {
         this.lobbyID = lobbyID;
@@ -83,20 +84,53 @@ public class GameManager {
 
     public void figureGotSelected(Figure figure) throws Exception {
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn()) {
-
-            if (!checkIfMoveIsPossible(figure, selectedCard)) {
-                //show feedback
-                currentTurnPhase = TurnPhase.CHOOSECARD;
-                return;
-            }
-            currentTurnPhase = TurnPhase.CURRENTLYMOVING;
-            int effect = 1;//TODO: set effect
-            selectedCard.playCard(figure, effect, null);
-            //send message to server
-            lastTurn.setCardtype(selectedCard.getCardtype());
-            webSocketClient.send(lastTurn.generateServerMessage());
-
+            figureSelectedNormalCase(figure);
         }
+        else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
+            figureSelectedSwitchCase(figure);
+        }
+        selectedCard = null;
+    }
+
+    private void figureSelectedNormalCase(Figure figure){
+        if(!doCheckAndShowFeedback(figure)){
+            return;
+        }
+
+        if(selectedCard.getCardtype() == Cardtype.SWITCH){
+            currentTurnPhase = TurnPhase.CHOOSESECONDFIGURE;
+            currentlySelectedFigure = figure;
+            return;
+        }
+        currentTurnPhase = TurnPhase.CURRENTLYMOVING;
+        int effect = 1;//TODO: set effect
+        selectedCard.playCard(figure, effect, null);
+        //send message to server
+        sendLastTurnServerMessage();
+    }
+    private void figureSelectedSwitchCase(Figure figure){
+        if(!doCheckAndShowFeedback(figure)){
+            return;
+        }
+        currentTurnPhase = TurnPhase.CURRENTLYMOVING;
+        selectedCard.playCard(currentlySelectedFigure, -1, figure);
+        currentlySelectedFigure = null;
+        //send message to server
+        sendLastTurnServerMessage();
+    }
+
+    private boolean doCheckAndShowFeedback(Figure figure){
+        if (!checkIfMoveIsPossible(figure, selectedCard)) {
+            //show feedback
+            currentTurnPhase = TurnPhase.CHOOSECARD;
+            return false;
+        }
+        return true;
+    }
+
+    private void sendLastTurnServerMessage(){
+        lastTurn.setCardtype(selectedCard.getCardtype());
+        webSocketClient.send(lastTurn.generateServerMessage());
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
