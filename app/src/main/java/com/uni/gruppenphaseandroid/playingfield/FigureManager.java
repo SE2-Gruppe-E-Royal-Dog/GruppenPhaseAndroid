@@ -18,13 +18,13 @@ public class FigureManager {
         this.figureList = new ArrayList<>();
     }
 
-    public void createFigureSetOfColor(Color color, PlayingField playingField, RelativeLayout relativeLayout) {
+    public void createFigureSetOfColor(Color color, PlayingField playingField) {
 
         createFigureObjects(color, playingField);
 
         for(Figure figure : figureList){
             if(figure.getColor()==color){
-                setUpSingleFigureUI(figure, relativeLayout);
+                setUpSingleFigureUI(figure, playingField.getView().findViewById(R.id.playingFieldRelativeLayout));
             }
         }
     }

@@ -47,14 +47,12 @@ public class GameManager {
     private String lobbyID;
     private boolean hasCheated = false;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID, FigureManager figureManager) {
         this.lobbyID = lobbyID;
-        //deactivate start game button
-        playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
 
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
-        figuremanager = new FigureManager();
+        this.figuremanager = figureManager;
         for (int i = 0; i < numberOfPlayers; i++) {
             createFigureSet(Color.values()[i]);
         }
@@ -64,12 +62,12 @@ public class GameManager {
 
 
     void createFigureSet(Color color) {
-        figuremanager.createFigureSetOfColor(color, playingField, playingField.getView().findViewById(R.id.playingFieldRelativeLayout));
+        figuremanager.createFigureSetOfColor(color, playingField);
     }
 
-    void nextTurn() {
+    public void nextTurn() {
 
-        currentTurnPlayerNumber += 1 % numberOfPlayers;
+        currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
     }
@@ -138,7 +136,7 @@ public class GameManager {
         return false;
     }
 
-    private boolean isItMyTurn() {
+    public boolean isItMyTurn() {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
@@ -207,5 +205,25 @@ public class GameManager {
 
     public boolean isHasCheated() {
         return hasCheated;
+    }
+
+    public int getCurrentTurnPlayerNumber() {
+        return currentTurnPlayerNumber;
+    }
+
+    public TurnPhase getCurrentTurnPhase() {
+        return currentTurnPhase;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public int getMyTurnNumber() {
+        return myTurnNumber;
+    }
+
+    public Card getSelectedCard() {
+        return selectedCard;
     }
 }
