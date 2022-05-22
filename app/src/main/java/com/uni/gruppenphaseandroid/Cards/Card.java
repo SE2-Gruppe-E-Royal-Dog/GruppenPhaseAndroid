@@ -16,12 +16,34 @@ public class Card {
         return cardtype;
     }
 
+    private static final String INVALID_ARGUMENTS= "Invalid Combination of values";
+
+    public void playCard(Figure myFigure, int effect, Figure targetFigure) {
+        if(myFigure==null){
+            throw new IllegalArgumentException("myFigure cannot be null");
+        }
+
+        if(effect==-1 && targetFigure==null){
+            //Cards with only one Effect
+            playNonEffectCard(myFigure);
+        }else if(effect>=0 && effect<=13 && targetFigure==null){
+            //Cards with multiple effects
+            playEffectCard(myFigure, effect);
+        }else if(effect==-1){
+            //Switchcard
+            playSwitchCard(myFigure, targetFigure);
+        }else{
+            throw new IllegalArgumentException(INVALID_ARGUMENTS);
+        }
+    }
+
     private void playNonEffectCard(Figure myFigure) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()){
             case MAGNET:
                 playingField.moveToNextFigure(myFigure);
-                return;
+                break;
+
             case TWO:
             case THREE:
             case FIVE:
@@ -32,81 +54,89 @@ public class Card {
             case TWELVE:
                 playingField.move(myFigure, getCardtype().getValue());
                 break;
-            default:throw new IllegalArgumentException("Invalid Combination of values");
+
+            default:throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
     }
 
     private void playEffectCard(Figure myFigure, int effect) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
+        int value;
         switch (getCardtype()) {
             case FOUR_PLUSMINUS:
-                if (effect == 1) playingField.move(myFigure, 4);
-                else playingField.move(myFigure, -4);
-                return;
+                if (effect == 1){
+                    value = 4;
+                }else{
+                    value = -4;
+                }
+                playingField.move(myFigure, value);
+                break;
+
             case ONETOSEVEN:
                 playingField.move(myFigure, effect);
-                return;
-            case ONEORELEVEN_START:
-                if (effect == 0) playingField.moveToStart(myFigure);
-                else if (effect == 1) playingField.move(myFigure, 1);
-                else playingField.move(myFigure, 11);
-                return;
-            case THIRTEEN_START:
-                if (effect == 0) playingField.moveToStart(myFigure);
-                else playingField.move(myFigure, 13);
                 break;
-            default:throw new IllegalArgumentException("Invalid Combination of values");
 
+            case ONEORELEVEN_START:
+                if (effect == 0){
+                    playingField.moveToStart(myFigure);
+                    break;
+                }
+                if (effect == 1){
+                    value = 1;
+                } else {
+                    value = 11;
+                }
+                playingField.move(myFigure, value);
+                break;
+
+            case THIRTEEN_START:
+                if (effect == 0){
+                    playingField.moveToStart(myFigure);
+                } else {
+                    playingField.move(myFigure, 13);
+                }
+                break;
+
+            default:
+                throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
     }
 
-    public void playCard(Figure myFigure, int effect, Figure targetFigure) {
-        if(myFigure==null){
-            throw new IllegalArgumentException("myFigure cannot be null");
-        }
-
-        if(effect==-1 && targetFigure==null){
-            playNonEffectCard(myFigure);
-        }else if(effect>=0 && effect<=13 && targetFigure==null){
-            playEffectCard(myFigure, effect);
-        }else if(effect==-1){
-            //playSwitchCard
-            if(getCardtype()==Cardtype.SWITCH) {
-                GameManager.getInstance().getPlayingField().switchPositions(myFigure, targetFigure);
-            }else{
-                throw new IllegalArgumentException("Invalid Combination of values");
-            }
-        }else{
-            throw new IllegalArgumentException("Invalid Combination of values");
+    private void playSwitchCard(Figure figure1, Figure figure2){
+        PlayingField playingField = GameManager.getInstance().getPlayingField();
+        if (getCardtype().equals(Cardtype.SWITCH)) {
+            playingField.switchPositions(figure1, figure2);
+        } else {
+            throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
     }
 
+    //////////CHECKS IF MOVE IS POSSIBLE//////////
 
     public boolean checkIfCardIsPlayable(Figure myFigure, int effect, Figure targetFigure){
         if(myFigure==null){
-            throw new IllegalArgumentException("myFigure cannot be null");
+            throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
 
         if(effect==-1 && targetFigure==null){
+            //Cards with only one Effect
             return checkNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
+            //Cards with multiple effects
             return checkEffectCard(myFigure, effect);
         }else if(effect==-1){
-            //playSwitchCard
-            if(getCardtype()==Cardtype.SWITCH) {
-                return checkSwitchCardFigure(myFigure) && checkSwitchCardFigure(targetFigure);
-            }else{
-                throw new IllegalArgumentException("Invalid Combination of values");
-            }
+            //Switchcard
+            return checkSwitchCard(myFigure, targetFigure);
         }else{
-            throw new IllegalArgumentException("Invalid Combination of values");
+            throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
     }
 
     private boolean checkNonEffectCard(Figure figure){
         switch (getCardtype()){
             case MAGNET:
-                return checkMagnet(figure);
+                return figure.checkIfAnotherFigureOnPlayingfield();
+
             case TWO:
             case THREE:
             case FIVE:
@@ -116,53 +146,53 @@ public class Card {
             case TEN:
             case TWELVE:
                 return figure.checkMoving(figure, getCardtype().getValue());
-            default:throw new IllegalArgumentException("Invalid Combination of values");
-        }
-    }
 
-    private boolean checkMagnet(Figure figure){
-        //TODO: check if there is another figure on the field
-        Field current = figure.getCurrentField();
-        Field field = current;
-
-        while (field.getNextField().getCurrentFigure()==null) {
-            field = field.getNextField();
+            default:
+                throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
-        if(field!=current.getPreviousField()){
-            return true;
-        }
-        return false;
     }
 
     private boolean checkEffectCard(Figure figure, int effect){
+        int value;
         switch (getCardtype()) {
             case FOUR_PLUSMINUS:
-                if (effect == 1) return figure.checkMoving(figure, 4);
-                else return figure.checkMoving(figure, -4);
+                if (effect == 1){
+                    value = 4;
+                }else{
+                    value = -4;
+                }
+                return figure.checkMoving(figure, value);
+
             case ONETOSEVEN:
                 return figure.checkMoving(figure, effect);
+
             case ONEORELEVEN_START:
-                //TODO: check for starting field
-                if (effect == 0) return figure.isOnStartingfield();
-                else if (effect == 1) return figure.checkMoving(figure, 1);
-                else return figure.checkMoving(figure, 11);
+                if (effect == 0){
+                    return figure.isOnStartingfield();
+                }
+                if (effect == 1){
+                    value = 1;
+                }else{
+                    value = 11;
+                }
+                return figure.checkMoving(figure, value);
+
             case THIRTEEN_START:
-                //TODO: check for starting field
-                if (effect == 0) return figure.isOnStartingfield();
-                else figure.checkMoving(figure, 13);
+                if (effect == 0){
+                    return figure.isOnStartingfield();
+                }
+                return figure.checkMoving(figure, 13);
 
-                break;
-            default:throw new IllegalArgumentException("Invalid Combination of values");
-
+            default:
+                throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
-        return true;
     }
 
-    private boolean checkSwitchCardFigure(Figure figure){
-        //TODO: check if switch is possible for figure 1
-        if(figure.isOnStartingfield() || figure.isOnGoalfield()){
-            return false;
+    private boolean checkSwitchCard(Figure figure1, Figure figure2){
+        if (getCardtype().equals(Cardtype.SWITCH)) {
+            return figure1.checkisOnNormalField() && figure2.checkisOnNormalField();
+        } else {
+            throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
-        return true;
     }
 }
