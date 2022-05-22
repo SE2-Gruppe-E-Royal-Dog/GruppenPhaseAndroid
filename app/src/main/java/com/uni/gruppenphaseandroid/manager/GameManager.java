@@ -73,6 +73,11 @@ public class GameManager {
         currentTurnPlayerNumber += 1 % numberOfPlayers;
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
+
+        if(!isThereAnyPossibleMove()){
+            turnPlayerDiscardsCard();
+            //nextTurn();
+        }
     }
 
     public void cardGotPlayed(Card card) {
@@ -166,6 +171,53 @@ public class GameManager {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
+    public boolean isThereAnyPossibleMove(){
+
+        boolean flag = false;
+        for(Card card : Handcards.getInstance().getMyCards()){
+            for(Figure figure : figuremanager.getFiguresOfColour(Color.values()[myTurnNumber])){
+                switch (card.getCardtype()){
+                    //TODO: equal card?
+                    case ONETOSEVEN:
+                        for(int i = 1; i <=7;i++ ){
+                            flag = flag | card.checkIfCardIsPlayable(figure, i, null);
+                        }
+                        break;
+                    case FOUR_PLUSMINUS:
+                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
+                        //TODO: which effect nr is -4?
+                        break;
+                    case ONEORELEVEN_START:
+                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
+                        flag = flag | card.checkIfCardIsPlayable(figure, 11, null);
+                        break;
+                    case THIRTEEN_START:
+                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag | card.checkIfCardIsPlayable(figure, 13, null);
+                        break;
+                    case SWITCH:
+                        for(int i = 1;i<=16;i++){
+                            if(i == figure.getId()){
+                                continue;
+                            }
+                            Figure targetFigure = figuremanager.getFigureWithID(i);
+                            flag = flag | card.checkIfCardIsPlayable(figure, -1, targetFigure);
+                        }
+                        break;
+                    default:
+                        flag = flag | card.checkIfCardIsPlayable(figure, -1, null);
+                }
+                if(flag) break; //early break for performance reasons
+            }
+            if(flag) break; //early break for performance reasons
+        }
+        return flag;
+    }
+
+    public void turnPlayerDiscardsCard(){
+
+    }
 
     public PlayingField getPlayingField() {
         return playingField;
