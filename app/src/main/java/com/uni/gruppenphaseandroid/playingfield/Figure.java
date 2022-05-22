@@ -73,6 +73,26 @@ public class Figure {
         return false;
     }
 
+    public boolean checkIfAnotherFigureOnPlayingfield(){
+        Field current = this.getCurrentField();
+        Field field = current;
+
+        while (field.getNextField().getCurrentFigure()==null) {
+            field = field.getNextField();
+        }
+        if(field!=current.getPreviousField()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkisOnNormalField(){
+        if(isOnStartingfield() || isOnGoalfield()){
+            return false;
+        }
+        return true;
+    }
+
     // Getter and Setter
 
     public int getId() {
