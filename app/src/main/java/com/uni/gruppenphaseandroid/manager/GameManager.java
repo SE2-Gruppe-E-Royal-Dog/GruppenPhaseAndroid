@@ -41,9 +41,9 @@ public class GameManager {
     private int myTurnNumber;
     private Client webSocketClient;
     private LastTurn lastTurn;
-    //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
+    private int currentEffect;
     private String lobbyID;
     private boolean hasCheated = false;
     private Figure currentlySelectedFigure;
@@ -120,7 +120,7 @@ public class GameManager {
     }
 
     private boolean doCheckAndShowFeedback(Figure figure){
-        if (!checkIfMoveIsPossible(figure, selectedCard)) {
+        if (!selectedCard.checkIfCardIsPlayable(figure, currentEffect, null)) {
             //show feedback
             currentTurnPhase = TurnPhase.CHOOSECARD;
             return false;
@@ -160,16 +160,6 @@ public class GameManager {
 
     private void everyOneDraws5Cards() {
     hasCheated = false;
-    }
-
-    private boolean checkIfMoveIsPossible(Figure figure, Card card) {
-
-        switch (card.getCardtype()) {
-            case TWO:
-                return playingField.checkMovingPossible(figure, 2);
-            //... other cases
-        }
-        return false;
     }
 
     private boolean isItMyTurn() {

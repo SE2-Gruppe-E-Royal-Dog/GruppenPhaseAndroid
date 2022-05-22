@@ -79,4 +79,83 @@ public class Card {
             throw new IllegalArgumentException("Invalid Combination of values");
         }
     }
+
+
+    public boolean checkIfCardIsPlayable(Figure myFigure, int effect, Figure targetFigure){
+        if(myFigure==null){
+            throw new IllegalArgumentException("myFigure cannot be null");
+        }
+
+        if(effect==-1 && targetFigure==null){
+            return checkNonEffectCard(myFigure);
+        }else if(effect>=0 && effect<=13 && targetFigure==null){
+            return checkEffectCard(myFigure, effect);
+        }else if(effect==-1 && targetFigure!=null){
+            //playSwitchCard
+            if(getCardtype()==Cardtype.SWITCH) {
+                return checkSwitchCard(myFigure);
+            }else{
+                throw new IllegalArgumentException("Invalid Combination of values");
+            }
+        }else{
+            throw new IllegalArgumentException("Invalid Combination of values");
+        }
+    }
+
+    private boolean checkNonEffectCard(Figure figure){
+        PlayingField playingField = GameManager.getInstance().getPlayingField();
+        switch (getCardtype()){
+            case MAGNET:
+                return checkMagnet(figure);
+            case TWO:
+            case THREE:
+            case FIVE:
+            case SIX:
+            case EIGTH:
+            case NINE:
+            case TEN:
+            case TWELVE:
+                return figure.checkMoving(figure, getCardtype().getValue());
+            default:throw new IllegalArgumentException("Invalid Combination of values");
+        }
+    }
+
+    private boolean checkMagnet(Figure figure){
+        //TODO: check if there is another figure on the field
+        return true;
+    }
+
+    private boolean checkEffectCard(Figure figure, int effect){
+        switch (getCardtype()) {
+            case FOUR_PLUSMINUS:
+                if (effect == 1) return figure.checkMoving(figure, 4);
+                else return figure.checkMoving(figure, 4);
+            case ONETOSEVEN:
+                return figure.checkMoving(figure, effect);
+            case ONEORELEVEN_START:
+                //TODO: check for starting field
+                /*
+                if (effect == 0) playingField.moveToStart(figure);
+                else if (effect == 1) playingField.move(figure, 1);
+                else playingField.move(figure, 11);
+                return;
+                */
+            case THIRTEEN_START:
+                //TODO: check for starting field
+                /*
+                if (effect == 0) playingField.moveToStart(figure);
+                else playingField.move(figure, 13);
+                */
+                break;
+            default:throw new IllegalArgumentException("Invalid Combination of values");
+
+        }
+        return true;
+    }
+
+    private boolean checkSwitchCard(Figure figure){
+
+        //TODO: check if switch is possible
+        return true;
+    }
 }
