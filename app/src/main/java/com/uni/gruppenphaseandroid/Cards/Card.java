@@ -1,6 +1,7 @@
 package com.uni.gruppenphaseandroid.Cards;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
@@ -93,7 +94,7 @@ public class Card {
         }else if(effect==-1){
             //playSwitchCard
             if(getCardtype()==Cardtype.SWITCH) {
-                return checkSwitchCardFigure1(myFigure) && checkSwitchCardFigure2(targetFigure);
+                return checkSwitchCardFigure(myFigure) && checkSwitchCardFigure(targetFigure);
             }else{
                 throw new IllegalArgumentException("Invalid Combination of values");
             }
@@ -121,7 +122,16 @@ public class Card {
 
     private boolean checkMagnet(Figure figure){
         //TODO: check if there is another figure on the field
-        return true;
+        Field current = figure.getCurrentField();
+        Field field = current;
+
+        while (field.getNextField().getCurrentFigure()==null) {
+            field = field.getNextField();
+        }
+        if(field!=current.getPreviousField()){
+            return true;
+        }
+        return false;
     }
 
     private boolean checkEffectCard(Figure figure, int effect){
@@ -133,18 +143,14 @@ public class Card {
                 return figure.checkMoving(figure, effect);
             case ONEORELEVEN_START:
                 //TODO: check for starting field
-                /*
-                if (effect == 0) playingField.moveToStart(figure);
-                else if (effect == 1) playingField.move(figure, 1);
-                else playingField.move(figure, 11);
-                return;
-                */
+                if (effect == 0) return figure.isOnStartingfield();
+                else if (effect == 1) return figure.checkMoving(figure, 1);
+                else return figure.checkMoving(figure, 11);
             case THIRTEEN_START:
                 //TODO: check for starting field
-                /*
-                if (effect == 0) playingField.moveToStart(figure);
-                else playingField.move(figure, 13);
-                */
+                if (effect == 0) return figure.isOnStartingfield();
+                else figure.checkMoving(figure, 13);
+
                 break;
             default:throw new IllegalArgumentException("Invalid Combination of values");
 
@@ -152,15 +158,11 @@ public class Card {
         return true;
     }
 
-    private boolean checkSwitchCardFigure1(Figure figure){
-
+    private boolean checkSwitchCardFigure(Figure figure){
         //TODO: check if switch is possible for figure 1
-        return true;
-    }
-
-    private boolean checkSwitchCardFigure2(Figure figure){
-
-        //TODO: check if switch is possible for figure 2
+        if(figure.isOnStartingfield() || figure.isOnGoalfield()){
+            return false;
+        }
         return true;
     }
 }
