@@ -167,7 +167,7 @@ public class Card {
 
             case ONEORELEVEN_START:
                 if (effect == 0){
-                    return figure.isOnStartingfield();
+                    return figure.isOnStartingAreaField();
                 }
                 if (effect == 1){
                     value = 1;
@@ -178,7 +178,7 @@ public class Card {
 
             case THIRTEEN_START:
                 if (effect == 0){
-                    return figure.isOnStartingfield();
+                    return figure.isOnStartingAreaField();
                 }
                 return figure.checkMoving(figure, 13);
 
