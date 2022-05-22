@@ -168,7 +168,7 @@ public class GameManager {
     }
 
     public void moveWormholes() {
-        if (isItMyTurn() == true || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
+        if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
         hasCheated = true;
