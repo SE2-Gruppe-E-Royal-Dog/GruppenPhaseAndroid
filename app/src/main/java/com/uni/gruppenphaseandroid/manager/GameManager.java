@@ -103,7 +103,7 @@ public class GameManager {
             Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
             Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
             Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
-            ;
+            
             lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
 
             if (!isItMyTurn()) { //for the turnplayer, the update took place already
