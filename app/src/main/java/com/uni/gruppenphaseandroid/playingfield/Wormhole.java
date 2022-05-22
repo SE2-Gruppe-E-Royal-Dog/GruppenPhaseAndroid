@@ -1,8 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
 
-import android.hardware.camera2.params.BlackLevelPattern;
-
 import java.util.Random;
 
 public class Wormhole extends Field {

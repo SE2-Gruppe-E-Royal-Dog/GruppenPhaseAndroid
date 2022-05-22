@@ -3,9 +3,9 @@ package com.uni.gruppenphaseandroid.manager;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
-import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;

@@ -1,9 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
-import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.uni.gruppenphaseandroid.R;
