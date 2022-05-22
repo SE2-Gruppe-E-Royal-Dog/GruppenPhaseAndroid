@@ -2,6 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class Figure {
     private int id;
@@ -31,7 +32,7 @@ public class Figure {
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
-    protected boolean checkOvertaking(Figure figure1) { // fertig!
+    protected boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -48,10 +49,10 @@ public class Figure {
 
     /**
      * Green Card (4 +/- and 10) cancel overtaking rules.
-     * @param card
      * @return true if overtaking possible
      */
-    private boolean checkGreenCard(Card card) {
+    private boolean checkGreenCard(Figure figure1) {
+        Card card = GameManager.getInstance().getSelectedCard();
         if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
             return true;
         } else {
@@ -59,8 +60,8 @@ public class Figure {
         }
     }
 
-    private boolean checkOvertakingPossible(Figure figure1, Card card) {
-        if (checkGreenCard(card)) {
+    private boolean checkOvertakingPossible(Figure figure1) {
+        if (checkGreenCard(figure1)) {
             return true;
         } else {
             return figure1.checkOvertaking(figure1);
@@ -74,7 +75,7 @@ public class Figure {
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    protected boolean checkBeaten(Figure figure1) { // fertig!
+    protected boolean checkBeaten(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -91,15 +92,14 @@ public class Figure {
      * Exception: Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
      * @param figure1 - figure who moves
-     * @param card which is played
+     * @param fieldsToMove - number of fields to move
      * @return true if moving is possible
      */
-    public boolean checkMoving(Figure figure1, Card card) {
+    public boolean checkMoving(Figure figure1, int fieldsToMove) {
         Field originField = figure1.getCurrentField();
-        int fieldsToMove = card.getCardtype().getValue();
 
         for (int i = 0; i < fieldsToMove - 1; i++) {
-            if (figure1.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure1, card)) { // check if figure1 is allowed to overtake figure2
+            if (figure1.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure1)) { // check if figure1 is allowed to overtake figure2
                 return false;
             }
 
@@ -124,17 +124,16 @@ public class Figure {
     /**
      * Sets new Position of Figure.
      * @param figure1 - figure who moves
-     * @param card which is played
+     * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
 
-    protected Field setNewPosition(Figure figure1, Card card) throws IllegalArgumentException {
-        if (checkMoving(figure1, card)) { // check if moving possible
-            int fieldsToMove = card.getCardtype().getValue();
+    protected Field setNewPosition(Figure figure1, int fieldsToMove) {
+        if (checkMoving(figure1, fieldsToMove)) { // check if moving possible
             Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
             return newPositionFigure1;
         } else {
-            throw new IllegalArgumentException("Moving not possible.");
+            return null;
         }
     }
 
@@ -180,5 +179,4 @@ public class Figure {
     public void setFigureUI(FigureUI figureUI) {
         this.figureUI = figureUI;
     }
-
 }

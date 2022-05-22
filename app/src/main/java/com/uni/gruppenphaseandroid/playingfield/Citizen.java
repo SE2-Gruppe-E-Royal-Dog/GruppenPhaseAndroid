@@ -39,11 +39,11 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
      * citizen is allowed to jump to the next special field -
      * no matter of blocked starting fields or higher degree.
      * @param figure1 - figure who moves
-     * @param card - card which is played
+     * @param fieldsToMove - fields to move
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, Card card) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
+    public boolean checkMoving(Figure figure1, int fieldsToMove) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
 
 
         return true;

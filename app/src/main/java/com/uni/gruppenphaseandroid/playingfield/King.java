@@ -2,6 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class King extends Figure { // TODO: Copy Card
 
@@ -59,12 +60,13 @@ public class King extends Figure { // TODO: Copy Card
      * Copy card is only allowed, if previous move was also allowed for the king.
      * Starting is allowed with 13 or 1/11.
      * @param figure1 - figure who moves
-     * @param card which is played
+     * @param fieldsToMove - fields to move
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, Card card) { // TODO: Copy Card für Zug des vorherigen Spielers
-        if(super.checkMoving(figure1, card) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
+    public boolean checkMoving(Figure figure1, int fieldsToMove) { // TODO: Copy Card für Zug des vorherigen Spielers
+        Card card = GameManager.getInstance().getSelectedCard();
+        if(super.checkMoving(figure1, fieldsToMove) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
             return true;
         } else {
             return false;

@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 
 import java.util.ArrayList;
@@ -108,7 +109,6 @@ public class PlayingField {
         }
     }
 
-
     private void generateGoalFields() {
 
         generateGoalFieldsOfColor(greenStartingField, 81, Color.GREEN);
@@ -116,8 +116,6 @@ public class PlayingField {
         generateGoalFieldsOfColor(redStartingField, 89, Color.RED);
         generateGoalFieldsOfColor(blueStartingField, 93, Color.BLUE);
     }
-
-
 
     private void generateGoalFieldsOfColor(Field startingField, int id, Color color){
         Field previousField = startingField;
@@ -282,8 +280,8 @@ public class PlayingField {
     }
 
   public Field move(Figure figure1, int fieldsToMove) { // TODO: Exception auch bei Cards einbauen
-        fieldsToMove = card.getCardtype().getValue();
-        Field newPositionFigure1 = setNewPosition(figure1, card); // includes all checks for moving to new Position incl. new position
+        Card card = GameManager.getInstance().getSelectedCard();
+        Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
         Figure figure2;
 
         try {
@@ -313,8 +311,8 @@ public class PlayingField {
         }
     }
 
-    private Field setNewPosition(Figure figure, Card card) { // includes all checks for overtaking, moving, beaten
-        return figure.setNewPosition(figure, card);
+    private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
+        return figure.setNewPosition(figure, fieldsToMove);
     }
 
     public void moveAllWormholesRandomly(){

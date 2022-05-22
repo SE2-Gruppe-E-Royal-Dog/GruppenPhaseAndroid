@@ -111,13 +111,13 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void checkMoveKing() throws Exception {
+    public void checkMoveKing() {
         Field expectedField = playingField.getRootField().getNextField().getNextField();
         Assert.assertEquals(expectedField, playingField.move(figure2, 1));
     }
 
     @Test
-    public void checkMoveJerk() throws Exception {
+    public void checkMoveJerk() {
         Field expectedField = playingField.getRootField().getNextField();
         Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1,1).getFieldID());
     }
