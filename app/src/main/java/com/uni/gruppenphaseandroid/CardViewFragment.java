@@ -7,21 +7,27 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.CardAdapter;
 import com.uni.gruppenphaseandroid.Cards.CardUI;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
 
 import java.util.EventListener;
+import java.util.LinkedList;
+import java.util.Objects;
 
 
 public class CardViewFragment extends Fragment implements EventListener, SensorEventListener {
@@ -29,15 +35,34 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     private SensorManager sensorManager;
     private Sensor sensor;
     TextView textView;
-    LinearLayout ll;
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    Button chooseCard;
+    CardAdapter cardAdapter;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //set up recyclerview
+        View rootView = inflater.inflate(R.layout.fragment_card_view, container, false);
+
+        recyclerView = rootView.findViewById(R.id.hsv_cardholder);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        cardAdapter = new CardAdapter();
+        recyclerView.setAdapter(cardAdapter);
+
+         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
+                .findFirstCompletelyVisibleItemPosition());
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_view, container, false);
+        return rootView;
     }
 
     @Override
@@ -48,19 +73,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
 
-        //set view in cardUi for linearlayout
-        CardUI.getInstance().setView(view);
-
-        //TODO on click show button play card
-        view.findViewById(R.id.linlayout_cardHolder).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-
-            }
-        });
     }
 
 
@@ -76,10 +88,16 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }catch (NullPointerException e){
             e.printStackTrace();
-        }
+        };
+
+        CardUI.getInstance().setView(getView());
+        CardUI.getInstance().addCardToHand();
+
+        recyclerView.findViewById(R.id.hsv_cardholder);
+        layoutManager = new LinearLayoutManager(getActivity());
     }
 
-
+    
     /**
      * sensorlistener bits
      */
@@ -156,4 +174,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
 
+    
+        
 }

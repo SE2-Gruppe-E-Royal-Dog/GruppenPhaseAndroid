@@ -162,10 +162,10 @@ public class GameManager {
     }
 
     public void moveWormholes() {
-        if (isItMyTurn() == true || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
+       /*if (isItMyTurn() == true || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
-
+*/
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
