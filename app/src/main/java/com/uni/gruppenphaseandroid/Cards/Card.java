@@ -128,7 +128,7 @@ public class Card {
         switch (getCardtype()) {
             case FOUR_PLUSMINUS:
                 if (effect == 1) return figure.checkMoving(figure, 4);
-                else return figure.checkMoving(figure, 4);
+                else return figure.checkMoving(figure, -4);
             case ONETOSEVEN:
                 return figure.checkMoving(figure, effect);
             case ONEORELEVEN_START:
