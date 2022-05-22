@@ -1,10 +1,11 @@
-package com.uni.gruppenphaseandroid.Cards;
+package com.uni.gruppenphaseandroid.cards;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class Card {
+    private static final String INVALID_COMBINATION_MSG = "Invalid Combination of values";
     private Cardtype cardtype;
 
     public Card(Cardtype cardtype) {
@@ -31,7 +32,7 @@ public class Card {
             case TWELVE:
                 playingField.move(myFigure, getCardtype().getValue());
                 break;
-            default:throw new IllegalArgumentException("Invalid Combination of values");
+            default:throw new IllegalArgumentException(INVALID_COMBINATION_MSG);
         }
     }
 
@@ -54,7 +55,7 @@ public class Card {
                 if (effect == 0) playingField.moveToStart(myFigure);
                 else playingField.move(myFigure, 13);
                 break;
-            default:throw new IllegalArgumentException("Invalid Combination of values");
+            default:throw new IllegalArgumentException(INVALID_COMBINATION_MSG);
 
         }
     }
@@ -73,10 +74,10 @@ public class Card {
             if(getCardtype()==Cardtype.SWITCH) {
                 GameManager.getInstance().getPlayingField().switchPositions(myFigure, targetFigure);
             }else{
-                throw new IllegalArgumentException("Invalid Combination of values");
+                throw new IllegalArgumentException(INVALID_COMBINATION_MSG);
             }
         }else{
-            throw new IllegalArgumentException("Invalid Combination of values");
+            throw new IllegalArgumentException(INVALID_COMBINATION_MSG);
         }
     }
 }
