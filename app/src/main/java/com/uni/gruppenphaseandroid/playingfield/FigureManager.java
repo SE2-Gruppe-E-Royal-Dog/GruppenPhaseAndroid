@@ -2,6 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableContainer;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -17,12 +18,14 @@ public class FigureManager {
         this.figureList = new ArrayList<>();
     }
 
-    public void createFigureSetOfColor(Color color, PlayingField playingField, RelativeLayout relativeLayout) {
+    public void createFigureSetOfColor(Color color, PlayingField playingField) {
 
         createFigureObjects(color, playingField);
 
         for(Figure figure : figureList){
-            setUpSingleFigureUI(figure, relativeLayout);
+            if(figure.getColor()==color){
+                setUpSingleFigureUI(figure, playingField.getView().findViewById(R.id.playingFieldRelativeLayout));
+            }
         }
     }
 
@@ -52,6 +55,7 @@ public class FigureManager {
         FigureUIimpl figureUIimpl = new FigureUIimpl();
         figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(figure.getColor(), figure.getTyp()));
         figureUIimpl.moveFigureToPosition(figure.getCurrentField().getFieldUIobject());
+        figureUIimpl.setButtonClickBehaviour(figure);
         figure.setFigureUI(figureUIimpl);
     }
 
@@ -96,6 +100,16 @@ public class FigureManager {
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public ArrayList<Figure> getFiguresOfColour(Color color){
+        ArrayList<Figure> figureSet = new ArrayList<>();
+        for (Figure figure: figureList){
+            if(figure.getColor() == color){
+                figureSet.add(figure);
+            }
+        }
+        return figureSet;
     }
 
 }

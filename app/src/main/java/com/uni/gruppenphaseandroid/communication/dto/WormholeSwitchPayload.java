@@ -5,12 +5,14 @@ public class WormholeSwitchPayload {
     int newWormholeFieldPosition_2;
     int newWormholeFieldPosition_3;
     int newWormholeFieldPosition_4;
+    String lobbyID;
 
-    public WormholeSwitchPayload(int newWormholeFieldPosition_1, int newWormholeFieldPosition_2, int newWormholeFieldPosition_3, int newWormholeFieldPosition_4) {
+    public WormholeSwitchPayload(int newWormholeFieldPosition_1, int newWormholeFieldPosition_2, int newWormholeFieldPosition_3, int newWormholeFieldPosition_4, String lobbyID) {
         this.newWormholeFieldPosition_1 = newWormholeFieldPosition_1;
         this.newWormholeFieldPosition_2 = newWormholeFieldPosition_2;
         this.newWormholeFieldPosition_3 = newWormholeFieldPosition_3;
         this.newWormholeFieldPosition_4 = newWormholeFieldPosition_4;
+        this.lobbyID = lobbyID;
     }
 
 
