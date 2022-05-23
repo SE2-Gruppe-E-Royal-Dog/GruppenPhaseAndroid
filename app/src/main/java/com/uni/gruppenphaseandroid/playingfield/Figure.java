@@ -134,6 +134,7 @@ public class Figure {
         } else {
             return null;
         }
+    }
 
     public boolean isOnStartingAreaField(){
         if(getCurrentField().getClass().equals(StartingAreaField.class)){
