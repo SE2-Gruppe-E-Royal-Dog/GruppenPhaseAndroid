@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,7 +31,16 @@ public class InGameFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_ingame, container, false);
+
+        View root = inflater.inflate(R.layout.activity_ingame, container, false);
+
+        if (CardViewFragment.selectedCard != -1){
+            ImageButton btn = root.findViewById(R.id.btn_cardholderButton);
+            btn.setImageResource(CardViewFragment.selectedCard);
+        } //TODO else set default Image which isnt drawn yet
+
+
+        return root;
     }
 
     @Override
@@ -58,7 +68,7 @@ public class InGameFragment extends Fragment {
         });
 
 
-        view.findViewById(R.id.fab_cardholder).setOnClickListener(view1 -> NavHostFragment.findNavController(InGameFragment.this)
+        view.findViewById(R.id.btn_cardholderButton).setOnClickListener(view1 -> NavHostFragment.findNavController(InGameFragment.this)
                 .navigate(R.id.action_InGameFragment_to_cardViewFragment2));
 
 
@@ -79,5 +89,6 @@ public class InGameFragment extends Fragment {
 
             websocketClient.send(message);
         });
+
     }
 }

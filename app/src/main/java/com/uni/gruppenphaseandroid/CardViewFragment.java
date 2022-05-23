@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.CardAdapter;
 import com.uni.gruppenphaseandroid.Cards.CardUI;
@@ -41,6 +43,9 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     LinearLayoutManager layoutManager;
     Button chooseCard;
     CardAdapter cardAdapter;
+    int clickedCard;
+    static int selectedCard;
+    ImageButton cardholder;
 
 
 
@@ -60,6 +65,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             @Override
             public void onItemClick(int card) {
                 chooseCard.setVisibility(View.VISIBLE);
+                clickedCard = card;
             }
         });
         recyclerView.setAdapter(cardAdapter);
@@ -72,9 +78,22 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        selectedCard = -1;
         //return to board button
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
+
+        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedCard = clickedCard;
+                NavHostFragment.findNavController(CardViewFragment.this)
+                        .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
+            }
+        });
+
+
+
 
 
     }
