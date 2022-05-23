@@ -3,6 +3,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 import android.view.View;
 
 import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 
 import java.util.ArrayList;
@@ -107,7 +108,6 @@ public class PlayingField {
         }
     }
 
-
     private void generateGoalFields() {
 
         generateGoalFieldsOfColor(greenStartingField, 81, Color.GREEN);
@@ -115,8 +115,6 @@ public class PlayingField {
         generateGoalFieldsOfColor(redStartingField, 89, Color.RED);
         generateGoalFieldsOfColor(blueStartingField, 93, Color.BLUE);
     }
-
-
 
     private void generateGoalFieldsOfColor(Field startingField, int id, Color color){
         Field previousField = startingField;
@@ -280,13 +278,14 @@ public class PlayingField {
         return current;
     }
 
-  public Field move(Figure figure1, int fieldsToMove) { // TODO: Input von Karten: wie viel fahren
-        Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+  public Field move(Figure figure1, int fieldsToMove) { // TODO: Exception auch bei Cards einbauen
+        Card card = GameManager.getInstance().getSelectedCard();
+        Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
         Figure figure2;
 
         try {
-            if (newPositionFigure1.getCurrentFigure() != null) { // TODO: Checks für Goal Area
-                figure2 = newPositionFigure1.getCurrentFigure();
+            if (newPositionFigure1.getCurrentFigure() != null) {
+                figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
                 figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
                 figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
             } else {
@@ -301,7 +300,6 @@ public class PlayingField {
 
             // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
-            // TODO: Karten: Figuren tauschen
 
             LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);
 
@@ -312,52 +310,8 @@ public class PlayingField {
         }
     }
 
-    public boolean checkMovingPossible(Figure figure, int fieldsToMove) { // TODO: Übergabe Kartenwert bei GameManager/KartenManager einbauen
-        Field originField = figure.getCurrentField();
-
-        for (int i = 0; i < fieldsToMove - 1; i++) {// TODO: Spezialfall CheckOvertaking wenn Goalfield erlauben?
-            if (figure.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure)) { // check if figure is allowed to overtake own figure
-                return false;
-            }
-
-            if (figure.getCurrentField() instanceof StartingField && ((StartingField) figure.getCurrentField()).getColor() == figure.getColor()) {
-                GoalField goalfield = ((StartingField) figure.getCurrentField()).getNextGoalField();
-                if (fieldsToMove <= 4) {
-                    figure.setCurrentField(goalfield);
-                    continue;
-                }
-            }
-            figure.setCurrentField(figure.getCurrentField().getFieldAtDistance(1, figure.getColor()));
-        }
-        figure.setCurrentField(originField);
-
-        Field newPosition = figure.getCurrentField().getFieldAtDistance(fieldsToMove, figure.getColor()); // TODO: Check ob newPosition ist Starting Field oder Goal Field => beaten not allowed!
-        if (newPosition.getCurrentFigure() != null) { // TODO: Checks für Goal Area
-            Figure beaten = newPosition.getCurrentFigure(); // figure was beaten and has to be set to Starting Area
-            return beaten.getTyp() != Typ.KING || figure.getTyp() == Typ.KING;
-        }
-        return true;
-    }
-
-    public boolean checkOvertakingPossible(Figure figure1) {
-        if (checkGreenCard(card)) {
-            return true;
-        } else {
-            return figure1.checkOvertaking(figure1);
-        }
-    }
-
-    public boolean checkGreenCard(Card card) {
-        //if (card.getColor() == GREEN) { // TODO: Farbe Karte einbauen
-        //return true;
-        //} else {
-        return false;
-        //}
-
-    }
-
-    public boolean checkBeatenPossible(Figure figure1) {
-        return figure1.checkBeaten(figure1);
+    private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
+        return figure.setNewPosition(figure, fieldsToMove);
     }
 
     public void moveAllWormholesRandomly(){
