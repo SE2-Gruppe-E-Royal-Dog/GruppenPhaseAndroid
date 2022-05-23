@@ -49,12 +49,19 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_card_view, container, false);
+        chooseCard = root.findViewById(R.id.btn_playCard);
+
         //set up for recyclerview
         recyclerView = root.findViewById(R.id.recyclerviewCard);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        cardAdapter = new CardAdapter();
+        cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(int card) {
+                chooseCard.setVisibility(View.VISIBLE);
+            }
+        });
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
                 .findFirstCompletelyVisibleItemPosition());
