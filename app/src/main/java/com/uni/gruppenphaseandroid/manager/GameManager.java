@@ -41,11 +41,12 @@ public class GameManager {
     private int myTurnNumber;
     private Client webSocketClient;
     private LastTurn lastTurn;
-    //cardmanager
     private FigureManager figuremanager;
     private Card selectedCard;
+    private int currentEffect;
     private String lobbyID;
     private boolean hasCheated = false;
+    private Figure currentlySelectedFigure;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID, FigureManager figureManager) {
         this.lobbyID = lobbyID;
@@ -70,6 +71,11 @@ public class GameManager {
         currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
+
+        if(!isThereAnyPossibleMove()){
+            turnPlayerDiscardsCard();
+            //nextTurn();
+        }
     }
 
     public void cardGotPlayed(Card card) {
@@ -81,20 +87,53 @@ public class GameManager {
 
     public void figureGotSelected(Figure figure) throws Exception {
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn()) {
-
-            if (!checkIfMoveIsPossible(figure, selectedCard.getCardtype().getValue())) {
-                //show feedback
-                currentTurnPhase = TurnPhase.CHOOSECARD;
-                return;
-            }
-            currentTurnPhase = TurnPhase.CURRENTLYMOVING;
-            int effect = 1;//TODO: set effect
-            selectedCard.playCard(figure, effect, null);
-            //send message to server
-            lastTurn.setCardtype(selectedCard.getCardtype());
-            webSocketClient.send(lastTurn.generateServerMessage());
-
+            figureSelectedNormalCase(figure);
         }
+        else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
+            figureSelectedSwitchCase(figure);
+        }
+        selectedCard = null;
+    }
+
+    private void figureSelectedNormalCase(Figure figure){
+        if(selectedCard.getCardtype() == Cardtype.SWITCH){
+            currentTurnPhase = TurnPhase.CHOOSESECONDFIGURE;
+            currentlySelectedFigure = figure;
+            return;
+        }
+        else if(!doCheckAndShowFeedback(figure, null)){
+            return;
+        }
+        currentTurnPhase = TurnPhase.CURRENTLYMOVING;
+        int effect = 1;//TODO: set effect
+        selectedCard.playCard(figure, effect, null);
+        //send message to server
+        sendLastTurnServerMessage();
+    }
+
+    private void figureSelectedSwitchCase(Figure figure){
+        if(!doCheckAndShowFeedback(currentlySelectedFigure, figure)){
+            return;
+        }
+        currentTurnPhase = TurnPhase.CURRENTLYMOVING;
+        selectedCard.playCard(currentlySelectedFigure, -1, figure);
+        currentlySelectedFigure = null;
+        //send message to server
+        sendLastTurnServerMessage();
+    }
+
+    private boolean doCheckAndShowFeedback(Figure figure1, Figure figure2){
+        if (!selectedCard.checkIfCardIsPlayable(figure1, currentEffect, figure2)) {
+            //show feedback
+            currentTurnPhase = TurnPhase.CHOOSECARD;
+            return false;
+        }
+        return true;
+    }
+
+    private void sendLastTurnServerMessage(){
+        lastTurn.setCardtype(selectedCard.getCardtype());
+        webSocketClient.send(lastTurn.generateServerMessage());
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
@@ -126,20 +165,57 @@ public class GameManager {
     hasCheated = false;
     }
 
-    private boolean checkIfMoveIsPossible(Figure figure, int fieldsToMove) {
-
-        switch (selectedCard.getCardtype()) {
-            case TWO:
-                return figure.checkMoving(figure, fieldsToMove);
-            //... other cases
-        }
-        return false;
-    }
-
     public boolean isItMyTurn() {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
+    public boolean isThereAnyPossibleMove(){
+
+        boolean flag = false;
+        for(Card card : Handcards.getInstance().getMyCards()){
+            for(Figure figure : figuremanager.getFiguresOfColour(Color.values()[myTurnNumber])){
+                switch (card.getCardtype()){
+                    //TODO: equal card?
+                    case ONETOSEVEN:
+                        for(int i = 1; i <=7;i++ ){
+                            flag = flag | card.checkIfCardIsPlayable(figure, i, null);
+                        }
+                        break;
+                    case FOUR_PLUSMINUS:
+                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
+                        //TODO: which effect nr is -4?
+                        break;
+                    case ONEORELEVEN_START:
+                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
+                        flag = flag | card.checkIfCardIsPlayable(figure, 11, null);
+                        break;
+                    case THIRTEEN_START:
+                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag | card.checkIfCardIsPlayable(figure, 13, null);
+                        break;
+                    case SWITCH:
+                        for(int i = 1;i<=16;i++){
+                            if(i == figure.getId()){
+                                continue;
+                            }
+                            Figure targetFigure = figuremanager.getFigureWithID(i);
+                            flag = flag | card.checkIfCardIsPlayable(figure, -1, targetFigure);
+                        }
+                        break;
+                    default:
+                        flag = flag | card.checkIfCardIsPlayable(figure, -1, null);
+                }
+                if(flag) break; //early break for performance reasons
+            }
+            if(flag) break; //early break for performance reasons
+        }
+        return flag;
+    }
+
+    public void turnPlayerDiscardsCard(){
+
+    }
 
     public PlayingField getPlayingField() {
         return playingField;

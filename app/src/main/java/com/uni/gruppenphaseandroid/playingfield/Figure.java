@@ -127,7 +127,6 @@ public class Figure {
      * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
-
     protected Field setNewPosition(Figure figure1, int fieldsToMove) {
         if (checkMoving(figure1, fieldsToMove)) { // check if moving possible
             Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
@@ -135,6 +134,39 @@ public class Figure {
         } else {
             return null;
         }
+
+    public boolean isOnStartingAreaField(){
+        if(getCurrentField().getClass().equals(StartingAreaField.class)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isOnGoalField(){
+        if(getCurrentField().getClass().equals(GoalField.class)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkisOnNormalField(){
+        if(isOnStartingAreaField() || isOnGoalField()){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkIfAnotherFigureOnPlayingfield(){
+        Field current = this.getCurrentField();
+        Field field = current;
+
+        while (field.getNextField().getCurrentFigure()==null) {
+            field = field.getNextField();
+        }
+        if(field!=current.getPreviousField()){
+            return true;
+        }
+        return false;
     }
 
 
