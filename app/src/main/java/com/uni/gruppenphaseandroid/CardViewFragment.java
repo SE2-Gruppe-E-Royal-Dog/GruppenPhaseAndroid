@@ -38,14 +38,13 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
 
     private SensorManager sensorManager;
     private Sensor sensor;
-    TextView textView;
-    RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
-    Button chooseCard;
-    CardAdapter cardAdapter;
+    private TextView textView;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private Button chooseCard;
+    private CardAdapter cardAdapter;
     int clickedCard;
     static int selectedCard;
-    ImageButton cardholder;
 
 
 
@@ -110,7 +109,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }catch (NullPointerException e){
-            e.printStackTrace();
+            Log.getStackTraceString(e);
         };
 
 
