@@ -78,7 +78,6 @@ public class CardUI  {
         //cardIV = new ImageView(view.getContext());
 
 
-        try {
             switch (card.getCardtype()) {
                 case TWO:
                     //cardIV.setBackgroundResource(R.drawable.ic_card_2);
@@ -141,9 +140,7 @@ public class CardUI  {
                     imageCardList.add(R.drawable.ic_card_switch);
                     break;
             }
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
+
         //return cardIV;
     }
 
