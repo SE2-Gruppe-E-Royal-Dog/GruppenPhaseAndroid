@@ -4,6 +4,7 @@ import static com.uni.gruppenphaseandroid.Cards.Cardtype.TWO;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +25,11 @@ import java.util.LinkedList;
 
 public class CardUI  {
 
-    private RecyclerView recyclerView;
-    private LinearLayout linearLayout;
     private View view;
     private static CardUI cardUI;
-    int tag;
     LinkedList<Integer> imageCardList;
-    ImageView cardIV;
+    int [] cardList;
+    //ImageView cardIV;
 
     static LinkedList<Card> myCards;        //für test zwecke
 
@@ -53,10 +52,8 @@ public class CardUI  {
 
     public void addCardToHand() {
 
-        recyclerView.findViewById(R.id.hsv_cardholder);
-
-         LinkedList<Card> cards = Handcards.getInstance().getMyCards();
-
+        imageCardList = new LinkedList<>();
+        LinkedList<Card> cards = Handcards.getInstance().getMyCards();
 
 //test cards
          LinkedList<Card> testCards = new LinkedList<>();
@@ -74,79 +71,77 @@ public class CardUI  {
 
 //test cards end
 
-
        for (Card c : testCards){
            findImageView(c);
-           recyclerView.addView(cardIV);
-
+           Log.e("code", imageCardList.getFirst().toString());
         }
     }
 
     private void findImageView (Card card) {
 
-        cardIV = new ImageView(view.getContext());
+        //cardIV = new ImageView(view.getContext());
 
 
         try {
             switch (card.getCardtype()) {
                 case TWO:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_2);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_2);
                     imageCardList.add(R.drawable.ic_card_2);
                     break;
                 case THREE:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_3);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_3);
                     imageCardList.add(R.drawable.ic_card_3);
                     break;
                 case FIVE:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_5);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_5);
                     imageCardList.add(R.drawable.ic_card_5);
                     break;
                 case SIX:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_6);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_6);
                     imageCardList.add(R.drawable.ic_card_6);
                     break;
                 case EIGTH:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_8);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_8);
                     imageCardList.add(R.drawable.ic_card_8);
                     break;
                 case NINE:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_9);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_9);
                     imageCardList.add(R.drawable.ic_card_9);
                     break;
                 case TEN:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_10);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_10);
                     imageCardList.add(R.drawable.ic_card_10);
                     break;
                 case TWELVE:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_12);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_12);
                     imageCardList.add(R.drawable.ic_card_12);
                     break;
                 case EQUAL:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_copy);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_copy);
                     imageCardList.add(R.drawable.ic_card_copy);
                     break;
                 case FOUR_PLUSMINUS:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_4);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_4);
                     imageCardList.add(R.drawable.ic_card_4);
                     break;
                 case ONETOSEVEN:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_7);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_7);
                     imageCardList.add(R.drawable.ic_card_7);
                     break;
                 case ONEORELEVEN_START:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_11);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_11);
                     imageCardList.add(R.drawable.ic_card_11);
                     break;
                 case THIRTEEN_START:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_13);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_13);
                     imageCardList.add(R.drawable.ic_card_13);
                     break;
                 case MAGNET:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_magnet);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_magnet);
                     imageCardList.add(R.drawable.ic_card_magnet);
                     break;
                 case SWITCH:
-                    cardIV.setBackgroundResource(R.drawable.ic_card_switch);
+                    //cardIV.setBackgroundResource(R.drawable.ic_card_switch);
                     imageCardList.add(R.drawable.ic_card_switch);
                     break;
             }
@@ -156,7 +151,7 @@ public class CardUI  {
         //return cardIV;
     }
 
-
+/*
     public void removeFromHand (ImageView view){
         linearLayout.removeView(view);
     }
@@ -164,8 +159,9 @@ public class CardUI  {
     public void removeAllFromHand (){
         linearLayout.removeAllViews();
     }
-
+*/
     public LinkedList<Integer> cardsForRecyclerView (){
+
         addCardToHand();
         return imageCardList;
     }

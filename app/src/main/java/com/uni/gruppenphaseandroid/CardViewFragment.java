@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,9 +48,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //set up recyclerview
-
-
         return inflater.inflate(R.layout.fragment_card_view, container, false);
     }
 
@@ -59,6 +58,18 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         //return to board button
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
+
+        //set up for recyclerview
+        recyclerView = view.findViewById(R.id.recyclerviewCard);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        cardAdapter = new CardAdapter();
+        recyclerView.setAdapter(cardAdapter);
+        recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
+                .findFirstCompletelyVisibleItemPosition());
+
+
 
     }
 
@@ -79,6 +90,8 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
 
 
     }
+
+
 
     
     /**
