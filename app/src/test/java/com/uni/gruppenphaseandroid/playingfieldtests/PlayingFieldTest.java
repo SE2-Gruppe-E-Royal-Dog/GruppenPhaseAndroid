@@ -3,6 +3,8 @@ package com.uni.gruppenphaseandroid.playingfieldtests;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -29,6 +31,7 @@ public class PlayingFieldTest {
     Figure figure2;
     FigureUI figureUI2;
     ImageView imageView;
+    Card card;
 
     @Before
     public void setUp() {
@@ -108,21 +111,24 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void checkMoveKing() throws Exception {
+    public void checkMoveKing() {
         Field expectedField = playingField.getRootField().getNextField().getNextField();
         Assert.assertEquals(expectedField, playingField.move(figure2, 1));
     }
 
     @Test
-    public void checkMoveJerk() throws Exception {
+    public void checkMoveJerk() {
         Field expectedField = playingField.getRootField().getNextField();
         Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1,1).getFieldID());
     }
 
-    @Test
+    /*@Test // TODO: Test OFFEN
     public void checkIfMovingPossibleKing() {
-        Assert.assertTrue(playingField.checkMovingPossible(figure2, 1));
+        card = new Card(Cardtype.TWO);
+        Assert.assertTrue(Figure.checkMoving(figure2, card));
     }
+
+     */
 
     @Test
     public void moveToBlueStart(){
@@ -149,5 +155,36 @@ public class PlayingFieldTest {
         playingField.moveToStart(figure1);
 
         Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void testGetFieldWithIDregular(){
+
+        Field actualField = playingField.getFieldWithID(37);
+        Assert.assertEquals(playingField.getRootField().getFieldAtDistance(36, Color.BLACK), actualField);
+    }
+    @Test
+    public void testGetFieldWithIDedgeCases1(){
+
+        Field actualField = playingField.getFieldWithID(1);
+        Assert.assertEquals(playingField.getRootField(), actualField);
+    }
+    @Test
+    public void testGetFieldWithIDedgeCases64(){
+
+        Field actualField = playingField.getFieldWithID(1);
+        Assert.assertEquals(playingField.getRootField().getFieldAtDistance(64, Color.BLACK), actualField);
+    }
+    @Test
+    public void testGetFieldWithIDGoal(){
+
+        Field actualField = playingField.getFieldWithID(82);
+        Assert.assertEquals(playingField.getGreenStartingField().getNextGoalField().getNextField(), actualField);
+    }
+
+    @Test
+    public void testGetFieldWithIDStartingArea(){
+        Field actualField = playingField.getFieldWithID(76);
+        Assert.assertEquals(playingField.getRedStartingField().getPreviousStartingArea(), actualField);
     }
 }
