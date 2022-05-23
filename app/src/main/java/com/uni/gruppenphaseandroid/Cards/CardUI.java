@@ -25,11 +25,9 @@ import java.util.LinkedList;
 
 public class CardUI  {
 
-    private View view;
+
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
-    int [] cardList;
-    //ImageView cardIV;
 
     //static LinkedList<Card> myCards;        //für test zwecke
 
@@ -43,10 +41,6 @@ public class CardUI  {
 
 
     public CardUI() {
-    }
-
-    public void setView (View view){
-        this.view = view;
     }
 
 
