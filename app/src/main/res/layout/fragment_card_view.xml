@@ -26,13 +26,14 @@
         android:id="@+id/btn_playCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Play card"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btn_returnToGame"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hsv_cardholder" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_cheater"
+        app:layout_constraintVertical_bias="0.949" />
 
     <TextView
         android:id="@+id/tv_cheater"
@@ -57,7 +58,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_playCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cheater">
+        app:layout_constraintTop_toBottomOf="@+id/tv_cheater"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewCard"
