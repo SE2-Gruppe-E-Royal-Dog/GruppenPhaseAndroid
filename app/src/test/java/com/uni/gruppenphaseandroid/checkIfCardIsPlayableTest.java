@@ -182,7 +182,7 @@ public class checkIfCardIsPlayableTest {
     public void checkTHIRTEEN_START_effect2_True(){
         Card card = new Card(Cardtype.THIRTEEN_START);
 
-        boolean res = card.checkIfCardIsPlayable(figure1, 0, null);
+        boolean res = card.checkIfCardIsPlayable(figure1, 1, null);
 
         Assert.assertTrue(res);
     }
