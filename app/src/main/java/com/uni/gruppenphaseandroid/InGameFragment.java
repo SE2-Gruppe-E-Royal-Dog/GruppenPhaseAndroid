@@ -77,6 +77,9 @@ public class InGameFragment extends Fragment implements SensorEventListener {
 
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
+            //deactivate start game button
+            playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
             var message = new Message();
