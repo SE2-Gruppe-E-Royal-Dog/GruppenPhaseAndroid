@@ -1,10 +1,16 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.view.View;
 import android.widget.ImageView;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -18,9 +24,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Any;
-
-import static org.mockito.Mockito.*;
 
 public class PlayingFieldTest {
 
@@ -119,7 +122,7 @@ public class PlayingFieldTest {
     @Test
     public void checkMoveJerk() {
         Field expectedField = playingField.getRootField().getNextField();
-        Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1,1).getFieldID());
+        Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1, 1).getFieldID());
     }
 
     /*@Test // TODO: Test OFFEN
@@ -131,7 +134,7 @@ public class PlayingFieldTest {
      */
 
     @Test
-    public void moveToBlueStart(){
+    public void moveToBlueStart() {
         figure1.setColor(Color.BLUE);
         Field expected = playingField.getBlueStartingField();
         playingField.moveToStart(figure1);
@@ -140,7 +143,7 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void moveToYellowStart(){
+    public void moveToYellowStart() {
         figure1.setColor(Color.YELLOW);
         Field expected = playingField.getYellowStartingField();
         playingField.moveToStart(figure1);
@@ -149,7 +152,7 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void moveToGreenStart(){
+    public void moveToGreenStart() {
         figure1.setColor(Color.GREEN);
         Field expected = playingField.getGreenStartingField();
         playingField.moveToStart(figure1);
@@ -158,32 +161,35 @@ public class PlayingFieldTest {
     }
 
     @Test
-    public void testGetFieldWithIDregular(){
+    public void testGetFieldWithIDregular() {
 
         Field actualField = playingField.getFieldWithID(37);
         Assert.assertEquals(playingField.getRootField().getFieldAtDistance(36, Color.BLACK), actualField);
     }
+
     @Test
-    public void testGetFieldWithIDedgeCases1(){
+    public void testGetFieldWithIDedgeCases1() {
 
         Field actualField = playingField.getFieldWithID(1);
         Assert.assertEquals(playingField.getRootField(), actualField);
     }
+
     @Test
-    public void testGetFieldWithIDedgeCases64(){
+    public void testGetFieldWithIDedgeCases64() {
 
         Field actualField = playingField.getFieldWithID(1);
         Assert.assertEquals(playingField.getRootField().getFieldAtDistance(64, Color.BLACK), actualField);
     }
+
     @Test
-    public void testGetFieldWithIDGoal(){
+    public void testGetFieldWithIDGoal() {
 
         Field actualField = playingField.getFieldWithID(82);
         Assert.assertEquals(playingField.getGreenStartingField().getNextGoalField().getNextField(), actualField);
     }
 
     @Test
-    public void testGetFieldWithIDStartingArea(){
+    public void testGetFieldWithIDStartingArea() {
         Field actualField = playingField.getFieldWithID(76);
         Assert.assertEquals(playingField.getRedStartingField().getPreviousStartingArea(), actualField);
     }
