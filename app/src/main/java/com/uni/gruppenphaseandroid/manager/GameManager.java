@@ -255,8 +255,6 @@ public class GameManager {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
-
-
     }
 
 
@@ -298,7 +296,7 @@ public class GameManager {
     public int getMyTurnNumber() {
         return myTurnNumber;
     }
-
+ 
     public Card getSelectedCard() {
         return selectedCard;
     }
