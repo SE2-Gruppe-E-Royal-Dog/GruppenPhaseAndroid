@@ -48,7 +48,17 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_card_view, container, false);
+        View root = inflater.inflate(R.layout.fragment_card_view, container, false);
+        //set up for recyclerview
+        recyclerView = root.findViewById(R.id.recyclerviewCard);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        cardAdapter = new CardAdapter();
+        recyclerView.setAdapter(cardAdapter);
+        recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
+                .findFirstCompletelyVisibleItemPosition());
+        return root;
     }
 
     @Override
@@ -58,17 +68,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         //return to board button
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
-
-        //set up for recyclerview
-        recyclerView = view.findViewById(R.id.recyclerviewCard);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-
-        cardAdapter = new CardAdapter();
-        recyclerView.setAdapter(cardAdapter);
-        recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
-                .findFirstCompletelyVisibleItemPosition());
-
 
 
     }

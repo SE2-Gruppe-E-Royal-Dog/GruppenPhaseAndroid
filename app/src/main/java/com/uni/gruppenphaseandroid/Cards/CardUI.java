@@ -58,7 +58,7 @@ public class CardUI  {
 //test cards
          LinkedList<Card> testCards = new LinkedList<>();
 
-        Card card1 = new Card(Cardtype.FIVE);
+        Card card1 = new Card(Cardtype.EIGTH);
         testCards.add(card1);
         Card card2 = new Card(TWO);
         testCards.add(card2);
