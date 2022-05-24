@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.cards.Card;
 
 public class Citizen extends Figure { // TODO: Sonderfeld offen
 

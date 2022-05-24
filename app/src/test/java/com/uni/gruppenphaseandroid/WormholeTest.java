@@ -47,5 +47,4 @@ public class WormholeTest {
         assertFalse(wormhole instanceof Wormhole);
         assertFalse(wormhole instanceof StartingField);
     }
-
 }

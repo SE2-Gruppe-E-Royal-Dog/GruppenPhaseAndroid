@@ -2,8 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.view.View;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 
@@ -267,7 +266,7 @@ public class PlayingField {
 
     public Field moveToNextFigure(Figure myFigure) {
         Field current = myFigure.getCurrentField();
-        
+
         while (current.getNextField().getCurrentFigure()==null) {
             current = current.getNextField();
             myFigure.getCurrentField().setCurrentFigure(null);
