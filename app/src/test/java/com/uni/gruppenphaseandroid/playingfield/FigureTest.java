@@ -5,12 +5,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class FigureTest {
+    /*
     @Test
     public void givenFigure_whenCheckingIfAnotherFigureCanOverTake_expectTrue() {
      var figure = new Figure();
 
      assertTrue(figure.checkOvertaking(new Figure()));
     }
+    */
 
     @Test
     public void givenFigure_whenCheckingIfBeaten_expectTrue() {
@@ -25,6 +27,7 @@ public class FigureTest {
         assertTrue(figure1.checkBeaten(figure2));
     }
 
+    /*
     @Test
     public void givenFigure_whenCheckingIfMoving_expectTrue() {
         var field1 = new Field();
@@ -37,6 +40,7 @@ public class FigureTest {
 
         assertTrue(figure1.checkMoving(figure2, 2));
     }
+    */
 
     @Test
     public void givenFigure_whenCheckingIfBeatenOnStartField_expectFalse() {
