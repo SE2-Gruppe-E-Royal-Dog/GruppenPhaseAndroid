@@ -7,50 +7,123 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.Cards.CardAdapter;
+import com.uni.gruppenphaseandroid.Cards.CardUI;
 
 import java.util.EventListener;
+import java.util.LinkedList;
+import java.util.Objects;
 
 
 public class CardViewFragment extends Fragment implements EventListener, SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
-    TextView textView;
+    private TextView textView;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private Button chooseCard;
+    private CardAdapter cardAdapter;
+    int clickedCard;
+    static int selectedCard;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_view, container, false);
+        View root = inflater.inflate(R.layout.fragment_card_view, container, false);
+        chooseCard = root.findViewById(R.id.btn_playCard);
+
+        //set up for recyclerview
+        recyclerView = root.findViewById(R.id.recyclerviewCard);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(int card) {
+                chooseCard.setVisibility(View.VISIBLE);
+                clickedCard = card;
+            }
+        });
+        recyclerView.setAdapter(cardAdapter);
+        recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
+                .findFirstCompletelyVisibleItemPosition());
+        return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        selectedCard = -1;
+        //return to board button
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
+
+        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedCard = clickedCard;
+                NavHostFragment.findNavController(CardViewFragment.this)
+                        .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
+            }
+        });
+
+
+
+
+
     }
 
+
+    //on create --> creats seonsorListener
+    //creats "hand" --> where cards will be stored --> dunno if it's the smartes way
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
         //initialization of sensor
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        try {
+            sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }catch (NullPointerException e){
+            Log.getStackTraceString(e);
+        };
+
+
     }
 
+
+
+    
+    /**
+     * sensorlistener bits
+     */
+
+
+    //if in CardViewFragment --> listen, otherwise sensor on pause
     @Override
     public void onResume() {
         super.onResume();
@@ -63,6 +136,8 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         super.onPause();
     }
 
+
+    //What happens if sensor change detected
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
@@ -77,6 +152,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
 
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
+
 
 
                 //shows a textView that is gone after 5 seconds
@@ -117,4 +193,7 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     @Override
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
+
+    
+        
 }

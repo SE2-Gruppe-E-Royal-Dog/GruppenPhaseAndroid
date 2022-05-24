@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.Cards.CardUI;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -167,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
             var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
 
             Handcards.getInstance().addCardToHand(payload.getCards());
+            CardUI.getInstance().addCardToHand(); //set UI Card Hand
         }
 
         private void handlePlayerLeftMessage(String body) {
