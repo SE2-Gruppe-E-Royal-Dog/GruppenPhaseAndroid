@@ -246,6 +246,9 @@ public class GameManager {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
+
+*/
+
         hasCheated = true;
 
         playingField.moveAllWormholesRandomly();
