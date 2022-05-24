@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.Cards.CardUI;
+import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;

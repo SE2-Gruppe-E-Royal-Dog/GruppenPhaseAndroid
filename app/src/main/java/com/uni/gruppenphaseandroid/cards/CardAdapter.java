@@ -1,6 +1,5 @@
-package com.uni.gruppenphaseandroid.Cards;
+package com.uni.gruppenphaseandroid.cards;
 
-import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

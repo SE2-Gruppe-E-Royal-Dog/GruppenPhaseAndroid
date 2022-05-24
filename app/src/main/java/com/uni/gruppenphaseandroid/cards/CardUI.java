@@ -1,23 +1,7 @@
-package com.uni.gruppenphaseandroid.Cards;
+package com.uni.gruppenphaseandroid.cards;
 
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.TWO;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.uni.gruppenphaseandroid.CardViewFragment;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
