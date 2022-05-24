@@ -247,7 +247,7 @@ public class GameManager {
             return;
         }
 
-*/
+
 
         hasCheated = true;
 
