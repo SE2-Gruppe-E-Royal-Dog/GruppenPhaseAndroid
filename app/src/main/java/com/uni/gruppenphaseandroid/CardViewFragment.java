@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid;
 
-import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,27 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.CardAdapter;
-import com.uni.gruppenphaseandroid.Cards.CardUI;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
-import java.util.LinkedList;
 import java.util.Objects;
 
 
@@ -42,8 +31,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private SensorManager sensorManager;
     private Sensor sensor;
     private TextView textView;
-    private Button chooseCard;
+    private Button btnPlayCard;
     private String clickedCard;
+    private int choosenCardFromHandIndex;
 
     public interface OnInputListener{
         void sendInput (String input);
@@ -57,7 +47,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_card_view, container, false);
-        chooseCard = view.findViewById(R.id.btn_playCard);
+        btnPlayCard = view.findViewById(R.id.btn_playCard);
         //set card default
         clickedCard = "-1";
 
@@ -69,8 +59,8 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int card) {
-                if(GameManager.getInstance().isItMyTurn() == true) {
-                    chooseCard.setVisibility(View.VISIBLE);
+                if(GameManager.getInstance().isItMyTurn()) {
+                    btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
                 }
             }
@@ -127,7 +117,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             mOnInputListener = (OnInputListener) getTargetFragment();
         }catch (ClassCastException e){
 
-            Log.e("error", "onAttach: ClassCastException: " + e.getMessage());
+            Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }
 
@@ -205,6 +195,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
 
-    
+    public int getChoosenCardFromHandIndex() {
+        return choosenCardFromHandIndex;
+    }
+
+    public void setChoosenCardFromHandIndex(int choosenCardFromHandIndex) {
+        this.choosenCardFromHandIndex = choosenCardFromHandIndex;
+    }
         
 }

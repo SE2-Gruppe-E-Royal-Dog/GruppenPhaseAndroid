@@ -1,9 +1,24 @@
 package com.uni.gruppenphaseandroid.Cards;
 
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.EIGTH;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.EQUAL;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.FIVE;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.FOUR_PLUSMINUS;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.MAGNET;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.NINE;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.ONEORELEVEN_START;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.ONETOSEVEN;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.SIX;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.SWITCH;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.TEN;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.THIRTEEN_START;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.THREE;
+import static com.uni.gruppenphaseandroid.Cards.Cardtype.TWELVE;
 import static com.uni.gruppenphaseandroid.Cards.Cardtype.TWO;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.style.LineHeightSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,9 +77,6 @@ public class CardUI  {
         testCards.add(card2);
         testCards.add(card3);
         testCards.add(card1);
-
-
-
 //test cards end
 
        for (Card c : testCards){
@@ -74,9 +86,6 @@ public class CardUI  {
     }
 
     private void findImageView (Card card) {
-
-        //cardIV = new ImageView(view.getContext());
-
 
             switch (card.getCardtype()) {
                 case TWO:
@@ -140,21 +149,46 @@ public class CardUI  {
                     imageCardList.add(R.drawable.ic_card_switch);
                     break;
             }
-
-        //return cardIV;
     }
 
-/*
-    public void removeFromHand (ImageView view){
-        linearLayout.removeView(view);
+    public Cardtype idToCardType (int card) {
+        switch (card) {
+            case R.drawable.ic_card_2:
+                return TWO;
+            case R.drawable.ic_card_3:
+                return THREE;
+            case R.drawable.ic_card_5:
+                return FIVE;
+            case R.drawable.ic_card_6:
+                return SIX;
+            case R.drawable.ic_card_8:
+                return EIGTH;
+            case R.drawable.ic_card_9:
+                return NINE;
+            case R.drawable.ic_card_10:
+                return TEN;
+            case R.drawable.ic_card_12:
+                return TWELVE;
+            case R.drawable.ic_card_copy:
+                return EQUAL;
+            case R.drawable.ic_card_4:
+                return FOUR_PLUSMINUS;
+            case R.drawable.ic_card_7:
+                return ONETOSEVEN;
+            case R.drawable.ic_card_11:
+                return ONEORELEVEN_START;
+            case R.drawable.ic_card_13:
+                return THIRTEEN_START;
+            case R.drawable.ic_card_magnet:
+                return MAGNET;
+            case R.drawable.ic_card_switch:
+                return SWITCH;
+        }
+        return null;
     }
 
-    public void removeAllFromHand (){
-        linearLayout.removeAllViews();
-    }
-*/
+
     public LinkedList<Integer> cardsForRecyclerView (){
-
         addCardToHand();
         return imageCardList;
     }
