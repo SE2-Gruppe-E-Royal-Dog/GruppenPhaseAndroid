@@ -118,7 +118,7 @@ public class InGameFragment extends Fragment implements SensorEventListener {
 
         if (x < 40 && !GameManager.getInstance().hasCheated()) {
             Log.e("Code", "sensor_light");
-            GameManager.getInstance().moveWormholes();
+            GameManager.getInstance().initiateMoveWormholes();
 
         }
     }

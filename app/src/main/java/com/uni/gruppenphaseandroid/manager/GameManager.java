@@ -245,7 +245,7 @@ public class GameManager {
         this.lastTurn = lastTurn;
     }
 
-    public void moveWormholes() {
+    public void initiateMoveWormholes() {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
