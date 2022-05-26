@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,69 +36,90 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 
-public class CardViewFragment extends Fragment implements EventListener, SensorEventListener {
+public class CardViewFragment extends DialogFragment implements EventListener, SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
     private TextView textView;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
     private Button chooseCard;
-    private CardAdapter cardAdapter;
-    int clickedCard;
-    static int selectedCard;
+    private String clickedCard;
 
+    public interface OnInputListener{
+        void sendInput (String input);
+    }
+
+    public OnInputListener mOnInputListener;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_card_view, container, false);
-        chooseCard = root.findViewById(R.id.btn_playCard);
+        View view = inflater.inflate(R.layout.fragment_card_view, container, false);
+        chooseCard = view.findViewById(R.id.btn_playCard);
+        //set card default
+        clickedCard = "-1";
 
         //set up for recyclerview
-        recyclerView = root.findViewById(R.id.recyclerviewCard);
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
+        CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int card) {
                 chooseCard.setVisibility(View.VISIBLE);
-                clickedCard = card;
+                clickedCard = Integer.toString(card);
             }
         });
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
                 .findFirstCompletelyVisibleItemPosition());
-        return root;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        selectedCard = -1;
         //return to board button
-        view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
+        view.findViewById(R.id.btn_returnToGame).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDialog().dismiss();
+            }
+        });
+                /*
+                view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
+                 */
 
+
+        //select card and return to board
         view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedCard = clickedCard;
+                Log.d("card_input", "input:" + clickedCard);
+                //capture input
+                if (!clickedCard.equals("")) {
+                    mOnInputListener.sendInput(clickedCard);
+                    getDialog().dismiss();
+                }
+
+/*
                 NavHostFragment.findNavController(CardViewFragment.this)
                         .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
+ */
             }
         });
-
-
-
-
-
+        return view;
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try{
+            mOnInputListener = (OnInputListener) getActivity();
+        }catch (ClassCastException e){
+
+            Log.e("error", "onAttach: ClassCastException: " + e.getMessage());
+        }
+    }
 
     //on create --> creats seonsorListener
     //creats "hand" --> where cards will be stored --> dunno if it's the smartes way
@@ -109,15 +132,13 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }catch (NullPointerException e){
-            Log.getStackTraceString(e);
+            Log.d("Sensor error tilt", e.getMessage());
         };
-
 
     }
 
 
 
-    
     /**
      * sensorlistener bits
      */
