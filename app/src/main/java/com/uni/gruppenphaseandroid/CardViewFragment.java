@@ -30,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.CardAdapter;
 import com.uni.gruppenphaseandroid.Cards.CardUI;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
 import java.util.LinkedList;
@@ -68,8 +69,10 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int card) {
-                chooseCard.setVisibility(View.VISIBLE);
-                clickedCard = Integer.toString(card);
+                if(GameManager.getInstance().isItMyTurn() == true) {
+                    chooseCard.setVisibility(View.VISIBLE);
+                    clickedCard = Integer.toString(card);
+                }
             }
         });
         recyclerView.setAdapter(cardAdapter);
@@ -83,10 +86,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 getDialog().dismiss();
             }
         });
-                /*
-                view1 -> NavHostFragment.findNavController(CardViewFragment.this)
-                .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
-                 */
 
 
         //select card and return to board
@@ -99,27 +98,11 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                     mOnInputListener.sendInput(clickedCard);
                     getDialog().dismiss();
                 }
-
-/*
-                NavHostFragment.findNavController(CardViewFragment.this)
-                        .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
- */
             }
         });
         return view;
     }
 
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try{
-            mOnInputListener = (OnInputListener) getActivity();
-        }catch (ClassCastException e){
-
-            Log.e("error", "onAttach: ClassCastException: " + e.getMessage());
-        }
-    }
 
     //on create --> creats seonsorListener
     //creats "hand" --> where cards will be stored --> dunno if it's the smartes way
@@ -137,13 +120,20 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {            //Methode für DialogFragement communication
+        super.onAttach(context);
+        try{
+            mOnInputListener = (OnInputListener) getTargetFragment();
+        }catch (ClassCastException e){
 
+            Log.e("error", "onAttach: ClassCastException: " + e.getMessage());
+        }
+    }
 
     /**
-     * sensorlistener bits
+     * Mehtoden die notwendig für den Sensor sind
      */
-
-
     //if in CardViewFragment --> listen, otherwise sensor on pause
     @Override
     public void onResume() {
