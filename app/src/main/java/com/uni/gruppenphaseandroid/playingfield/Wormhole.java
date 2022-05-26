@@ -17,7 +17,7 @@ public class Wormhole extends Field {
     }
 
     @Override
-    protected void triggerSpecialFieldEffect() {
+    public void triggerSpecialFieldEffect() {
         Figure myFigure;
         Figure partnerFigure;
 

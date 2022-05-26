@@ -20,6 +20,7 @@ import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.StartingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
+import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -200,4 +201,52 @@ public class PlayingFieldTest {
         playingField.repairWormholeVisuals();
         verify(imageView, times(60)).setImageResource(anyInt());
     }
+    @Test
+    public void testRepairRootField(){
+        playingField.repairRootField();
+        Assert.assertEquals(1, playingField.getRootField().getFieldID());
+
+    }
+    @Test
+    public void testRepairRootFieldAfterSwitch(){
+        playingField.getFieldWithID(20).switchField(playingField.getRootField());
+        playingField.repairRootField();
+        Assert.assertEquals(1, playingField.getRootField().getFieldID());
+
+    }
+    @Test
+    public void testMoveAllWormholeRandomlyUI(){
+        playingField.moveAllWormholesRandomly();
+        verify(imageView, times(68)).setImageResource(anyInt());
+
+    }
+
+    @Test
+    public void testMoveAllWormholeRandomlyIndex(){
+        playingField.moveAllWormholesRandomly();
+        Field currentField = playingField.getRootField();
+
+        for (int i = 1; i <= 64; i++) {
+            Assert.assertEquals(i, currentField.getFieldID());
+            currentField = currentField.getNextField();
+        }
+
+    }
+
+    @Test
+    public void testWormholeTypeCheck(){
+        playingField.moveAllWormholesRandomly();
+        verify(imageView, times(68)).setImageResource(anyInt());
+        Field currentField = playingField.getRootField();
+        int wormholeCount = 0;
+        for (int i = 1; i <= 64; i++) {
+            if (currentField instanceof Wormhole){
+                wormholeCount++;
+            }
+        currentField = currentField.getNextField();
+        }
+        Assert.assertEquals(4, wormholeCount);
+
+    }
+
 }
