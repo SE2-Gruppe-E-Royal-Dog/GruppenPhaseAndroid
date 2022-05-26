@@ -246,8 +246,6 @@ public class GameManager {
             return;
         }
 
-
-
         hasCheated = true;
 
         playingField.moveAllWormholesRandomly();

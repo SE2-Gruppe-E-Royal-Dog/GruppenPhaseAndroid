@@ -1,6 +1,7 @@
 package com.uni.gruppenphaseandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -42,12 +43,12 @@ public class InGameFragment extends Fragment implements SensorEventListener {
 
         View root = inflater.inflate(R.layout.activity_ingame, container, false);
 
-        if (CardViewFragment.selectedCard != -1){
-            ImageButton btn = root.findViewById(R.id.btn_cardholderButton);
+       /* if (CardViewFragment.selectedCard != -1){
+            ImageButton btn = getActivity().findViewById(R.id.btn_cardholderButton);
             btn.setImageResource(CardViewFragment.selectedCard);
         } //TODO else set default Image which isnt drawn yet
 
-
+*/
         return root;
     }
 
@@ -76,8 +77,6 @@ public class InGameFragment extends Fragment implements SensorEventListener {
         });
 
 
-        view.findViewById(R.id.btn_cardholderButton).setOnClickListener(view1 -> NavHostFragment.findNavController(InGameFragment.this)
-                .navigate(R.id.action_InGameFragment_to_cardViewFragment2));
 
 
         view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
@@ -85,10 +84,16 @@ public class InGameFragment extends Fragment implements SensorEventListener {
 
         view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
 
+        view.findViewById(R.id.btn_cardholderButton).setOnClickListener(view15 -> NavHostFragment.findNavController(InGameFragment.this)
+                .navigate(R.id.action_InGameFragment_to_cardViewFragment2));
+
+
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
             playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+            //activate cardholder
+            playingField.getView().findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
 
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
@@ -99,10 +104,18 @@ public class InGameFragment extends Fragment implements SensorEventListener {
             message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
+
+
         });
 
 
+        /*
 
+//view.findViewById(R.id.btn_cardholderButton).setBackgroundResource(STANDARD KARTEN BILD);
+
+
+
+*/
     }
 
     @Override
@@ -110,6 +123,11 @@ public class InGameFragment extends Fragment implements SensorEventListener {
         super.onCreate(savedInstanceState);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
+
+
+
+
+
     }
 
 

@@ -29,7 +29,7 @@ public class CardUI  {
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
 
-    //static LinkedList<Card> myCards;        //für test zwecke
+    static LinkedList<Card> myCards;        //für test zwecke
 
 
     public static CardUI getInstance() {
@@ -50,7 +50,7 @@ public class CardUI  {
         LinkedList<Card> cards = Handcards.getInstance().getMyCards();
 
 //test cards
-         /*LinkedList<Card> testCards = new LinkedList<>();
+         LinkedList<Card> testCards = new LinkedList<>();
 
         Card card1 = new Card(Cardtype.EIGTH);
         testCards.add(card1);
@@ -64,10 +64,10 @@ public class CardUI  {
         testCards.add(card1);
 
 
-          */
+
 //test cards end
 
-       for (Card c : cards){
+       for (Card c : testCards){
            findImageView(c);
            Log.e("code", imageCardList.getFirst().toString());
         }
