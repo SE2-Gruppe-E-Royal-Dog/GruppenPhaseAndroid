@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
@@ -192,5 +193,11 @@ public class PlayingFieldTest {
     public void testGetFieldWithIDStartingArea() {
         Field actualField = playingField.getFieldWithID(76);
         Assert.assertEquals(playingField.getRedStartingField().getPreviousStartingArea(), actualField);
+    }
+
+    @Test
+    public void testRepairWormholeVisuals(){
+        playingField.repairWormholeVisuals();
+        verify(imageView, times(60)).setImageResource(anyInt());
     }
 }
