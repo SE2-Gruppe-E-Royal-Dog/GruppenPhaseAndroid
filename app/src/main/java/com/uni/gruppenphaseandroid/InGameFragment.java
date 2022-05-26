@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.Cards.CardUI;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -151,8 +153,28 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         btnCardholder.setVisibility(View.VISIBLE);
         if (imageID != -1){
             btnCardholder.setImageResource(imageID);
-        } //TODO else set default Image which isnt drawn yet
+            checkCard(imageID);
+        } else{
+            btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
+        }
     }
 
+    public void checkCard (int imageID){
+        if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))){
+            // TODO open new overlay to check conditions for 4+- or 1-7 or 1/11
+            //or add new button to check the conditions
+
+        }
+    }
+
+    public boolean checkIfSpecialNumberCardEffect(Cardtype cardtype){
+        return cardtype == Cardtype.ONEORELEVEN_START || cardtype == Cardtype.FOUR_PLUSMINUS || cardtype == Cardtype.ONETOSEVEN;
+
+    }
+
+
+
+    //todo choose figure -- initialize figure i guess?
+    //TODO send card + figure to gamemanger && "make move" button
 
 }
