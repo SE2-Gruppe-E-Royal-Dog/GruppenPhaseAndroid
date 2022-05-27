@@ -193,4 +193,6 @@ public class PlayingFieldTest {
         Field actualField = playingField.getFieldWithID(76);
         Assert.assertEquals(playingField.getRedStartingField().getPreviousStartingArea(), actualField);
     }
+
+
 }

@@ -20,7 +20,7 @@ public class Jerk extends Figure {
      * @return true if overtaking possible
      */
     @Override
-    protected boolean checkOvertaking(Figure figure1) {
+    public boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 

@@ -32,7 +32,7 @@ public class Figure {
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
-    protected boolean checkOvertaking(Figure figure1) {
+    public boolean checkOvertaking(Figure figure1) {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
