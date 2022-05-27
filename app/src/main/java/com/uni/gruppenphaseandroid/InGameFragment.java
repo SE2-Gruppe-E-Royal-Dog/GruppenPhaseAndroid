@@ -55,7 +55,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
 
-
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
@@ -166,11 +165,16 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             // TODO open new overlay to check conditions for 4+- or 1-7 or 1/11
             //or add new button to check the conditions
             Log.d("check card", "choosen card is a special card, open new dialog window");
+            getActivity().findViewById(R.id.fab_specialCards).setVisibility(View.VISIBLE);
 
-            SpecialCardDialogFragment specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
-            specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
-            specialCardDialog.setTargetFragment(InGameFragment.this, 1);
-
+            getActivity().findViewById(R.id.fab_specialCards).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SpecialCardDialogFragment specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
+                    specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
+                    specialCardDialog.setTargetFragment(InGameFragment.this, 1);
+                }
+            });
         }
     }
 
@@ -183,8 +187,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     @Override
     public void sendInputSpecialCardFragment(String input) {
 
-        //TODO handle string from special card dialog and sent cardvalue
+        Log.d("selectedSpecialcArd", input);
 
+        //TODO handle string from special card dialog and sent cardvalue
         // if one to seven set Cardtype.ONE or what so ever
 
 
