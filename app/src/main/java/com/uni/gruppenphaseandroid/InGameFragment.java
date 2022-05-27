@@ -27,12 +27,13 @@ import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
-public class InGameFragment extends Fragment implements SensorEventListener, CardViewFragment.OnInputListener {
+public class InGameFragment extends Fragment implements SensorEventListener, CardViewFragment.OnInputListener, SpecialCardDialogFragment.OnCardInputListener {
     private Client websocketClient;
     private final Gson gson = new Gson();
     private SensorManager sensorManager;
     private Sensor sensor;
     private ImageButton btnCardholder;
+    private Cardtype selectedCardtype;
 
     @Override
     public View onCreateView(
@@ -144,9 +145,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     //method for Dialog Fragment - Card Holder
     @Override
-    public void sendInput(String input) {
+    public void sendInputCardFragment(String input) {
         getActivity().findViewById(R.id.btn_cardholderButton).setBackgroundResource(Integer.parseInt(input));
         setCardViewImage(Integer.parseInt(input));
+        selectedCardtype = CardUI.getInstance().idToCardType(Integer.parseInt(input));
     }
 
     public void setCardViewImage (int imageID){
@@ -163,6 +165,11 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))){
             // TODO open new overlay to check conditions for 4+- or 1-7 or 1/11
             //or add new button to check the conditions
+            Log.d("check card", "choosen card is a special card, open new dialog window");
+
+            SpecialCardDialogFragment specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
+            specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
+            specialCardDialog.setTargetFragment(InGameFragment.this, 1);
 
         }
     }
@@ -172,9 +179,20 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
+    //methods for selecting special cards
+    @Override
+    public void sendInputSpecialCardFragment(String input) {
 
+        //TODO handle string from special card dialog and sent cardvalue
+
+        // if one to seven set Cardtype.ONE or what so ever
+
+
+    }
 
     //todo choose figure -- initialize figure i guess?
     //TODO send card + figure to gamemanger && "make move" button
+    //TODO ablagestapel
+    //TODO visual note for cheating!
 
 }

@@ -33,13 +33,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
-    private int choosenCardFromHandIndex;
 
     public interface OnInputListener{
-        void sendInput (String input);
+        void sendInputCardFragment(String input);
     }
 
-    public OnInputListener mOnInputListener;
+    public OnInputListener cardInputListener;
 
 
     @Override
@@ -85,7 +84,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 Log.d("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
-                    mOnInputListener.sendInput(clickedCard);
+                    cardInputListener.sendInputCardFragment(clickedCard);
                     getDialog().dismiss();
                 }
             }
@@ -114,7 +113,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     public void onAttach(@NonNull Context context) {            //Methode für DialogFragement communication
         super.onAttach(context);
         try{
-            mOnInputListener = (OnInputListener) getTargetFragment();
+            cardInputListener = (OnInputListener) getTargetFragment();
         }catch (ClassCastException e){
 
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
@@ -195,12 +194,5 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
 
-    public int getChoosenCardFromHandIndex() {
-        return choosenCardFromHandIndex;
-    }
-
-    public void setChoosenCardFromHandIndex(int choosenCardFromHandIndex) {
-        this.choosenCardFromHandIndex = choosenCardFromHandIndex;
-    }
         
 }
