@@ -4,7 +4,7 @@ public class Field {
 
     private Field nextField;
     private Field previousField;
-    private int fieldID;
+   protected int fieldID;
     private Figure currentFigure;
     private FieldUI fieldUIobject;
 

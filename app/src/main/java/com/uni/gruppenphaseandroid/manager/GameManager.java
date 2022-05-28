@@ -35,6 +35,9 @@ public class GameManager {
     }
 
     private int currentTurnPlayerNumber;
+
+
+
     private TurnPhase currentTurnPhase;
     private PlayingField playingField;
     private int numberOfPlayers;
@@ -242,7 +245,7 @@ public class GameManager {
         this.lastTurn = lastTurn;
     }
 
-    public void moveWormholes() {
+    public void initiateMoveWormholes() {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
@@ -282,7 +285,7 @@ public class GameManager {
         playingField.repairWormholeVisuals();
     }
 
-    public boolean isHasCheated() {
+    public boolean hasCheated() {
         return hasCheated;
     }
 
@@ -304,5 +307,9 @@ public class GameManager {
  
     public Card getSelectedCard() {
         return selectedCard;
+    }
+
+    public void setCurrentTurnPhase(TurnPhase currentTurnPhase) {
+        this.currentTurnPhase = currentTurnPhase;
     }
 }
