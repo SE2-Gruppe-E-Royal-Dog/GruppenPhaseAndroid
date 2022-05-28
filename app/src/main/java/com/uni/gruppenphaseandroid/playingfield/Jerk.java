@@ -38,7 +38,7 @@ public class Jerk extends Figure {
     /**
      * Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
-     * this figure1 - figure who moves
+     * this gitfigure1 - figure who moves
      * @param fieldsToMove - fields to move
      * @return new Position of Jerk within Goal Area.
      */
