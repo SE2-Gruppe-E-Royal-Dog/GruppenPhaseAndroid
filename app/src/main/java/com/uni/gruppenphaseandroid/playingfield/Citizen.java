@@ -14,16 +14,16 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
 
     /**
      * Degree has to be considered.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) {
-        Field newPosition = figure1.getCurrentField().getNextField();
+    public boolean checkOvertaking() {
+        Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking(figure1) == true) {
+        if(super.checkOvertaking() == true) {
             if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN) {
                 return false;
             } else {
@@ -38,12 +38,12 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
      * If moving to a special field clockwise and taking a card,
      * citizen is allowed to jump to the next special field -
      * no matter of blocked starting fields or higher degree.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * @param fieldsToMove - fields to move
      * @return true if moving possible
      */
     @Override
-    public boolean checkMoving(Figure figure1, int fieldsToMove) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
+    public boolean checkMoving(int fieldsToMove) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
 
 
         return true;

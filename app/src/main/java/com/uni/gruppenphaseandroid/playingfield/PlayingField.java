@@ -278,40 +278,32 @@ public class PlayingField {
         return current;
     }
 
-  public Field move(Figure figure1, int fieldsToMove) { // TODO: Exception auch bei Cards einbauen
+  public Field move(Figure figure1, int fieldsToMove) {
         Card card = GameManager.getInstance().getSelectedCard();
         Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
         Figure figure2;
 
-        try {
-            if (newPositionFigure1.getCurrentFigure() != null) {
-                figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
-                figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
-                figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
-            } else {
-                figure2 = null;
-            }
-
-            figure1.getCurrentField().setCurrentFigure(null);
-            newPositionFigure1.setCurrentFigure(figure1);
-            figure1.setCurrentField(newPositionFigure1);
-            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
-            newPositionFigure1.triggerSpecialFieldEffect();
-
-            // TODO: Wurmlöcher einfügen
-            // TODO: Schummeln einfügen
-
-            LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);
-
-            return newPositionFigure1;
-        } catch (Exception e) {
-            e.getMessage();
-            return figure1.getCurrentField();
+        if (newPositionFigure1.getCurrentFigure() != null) {
+            figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
+            figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
+            figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
+        } else {
+            figure2 = null;
         }
+
+        figure1.getCurrentField().setCurrentFigure(null);
+        newPositionFigure1.setCurrentFigure(figure1);
+        figure1.setCurrentField(newPositionFigure1);
+        figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
+        newPositionFigure1.triggerSpecialFieldEffect();
+
+        LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);
+
+        return newPositionFigure1;
     }
 
     private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
-        return figure.setNewPosition(figure, fieldsToMove);
+        return figure.setNewPosition(fieldsToMove);
     }
 
     public void moveAllWormholesRandomly(){

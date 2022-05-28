@@ -12,16 +12,16 @@ public class Knight extends Figure {
 
     /**
      * Degree has to be considered.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking(Figure figure1) {
-        Field newPosition = figure1.getCurrentField().getNextField();
+    public boolean checkOvertaking() {
+        Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking(figure1) == true) {
+        if(super.checkOvertaking() == true) {
             if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
                 return false;
             } else {

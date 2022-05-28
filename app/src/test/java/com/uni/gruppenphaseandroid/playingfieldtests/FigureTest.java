@@ -130,33 +130,35 @@ public class FigureTest {
     public void checkOvertakingRedJerkByRedCitizen() {
         figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
         figure2 = new Figure(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
-        Assert.assertTrue(figure2.checkOvertaking(figure1));
+        Assert.assertTrue(figure2.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByRedKnight() {
         figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
         figure3 = new Figure(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
-        Assert.assertTrue(figure3.checkOvertaking(figure1));
+        Assert.assertTrue(figure3.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByRedKing() {
         figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
         figure4 = new Figure(4, Color.RED, field1, Typ.KING, figureUI4);
-        Assert.assertTrue(figure4.checkOvertaking(figure1));
+        Assert.assertTrue(figure4.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByRedJerk() {
         figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
         figure1 = new Figure(1, Color.RED, field1, Typ.JERK, figureUI1);
-        Assert.assertFalse(figure1.checkOvertaking(figure2));
+        Assert.assertTrue(figure2.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByRedKnight() {
-
+        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        figure3 = new Figure(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(figure3.checkOvertaking());
     }
 
     @Test
