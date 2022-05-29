@@ -118,13 +118,15 @@ public class PlayingFieldTest {
     @Test
     public void checkMoveKing() {
         Field expectedField = playingField.getRootField().getNextField().getNextField();
-        Assert.assertEquals(expectedField, playingField.move(figure2, 1));
+        playingField.move(figure2, 1);
+        Assert.assertEquals(expectedField, figure2.getCurrentField());
     }
 
     @Test
     public void checkMoveJerk() {
         Field expectedField = playingField.getRootField().getNextField();
-        Assert.assertEquals(expectedField.getFieldID(), playingField.move(figure1, 1).getFieldID());
+        playingField.move(figure1, 1);
+        Assert.assertEquals(expectedField.getFieldID(), figure1.getCurrentField().getFieldID());
     }
 
     /*@Test // TODO: Test OFFEN
