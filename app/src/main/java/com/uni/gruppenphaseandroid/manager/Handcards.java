@@ -30,4 +30,8 @@ public class Handcards {
     public void discardHandcard(int index){
         myCards.remove(index);
     }
+
+    public void setMyCards(LinkedList<Card> myCards) {
+        this.myCards = myCards;
+    }
 }
