@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.282" />
+            app:layout_constraintVertical_bias="0.217" />
 
         <Button
             android:id="@+id/btn_chancel"
@@ -48,27 +48,29 @@
 
         <Button
             android:id="@+id/btn_optionOne"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="48dp"
             android:text="Button"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/btn_playOneToSeven"
             app:layout_constraintEnd_toStartOf="@+id/btn_optionTwo"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_userInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_userInfo"
+            app:layout_constraintVertical_bias="0.763" />
 
         <Button
             android:id="@+id/btn_optionTwo"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="48dp"
             android:text="Button"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/btn_playOneToSeven"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_userInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_userInfo"
+            app:layout_constraintVertical_bias="0.763" />
 
         <SeekBar
             android:id="@+id/sb_selectOneToSeven"
@@ -84,6 +86,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_userInfo"
             app:layout_constraintVertical_bias="0.532" />
+
+        <Button
+            android:id="@+id/btn_optionThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btn_playOneToSeven"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_userInfo"
+            app:layout_constraintVertical_bias="0.256" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

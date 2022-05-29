@@ -14,10 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class SpecialCardDialogFragment extends DialogFragment {
 
-    // TODO user options for special cards | 4+- | 1-7 | 1 or 11
+    //options for special cards | 4+- | 1-7 | 1 or 11
 
     private TextView textView;          //Display the titel of the card (one or eleven||4 +-||1-7) and asks to specificate the value
     private Button optionOne;
@@ -26,8 +27,19 @@ public class SpecialCardDialogFragment extends DialogFragment {
     private Button chancel;
     private SeekBar optionOneTwoSeven;
     private Cardtype cardtype;
-    private String selectedCard;
+    private int selectedCardEffect;
     public CardViewFragment.OnInputListener mOnInputListener;
+
+    //Values for seekbar //TODO does it work like this
+    public static final String VAL1 = "1";
+    public static final String VAL2 = "2";
+    public static final String VAL3 = "3";
+    public static final String VAL4 = "4";
+    public static final String VAL5 = "5";
+    public static final String VAL6 = "6";
+    public static final String VAL7 = "7";
+
+    public static enum Suit{VAL1,VAL2,VAL3,VAL4,VAL5,VAL6,VAL7,}
 
     public interface OnCardInputListener{
         void sendInputSpecialCardFragment (String input);
@@ -49,7 +61,9 @@ public class SpecialCardDialogFragment extends DialogFragment {
          optionOne.setVisibility(View.INVISIBLE);
          Button optionTwo = view.findViewById(R.id.btn_optionTwo);
          optionTwo.setVisibility(View.INVISIBLE);
-         Button ok = view.findViewById(R.id.btn_playCard);
+         Button optionThree = view.findViewById(R.id.btn_optionThree);
+         optionThree.setVisibility(View.INVISIBLE);
+         Button ok = view.findViewById(R.id.btn_playOneToSeven);
          ok.setVisibility(View.INVISIBLE);
          SeekBar optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
          optionOne.setVisibility(View.INVISIBLE);
@@ -66,29 +80,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                 optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
-                        switch (value){
-                            case 0:
-                                selectedCard ="ONE";
-                                break;
-                            case 1:
-                                selectedCard = "TWO";
-                                break;
-                            case 2:
-                                selectedCard = "THREE";
-                                break;
-                            case 3:
-                                selectedCard = "FOUR";
-                                break;
-                            case 4:
-                                selectedCard = "FIVE";
-                                break;
-                            case 5:
-                                selectedCard = "SIX";
-                                break;
-                            case 6:
-                                selectedCard = "SEVEN";
-                                break;
-                        }
+                        selectedCardEffect = value;
                     }
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) {
@@ -104,7 +96,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        specialCardInput.sendInputSpecialCardFragment(selectedCard);
+                        GameManager.getInstance().setCurrentEffect(selectedCardEffect);
                         getDialog().dismiss();
 
                     }
@@ -114,21 +106,30 @@ public class SpecialCardDialogFragment extends DialogFragment {
             case ONEORELEVEN_START:
                 optionOne.setText("ONE");
                 optionTwo.setText("ELEVEN");
+                optionThree.setText ("Start");
 
                 optionOne.setVisibility(View.VISIBLE);
                 optionTwo.setVisibility(View.VISIBLE);
+                optionThree.setVisibility(View.VISIBLE);
 
                 optionOne.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        selectedCard = "ONE";
+                        GameManager.getInstance().setCurrentEffect(1);
                         getDialog().dismiss();
                     }
                 });
                 optionTwo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        selectedCard = "ELEVEN";
+                        GameManager.getInstance().setCurrentEffect(2);
+                        getDialog().dismiss();
+                    }
+                });
+                optionThree.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        GameManager.getInstance().setCurrentEffect(0);
                         getDialog().dismiss();
                     }
                 });
@@ -144,14 +145,15 @@ public class SpecialCardDialogFragment extends DialogFragment {
                 optionOne.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        selectedCard = "FOUR_PLUS";
+                        GameManager.getInstance().setCurrentEffect(1);
                         getDialog().dismiss();
                     }
                 });
                 optionTwo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        selectedCard = "FOUR_MINUS";
+
+                        GameManager.getInstance().setCurrentEffect(0);
                         getDialog().dismiss();
                     }
                 });

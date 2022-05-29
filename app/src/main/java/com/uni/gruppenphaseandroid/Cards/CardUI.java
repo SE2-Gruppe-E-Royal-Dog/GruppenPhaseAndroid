@@ -78,13 +78,12 @@ public class CardUI  {
         Card card5 = new Card(ONETOSEVEN);
         testCards.add(card5);
         Card card6 = new Card(ONEORELEVEN_START);
-        testCards.add(card3);
+        testCards.add(card6);
         testCards.add(card1);
 //test cards end
 
        for (Card c : testCards){
            findImageView(c);
-           Log.e("code", imageCardList.getFirst().toString());
         }
     }
 

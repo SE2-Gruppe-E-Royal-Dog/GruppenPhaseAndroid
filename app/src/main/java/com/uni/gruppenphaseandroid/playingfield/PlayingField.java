@@ -280,6 +280,8 @@ public class PlayingField {
     }
 
   public Field move(Figure figure1, int fieldsToMove) { // TODO: Exception auch bei Cards einbauen
+        //TODO if schummeln true, check if + or - 1 --> adjust value of fields to move ???
+
         Card card = GameManager.getInstance().getSelectedCard();
         Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
         Figure figure2;

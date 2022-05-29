@@ -85,6 +85,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 //capture input
                 if (!clickedCard.equals("")) {
                     cardInputListener.sendInputCardFragment(clickedCard);
+
+
+
                     getDialog().dismiss();
                 }
             }
@@ -119,6 +122,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }
+
+
+
 
     /**
      * Mehtoden die notwendig für den Sensor sind

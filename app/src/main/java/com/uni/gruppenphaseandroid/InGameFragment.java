@@ -10,13 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.CardUI;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
@@ -33,7 +36,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private SensorManager sensorManager;
     private Sensor sensor;
     private ImageButton btnCardholder;
+    private FloatingActionButton btnSpecialCards;
     private Cardtype selectedCardtype;
+    private CardViewFragment cardholder;
+    private SpecialCardDialogFragment specialCardDialog;
 
     @Override
     public View onCreateView(
@@ -54,6 +60,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
+        btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
 
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
@@ -95,12 +102,20 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         });
 
 
-        getActivity().findViewById(R.id.btn_cardholderButton).setOnClickListener(new View.OnClickListener() {
+        btnCardholder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CardViewFragment cardholder = new CardViewFragment();
+                cardholder = new CardViewFragment();
                 cardholder.show(getFragmentManager(), "cardholder Dialog");
                 cardholder.setTargetFragment(InGameFragment.this, 1);
+            }
+        });
+        btnSpecialCards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
+                specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
+                specialCardDialog.setTargetFragment(InGameFragment.this, 1);
             }
         });
     }
@@ -144,38 +159,34 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     //method for Dialog Fragment - Card Holder
     @Override
-    public void sendInputCardFragment(String input) {
+    public void sendInputCardFragment(String input) {               //get's input from cardholder aka choosen card
         getActivity().findViewById(R.id.btn_cardholderButton).setBackgroundResource(Integer.parseInt(input));
         setCardViewImage(Integer.parseInt(input));
-        selectedCardtype = CardUI.getInstance().idToCardType(Integer.parseInt(input));
     }
 
-    public void setCardViewImage (int imageID){
+    public void setCardViewImage (int imageID){                     //set's the cardholder image to the choosen card, so the player sees what card he has choosen
         btnCardholder.setVisibility(View.VISIBLE);
         if (imageID != -1){
             btnCardholder.setImageResource(imageID);
+            selectedCardtype = CardUI.getInstance().idToCardType(imageID);
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
         }
     }
 
-    public void checkCard (int imageID){
-        if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))){
-            // TODO open new overlay to check conditions for 4+- or 1-7 or 1/11
-            //or add new button to check the conditions
-            Log.d("check card", "choosen card is a special card, open new dialog window");
-            getActivity().findViewById(R.id.fab_specialCards).setVisibility(View.VISIBLE);
-
-            getActivity().findViewById(R.id.fab_specialCards).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SpecialCardDialogFragment specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
-                    specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
-                    specialCardDialog.setTargetFragment(InGameFragment.this, 1);
+    public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
+            if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
+                Log.d("check card", "choosen card is a special card, open new dialog window");
+                btnSpecialCards.setVisibility(View.VISIBLE);
+                if (btnSpecialCards != null) {
+                    //TODO instandly open special card dialog
+                    //btnSpecialCards.performClick();
                 }
-            });
-        }
+            } else {
+                GameManager.getInstance().setCurrentEffect(-1);
+                GameManager.getInstance().cardGotPlayed(new Card(selectedCardtype));
+            }
     }
 
     public boolean checkIfSpecialNumberCardEffect(Cardtype cardtype){
@@ -195,9 +206,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
-    //todo choose figure -- initialize figure i guess?
-    //TODO send card + figure to gamemanger && "make move" button
     //TODO ablagestapel
     //TODO visual note for cheating!
+    //TODO detail work --> button abstand, skeebar mit nummern, specialcard icon change
 
 }
