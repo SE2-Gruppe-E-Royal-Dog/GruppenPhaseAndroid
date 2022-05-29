@@ -24,14 +24,15 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
         Figure figure2 = newPosition.getCurrentFigure();
 
         if(super.checkOvertaking() == true) {
-            if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN) {
-                return false;
-            } else {
-                return true;
+            switch (figure2.getTyp()) {
+                case JERK:
+                case CITIZEN:
+                    return true;
+                case KNIGHT:
+                case KING:
+                    return false;
             }
-        } else {
-            return false;
-        }
+        } return false;
     }
 
     /**

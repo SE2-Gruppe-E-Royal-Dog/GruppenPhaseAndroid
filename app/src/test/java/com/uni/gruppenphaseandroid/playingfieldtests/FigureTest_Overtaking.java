@@ -3,20 +3,22 @@ package com.uni.gruppenphaseandroid.playingfieldtests;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.view.View;
 import android.widget.ImageView;
 
-import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureUI;
 import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
+import com.uni.gruppenphaseandroid.playingfield.Jerk;
+import com.uni.gruppenphaseandroid.playingfield.King;
+import com.uni.gruppenphaseandroid.playingfield.Knight;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
@@ -28,22 +30,30 @@ import org.junit.Test;
 public class FigureTest_Overtaking {
     PlayingField playingField;
     View view;
-    Figure figure1;
+    Jerk jerkRed; // Red
     FigureUI figureUI1;
-    Figure figure2;
+    Citizen citizenRed;
     FigureUI figureUI2;
-    Figure figure3;
+    Knight knightRed;
     FigureUI figureUI3;
-    Figure figure4;
+    King kingRed;
     FigureUI figureUI4;
-    Figure figure5;
+    Jerk jerkBlue; // Blue
     FigureUI figureUI5;
-    Figure figure6;
+    Citizen citizenBlue;
     FigureUI figureUI6;
-    Figure figure7;
+    Knight knightBlue;
     FigureUI figureUI7;
-    Figure figure8;
+    King kingBlue;
     FigureUI figureUI8;
+    Jerk jerkGreen; // Green
+    FigureUI figureUI9;
+    Citizen citizenGreen;
+    FigureUI figureUI10;
+    Knight knightGreen;
+    FigureUI figureUI11;
+    King kingGreen;
+    FigureUI figureUI12;
     ImageView imageView;
     Field field1;
     Field field2;
@@ -55,6 +65,10 @@ public class FigureTest_Overtaking {
     Field field8;
     Field field9;
     Field field10;
+    Field field11;
+    Field field12;
+    Field field13; // grünes Startfeld
+    Field field14;
 
     @Before
     public void setUp(){
@@ -74,6 +88,10 @@ public class FigureTest_Overtaking {
         field8 = field7.getNextField();
         field9 = field8.getNextField();
         field10 = field9.getNextField();
+        field11 = field10.getNextField();
+        field12 = field11.getNextField();
+        field13 = field12.getNextField();
+        field14 = field13.getNextField();
 
         //verify(imageView, times(16)).setImageDrawable(any());
         //verify(imageView, times(16)).getDrawable();
@@ -89,6 +107,10 @@ public class FigureTest_Overtaking {
         figureUI6 = mock(FigureUIimpl.class);
         figureUI7 = mock(FigureUIimpl.class);
         figureUI8 = mock(FigureUIimpl.class);
+        figureUI9 = mock(FigureUIimpl.class);
+        figureUI10 = mock(FigureUIimpl.class);
+        figureUI11 = mock(FigureUIimpl.class);
+        figureUI12 = mock(FigureUIimpl.class);
     }
 
     @After
@@ -122,86 +144,86 @@ public class FigureTest_Overtaking {
      */
     @Test
     public void checkOvertakingRedJerkByRedCitizen() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure2 = new Figure(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
-        Assert.assertTrue(figure2.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
+        Assert.assertTrue(citizenRed.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByRedKnight() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure3 = new Figure(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
-        Assert.assertTrue(figure3.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(knightRed.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByRedKing() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure4 = new Figure(4, Color.RED, field1, Typ.KING, figureUI4);
-        Assert.assertTrue(figure4.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
+        Assert.assertTrue(kingRed.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedCitizenByRedJerk() { // NOK!!
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure1 = new Figure(1, Color.RED, field1, Typ.JERK, figureUI1);
-        Assert.assertFalse(figure1.checkOvertaking());
+    public void checkOvertakingRedCitizenByRedJerk() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByRedKnight() { // OK
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure3 = new Figure(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
-        Assert.assertTrue(figure3.checkOvertaking());
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(knightRed.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByRedKing() { // OK
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure4 = new Figure(4, Color.RED, field1, Typ.KING, figureUI4);
-        Assert.assertTrue(figure4.checkOvertaking());
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
+        Assert.assertTrue(kingRed.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKnightByRedJerk() { // NOK!!
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure1 = new Figure(1, Color.RED, field1, Typ.JERK, figureUI1);
-        Assert.assertFalse(figure1.checkOvertaking());
+    public void checkOvertakingRedKnightByRedJerk() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKnightByRedCitizen() { // NOK!!
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure2 = new Figure(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
-        Assert.assertFalse(figure2.checkOvertaking());
+    public void checkOvertakingRedKnightByRedCitizen() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
+        Assert.assertFalse(citizenRed.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedKnightByRedKing() { // OK
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure4 = new Figure(4, Color.RED, field1, Typ.KING, figureUI4);
-        Assert.assertTrue(figure4.checkOvertaking());
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
+        Assert.assertTrue(kingRed.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKingByRedJerk() { // NOK!!
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure1 = new Figure(1, Color.RED, field1, Typ.JERK, figureUI1);
-        Assert.assertFalse(figure1.checkOvertaking());
+    public void checkOvertakingRedKingByRedJerk() { // OK
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKingByRedCitizen() { // NOK!!
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure2 = new Figure(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
-        Assert.assertFalse(figure2.checkOvertaking());
+    public void checkOvertakingRedKingByRedCitizen() { // OK
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
+        Assert.assertFalse(citizenRed.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKingByRedKnight() { // NOK!!
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure3 = new Figure(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
-        Assert.assertFalse(figure3.checkOvertaking());
+    public void checkOvertakingRedKingByRedKnight() { // OK
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        Assert.assertFalse(knightRed.checkOvertaking());
     }
 
     /**
@@ -209,119 +231,126 @@ public class FigureTest_Overtaking {
      */
     @Test
     public void checkOvertakingRedJerkByBlueJerk() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure5 = new Figure(5, Color.BLUE, field1, Typ.JERK, figureUI5);
-        Assert.assertTrue(figure5.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertTrue(jerkBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByBlueCitizen() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure6 = new Figure(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
-        Assert.assertTrue(figure6.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByBlueKnight() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure7 = new Figure(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
-        Assert.assertTrue(figure7.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedJerkByBlueKing() { // OK
-        figure1 = new Figure(1, Color.RED, field2, Typ.JERK, figureUI1);
-        figure8 = new Figure(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(figure8.checkOvertaking());
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedCitizenByBlueJerk() { // NOK!!
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure5 = new Figure(5, Color.BLUE, field1, Typ.JERK, figureUI5);
-        Assert.assertFalse(figure5.checkOvertaking());
+    public void checkOvertakingRedCitizenByBlueJerk() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByBlueCitizen() { // OK
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure6 = new Figure(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
-        Assert.assertTrue(figure6.checkOvertaking());
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByBlueKnight() { // OK
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure7 = new Figure(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
-        Assert.assertTrue(figure7.checkOvertaking());
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedCitizenByBlueKing() { // OK
-        figure2 = new Figure(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
-        figure8 = new Figure(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(figure8.checkOvertaking());
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKnightByBlueJerk() { // NOK!!
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure5 = new Figure(5, Color.BLUE, field1, Typ.JERK, figureUI5);
-        Assert.assertFalse(figure5.checkOvertaking());
+    public void checkOvertakingRedKnightByBlueJerk() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKnightByBlueCitizen() { // NOK!!
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure6 = new Figure(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
-        Assert.assertFalse(figure6.checkOvertaking());
+    public void checkOvertakingRedKnightByBlueCitizen() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertFalse(citizenBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedKnightByBlueKnight() { // OK
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure7 = new Figure(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
-        Assert.assertTrue(figure7.checkOvertaking());
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedKnightByBlueKing() { // OK
-        figure3 = new Figure(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
-        figure8 = new Figure(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(figure8.checkOvertaking());
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKingByBlueJerk() { // NOK!!
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure5 = new Figure(5, Color.BLUE, field1, Typ.JERK, figureUI5);
-        Assert.assertFalse(figure5.checkOvertaking());
+    public void checkOvertakingRedKingByBlueJerk() { // OK
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKingByBlueCitizen() { // NOK!!
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure6 = new Figure(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
-        Assert.assertFalse(figure6.checkOvertaking());
+    public void checkOvertakingRedKingByBlueCitizen() { // OK
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertFalse(citizenBlue.checkOvertaking());
     }
 
     @Test
-    public void checkOvertakingRedKingByBlueKnight() { // NOK!!
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure7 = new Figure(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
-        Assert.assertFalse(figure7.checkOvertaking());
+    public void checkOvertakingRedKingByBlueKnight() { // OK
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertaking());
     }
 
     @Test
     public void checkOvertakingRedKingByBlueKing() { // OK
-        figure4 = new Figure(4, Color.RED, field2, Typ.KING, figureUI4);
-        figure8 = new Figure(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(figure8.checkOvertaking());
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkOvertaking());
     }
 
     /**
      * Test checkGreenCard und checkOvertakingPossible
      */
     // Wie bekomme ich selected Card über GameManager?
-    GameManager.
+
+
+    /**
+     * Test Überholverbot auf eigenem Startfeld
+     * Ausnahme: Knight darf immer überholen innerhalb der Rangfolge
+     */
+
+    
 }

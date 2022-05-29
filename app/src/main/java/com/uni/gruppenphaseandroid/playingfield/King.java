@@ -27,14 +27,15 @@ public class King extends Figure { // TODO: Copy Card
         Figure figure2 = newPosition.getCurrentFigure();
 
         if(super.checkOvertaking() == true) {
-            if (figure2.getTyp() == Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT || figure2.getTyp() != Typ.KING) { // all 4 cases covered => but default value set to false
-                return false;
-            } else {
-                return true;
+            switch (figure2.getTyp()) {
+                case JERK:
+                case CITIZEN:
+                case KNIGHT:
+                case KING:
+                    return true;
             }
-        } else {
-            return false;
-        }
+        } return false;
+
     }
 
     /**

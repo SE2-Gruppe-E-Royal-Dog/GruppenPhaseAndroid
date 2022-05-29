@@ -24,15 +24,16 @@ public class Jerk extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking() == true) {
-            if (figure2.getTyp() != Typ.JERK) {
-                return false;
-            } else {
-                return true;
+        if (super.checkOvertaking() == true) {
+            switch (figure2.getTyp()) {
+                case JERK:
+                    return true;
+                case CITIZEN:
+                case KNIGHT:
+                case KING:
+                    return false;
             }
-        } else {
-            return false;
-        }
+        } return false;
     }
 
     /**
@@ -43,7 +44,7 @@ public class Jerk extends Figure {
      * @return new Position of Jerk within Goal Area.
      */
     @Override
-    protected Field setNewPosition(int fieldsToMove) {
+    protected Field setNewPosition ( int fieldsToMove){
         Card card = GameManager.getInstance().getSelectedCard();
         Field newPositionFigure1 = super.setNewPosition(fieldsToMove);
 
@@ -61,7 +62,6 @@ public class Jerk extends Figure {
                         newPositionFigure1 = getCurrentField().getFieldAtDistance(fieldsToMove, getColor());
                 }
             }
-        }    return newPositionFigure1;
-
+        } return newPositionFigure1;
     }
 }

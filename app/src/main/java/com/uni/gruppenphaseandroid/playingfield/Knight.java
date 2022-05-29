@@ -22,13 +22,15 @@ public class Knight extends Figure {
         Figure figure2 = newPosition.getCurrentFigure();
 
         if(super.checkOvertaking() == true) {
-            if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
-                return false;
-            } else {
-                return true;
+            switch (figure2.getTyp()) {
+                case JERK:
+                case CITIZEN:
+                case KNIGHT:
+                    return true;
+                case KING:
+                    return false;
             }
-        } else {
-            return false;
         }
+        return false;
     }
 }
