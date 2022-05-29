@@ -75,7 +75,8 @@ public class Figure {
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    public boolean checkBeaten() {
+    public boolean checkBeaten() { // TODO: King auf fremdem Startfeld rauswerfen geht von allen Figuren der Farbe des Startfeldes
+        // TODO: King auf fremdem Startfeld kann nur von der Farbe geschlagen werden!
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 

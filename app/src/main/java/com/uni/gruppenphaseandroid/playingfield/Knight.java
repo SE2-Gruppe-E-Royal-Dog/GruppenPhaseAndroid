@@ -41,11 +41,11 @@ public class Knight extends Figure {
      * @return true if beating is possible
      */
     @Override
-    public boolean checkBeaten() {
+    public boolean checkBeaten() { // TODO: Funktioniert nicht
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking() == true && figure2.getTyp() == Typ.KING) {
+        if((super.checkOvertaking() == true && figure2.getTyp() == Typ.KING) || super.checkOvertaking() == false) {
             return false;
         } return true;
     }
