@@ -24,7 +24,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.function.ThrowingRunnable;
 
 public class checkIfCardIsPlayableTest {
     PlayingField playingField;
@@ -66,7 +65,7 @@ public class checkIfCardIsPlayableTest {
     }
 
     @Test
-    public void checkNum(){
+    public void checkEqualNum(){
         Card card = new Card(Cardtype.EQUAL);
         LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
         lastTurn.setCardtype(Cardtype.TWO);
@@ -181,19 +180,10 @@ public class checkIfCardIsPlayableTest {
     }
 
     @Test
-    public void checkONETOSEVEN_effect1_True(){
+    public void checkONETOSEVEN_effect3_True(){
         Card card = new Card(Cardtype.ONETOSEVEN);
 
-        boolean res = card.checkIfCardIsPlayable(figure1, 1, null);
-
-        Assert.assertTrue(res);
-    }
-
-    @Test
-    public void checkONETOSEVEN_effect2_True(){
-        Card card = new Card(Cardtype.ONETOSEVEN);
-
-        boolean res = card.checkIfCardIsPlayable(figure1, 2, null);
+        boolean res = card.checkIfCardIsPlayable(figure1, 3, null);
 
         Assert.assertTrue(res);
     }
