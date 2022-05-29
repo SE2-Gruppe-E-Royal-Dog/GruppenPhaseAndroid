@@ -295,4 +295,45 @@ public class PlayingFieldTest {
 
     }
 
+    @Test
+    public void testApplyCheatModifierMinusOneStartingField() {
+        Field expectedField = playingField.getRedStartingField().getPreviousField();
+        GameManager.getInstance().setCheatModifier(-1);
+        Field actualField = playingField.applyCheatModifier(playingField.getRedStartingField(), Color.RED);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierPlusOneGoalField_normalCase(){
+        Field expectedField = playingField.getGreenStartingField().getNextGoalField().getNextField();
+        GameManager.getInstance().setCheatModifier(1);
+        Field actualField = playingField.applyCheatModifier(playingField.getGreenStartingField().getNextGoalField(), Color.GREEN);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierMinusOneGoalField_returnToStartField(){
+        Field expectedField = playingField.getGreenStartingField();
+        GameManager.getInstance().setCheatModifier(-1);
+        Field actualField = playingField.applyCheatModifier(playingField.getGreenStartingField().getNextGoalField(), Color.GREEN);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierMinusOneGoalField_normalCase(){
+        Field expectedField = playingField.getGreenStartingField().getNextGoalField();
+        GameManager.getInstance().setCheatModifier(-1);
+        Field actualField = playingField.applyCheatModifier(playingField.getGreenStartingField().getNextGoalField().getNextField(), Color.GREEN);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierPlusOneGoalField_lastGoalFieldCase(){
+        Field expectedField = playingField.getGreenStartingField().getNextGoalField().getFieldAtDistance(3, Color.GREEN);
+        GameManager.getInstance().setCheatModifier(1);
+        Field actualField = playingField.applyCheatModifier(playingField.getGreenStartingField().getNextGoalField().getFieldAtDistance(3, Color.GREEN), Color.GREEN);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+
 }
