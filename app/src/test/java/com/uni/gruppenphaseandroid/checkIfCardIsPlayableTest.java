@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid;
 
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -55,9 +57,74 @@ public class checkIfCardIsPlayableTest {
         imageView = null;
     }
 
-    /*
-    TODO: Exceptiontest Figure is null
-     */
+    @Test
+    public void checkFigureIsNullException(){
+        Card card = new Card(Cardtype.TWO);
+
+        assertThrows(IllegalArgumentException.class, () -> card.checkIfCardIsPlayable(null, -1, null));
+    }
+
+    @Test
+    public void checkEqualNum(){
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.TWO);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        boolean res = card.checkIfCardIsPlayable(figure1, -1, null);
+
+        Assert.assertTrue(res);
+    }
+
+    @Test
+    public void checkEqualEqual(){
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.EQUAL);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        boolean res = card.checkIfCardIsPlayable(figure1, -1, null);
+
+        Assert.assertFalse(res);
+    }
+
+    @Test
+    public void checkEqualStart(){
+        figure1.setCurrentField(playingField.getRedStartingField().getPreviousStartingArea());
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        boolean res = card.checkIfCardIsPlayable(figure1, 0, null);
+
+        Assert.assertTrue(res);
+    }
+
+    @Test
+    public void checkEqualEffect(){
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        boolean res = card.checkIfCardIsPlayable(figure1, 1, null);
+
+        Assert.assertTrue(res);
+    }
+
+    @Test
+    public void checkEqualSwitch(){
+        figure2 = new Figure(2, Color.BLUE, playingField.getBlueStartingField().getNextField(), Typ.KING, figureUI2);
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.SWITCH);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        boolean res = card.checkIfCardIsPlayable(figure1, -1, figure2);
+
+        Assert.assertTrue(res);
+    }
 
     @Test
     public void checkMAGNET_True(){
@@ -87,13 +154,12 @@ public class checkIfCardIsPlayableTest {
         Assert.assertTrue(res);
     }
 
-    /*
-    TODO: checkNumberCard_triesToMoveOverGoal
-     */
+    @Test
+    public void checkNonEffectCardException(){
+        Card card = new Card(Cardtype.ONEORELEVEN_START);
 
-    /*
-    TODO: Exceptiontest checkNonEffectCard
-     */
+        assertThrows(IllegalArgumentException.class, () -> card.checkIfCardIsPlayable(figure1, -1, null));
+    }
 
     @Test
     public void checkFOUR_PLUSMINUS_effect1_True(){
@@ -114,19 +180,10 @@ public class checkIfCardIsPlayableTest {
     }
 
     @Test
-    public void checkONETOSEVEN_effect1_True(){
+    public void checkONETOSEVEN_effect3_True(){
         Card card = new Card(Cardtype.ONETOSEVEN);
 
-        boolean res = card.checkIfCardIsPlayable(figure1, 1, null);
-
-        Assert.assertTrue(res);
-    }
-
-    @Test
-    public void checkONETOSEVEN_effect2_True(){
-        Card card = new Card(Cardtype.ONETOSEVEN);
-
-        boolean res = card.checkIfCardIsPlayable(figure1, 2, null);
+        boolean res = card.checkIfCardIsPlayable(figure1, 3, null);
 
         Assert.assertTrue(res);
     }
@@ -187,9 +244,12 @@ public class checkIfCardIsPlayableTest {
         Assert.assertTrue(res);
     }
 
-    /*
-    TODO: Exceptiontest checkEffectCard
-     */
+    @Test
+    public void checkEffectCardException(){
+        Card card = new Card(Cardtype.TWO);
+
+        assertThrows(IllegalArgumentException.class, () -> card.checkIfCardIsPlayable(figure1, 0, null));
+    }
 
     @Test
     public void checkSWITCH_True(){
@@ -243,7 +303,11 @@ public class checkIfCardIsPlayableTest {
         Assert.assertFalse(res);
     }
 
-    /*
-    TODO: Exceptiontest checkSwitchCard
-     */
+    @Test
+    public void checkSwitchException(){
+        figure2 = new Figure(2, Color.BLUE, playingField.getBlueStartingField().getNextGoalField(), Typ.KING, figureUI2);
+        Card card = new Card(Cardtype.TWO);
+
+        assertThrows(IllegalArgumentException.class, () -> card.checkIfCardIsPlayable(figure1, -1, figure2));
+    }
 }
