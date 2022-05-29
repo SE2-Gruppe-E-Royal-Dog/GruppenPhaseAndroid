@@ -341,16 +341,166 @@ public class FigureTest_Overtaking {
         Assert.assertTrue(kingBlue.checkOvertaking());
     }
 
-    /**
-     * Test checkGreenCard und checkOvertakingPossible
-     */
-    // Wie bekomme ich selected Card über GameManager?
-
-
-    /**
+     /**
      * Test Überholverbot auf eigenem Startfeld
      * Ausnahme: Knight darf immer überholen innerhalb der Rangfolge
      */
+    @Test
+    public void checkOvertakingGreenJerkByRedJerkOnGreenStartingField() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
+        jerkRed = new Jerk(1, Color.RED, field12, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
+    }
 
-    
+    @Test
+    public void checkOvertakingGreenJerkByRedCitizenOnGreenStartingField() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
+        citizenRed = new Citizen(2, Color.RED, field12, Typ.CITIZEN, figureUI2);
+        Assert.assertFalse(citizenRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenJerkByRedKnightOnGreenStartingField() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
+        knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(knightRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenJerkByRedKingOnGreenStartingField() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
+        kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
+        Assert.assertFalse(kingRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenCitizenByRedJerkOnGreenStartingField() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
+        jerkRed = new Jerk(1, Color.RED, field12, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenCitizenByRedCitizenOnGreenStartingField() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
+        citizenRed = new Citizen(2, Color.RED, field12, Typ.CITIZEN, figureUI2);
+        Assert.assertFalse(citizenRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenCitizenByRedKnightOnGreenStartingField() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
+        knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(knightRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenCitizenByRedKingOnGreenStartingField() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
+        kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
+        Assert.assertFalse(kingRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKnightByRedJerkOnGreenStartingField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
+        jerkRed = new Jerk(1, Color.RED, field12, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKnightByRedCitizenOnGreenStartingField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
+        citizenRed = new Citizen(2, Color.RED, field12, Typ.CITIZEN, figureUI2);
+        Assert.assertFalse(citizenRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKnightByRedKnightOnGreenStartingField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
+        knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(knightRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKnightByRedKingOnGreenStartingField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
+        kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
+        Assert.assertFalse(kingRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByRedJerkOnGreenStartingField() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        jerkRed = new Jerk(1, Color.RED, field12, Typ.JERK, figureUI1);
+        Assert.assertFalse(jerkRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByRedCitizenOnGreenStartingField() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        citizenRed = new Citizen(2, Color.RED, field12, Typ.CITIZEN, figureUI2);
+        Assert.assertFalse(citizenRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByRedKnightOnGreenStartingField() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
+        Assert.assertFalse(knightRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByRedKingOnGreenStartingField() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
+        Assert.assertFalse(kingRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByRedKingOnNormalField() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        kingRed = new King(4, Color.RED, field11, Typ.KING, figureUI4);
+        Assert.assertTrue(kingRed.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByBlueKingOnGreenStartingField() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        kingBlue = new King(8, Color.BLUE, field12, Typ.KING, figureUI8);
+        Assert.assertFalse(kingBlue.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByBlueKingOnNormalField() { // OK
+        kingGreen = new King(12, Color.GREEN, field14, Typ.KING, figureUI12);
+        kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKingByBlueKnightOnGreenStartingField() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKnightByBlueKnightOnGreenStartingField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
+        knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertaking());
+    }
+
+    @Test
+    public void checkOvertakingGreenKnightByBlueKnightOnNormalField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field14, Typ.KNIGHT, figureUI11);
+        knightBlue = new Knight(7, Color.BLUE, field13, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertaking());
+    }
+
+    /**
+     * CheckGreenCard und checkOvertakingPossible mit Green Card
+     */
+
 }
