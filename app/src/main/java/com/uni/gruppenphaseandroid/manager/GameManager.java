@@ -51,6 +51,9 @@ public class GameManager {
     private boolean hasCheated = false;
     private Figure currentlySelectedFigure;
 
+
+    private int cheatModifier = 0;
+
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID, FigureManager figureManager) {
         this.lobbyID = lobbyID;
 
@@ -314,4 +317,13 @@ public class GameManager {
     public void setCurrentTurnPhase(TurnPhase currentTurnPhase) {
         this.currentTurnPhase = currentTurnPhase;
     }
+
+    public int getCheatModifier() {
+        return cheatModifier;
+    }
+
+    public void setCheatModifier(int cheatModifier) {
+        this.cheatModifier = cheatModifier;
+    }
+
 }
