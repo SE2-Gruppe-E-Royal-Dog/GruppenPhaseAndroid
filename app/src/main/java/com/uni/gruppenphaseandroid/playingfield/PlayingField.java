@@ -282,6 +282,8 @@ public class PlayingField {
         Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
         Figure figure2;
 
+        newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
+
             if (newPositionFigure1.getCurrentFigure() != null) {
                 figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
                 figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
@@ -378,9 +380,9 @@ public class PlayingField {
         figure.getFigureUI().moveFigureToPosition(field.getFieldUIobject());
     }
 
-    private Field applyCheatModifierForStartingField(StartingField startingField, Figure figure) {
+    private Field applyCheatModifierForStartingField(StartingField startingField, Color figureColor) {
         if (GameManager.getInstance().getCheatModifier() == 1) {
-            if (startingField.getColor() == figure.getColor() && startingField.getNextGoalField().getCurrentFigure() == null) {
+            if (startingField.getColor() == figureColor && startingField.getNextGoalField().getCurrentFigure() == null) {
                 return startingField.getNextGoalField();
             } else {
                 return startingField.getNextField();
@@ -402,11 +404,11 @@ public class PlayingField {
         }
     }
 
-    private Field applyCheatModifier(Field field, Figure figure) {
+    public Field applyCheatModifier(Field field, Color figureColor){
         if (GameManager.getInstance().getCheatModifier() == 0) {
             return field; }
         if (field instanceof StartingField) {
-            return applyCheatModifierForStartingField((StartingField) field, figure);
+            return applyCheatModifierForStartingField((StartingField) field, figureColor);
         } else if (field instanceof GoalField) {
                 return applyCheatModifierForGoalField(field);
             } else{ // Field is regular field

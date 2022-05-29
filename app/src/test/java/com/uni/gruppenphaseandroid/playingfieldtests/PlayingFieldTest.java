@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -248,6 +249,49 @@ public class PlayingFieldTest {
         currentField = currentField.getNextField();
         }
         Assert.assertEquals(4, wormholeCount);
+
+    }
+
+    @Test
+    public void testApplyCheatModifierPlusOneRegularField(){
+        Field expectedField = playingField.getRootField().getFieldAtDistance(36, Color.BLACK);
+        GameManager.getInstance().setCheatModifier(1);
+        Field actualField = playingField.applyCheatModifier(playingField.getRootField().getFieldAtDistance(35, Color.BLACK), Color.BLACK);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierMinusOneRegularField(){
+        Field expectedField = playingField.getRootField().getFieldAtDistance(12, Color.BLACK);
+        GameManager.getInstance().setCheatModifier(-1);
+        Field actualField = playingField.applyCheatModifier(playingField.getRootField().getFieldAtDistance(13, Color.BLACK), Color.BLACK);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierNoChangeRegularField(){
+        Field expectedField = playingField.getRootField().getFieldAtDistance(41, Color.BLACK);
+        GameManager.getInstance().setCheatModifier(0);
+        Field actualField = playingField.applyCheatModifier(playingField.getRootField().getFieldAtDistance(41, Color.BLACK), Color.BLACK);
+        Assert.assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void testApplyCheatModifierPlusOneStartingField_normalCase(){
+        Field expectedField = playingField.getRedStartingField().getNextGoalField();
+        GameManager.getInstance().setCheatModifier(1);
+        Field actualField = playingField.applyCheatModifier(playingField.getRedStartingField(), Color.RED);
+        Assert.assertEquals(expectedField, actualField);
+
+    }
+
+    @Test
+    public void testApplyCheatModifierPlusOneStartingField_fieldOccupied(){
+        Field expectedField = playingField.getRedStartingField().getNextField();
+        GameManager.getInstance().setCheatModifier(1);
+        playingField.getRedStartingField().getNextGoalField().setCurrentFigure(figure1);
+        Field actualField = playingField.applyCheatModifier(playingField.getRedStartingField(), Color.RED);
+        Assert.assertEquals(expectedField, actualField);
 
     }
 
