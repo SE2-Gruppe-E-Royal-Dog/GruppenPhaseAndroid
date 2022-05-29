@@ -45,7 +45,7 @@ public class King extends Figure { // TODO: Copy Card
      * @return true if beating is possible
      */
     @Override
-    protected boolean checkBeaten() {
+    public boolean checkBeaten() { // Offen
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 

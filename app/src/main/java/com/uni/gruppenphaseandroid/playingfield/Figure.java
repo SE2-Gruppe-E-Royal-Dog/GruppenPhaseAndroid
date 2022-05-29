@@ -75,7 +75,7 @@ public class Figure {
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    protected boolean checkBeaten() {
+    public boolean checkBeaten() {
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 

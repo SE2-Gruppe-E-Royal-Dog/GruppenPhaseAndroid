@@ -93,10 +93,7 @@ public class FigureTest_Overtaking {
         field13 = field12.getNextField();
         field14 = field13.getNextField();
 
-        //verify(imageView, times(16)).setImageDrawable(any());
-        //verify(imageView, times(16)).getDrawable();
-
-        Field startingAreaField = playingField.getRedStartingField().getPreviousStartingArea();
+        Field startingAreaField = playingField.getGreenStartingField().getPreviousStartingArea();
         startingAreaField.setCurrentFigure(new Figure());
         startingAreaField.getPreviousField().setCurrentFigure(new Figure());
         figureUI1 = mock(FigureUIimpl.class);
@@ -119,25 +116,7 @@ public class FigureTest_Overtaking {
         playingField = null;
         imageView = null;
     }
-    /*
-    @Test
-    public void checkMoveKing() throws Exception {
-        Field expectedField = playingField.getRootField().getNextField().getNextField();
-        Assert.assertEquals(expectedField, playingField.move(figure2,1));
-    }
 
-    @Test
-    public void checkMoveJerk() throws Exception {
-        Field expectedField = playingField.getRootField().getNextField();
-        Assert.assertEquals(expectedField, playingField.move(figure1,1));
-    }
-
-    @Test
-    public void checkIfMovingPossibleKing() {
-        Assert.assertTrue(playingField.checkMovingPossible(figure2, 1));
-    }
-
-     */
 
     /**
      * Test Rangfolge innerhalb einer Farbe: Jerk -> Citizen -> Knight -> King

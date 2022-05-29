@@ -36,6 +36,22 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
     }
 
     /**
+     * King can only be beaten by another king.
+     * this figure - figure who moves
+     * figure 2 - figure to be beaten
+     * @return true if beating is possible
+     */
+    @Override
+    public boolean checkBeaten() {
+        Field newPosition = getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
+
+        if(super.checkOvertaking() == true && figure2.getTyp() == Typ.KING) {
+            return false;
+        } return true;
+    }
+
+    /**
      * If moving to a special field clockwise and taking a card,
      * citizen is allowed to jump to the next special field -
      * no matter of blocked starting fields or higher degree.

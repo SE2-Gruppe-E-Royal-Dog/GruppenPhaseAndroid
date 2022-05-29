@@ -37,6 +37,22 @@ public class Jerk extends Figure {
     }
 
     /**
+     * King can only be beaten by another king.
+     * this figure - figure who moves
+     * figure 2 - figure to be beaten
+     * @return true if beating is possible
+     */
+    @Override
+    public boolean checkBeaten() {
+        Field newPosition = getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
+
+        if(super.checkOvertaking() == true && figure2.getTyp() == Typ.KING) {
+            return false;
+        } return true;
+    }
+
+    /**
      * Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
      * this gitfigure1 - figure who moves
