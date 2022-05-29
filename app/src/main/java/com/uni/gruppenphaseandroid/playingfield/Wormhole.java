@@ -12,12 +12,8 @@ public class Wormhole extends Field {
 
     }
 
-    public Wormhole(int fieldID){
-        this.fieldID = fieldID;
-    }
-
     @Override
-    public void triggerSpecialFieldEffect() {
+    protected void triggerSpecialFieldEffect() {
         Figure myFigure;
         Figure partnerFigure;
 

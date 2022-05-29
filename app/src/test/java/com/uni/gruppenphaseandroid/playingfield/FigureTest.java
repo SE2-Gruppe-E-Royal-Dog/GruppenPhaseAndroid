@@ -24,7 +24,7 @@ public class FigureTest {
         var figure2 = new Figure(1, Color.YELLOW, field2, Typ.CITIZEN, new FigureUIimpl());
         field2.setCurrentFigure(figure2);
 
-        assertTrue(figure1.checkBeaten(figure2));
+        assertTrue(figure1.checkBeaten());
     }
 
     /*
@@ -58,6 +58,6 @@ public class FigureTest {
         var figure2 = new Figure(1, Color.YELLOW, field1, Typ.CITIZEN, new FigureUIimpl());
         field2.setCurrentFigure(figure1);
 
-        assertTrue(figure2.checkBeaten(figure1));
+        assertTrue(figure2.checkBeaten());
     }
 }
