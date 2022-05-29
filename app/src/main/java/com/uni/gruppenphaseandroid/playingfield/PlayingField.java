@@ -378,4 +378,42 @@ public class PlayingField {
         figure.getFigureUI().moveFigureToPosition(field.getFieldUIobject());
     }
 
-}
+    private Field applyCheatModifierForStartingField(StartingField startingField, Figure figure) {
+        if (GameManager.getInstance().getCheatModifier() == 1) {
+            if (startingField.getColor() == figure.getColor() && startingField.getNextGoalField().getCurrentFigure() == null) {
+                return startingField.getNextGoalField();
+            } else {
+                return startingField.getNextField();
+            }
+        } else { //CheatModifier == -1
+           return startingField.getPreviousField();
+        }
+    }
+
+    private Field applyCheatModifierForGoalField(Field field) {
+        if (GameManager.getInstance().getCheatModifier() == -1) {
+            return field.getPreviousField();
+        } else { // CheatModifier == 1
+            if (field.getNextField() == null) {
+                return field;
+            } else { //CheatModifier == -1
+                return field.getNextField();
+            }
+        }
+    }
+
+    private Field applyCheatModifier(Field field, Figure figure) {
+        if (GameManager.getInstance().getCheatModifier() == 0) {
+            return field; }
+        if (field instanceof StartingField) {
+            return applyCheatModifierForStartingField((StartingField) field, figure);
+        } else if (field instanceof GoalField) {
+                return applyCheatModifierForGoalField(field);
+            } else{ // Field is regular field
+                    return field.getFieldAtDistance(GameManager.getInstance().getCheatModifier(), Color.BLACK);
+                }
+            }
+        }
+
+
+
