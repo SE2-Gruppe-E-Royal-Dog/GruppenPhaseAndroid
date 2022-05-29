@@ -61,6 +61,7 @@ public class PlayingFieldTest {
         view = null;
         playingField = null;
         imageView = null;
+        GameManager.getInstance().setCheatModifier(0);
     }
 
     @Test
