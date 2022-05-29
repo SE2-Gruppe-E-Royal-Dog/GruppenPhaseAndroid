@@ -86,8 +86,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 if (!clickedCard.equals("")) {
                     cardInputListener.sendInputCardFragment(clickedCard);
 
-
-
                     getDialog().dismiss();
                 }
             }

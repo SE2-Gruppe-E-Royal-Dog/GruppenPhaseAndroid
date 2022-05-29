@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
@@ -97,6 +98,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         GameManager.getInstance().setCurrentEffect(selectedCardEffect);
+                        GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
                         getDialog().dismiss();
 
                     }
@@ -116,6 +118,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         GameManager.getInstance().setCurrentEffect(1);
+                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.ONEORELEVEN_START));
                         getDialog().dismiss();
                     }
                 });
@@ -123,6 +126,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         GameManager.getInstance().setCurrentEffect(2);
+                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.ONEORELEVEN_START));
                         getDialog().dismiss();
                     }
                 });
@@ -130,6 +134,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         GameManager.getInstance().setCurrentEffect(0);
+                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.ONEORELEVEN_START));
                         getDialog().dismiss();
                     }
                 });
@@ -146,6 +151,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         GameManager.getInstance().setCurrentEffect(1);
+                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.FOUR_PLUSMINUS));
                         getDialog().dismiss();
                     }
                 });
@@ -154,6 +160,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     public void onClick(View view) {
 
                         GameManager.getInstance().setCurrentEffect(0);
+                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.FOUR_PLUSMINUS));
                         getDialog().dismiss();
                     }
                 });

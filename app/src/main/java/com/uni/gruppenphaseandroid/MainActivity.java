@@ -204,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
             //start game
             Log.d("server_communication", "Server message received!!!!!!");
             GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, new FigureManager());
+
+            //TODO hide startgame button and show chardholder
         }
 
         private void handleUpdateBoard(String body) {

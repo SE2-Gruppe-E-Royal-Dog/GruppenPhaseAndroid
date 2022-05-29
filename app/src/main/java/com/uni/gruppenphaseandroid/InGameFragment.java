@@ -81,12 +81,13 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
 
+        btnCardholder.setVisibility(View.VISIBLE);
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
             playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
             //activate cardholder
-            btnCardholder.setVisibility(View.VISIBLE);
+            //btnCardholder.setVisibility(View.VISIBLE);
 
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
