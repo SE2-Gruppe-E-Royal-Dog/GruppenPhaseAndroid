@@ -77,6 +77,8 @@ public class GameManager {
 
         if(!isThereAnyPossibleMove()){
             turnPlayerDiscardsCard();
+            //int index = selectCardToDiscard();
+            //Handcards.getInstance().discardHandcard(index);
             //nextTurn();
         }
     }
