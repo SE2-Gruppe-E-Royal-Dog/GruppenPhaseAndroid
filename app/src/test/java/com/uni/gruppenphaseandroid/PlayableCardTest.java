@@ -23,7 +23,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class checkIfCardIsPlayableTest {
+public class PlayableCardTest {
     PlayingField playingField;
     View view;
     Figure figure1;

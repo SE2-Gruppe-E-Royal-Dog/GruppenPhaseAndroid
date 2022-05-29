@@ -39,11 +39,7 @@ public class Figure {
         if (figure1.getTyp() == Typ.KNIGHT) {
             return true;
         } else {
-            if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) {
-                return false;
-            } else {
-                return true;
-            }
+            return !(newPosition instanceof StartingField) || ((StartingField) newPosition).getColor() != figure2.getColor();
         }
     }
 
@@ -53,11 +49,7 @@ public class Figure {
      */
     private boolean checkGreenCard(Figure figure1) {
         Card card = GameManager.getInstance().getSelectedCard();
-        if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
-            return true;
-        } else {
-            return false;
-        }
+        return card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN;
     }
 
     private boolean checkOvertakingPossible(Figure figure1) {
@@ -79,11 +71,7 @@ public class Figure {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
-            return false;
-        } else {
-            return true;
-        }
+        return (!(newPosition instanceof StartingField) || ((StartingField) newPosition).getColor() != figure2.getColor()) && !(newPosition instanceof GoalField);
     }
 
     /**
@@ -137,24 +125,15 @@ public class Figure {
     }
 
     public boolean isOnStartingAreaField(){
-        if(getCurrentField().getClass().equals(StartingAreaField.class)){
-            return true;
-        }
-        return false;
+        return getCurrentField().getClass().equals(StartingAreaField.class);
     }
 
     public boolean isOnGoalField(){
-        if(getCurrentField().getClass().equals(GoalField.class)){
-            return true;
-        }
-        return false;
+        return getCurrentField().getClass().equals(GoalField.class);
     }
 
     public boolean checkisOnNormalField(){
-        if(isOnStartingAreaField() || isOnGoalField()){
-            return false;
-        }
-        return true;
+        return !isOnStartingAreaField() && !isOnGoalField();
     }
 
     public boolean checkIfAnotherFigureOnPlayingfield(){
@@ -164,10 +143,8 @@ public class Figure {
         while (field.getNextField().getCurrentFigure()==null) {
             field = field.getNextField();
         }
-        if(field!=current.getPreviousField()){
-            return true;
-        }
-        return false;
+
+        return field != current.getPreviousField();
     }
 
 

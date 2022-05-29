@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
-public class FigureUIimpl extends FigureUI {
+public class FigureUIimpl implements FigureUI {
 
     private ImageView imageView;
 

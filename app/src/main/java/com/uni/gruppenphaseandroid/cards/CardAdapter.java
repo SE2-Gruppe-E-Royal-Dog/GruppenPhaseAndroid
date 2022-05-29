@@ -27,7 +27,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
             // Define click listener for the ViewHolder's View.
             view.setOnClickListener(v -> Log.d("code", "Element " + getAdapterPosition() + " clicked."));
-            imageView = (ImageView) view.findViewById(R.id.imageView);
+            imageView = view.findViewById(R.id.imageView);
         }
 
         public ImageView getImageView() {
@@ -54,9 +54,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imageView.setImageResource(imageCardList.get(position));
 
-        holder.itemView.setOnClickListener((view -> {
-            mItemClickListener.onItemClick(imageCardList.get(position));
-        }));
+        holder.itemView.setOnClickListener((view -> mItemClickListener.onItemClick(imageCardList.get(position))));
         }
 
     @Override
