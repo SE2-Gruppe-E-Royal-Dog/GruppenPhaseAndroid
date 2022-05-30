@@ -1,38 +1,6 @@
 package com.uni.gruppenphaseandroid.Cards;
 
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.EIGTH;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.EQUAL;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.FIVE;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.FOUR_PLUSMINUS;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.MAGNET;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.NINE;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.ONEORELEVEN_START;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.ONETOSEVEN;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.SIX;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.SWITCH;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.TEN;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.THIRTEEN_START;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.THREE;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.TWELVE;
-import static com.uni.gruppenphaseandroid.Cards.Cardtype.TWO;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.text.style.LineHeightSpan;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.uni.gruppenphaseandroid.CardViewFragment;
+import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
@@ -44,7 +12,7 @@ public class CardUI  {
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
 
-    static LinkedList<Card> myCards;        //für test zwecke
+    static LinkedList<com.uni.gruppenphaseandroid.Cards.Card> myCards;        //für test zwecke
 
 
     public static CardUI getInstance() {
@@ -69,15 +37,15 @@ public class CardUI  {
 
         Card card1 = new Card(Cardtype.EIGTH);
         testCards.add(card1);
-        Card card2 = new Card(TWO);
+        Card card2 = new Card(Cardtype.TWO);
         testCards.add(card2);
         Card card3 = new Card(Cardtype.NINE);
         testCards.add(card1);
-        Card card4 = new Card(FOUR_PLUSMINUS);
+        Card card4 = new Card(Cardtype.FOUR_PLUSMINUS);
         testCards.add(card4);
-        Card card5 = new Card(ONETOSEVEN);
+        Card card5 = new Card(Cardtype.ONETOSEVEN);
         testCards.add(card5);
-        Card card6 = new Card(ONEORELEVEN_START);
+        Card card6 = new Card(Cardtype.ONEORELEVEN_START);
         testCards.add(card6);
         testCards.add(card1);
 //test cards end
@@ -141,35 +109,35 @@ public class CardUI  {
     public Cardtype idToCardType (int card) {
         switch (card) {
             case R.drawable.ic_card_2:
-                return TWO;
+                return Cardtype.TWO;
             case R.drawable.ic_card_3:
-                return THREE;
+                return Cardtype.THREE;
             case R.drawable.ic_card_5:
-                return FIVE;
+                return Cardtype.FIVE;
             case R.drawable.ic_card_6:
-                return SIX;
+                return Cardtype.SIX;
             case R.drawable.ic_card_8:
-                return EIGTH;
+                return Cardtype.EIGTH;
             case R.drawable.ic_card_9:
-                return NINE;
+                return Cardtype.NINE;
             case R.drawable.ic_card_10:
-                return TEN;
+                return Cardtype.TEN;
             case R.drawable.ic_card_12:
-                return TWELVE;
+                return Cardtype.TWELVE;
             case R.drawable.ic_card_copy:
-                return EQUAL;
+                return Cardtype.EQUAL;
             case R.drawable.ic_card_4:
-                return FOUR_PLUSMINUS;
+                return Cardtype.FOUR_PLUSMINUS;
             case R.drawable.ic_card_7:
-                return ONETOSEVEN;
+                return Cardtype.ONETOSEVEN;
             case R.drawable.ic_card_11:
-                return ONEORELEVEN_START;
+                return Cardtype.ONEORELEVEN_START;
             case R.drawable.ic_card_13:
-                return THIRTEEN_START;
+                return Cardtype.THIRTEEN_START;
             case R.drawable.ic_card_magnet:
-                return MAGNET;
+                return Cardtype.MAGNET;
             case R.drawable.ic_card_switch:
-                return SWITCH;
+                return Cardtype.SWITCH;
         }
         return null;
     }

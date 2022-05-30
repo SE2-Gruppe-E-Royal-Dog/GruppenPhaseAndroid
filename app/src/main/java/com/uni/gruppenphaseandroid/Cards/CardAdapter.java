@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid.Cards;
 
-import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.uni.gruppenphaseandroid.CardViewFragment;
-import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.R;
 
 import java.util.LinkedList;

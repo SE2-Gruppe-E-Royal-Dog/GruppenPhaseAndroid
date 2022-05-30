@@ -1,7 +1,6 @@
 package com.uni.gruppenphaseandroid;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
 import org.junit.After;

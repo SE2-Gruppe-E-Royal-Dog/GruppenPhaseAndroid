@@ -1,24 +1,15 @@
 package com.uni.gruppenphaseandroid.managertests;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyMap;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
-import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
-import com.uni.gruppenphaseandroid.playingfield.Color;
-import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 

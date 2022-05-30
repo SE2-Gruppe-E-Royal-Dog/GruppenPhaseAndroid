@@ -15,7 +15,6 @@ import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureUI;
 import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
-import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 

@@ -1,25 +1,13 @@
 package com.uni.gruppenphaseandroid;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.validateMockitoUsage;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.content.Context;
-import android.media.Image;
-import android.view.View;
-import android.widget.ImageView;
-
-import com.uni.gruppenphaseandroid.Cards.Card;
 import com.uni.gruppenphaseandroid.Cards.CardUI;
 import com.uni.gruppenphaseandroid.Cards.Cardtype;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class CardUITest {
