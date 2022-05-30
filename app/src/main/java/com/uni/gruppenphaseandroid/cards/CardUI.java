@@ -1,6 +1,9 @@
-package com.uni.gruppenphaseandroid.Cards;
+package com.uni.gruppenphaseandroid.cards;
 
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
+import android.util.Log;
+
+
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
@@ -12,7 +15,11 @@ public class CardUI  {
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
 
+
     static LinkedList<com.uni.gruppenphaseandroid.Cards.Card> myCards;        //für test zwecke
+
+    //static LinkedList<Card> myCards;        //für test zwecke
+
 
 
     public static CardUI getInstance() {
@@ -33,6 +40,7 @@ public class CardUI  {
         LinkedList<Card> cards = Handcards.getInstance().getMyCards();
 
 //test cards
+
          LinkedList<Card> testCards = new LinkedList<>();
 
         Card card1 = new Card(Cardtype.EIGTH);
@@ -52,6 +60,7 @@ public class CardUI  {
 
        for (Card c : testCards){
            findImageView(c);
+
         }
     }
 
@@ -144,6 +153,7 @@ public class CardUI  {
 
 
     public LinkedList<Integer> cardsForRecyclerView (){
+
         addCardToHand();
         return imageCardList;
     }

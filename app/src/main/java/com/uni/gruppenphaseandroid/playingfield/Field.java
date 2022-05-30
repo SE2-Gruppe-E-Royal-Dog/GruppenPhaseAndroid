@@ -1,14 +1,11 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import android.view.View;
-import com.uni.gruppenphaseandroid.manager.GameManager;
-import java.util.Random;
 
 public class Field {
 
     private Field nextField;
     private Field previousField;
-    private int fieldID;
+   protected int fieldID;
     private Figure currentFigure;
     private FieldUI fieldUIobject;
 

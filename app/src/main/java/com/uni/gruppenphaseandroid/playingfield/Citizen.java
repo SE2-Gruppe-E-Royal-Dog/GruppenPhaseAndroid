@@ -1,5 +1,8 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+
+import com.uni.gruppenphaseandroid.cards.Card;
+
 public class Citizen extends Figure { // TODO: Sonderfeld offen
 
     public Citizen(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {

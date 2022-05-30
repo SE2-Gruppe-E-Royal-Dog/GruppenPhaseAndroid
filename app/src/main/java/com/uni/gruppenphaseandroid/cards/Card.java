@@ -1,4 +1,6 @@
-package com.uni.gruppenphaseandroid.Cards;
+
+package com.uni.gruppenphaseandroid.cards;
+
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -22,7 +24,12 @@ public class Card {
             throw new IllegalArgumentException("myFigure cannot be null");
         }
 
-        if(effect==-1 && targetFigure==null){
+
+        if(getCardtype()==Cardtype.EQUAL){
+            //Gets last played Card
+            playEqualCard(myFigure, effect, targetFigure);
+        }else if(effect==-1 && targetFigure==null){
+
             //Cards with only one Effect
             playNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
@@ -33,6 +40,17 @@ public class Card {
             playSwitchCard(myFigure, targetFigure);
         }else{
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
+        }
+    }
+
+
+    private void playEqualCard(Figure myFigure, int effect, Figure targetFigure){
+        Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
+        if(newCardtype==Cardtype.EQUAL){
+            throw new IllegalArgumentException("You cannot activate an EQUAL Card if the last activated Card was an EQUAL Card");
+        }else{
+            Card newCard = new Card(newCardtype);
+            newCard.playCard(myFigure, effect, targetFigure);
         }
     }
 
@@ -117,7 +135,11 @@ public class Card {
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
 
-        if(effect==-1 && targetFigure==null){
+        if(getCardtype()==Cardtype.EQUAL){
+            //Cards with Cardtype EQUAL
+            return checkEqualCard(myFigure, effect, targetFigure);
+        }else if(effect==-1 && targetFigure==null){
+
             //Cards with only one Effect
             return checkNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
@@ -128,6 +150,17 @@ public class Card {
             return checkSwitchCard(myFigure, targetFigure);
         }else{
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
+        }
+    }
+
+
+    private boolean checkEqualCard(Figure myFigure, int effect, Figure targetFigure){
+        Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
+        if(newCardtype==Cardtype.EQUAL){
+            return false;
+        }else{
+            Card newCard = new Card(newCardtype);
+            return newCard.checkIfCardIsPlayable(myFigure, effect, targetFigure);
         }
     }
 

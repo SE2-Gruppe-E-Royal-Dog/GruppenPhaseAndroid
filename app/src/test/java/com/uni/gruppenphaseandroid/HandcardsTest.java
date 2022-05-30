@@ -1,7 +1,10 @@
 package com.uni.gruppenphaseandroid;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
+
+import com.uni.gruppenphaseandroid.cards.Card;
+
 import com.uni.gruppenphaseandroid.manager.Handcards;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -45,5 +48,18 @@ public class HandcardsTest {
         handcards.addCardToHand(list);
 
         Assert.assertEquals(1, handcards.getMyCards().size());
+    }
+
+    @Test
+    public void discardHandcard(){
+        LinkedList<Card> list = new LinkedList<>();
+        list.add(card);
+        handcards.setMyCards(list);
+
+        Assert.assertEquals(1, handcards.getMyCards().size());
+
+        handcards.discardHandcard(0);
+
+        Assert.assertEquals(0, handcards.getMyCards().size());
     }
 }

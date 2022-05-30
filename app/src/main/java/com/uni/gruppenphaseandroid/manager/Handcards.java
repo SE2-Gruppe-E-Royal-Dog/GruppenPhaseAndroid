@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.cards.Card;
 
 import java.util.LinkedList;
 
@@ -25,5 +25,13 @@ public class Handcards {
 
     public void addCardToHand(LinkedList<Card> cards) {
         myCards.addAll(cards);
+    }
+
+    public void discardHandcard(int index){
+        myCards.remove(index);
+    }
+
+    public void setMyCards(LinkedList<Card> myCards) {
+        this.myCards = myCards;
     }
 }

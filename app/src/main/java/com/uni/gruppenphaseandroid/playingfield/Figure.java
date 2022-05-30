@@ -1,8 +1,9 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
+
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class Figure {

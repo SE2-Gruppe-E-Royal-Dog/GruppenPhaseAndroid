@@ -1,4 +1,6 @@
-package com.uni.gruppenphaseandroid.Cards;
+
+package com.uni.gruppenphaseandroid.cards;
+
 
 public enum Cardtype {
     TWO(2),
