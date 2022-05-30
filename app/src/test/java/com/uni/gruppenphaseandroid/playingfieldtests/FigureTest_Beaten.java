@@ -510,6 +510,13 @@ public class FigureTest_Beaten {
     }
 
     @Test
+    public void checkBeatenBlueKnightByGreenCitizenOnGreenStartingField() { // OK
+        knightBlue = new Knight(7, Color.BLUE, field13, Typ.KNIGHT, figureUI7);
+        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
+        Assert.assertTrue(citizenGreen.checkBeaten());
+    }
+
+    @Test
     public void checkBeatenBlueKingByRedKingOnGreenStartingField() { // OK
         kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);

@@ -82,10 +82,10 @@ public class Figure {
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
-            return false; //
-        } else if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == color) {
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == color && ((StartingField) newPosition).getColor() != figure2.getColor()) {
             return true;
+        } else if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
+            return false;
         } return true;
     }
 

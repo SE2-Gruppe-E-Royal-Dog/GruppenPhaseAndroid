@@ -4,7 +4,7 @@ import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
-public class King extends Figure { // TODO: Copy Card
+public class King extends Figure {
 
     public King(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -37,26 +37,6 @@ public class King extends Figure { // TODO: Copy Card
         } return false;
 
     }
-
-    /**
-     * King can only be beaten by another king, except on the starting field of another color.
-     * this figure - figure who moves
-     * figure 2 - figure to be beaten
-     * @return true if beating is possible
-     */
-    /*@Override
-    public boolean checkBeaten() { // TODO: Funktioniert nicht
-        Field newPosition = getCurrentField().getNextField();
-        Figure figure2 = newPosition.getCurrentFigure();
-
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() != figure2.getColor()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-     */
 
     /**
      * King can only move 1-7 fields and use starting card, magnet card and switch card.
