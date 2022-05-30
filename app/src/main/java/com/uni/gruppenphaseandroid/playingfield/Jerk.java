@@ -47,7 +47,7 @@ public class Jerk extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.checkOvertaking() == true && figure2.getTyp() == Typ.KING) || super.checkOvertaking() == false) {
+        if((super.checkBeaten() == true && figure2.getTyp() == Typ.KING) || super.checkBeaten() == false) {
             return false;
         } return true;
     }

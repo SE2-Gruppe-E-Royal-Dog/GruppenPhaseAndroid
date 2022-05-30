@@ -18,6 +18,7 @@ import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.King;
 import com.uni.gruppenphaseandroid.playingfield.Knight;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.StartingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
 import org.junit.After;
@@ -320,7 +321,7 @@ public class FigureTest_Beaten {
     }
 
     /**
-     * Test Rausschmeißverbot auf eigenem Startfeld nicht möglich.
+     * Test Rausschmeißverbot auf eigenem Startfeld.
      */
     @Test
     public void checkBeatenGreenJerkByRedJerkOnGreenStartingField() { // OK
@@ -337,14 +338,21 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenGreenJerkByRedKnightOnGreenStartingField() { // TODO: NOK!!!
+    public void checkBeatenGreenJerkByRedKnightOnGreenStartingField() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
         Assert.assertFalse(knightRed.checkBeaten());
     }
 
     @Test
-    public void checkBeatenGreenJerkByRedKingOnGreenStartingField() { // TODO: NOK!!
+    public void checkColorStartingField() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
+        Assert.assertTrue(field13 instanceof StartingField);
+        Assert.assertTrue(((StartingField) field13).getColor() == Color.GREEN);
+    }
+
+    @Test
+    public void checkBeatenGreenJerkByRedKingOnGreenStartingField() { // OK!!
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
         Assert.assertFalse(kingRed.checkBeaten());
@@ -365,14 +373,14 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenGreenCitizenByRedKnightOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenCitizenByRedKnightOnGreenStartingField() { // OK
         citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
         knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
         Assert.assertFalse(knightRed.checkBeaten());
     }
 
     @Test
-    public void checkBeatenGreenCitizenByRedKingOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenCitizenByRedKingOnGreenStartingField() { // OK
         citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
         Assert.assertFalse(kingRed.checkBeaten());
@@ -393,14 +401,14 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenGreenKnightByRedKnightOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenKnightByRedKnightOnGreenStartingField() { // OK
         knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
         knightRed = new Knight(3, Color.RED, field12, Typ.KNIGHT, figureUI3);
         Assert.assertFalse(knightRed.checkBeaten());
     }
 
     @Test
-    public void checkBeatenGreenKnightByRedKingOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenKnightByRedKingOnGreenStartingField() { // OK
         knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
         Assert.assertFalse(kingRed.checkBeaten());
@@ -428,7 +436,7 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenGreenKingByRedKingOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenKingByRedKingOnGreenStartingField() { // OK
         kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
         Assert.assertFalse(kingRed.checkBeaten());
@@ -442,7 +450,7 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenGreenKingByBlueKingOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenKingByBlueKingOnGreenStartingField() { // OK
         kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
         kingBlue = new King(8, Color.BLUE, field12, Typ.KING, figureUI8);
         Assert.assertFalse(kingBlue.checkBeaten());
@@ -463,7 +471,7 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenGreenKnightByBlueKnightOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenGreenKnightByBlueKnightOnGreenStartingField() { // OK
         knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
         knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
         Assert.assertFalse(knightBlue.checkBeaten());
@@ -477,7 +485,8 @@ public class FigureTest_Beaten {
     }
 
     /**
-     * König kann auf fremdem Startfeld geschmissen werden.
+     * König kann auf fremdem Startfeld von der Figur dieser Farbe geschmissen werden.
+     * Gleiche Farbe kann auf Figur der gleichen Farbe auf eigenem Startfeld nicht schmeißen.
      */
     @Test
     public void checkBeatenBlueKingByGreenKingOnGreenStartingField() { // OK
@@ -487,17 +496,24 @@ public class FigureTest_Beaten {
     }
 
     @Test
+    public void checkBeatenGreenKnightByGreenCitizenOnGreenStartingField() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
+        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
+        Assert.assertFalse(citizenGreen.checkBeaten());
+    }
+
+    @Test
     public void checkBeatenBlueKingByGreenCitizenOnGreenStartingField() { // TODO: NOK
         kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
-        citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
+        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
         Assert.assertTrue(citizenGreen.checkBeaten());
     }
 
     @Test
-    public void checkBeatenBlueKingByRedKingOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenBlueKingByRedKingOnGreenStartingField() { // OK
         kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
-        Assert.assertFalse(kingRed.checkBeaten());
+        Assert.assertTrue(kingRed.checkBeaten());
     }
 
     /**

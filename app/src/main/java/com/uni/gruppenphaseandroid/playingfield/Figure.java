@@ -71,20 +71,22 @@ public class Figure {
     /**
      *  A figure cannot be beaten by another one (no matter which color),
      *  if its current position is the own starting field or the own goal area.
+     *  Additionally a figure can beat every other figure on its own starting field,
+     *  no matter if coming from Starting Area or coming for the goal area.
+     *  Figure can not beat a figure of its own color on its own Starting Field.
      * this figure - figure who moves
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
     public boolean checkBeaten() { // TODO: King auf fremdem Startfeld rauswerfen geht von allen Figuren der Farbe des Startfeldes
-        // TODO: King auf fremdem Startfeld kann nur von der Farbe geschlagen werden!
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
         if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
-            return false;
-        } else {
+            return false; //
+        } else if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == color) {
             return true;
-        }
+        } return true;
     }
 
     /**

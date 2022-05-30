@@ -44,17 +44,19 @@ public class King extends Figure { // TODO: Copy Card
      * figure 2 - figure to be beaten
      * @return true if beating is possible
      */
-    @Override
+    /*@Override
     public boolean checkBeaten() { // TODO: Funktioniert nicht
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() != figure2.getColor() || getTyp() == Typ.KING) {
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() != figure2.getColor()) {
             return true;
         } else {
             return false;
         }
     }
+
+     */
 
     /**
      * King can only move 1-7 fields and use starting card, magnet card and switch card.
