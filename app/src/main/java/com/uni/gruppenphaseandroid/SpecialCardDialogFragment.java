@@ -29,18 +29,10 @@ public class SpecialCardDialogFragment extends DialogFragment {
     private SeekBar optionOneTwoSeven;
     private Cardtype cardtype;
     private int selectedCardEffect;
+    public TextView tv_seekbar;
     public CardViewFragment.OnInputListener mOnInputListener;
 
-    //Values for seekbar //TODO does it work like this
-    public static final String VAL1 = "1";
-    public static final String VAL2 = "2";
-    public static final String VAL3 = "3";
-    public static final String VAL4 = "4";
-    public static final String VAL5 = "5";
-    public static final String VAL6 = "6";
-    public static final String VAL7 = "7";
 
-    public static enum Suit{VAL1,VAL2,VAL3,VAL4,VAL5,VAL6,VAL7,}
 
     public interface OnCardInputListener{
         void sendInputSpecialCardFragment (String input);
@@ -69,6 +61,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
          SeekBar optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
          optionOne.setVisibility(View.INVISIBLE);
          Button chancel = view.findViewById(R.id.btn_chancel);
+         tv_seekbar = view.findViewById(R.id.tv_seekbar);
 
         textView.setText("Choose the value of your card:");
 
@@ -82,6 +75,14 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
                         selectedCardEffect = value;
+
+
+
+                        int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
+                        tv_seekbar.setVisibility(View.VISIBLE);
+                        tv_seekbar.setText("" + (value+1));
+                        tv_seekbar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+                        //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar
 
 
                     }
