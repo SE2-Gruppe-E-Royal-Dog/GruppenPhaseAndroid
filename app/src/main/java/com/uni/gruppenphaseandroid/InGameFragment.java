@@ -183,11 +183,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
                 Log.d("check card", "choosen card is a special card, open new dialog window");
                 btnSpecialCards.setVisibility(View.VISIBLE);
-                if (btnSpecialCards != null) {
-                    //TODO instandly open special card dialog
-                    //btnSpecialCards.performClick();
-                }
+                new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
+
             } else {
+                btnSpecialCards.setVisibility(View.INVISIBLE);
                 GameManager.getInstance().setCurrentEffect(-1);
                 GameManager.getInstance().cardGotPlayed(new Card(selectedCardtype));
             }
@@ -204,14 +203,12 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         Log.d("selectedSpecialcArd", input);
 
-        //TODO handle string from special card dialog and sent cardvalue
-        // if one to seven set Cardtype.ONE or what so ever
+        //TODO maybe adjust fab to special card icon
 
 
     }
 
-    //TODO ablagestapel
-    //TODO visual note for cheating!
-    //TODO detail work --> button abstand, skeebar mit nummern, specialcard icon change
+
+    //TODO visual note for cheating! findViewById(R.id.tv_cheater);
 
 }
