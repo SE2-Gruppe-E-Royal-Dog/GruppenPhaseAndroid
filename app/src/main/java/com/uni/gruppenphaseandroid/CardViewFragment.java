@@ -39,7 +39,6 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     static int selectedCard;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,12 +51,9 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(int card) {
-                chooseCard.setVisibility(View.VISIBLE);
-                clickedCard = card;
-            }
+        cardAdapter = new CardAdapter(card -> {
+            chooseCard.setVisibility(View.VISIBLE);
+            clickedCard = card;
         });
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
@@ -74,19 +70,11 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
         view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
                 .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
 
-        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectedCard = clickedCard;
-                NavHostFragment.findNavController(CardViewFragment.this)
-                        .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
-            }
+        view.findViewById(R.id.btn_playCard).setOnClickListener(view12 -> {
+            selectedCard = clickedCard;
+            NavHostFragment.findNavController(CardViewFragment.this)
+                    .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
         });
-
-
-
-
-
     }
 
 
@@ -102,13 +90,9 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }catch (NullPointerException e){
             Log.getStackTraceString(e);
-        };
-
+        }
 
     }
-
-
-
     
     /**
      * sensorlistener bits
@@ -185,7 +169,5 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     @Override
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
-
-    
         
 }

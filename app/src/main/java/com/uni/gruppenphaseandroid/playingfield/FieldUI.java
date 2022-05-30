@@ -2,15 +2,15 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 public interface FieldUI {
 
-    public abstract void changeAppearance(int resourceID);
+    void changeAppearance(int resourceID);
 
-    public abstract void registerUIobject(String tag);
+    void registerUIobject(String tag);
 
-    public abstract int getMarginTop();
+    int getMarginTop();
 
-    public abstract int getMarginLeft();
+    int getMarginLeft();
 
-    public abstract void switchFieldUI(FieldUI fieldUI);
-    public abstract void turnIntoWormhole();
-    public abstract void turnIntoRegularField();
+    void switchFieldUI(FieldUI fieldUI);
+    void turnIntoWormhole();
+    void turnIntoRegularField();
 }

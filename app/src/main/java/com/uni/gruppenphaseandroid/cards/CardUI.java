@@ -9,12 +9,8 @@ import java.util.LinkedList;
 
 public class CardUI  {
 
-
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
-
-    //static LinkedList<Card> myCards;        //für test zwecke
-
 
     public static CardUI getInstance() {
         if (cardUI == null) {
@@ -23,33 +19,13 @@ public class CardUI  {
         return cardUI;
     }
 
-
     public CardUI() {
     }
-
 
     public void addCardToHand() {
 
         imageCardList = new LinkedList<>();
         LinkedList<Card> cards = Handcards.getInstance().getMyCards();
-
-//test cards
-         /*LinkedList<Card> testCards = new LinkedList<>();
-
-        Card card1 = new Card(Cardtype.EIGTH);
-        testCards.add(card1);
-        Card card2 = new Card(TWO);
-        testCards.add(card2);
-        Card card3 = new Card(Cardtype.NINE);
-        testCards.add(card1);
-        testCards.add(card2);
-        testCards.add(card2);
-        testCards.add(card3);
-        testCards.add(card1);
-
-
-          */
-//test cards end
 
        for (Card c : cards){
            findImageView(c);
@@ -128,22 +104,11 @@ public class CardUI  {
         //return cardIV;
     }
 
-/*
-    public void removeFromHand (ImageView view){
-        linearLayout.removeView(view);
-    }
-
-    public void removeAllFromHand (){
-        linearLayout.removeAllViews();
-    }
-*/
     public LinkedList<Integer> cardsForRecyclerView (){
 
         addCardToHand();
         return imageCardList;
     }
-
-
 
 }
 
