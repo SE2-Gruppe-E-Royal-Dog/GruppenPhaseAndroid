@@ -482,4 +482,6 @@ public class FigureTest_Overtaking {
      * CheckGreenCard und checkOvertakingPossible mit Green Card
      */
 
+    // TODO: Test noch offen
+
 }

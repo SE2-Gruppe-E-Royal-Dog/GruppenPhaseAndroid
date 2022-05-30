@@ -486,7 +486,7 @@ public class FigureTest_Beaten {
 
     /**
      * König kann auf fremdem Startfeld von der Figur dieser Farbe geschmissen werden.
-     * Gleiche Farbe kann auf Figur der gleichen Farbe auf eigenem Startfeld nicht schmeißen.
+     * Gleiche Farbe kann Figur der gleichen Farbe auf eigenem Startfeld nicht schmeißen.
      */
     @Test
     public void checkBeatenBlueKingByGreenKingOnGreenStartingField() { // OK
@@ -503,7 +503,7 @@ public class FigureTest_Beaten {
     }
 
     @Test
-    public void checkBeatenBlueKingByGreenCitizenOnGreenStartingField() { // TODO: NOK
+    public void checkBeatenBlueKingByGreenCitizenOnGreenStartingField() { // TODO: NOK - König hier keine Ausnahme!
         kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
         citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
         Assert.assertTrue(citizenGreen.checkBeaten());
@@ -526,5 +526,6 @@ public class FigureTest_Beaten {
     /**
      * Rausschmeißen im Ziel nicht möglich.
      */
+    // TODO: Test Noch offen
 
 }
