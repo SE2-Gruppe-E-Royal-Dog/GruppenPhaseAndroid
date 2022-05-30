@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -46,6 +47,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
@@ -77,17 +80,17 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
+/*
         view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
 
         view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
-
-        btnCardholder.setVisibility(View.VISIBLE);
+*/
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
             playingField.getView().findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
             //activate cardholder
-            //btnCardholder.setVisibility(View.VISIBLE);
+            btnCardholder.setVisibility(View.VISIBLE);
 
             websocketClient = ((MainActivity) getContext()).getService().getClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();

@@ -280,8 +280,6 @@ public class PlayingField {
     }
 
   public Field move(Figure figure1, int fieldsToMove) { // TODO: Exception auch bei Cards einbauen
-        //TODO if schummeln true, check if + or - 1 --> adjust value of fields to move ???
-
         Card card = GameManager.getInstance().getSelectedCard();
         Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
         Figure figure2;
@@ -301,7 +299,6 @@ public class PlayingField {
             figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
             newPositionFigure1.triggerSpecialFieldEffect();
 
-            // TODO: Wurmlöcher einfügen
             // TODO: Schummeln einfügen
 
             LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2.getCurrentField(), fieldsToMove);

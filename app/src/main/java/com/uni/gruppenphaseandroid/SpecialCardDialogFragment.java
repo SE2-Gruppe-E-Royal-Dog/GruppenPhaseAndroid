@@ -82,6 +82,8 @@ public class SpecialCardDialogFragment extends DialogFragment {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
                         selectedCardEffect = value;
+
+
                     }
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) {

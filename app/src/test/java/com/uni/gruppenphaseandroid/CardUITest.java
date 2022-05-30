@@ -60,6 +60,17 @@ public class CardUITest {
 
 
     }
+  */
+    @Test
+    public void idToCardType (){
+        int id1 = R.drawable.ic_card_2;
 
-*/
+        Assert.assertEquals(Cardtype.TWO, CardUI.getInstance().idToCardType(id1));
+    }
+
+
+    //TODO add more tests
+
+
+
 }
