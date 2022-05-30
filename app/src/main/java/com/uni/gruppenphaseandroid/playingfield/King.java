@@ -8,7 +8,6 @@ public class King extends Figure { // TODO: Copy Card
 
     public King(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
-        typ = Typ.KING;
     }
 
     public King() {
@@ -26,12 +25,9 @@ public class King extends Figure { // TODO: Copy Card
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking(figure1) == true) {
-            if (figure2.getTyp() == Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT || figure2.getTyp() != Typ.KING) { // all 4 cases covered => but default value set to false
-                return false;
-            } else {
-                return true;
-            }
+        if(super.checkOvertaking(figure1)) {
+            // all 4 cases covered => but default value set to false
+            return figure2.getTyp() != Typ.JERK && figure2.getTyp() == Typ.CITIZEN && figure2.getTyp() == Typ.KNIGHT && figure2.getTyp() == Typ.KING;
         } else {
             return false;
         }
@@ -48,11 +44,7 @@ public class King extends Figure { // TODO: Copy Card
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() != figure2.getColor() || figure1.getTyp() == Typ.KING) {
-            return true;
-        } else {
-            return false;
-        }
+        return newPosition instanceof StartingField && ((StartingField) newPosition).getColor() != figure2.getColor() || figure1.getTyp() == Typ.KING;
     }
 
     /**
@@ -66,10 +58,6 @@ public class King extends Figure { // TODO: Copy Card
     @Override
     public boolean checkMoving(Figure figure1, int fieldsToMove) { // TODO: Copy Card für Zug des vorherigen Spielers
         Card card = GameManager.getInstance().getSelectedCard();
-        if(super.checkMoving(figure1, fieldsToMove) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
-            return true;
-        } else {
-            return false;
-        }
+        return super.checkMoving(figure1, fieldsToMove) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH);
     }
 }

@@ -7,7 +7,6 @@ public class Jerk extends Figure {
 
     public Jerk(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
-        typ = Typ.JERK;
     }
 
     public Jerk() {
@@ -24,12 +23,8 @@ public class Jerk extends Figure {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking(figure1) == true) {
-            if (figure2.getTyp() != Typ.JERK) {
-                return false;
-            } else {
-                return true;
-            }
+        if(super.checkOvertaking(figure1)) {
+            return figure2.getTyp() == Typ.JERK;
         } else {
             return false;
         }

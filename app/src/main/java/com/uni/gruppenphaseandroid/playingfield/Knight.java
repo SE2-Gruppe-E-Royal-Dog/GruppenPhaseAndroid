@@ -4,7 +4,6 @@ public class Knight extends Figure {
 
     public Knight(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
-        typ = Typ.KNIGHT;
     }
 
     public Knight() {
@@ -21,12 +20,8 @@ public class Knight extends Figure {
         Field newPosition = figure1.getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking(figure1) == true) {
-            if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
-                return false;
-            } else {
-                return true;
-            }
+        if(super.checkOvertaking(figure1)) {
+            return figure2.getTyp() == Typ.JERK && figure2.getTyp() == Typ.CITIZEN && figure2.getTyp() == Typ.KNIGHT;
         } else {
             return false;
         }
