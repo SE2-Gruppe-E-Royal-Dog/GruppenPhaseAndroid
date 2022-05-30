@@ -49,6 +49,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         btnPlayCard = view.findViewById(R.id.btn_playCard);
         //set card default
         clickedCard = "-1";
+        if(GameManager.getInstance().isThereAnyPossibleMove()){
+            view.findViewById(R.id.tv_instrucitons).setVisibility(View.VISIBLE);
+        }
 
         //set up for recyclerview
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
@@ -84,9 +87,14 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 Log.d("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
-                    cardInputListener.sendInputCardFragment(clickedCard);
-
-                    getDialog().dismiss();
+                    if(GameManager.getInstance().isThereAnyPossibleMove()){
+                        //TODO discharge card and end turn
+                        cardInputListener.sendInputCardFragment("-1");
+                        getDialog().dismiss();
+                    }else {
+                        cardInputListener.sendInputCardFragment(clickedCard);
+                        getDialog().dismiss();
+                    }
                 }
             }
         });

@@ -54,8 +54,6 @@ public class SpecialCardDialogFragment extends DialogFragment {
          optionOne.setVisibility(View.INVISIBLE);
          Button optionTwo = view.findViewById(R.id.btn_optionTwo);
          optionTwo.setVisibility(View.INVISIBLE);
-         Button optionThree = view.findViewById(R.id.btn_optionThree);
-         optionThree.setVisibility(View.INVISIBLE);
          Button ok = view.findViewById(R.id.btn_playOneToSeven);
          ok.setVisibility(View.INVISIBLE);
          SeekBar optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
@@ -63,119 +61,119 @@ public class SpecialCardDialogFragment extends DialogFragment {
          Button chancel = view.findViewById(R.id.btn_chancel);
          tv_seekbar = view.findViewById(R.id.tv_seekbar);
 
-        textView.setText("Choose the value of your card:");
+             textView.setText("Choose the value of your card:");
 
-        switch (cardtype){
-            case ONETOSEVEN:
+             switch (cardtype) {
+                 case ONETOSEVEN:
 
-                optionOneToSeven.setVisibility(View.VISIBLE);
-                ok.setVisibility(View.VISIBLE);
-                ok.setVisibility(View.VISIBLE);
-                optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
-                        selectedCardEffect = value;
-
-
-
-                        int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
-                        tv_seekbar.setVisibility(View.VISIBLE);
-                        tv_seekbar.setText("" + (value+1));
-                        tv_seekbar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
-                        //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar
+                     optionOneToSeven.setVisibility(View.VISIBLE);
+                     ok.setText("OK");
+                     ok.setVisibility(View.VISIBLE);
+                     optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                         @Override
+                         public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
+                             selectedCardEffect = value;
 
 
-                    }
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
+                             int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
+                             tv_seekbar.setVisibility(View.VISIBLE);
+                             tv_seekbar.setText("" + (value + 1));
+                             tv_seekbar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+                             //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar
 
-                    }
 
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
+                         }
 
-                    }
-                });
+                         @Override
+                         public void onStartTrackingTouch(SeekBar seekBar) {
 
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        GameManager.getInstance().setCurrentEffect(selectedCardEffect);
-                        GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
-                        getDialog().dismiss();
+                         }
 
-                    }
-                });
+                         @Override
+                         public void onStopTrackingTouch(SeekBar seekBar) {
 
-                break;
-            case ONEORELEVEN_START:
-                optionOne.setText("ONE");
-                optionTwo.setText("ELEVEN");
-                optionThree.setText ("Start");
+                         }
+                     });
 
-                optionOne.setVisibility(View.VISIBLE);
-                optionTwo.setVisibility(View.VISIBLE);
-                optionThree.setVisibility(View.VISIBLE);
+                     ok.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             GameManager.getInstance().setCurrentEffect(selectedCardEffect);
+                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
+                             getDialog().dismiss();
 
-                optionOne.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        GameManager.getInstance().setCurrentEffect(1);
-                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.ONEORELEVEN_START));
-                        getDialog().dismiss();
-                    }
-                });
-                optionTwo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        GameManager.getInstance().setCurrentEffect(2);
-                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.ONEORELEVEN_START));
-                        getDialog().dismiss();
-                    }
-                });
-                optionThree.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        GameManager.getInstance().setCurrentEffect(0);
-                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.ONEORELEVEN_START));
-                        getDialog().dismiss();
-                    }
-                });
+                         }
+                     });
 
-                break;
-            case FOUR_PLUSMINUS:
-                optionOne.setText("Four PLUS");
-                optionTwo.setText("Four MINUS");
+                     break;
+                 case ONEORELEVEN_START:
+                     optionOne.setText("ONE");
+                     optionTwo.setText("ELEVEN");
+                     ok.setText("Start");
 
-                optionOne.setVisibility(View.VISIBLE);
-                optionTwo.setVisibility(View.VISIBLE);
+                     optionOne.setVisibility(View.VISIBLE);
+                     optionTwo.setVisibility(View.VISIBLE);
+                     ok.setVisibility(View.VISIBLE);
 
-                optionOne.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        GameManager.getInstance().setCurrentEffect(1);
-                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.FOUR_PLUSMINUS));
-                        getDialog().dismiss();
-                    }
-                });
-                optionTwo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                     optionOne.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             GameManager.getInstance().setCurrentEffect(1);
+                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                             getDialog().dismiss();
+                         }
+                     });
+                     optionTwo.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             GameManager.getInstance().setCurrentEffect(2);
+                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                             getDialog().dismiss();
+                         }
+                     });
+                     ok.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             GameManager.getInstance().setCurrentEffect(0);
+                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                             getDialog().dismiss();
+                         }
+                     });
 
-                        GameManager.getInstance().setCurrentEffect(0);
-                        GameManager.getInstance().cardGotPlayed(new Card (Cardtype.FOUR_PLUSMINUS));
-                        getDialog().dismiss();
-                    }
-                });
-                break;
-        }
+                     break;
+                 case FOUR_PLUSMINUS:
+                     optionOne.setText("Four PLUS");
+                     optionTwo.setText("Four MINUS");
 
-        chancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
-        });
+                     optionOne.setVisibility(View.VISIBLE);
+                     optionTwo.setVisibility(View.VISIBLE);
+
+                     optionOne.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             GameManager.getInstance().setCurrentEffect(1);
+                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                             getDialog().dismiss();
+                         }
+                     });
+                     optionTwo.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+
+                             GameManager.getInstance().setCurrentEffect(0);
+                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                             getDialog().dismiss();
+                         }
+                     });
+                     break;
+             }
+
+             chancel.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     getDialog().dismiss();
+                 }
+             });
 
         return view;
     }

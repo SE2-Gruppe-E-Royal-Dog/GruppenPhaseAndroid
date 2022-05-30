@@ -35,8 +35,8 @@
 
         <Button
             android:id="@+id/btn_playOneToSeven"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="35dp"
             android:text="ok"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/btn_chancel"
@@ -90,17 +90,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_userInfo"
             app:layout_constraintVertical_bias="0.532" />
-
-        <Button
-            android:id="@+id/btn_optionThree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/btn_optionTwo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_userInfo" />
 
         <TextView
             android:id="@+id/tv_seekbar"
