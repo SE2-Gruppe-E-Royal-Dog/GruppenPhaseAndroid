@@ -1,6 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.cards.Card;
 
 import java.util.LinkedList;
 

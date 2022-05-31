@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid.Cards;
+package com.uni.gruppenphaseandroid.cards;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Figure;

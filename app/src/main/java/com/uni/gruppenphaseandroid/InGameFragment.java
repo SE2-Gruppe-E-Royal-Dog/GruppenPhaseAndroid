@@ -18,9 +18,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.CardUI;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.CardUI;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;

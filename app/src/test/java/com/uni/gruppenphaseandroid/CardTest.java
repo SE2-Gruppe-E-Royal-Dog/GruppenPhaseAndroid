@@ -1,7 +1,7 @@
 package com.uni.gruppenphaseandroid;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 
 import org.junit.After;
 import org.junit.Assert;

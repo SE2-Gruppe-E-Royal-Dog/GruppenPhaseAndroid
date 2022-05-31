@@ -1,6 +1,6 @@
-package com.uni.gruppenphaseandroid.Cards;
+package com.uni.gruppenphaseandroid.cards;
 
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
@@ -12,7 +12,7 @@ public class CardUI  {
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
 
-    static LinkedList<com.uni.gruppenphaseandroid.Cards.Card> myCards;        //für test zwecke
+    static LinkedList<Card> myCards;        //für test zwecke
 
 
     public static CardUI getInstance() {

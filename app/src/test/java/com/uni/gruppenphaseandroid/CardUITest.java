@@ -4,8 +4,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import com.uni.gruppenphaseandroid.Cards.CardUI;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.CardUI;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -2,7 +2,7 @@ package com.uni.gruppenphaseandroid.playingfield;
 
 import android.view.View;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
+import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 

@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;

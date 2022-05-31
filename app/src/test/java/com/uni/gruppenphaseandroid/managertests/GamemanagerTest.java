@@ -6,8 +6,8 @@ import static org.mockito.Mockito.verify;
 
 import android.view.View;
 
-import com.uni.gruppenphaseandroid.Cards.Card;
-import com.uni.gruppenphaseandroid.Cards.Cardtype;
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;

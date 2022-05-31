@@ -19,7 +19,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.uni.gruppenphaseandroid.Cards.CardAdapter;
+
+import com.uni.gruppenphaseandroid.cards.CardAdapter;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
