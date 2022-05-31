@@ -27,7 +27,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-FigureTestOvertaking {
+public class FigureTest_Overtaking {
     PlayingField playingField;
     View view;
     Jerk jerkRed; // Red
