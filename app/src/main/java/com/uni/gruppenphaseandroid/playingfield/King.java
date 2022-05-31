@@ -26,7 +26,7 @@ public class King extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking() == true) {
+        if(super.checkOvertaking()) {
             switch (figure2.getTyp()) {
                 case JERK:
                 case CITIZEN:
@@ -49,7 +49,7 @@ public class King extends Figure {
     @Override
     public boolean checkMoving(int fieldsToMove) {
         Card card = GameManager.getInstance().getSelectedCard();
-        if(super.checkMoving(fieldsToMove) == true && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
+        if(super.checkMoving(fieldsToMove) && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
             return true;
         } else {
             return false;
