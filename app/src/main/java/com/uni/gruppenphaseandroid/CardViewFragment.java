@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.uni.gruppenphaseandroid.cards.CardAdapter;
+import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
@@ -34,6 +35,10 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
+    private int roundIndex; // TODO get from Game Manager
+
+
+    private static String playerId;
 
     public interface OnInputListener{
         void sendInputCardFragment(String input);
@@ -153,20 +158,21 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     //What happens if sensor change detected
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+        Cheater cheater = new Cheater(playerId, roundIndex);
 
         textView = getView().findViewById(R.id.tv_cheater);
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
 
+        boolean cheating = cheater.cheatingAllowed(playerId);
         if (Math.abs(x) > Math.abs(y)) {
-            if (x < 0) { //tilt to right
-                //TODO Manipulate move -1
-                //TODO check cheating
+
+            if (x < 0 && cheating) { //tilt to right
+                cheater.cheating(cheater);
+                GameManager.getInstance().setCheatModifier(-1);
 
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
-
-
 
                 //shows a textView that is gone after 5 seconds
                 new CountDownTimer(3000, 1000) {
@@ -182,8 +188,10 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 }.start();
 
             } else {
-                if (x > 0) { //tilt to left
-                    //TODO Manipulate move +1
+                if (x > 0 && cheating) { //tilt to left
+                    cheater.cheating(cheater);
+                    GameManager.getInstance().setCheatModifier(+1);
+
                     textView.setText("Cheater Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
 
@@ -206,6 +214,11 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     @Override
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
+
+    public static void setPlayerId(String playerId) {
+        CardViewFragment.playerId = playerId;
+    }
+
 
         
 }

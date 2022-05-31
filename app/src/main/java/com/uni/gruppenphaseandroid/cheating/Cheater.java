@@ -27,7 +27,6 @@ public class Cheater extends Fragment {
     public Cheater(String playerID, int roundIndex) {
         this.playerID = playerID;                             //bis jetzt nur am Server --> von gameManager?
         this.roundIndex = roundIndex;                         //merkt sich die Runde, in der geschummelt wurde
-        setCheatingAllowed(false);                            //constructor --> erstes mal schummeln --> daher für nächsten runden false
     }
 
 
@@ -35,28 +34,19 @@ public class Cheater extends Fragment {
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
     public boolean cheatingAllowed(String playerID) {
-        if (getlastCheat(playerID) == 0) {       //TODO bedinung prüfen
-            setCheatingAllowed(true);
-        } else {
-            setCheatingAllowed((getlastCheat(playerID) - getRoundIndex()) >= 5);
+        this.cheatingAllowed = (( getRoundIndex() - getLastCheat(playerID)) >= 5);
+        return cheatingAllowed;
         }
 
-
-        return isCheatingAllowed();
-    }
-
-    public void cheating(Cheater c) {
-        //TODO koppel with move methode
-        noteCheating(c);
+    public void cheating(Cheater cheater) {
+        noteCheating(cheater);
     }
 
     public static void noteCheating(Cheater cheater) {
         cheaters.add(cheater);
-        cheater.setCheatingAllowed(false);
-
     }
 
-    public int getlastCheat(String playerID) {
+    public int getLastCheat(String playerID) {
 
         int round = 0;
         if (!cheaters.isEmpty()) {
@@ -67,17 +57,6 @@ public class Cheater extends Fragment {
             }
         }
         return round;
-    }
-
-    public void noteServer() {
-        //TODO make it work T-T
-        websocketClient = ((MainActivity) getContext()).getService().getClient();
-        var message = new Message();
-        message.setType(MessageType.CHEATING_TILT_RIGHT);
-        //or
-        message.setType(MessageType.CHEATING_TILT_LEFT);
-        websocketClient.send(message);
-
     }
 
 
@@ -115,9 +94,6 @@ public class Cheater extends Fragment {
         return cheatingAllowed;
     }
 
-    public void setCheatingAllowed(boolean cheatingAllowed) {
-        this.cheatingAllowed = cheatingAllowed;
-    }
 
     public static List<Cheater> getCheaters() {
         return cheaters;
