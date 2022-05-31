@@ -169,7 +169,7 @@ public class Card {
             case NINE:
             case TEN:
             case TWELVE:
-                return figure.checkMoving(figure, getCardtype().getValue());
+                return figure.checkMoving(getCardtype().getValue());
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENTS);
@@ -185,10 +185,10 @@ public class Card {
                 }else{
                     value = -4;
                 }
-                return figure.checkMoving(figure, value);
+                return figure.checkMoving(value);
 
             case ONETOSEVEN:
-                return figure.checkMoving(figure, effect);
+                return figure.checkMoving(effect);
 
             case ONEORELEVEN_START:
                 if (effect == 0){
@@ -199,13 +199,13 @@ public class Card {
                 }else{
                     value = 11;
                 }
-                return figure.checkMoving(figure, value);
+                return figure.checkMoving(value);
 
             case THIRTEEN_START:
                 if (effect == 0){
                     return figure.isOnStartingAreaField();
                 }
-                return figure.checkMoving(figure, 13);
+                return figure.checkMoving(13);
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENTS);

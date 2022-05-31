@@ -12,23 +12,41 @@ public class Knight extends Figure {
 
     /**
      * Degree has to be considered.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
     @Override
-    protected boolean checkOvertaking(Figure figure1) {
-        Field newPosition = figure1.getCurrentField().getNextField();
+    public boolean checkOvertaking() {
+        Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking(figure1) == true) {
-            if (figure2.getTyp() != Typ.JERK || figure2.getTyp() != Typ.CITIZEN || figure2.getTyp() != Typ.KNIGHT) {
-                return false;
-            } else {
-                return true;
+        if(super.checkOvertaking()) {
+            switch (figure2.getTyp()) {
+                case JERK:
+                case CITIZEN:
+                case KNIGHT:
+                    return true;
+                case KING:
+                    return false;
             }
-        } else {
-            return false;
         }
+        return false;
+    }
+
+    /**
+     * King can only be beaten by another king.
+     * this figure - figure who moves
+     * figure 2 - figure to be beaten
+     * @return true if beating is possible
+     */
+    @Override
+    public boolean checkBeaten() {
+        Field newPosition = getCurrentField().getNextField();
+        Figure figure2 = newPosition.getCurrentFigure();
+
+        if((super.checkBeaten() && figure2.getTyp() == Typ.KING) || !super.checkBeaten()) {
+            return false;
+        } return true;
     }
 }

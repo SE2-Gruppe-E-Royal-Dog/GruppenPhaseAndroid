@@ -335,6 +335,4 @@ public class PlayingFieldTest {
         Field actualField = playingField.applyCheatModifier(playingField.getGreenStartingField().getNextGoalField().getFieldAtDistance(3, Color.GREEN), Color.GREEN);
         Assert.assertEquals(expectedField, actualField);
     }
-
-
 }

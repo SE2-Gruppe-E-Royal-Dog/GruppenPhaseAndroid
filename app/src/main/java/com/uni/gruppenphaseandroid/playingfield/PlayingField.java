@@ -303,7 +303,7 @@ public class PlayingField {
     }
 
     private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
-        return figure.setNewPosition(figure, fieldsToMove);
+        return figure.setNewPosition(fieldsToMove);
     }
 
     public void moveAllWormholesRandomly(){

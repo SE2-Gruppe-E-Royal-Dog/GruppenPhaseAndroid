@@ -28,15 +28,15 @@ public class Figure {
      * A figure cannot be overtaken by another one (no matter which color),
      * if its current position is the own starting field.
      * Exception: Knight is allowed to overtake but has to consider degree.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
-    protected boolean checkOvertaking(Figure figure1) {
-        Field newPosition = figure1.getCurrentField().getNextField();
+    public boolean checkOvertaking() {
+        Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (figure1.getTyp() == Typ.KNIGHT) {
+        if (typ == Typ.KNIGHT) {
             return true;
         } else {
             if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) {
@@ -51,7 +51,7 @@ public class Figure {
      * Green Card (4 +/- and 10) cancel overtaking rules.
      * @return true if overtaking possible
      */
-    private boolean checkGreenCard(Figure figure1) {
+    private boolean checkGreenCard() {
         Card card = GameManager.getInstance().getSelectedCard();
         if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
             return true;
@@ -60,30 +60,34 @@ public class Figure {
         }
     }
 
-    private boolean checkOvertakingPossible(Figure figure1) {
-        if (checkGreenCard(figure1)) {
+    private boolean checkOvertakingPossible() {
+        if (checkGreenCard()) {
             return true;
         } else {
-            return figure1.checkOvertaking(figure1);
+            return checkOvertaking();
         }
     }
 
     /**
      *  A figure cannot be beaten by another one (no matter which color),
      *  if its current position is the own starting field or the own goal area.
-     * @param figure1 - figure who moves
+     *  Additionally a figure can beat every other figure on its own starting field,
+     *  no matter if coming from Starting Area or coming for the goal area.
+     *  Figure can not beat a figure of its own color on its own Starting Field.
+     * this figure - figure who moves
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    protected boolean checkBeaten(Figure figure1) {
-        Field newPosition = figure1.getCurrentField().getNextField();
+    public boolean checkBeaten() { // TODO: King auf fremdem Startfeld rauswerfen geht von allen Figuren der Farbe des Startfeldes
+        // TODO: Alle checks in einem in SuperKlasse Figure machen - Löschen in Subklassen
+        Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
-            return false;
-        } else {
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == color && ((StartingField) newPosition).getColor() != figure2.getColor()) {
             return true;
-        }
+        } else if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
+            return false;
+        } return true;
     }
 
     /**
@@ -91,45 +95,45 @@ public class Figure {
      * if its current position is the own starting field or own goal area.
      * Exception: Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * @param fieldsToMove - number of fields to move
      * @return true if moving is possible
      */
-    public boolean checkMoving(Figure figure1, int fieldsToMove) {
-        Field originField = figure1.getCurrentField();
+    public boolean checkMoving(int fieldsToMove) {
+        Field originField = currentField;
 
         for (int i = 0; i < fieldsToMove - 1; i++) {
-            if (figure1.getCurrentField().getNextField().getCurrentFigure() != null && !checkOvertakingPossible(figure1)) { // check if figure1 is allowed to overtake figure2
+            if (currentField.getNextField().getCurrentFigure() != null && !checkOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
                 return false;
             }
 
-            if (figure1.getCurrentField() instanceof StartingField && ((StartingField) figure1.getCurrentField()).getColor() == figure1.getColor()) {
-                GoalField goalfield = ((StartingField) figure1.getCurrentField()).getNextGoalField();
+            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {
+                GoalField goalfield = ((StartingField) currentField).getNextGoalField();
                 if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
-                    figure1.setCurrentField(goalfield);
+                    setCurrentField(goalfield);
                     continue;
                 }
             }
-            figure1.setCurrentField(figure1.getCurrentField().getFieldAtDistance(1, figure1.getColor()));
+            setCurrentField(currentField.getFieldAtDistance(1, color));
         }
-        figure1.setCurrentField(originField);
+        setCurrentField(originField);
 
-        Field newPosition = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+        Field newPosition = currentField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
-            return checkBeaten(figure1); // check if figure2 can be beaten
+            return checkBeaten(); // check if figure2 can be beaten
         }
         return true;
     }
 
     /**
      * Sets new Position of Figure.
-     * @param figure1 - figure who moves
+     * this figure - figure who moves
      * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
-    protected Field setNewPosition(Figure figure1, int fieldsToMove) {
-        if (checkMoving(figure1, fieldsToMove)) { // check if moving possible
-            Field newPositionFigure1 = figure1.getCurrentField().getFieldAtDistance(fieldsToMove, figure1.getColor());
+    protected Field setNewPosition(int fieldsToMove) {
+        if (checkMoving(fieldsToMove)) { // check if moving possible
+            Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
             return newPositionFigure1;
         } else {
             return null;
