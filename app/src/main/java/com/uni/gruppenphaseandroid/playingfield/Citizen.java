@@ -23,7 +23,7 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking() == true) {
+        if(super.checkOvertaking()) {
             switch (figure2.getTyp()) {
                 case JERK:
                 case CITIZEN:
@@ -46,7 +46,7 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.checkBeaten() == true && figure2.getTyp() == Typ.KING) || super.checkBeaten() == false) { // TODO: Noch offen
+        if((super.checkBeaten() && figure2.getTyp() == Typ.KING) || !super.checkBeaten()) {
             return false;
         } return true;
     }
