@@ -21,7 +21,7 @@ import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import org.junit.After;
 import org.junit.Before;
 
-FigureTestMoving {
+public class FigureTest_Moving {
     PlayingField playingField;
     View view;
     Jerk jerkRed; // Red
