@@ -79,6 +79,7 @@ public class Figure {
      * @return true if beating is possible
      */
     public boolean checkBeaten() { // TODO: King auf fremdem Startfeld rauswerfen geht von allen Figuren der Farbe des Startfeldes
+        // TODO: Alle checks in einem in SuperKlasse Figure machen - Löschen in Subklassen
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
