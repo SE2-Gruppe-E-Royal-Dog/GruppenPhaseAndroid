@@ -348,7 +348,7 @@ public class FigureTest_Beaten {
     public void checkColorStartingField() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         Assert.assertTrue(field13 instanceof StartingField);
-        Assert.assertTrue(((StartingField) field13).getColor() == Color.GREEN);
+        Assert.assertSame(((StartingField) field13).getColor(), Color.GREEN);
     }
 
     @Test
