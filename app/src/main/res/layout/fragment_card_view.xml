@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:scrollbars="horizontal"
     tools:context=".CardViewFragment">
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cheater Cheater"
-        android:textSize="45sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,8 +51,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutCards"
-        android:layout_width="413dp"
-        android:layout_height="338dp"
+        android:layout_width="399dp"
+        android:layout_height="250dp"
         android:layout_marginTop="64dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btn_playCard"
@@ -67,9 +67,22 @@
             android:layout_height="243dp"
             android:clickable="true"
             android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:scrollbarAlwaysDrawHorizontalTrack="false"
             android:scrollbars="horizontal" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_instrucitons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="There is no possible move. \n choose one card to drop"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCards"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cheater" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

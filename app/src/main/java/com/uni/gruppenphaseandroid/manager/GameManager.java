@@ -46,7 +46,7 @@ public class GameManager {
     private LastTurn lastTurn;
     private FigureManager figuremanager;
     private Card selectedCard;
-    private int currentEffect;
+    private int currentEffect;                          //int for special cards
     private String lobbyID;
     private boolean hasCheated = false;
     private Figure currentlySelectedFigure;
@@ -113,8 +113,7 @@ public class GameManager {
             return;
         }
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
-        int effect = 1;//TODO: set effect
-        selectedCard.playCard(figure, effect, null);
+        selectedCard.playCard(figure, currentEffect, null);
         //send message to server
         sendLastTurnServerMessage();
     }
@@ -326,4 +325,12 @@ public class GameManager {
         this.cheatModifier = cheatModifier;
     }
 
+
+    public int getCurrentEffect() {
+        return currentEffect;
+    }
+
+    public void setCurrentEffect(int currentEffect) {
+        this.currentEffect = currentEffect;
+    }
 }
