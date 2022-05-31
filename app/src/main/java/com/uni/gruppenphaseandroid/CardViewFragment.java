@@ -159,6 +159,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Cheater cheater = new Cheater(playerId, roundIndex);
+        TextView note = getActivity().findViewById(R.id.tv_cheater);
 
         textView = getView().findViewById(R.id.tv_cheater);
         float x = sensorEvent.values[0];
@@ -170,6 +171,8 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             if (x < 0 && cheating) { //tilt to right
                 cheater.cheating(cheater);
                 GameManager.getInstance().setCheatModifier(-1);
+                note.setText("-1");
+                note.setVisibility(View.VISIBLE);
 
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
@@ -191,6 +194,8 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 if (x > 0 && cheating) { //tilt to left
                     cheater.cheating(cheater);
                     GameManager.getInstance().setCheatModifier(+1);
+                    note.setText("+1");
+                    note.setVisibility(View.VISIBLE);
 
                     textView.setText("Cheater Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
