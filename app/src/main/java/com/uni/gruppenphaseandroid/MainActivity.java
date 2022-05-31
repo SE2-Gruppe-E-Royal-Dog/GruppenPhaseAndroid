@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -70,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bindService();
         doRegisterReceiver();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
@@ -202,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
             //start game
             Log.d("server_communication", "Server message received!!!!!!");
             GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, new FigureManager());
+
+            //TODO hide startgame button and show chardholder
         }
 
         private void handleUpdateBoard(String body) {

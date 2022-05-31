@@ -4,6 +4,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import com.uni.gruppenphaseandroid.cards.CardUI;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 public class CardUITest {
 /*
 
@@ -42,6 +48,17 @@ public class CardUITest {
 
 
     }
+  */
+    @Test
+    public void idToCardType (){
+        int id1 = R.drawable.ic_card_2;
 
-*/
+        Assert.assertEquals(Cardtype.TWO, CardUI.getInstance().idToCardType(id1));
+    }
+
+
+    //TODO add more tests
+
+
+
 }

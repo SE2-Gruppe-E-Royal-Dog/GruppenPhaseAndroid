@@ -34,11 +34,13 @@ public class FigureUIimpl extends FigureUI {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Figur", "Figure was selected!");
+
                 try {
+                    Log.e("Figur", "Figure was selected!");
                     GameManager.getInstance().figureGotSelected(figure);
+                    //TODO EFFECT
                 } catch (Exception e) {
-                    Log.e("Figur", "Figure selection ended up in exception!");
+                    Log.e("Figur", "Figure selection ended up in exception! " + e.getMessage());
                 }
             }
         });

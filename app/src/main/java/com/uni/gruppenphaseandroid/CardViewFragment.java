@@ -15,78 +15,91 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.uni.gruppenphaseandroid.cards.CardAdapter;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
 import java.util.Objects;
 
 
-public class CardViewFragment extends Fragment implements EventListener, SensorEventListener {
+public class CardViewFragment extends DialogFragment implements EventListener, SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
     private TextView textView;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
-    private Button chooseCard;
-    private CardAdapter cardAdapter;
-    int clickedCard;
-    static int selectedCard;
+    private Button btnPlayCard;
+    private String clickedCard;
 
+    public interface OnInputListener{
+        void sendInputCardFragment(String input);
+    }
+
+    public OnInputListener cardInputListener;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_card_view, container, false);
-        chooseCard = root.findViewById(R.id.btn_playCard);
+        View view = inflater.inflate(R.layout.fragment_card_view, container, false);
+        btnPlayCard = view.findViewById(R.id.btn_playCard);
+        //set card default
+        clickedCard = "-1";
+        if(GameManager.getInstance().isThereAnyPossibleMove()){
+            view.findViewById(R.id.tv_instrucitons).setVisibility(View.VISIBLE);
+        }
 
         //set up for recyclerview
-        recyclerView = root.findViewById(R.id.recyclerviewCard);
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
+        CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int card) {
-                chooseCard.setVisibility(View.VISIBLE);
-                clickedCard = card;
+                if(GameManager.getInstance().isItMyTurn()) {
+                    btnPlayCard.setVisibility(View.VISIBLE);
+                    clickedCard = Integer.toString(card);
+                }
             }
         });
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
                 .findFirstCompletelyVisibleItemPosition());
-        return root;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        selectedCard = -1;
         //return to board button
-        view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> NavHostFragment.findNavController(CardViewFragment.this)
-                .navigate(R.id.action_cardViewFragment2_to_InGameFragment2));
-
-        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btn_returnToGame).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedCard = clickedCard;
-                NavHostFragment.findNavController(CardViewFragment.this)
-                        .navigate(R.id.action_cardViewFragment2_to_InGameFragment2);
+                getDialog().dismiss();
             }
         });
 
 
-
-
-
+        //select card and return to board
+        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("card_input", "input:" + clickedCard);
+                //capture input
+                if (!clickedCard.equals("")) {
+                    if(GameManager.getInstance().isThereAnyPossibleMove()){
+                        //TODO discharge card and end turn
+                        cardInputListener.sendInputCardFragment("-1");
+                        getDialog().dismiss();
+                    }else {
+                        cardInputListener.sendInputCardFragment(clickedCard);
+                        getDialog().dismiss();
+                    }
+                }
+            }
+        });
+        return view;
     }
 
 
@@ -101,20 +114,28 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
             sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }catch (NullPointerException e){
-            Log.getStackTraceString(e);
+            Log.d("Sensor error tilt", e.getMessage());
         };
 
+    }
 
+    @Override
+    public void onAttach(@NonNull Context context) {            //Methode für DialogFragement communication
+        super.onAttach(context);
+        try{
+            cardInputListener = (OnInputListener) getTargetFragment();
+        }catch (ClassCastException e){
+
+            Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
+        }
     }
 
 
 
-    
+
     /**
-     * sensorlistener bits
+     * Mehtoden die notwendig für den Sensor sind
      */
-
-
     //if in CardViewFragment --> listen, otherwise sensor on pause
     @Override
     public void onResume() {
@@ -186,6 +207,5 @@ public class CardViewFragment extends Fragment implements EventListener, SensorE
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
 
-    
         
 }
