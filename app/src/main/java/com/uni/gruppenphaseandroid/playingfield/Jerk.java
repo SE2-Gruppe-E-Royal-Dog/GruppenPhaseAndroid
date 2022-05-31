@@ -65,7 +65,7 @@ public class Jerk extends Figure {
         Field newPositionFigure1 = super.setNewPosition(fieldsToMove);
 
         if (getCurrentField() instanceof StartingField && ((StartingField) getCurrentField()).getColor() == getColor()) {
-            GoalField goalfield = ((StartingField) getCurrentField()).getNextGoalField();
+            ((StartingField) getCurrentField()).getNextGoalField();
             if (fieldsToMove <= 6) {
                 switch (fieldsToMove) {
                     case 6:
