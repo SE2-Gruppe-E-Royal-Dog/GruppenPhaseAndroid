@@ -127,16 +127,16 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         super.onCreate(savedInstanceState);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
-
     }
+
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
 
-        if (x < 40 && !GameManager.getInstance().isHasCheated()) {
-            Log.d("sensor_Light", "Light change was registerd");
-            GameManager.getInstance().moveWormholes();
+        if (x < 40 && !GameManager.getInstance().hasCheated()) {
+            Log.e("Code", "sensor_light");
+            GameManager.getInstance().initiateMoveWormholes();
 
         }
     }

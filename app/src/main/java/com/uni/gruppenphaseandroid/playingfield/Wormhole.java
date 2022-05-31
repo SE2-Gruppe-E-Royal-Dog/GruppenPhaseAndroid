@@ -1,21 +1,23 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
 
-import android.hardware.camera2.params.BlackLevelPattern;
-
 import java.util.Random;
 
 public class Wormhole extends Field {
 
-    Wormhole partnerWormhole;
-    static Random random = new Random();
+    private final Random random = new Random();
+    private Wormhole partnerWormhole;
 
     public Wormhole() {
 
     }
 
+    public Wormhole(int fieldID){
+        this.fieldID = fieldID;
+    }
+
     @Override
-    protected void triggerSpecialFieldEffect() {
+    public void triggerSpecialFieldEffect() {
         Figure myFigure;
         Figure partnerFigure;
 
@@ -34,8 +36,6 @@ public class Wormhole extends Field {
 
         myFigure.getFigureUI().moveFigureToPosition(partnerWormhole.getFieldUIobject());
 
-
-
     }
 
     public Wormhole getPartnerWormhole() {
@@ -46,21 +46,15 @@ public class Wormhole extends Field {
         this.partnerWormhole = partnerWormhole;
     }
 
-
     public Wormhole(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID) {
         super(fieldUIobject, nextField, previousField, currentFigure, fieldID);
-
     }
 
-
     public void moveWormholeToRandomPosition() {
-
-
         int value = generateRandomNumber();
         Field targetField = getNewFieldforWormholeSwitch(value);
 
         switchField(targetField);
-
     }
 
     public int generateRandomNumber() {
@@ -68,7 +62,6 @@ public class Wormhole extends Field {
         int max = 63;
 
         return random.nextInt(max - min) + min;
-
     }
 
     public Field getNewFieldforWormholeSwitch(int value) {
@@ -78,9 +71,8 @@ public class Wormhole extends Field {
             value = generateRandomNumber();
 
             targetField = getFieldAtDistance(value, Color.BLACK);
-
-
         }
+
         return targetField;
 
     }

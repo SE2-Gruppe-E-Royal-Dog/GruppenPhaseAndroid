@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
