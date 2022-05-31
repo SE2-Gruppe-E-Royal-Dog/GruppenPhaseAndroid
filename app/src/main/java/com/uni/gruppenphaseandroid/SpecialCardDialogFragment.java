@@ -78,7 +78,8 @@ public class SpecialCardDialogFragment extends DialogFragment {
                              int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
                              tv_seekbar.setVisibility(View.VISIBLE);
                              tv_seekbar.setText("" + (value + 1));
-                             tv_seekbar.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+                             int valHelp = seekBar.getThumbOffset()/2;
+                             tv_seekbar.setX(seekBar.getX() + val + valHelp);
                              //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar
 
 
