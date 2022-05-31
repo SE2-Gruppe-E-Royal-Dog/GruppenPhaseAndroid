@@ -35,6 +35,9 @@ public class GameManager {
     }
 
     private int currentTurnPlayerNumber;
+
+
+
     private TurnPhase currentTurnPhase;
     private PlayingField playingField;
     private int numberOfPlayers;
@@ -47,6 +50,9 @@ public class GameManager {
     private String lobbyID;
     private boolean hasCheated = false;
     private Figure currentlySelectedFigure;
+
+
+    private int cheatModifier = 0;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID, FigureManager figureManager) {
         this.lobbyID = lobbyID;
@@ -74,6 +80,8 @@ public class GameManager {
 
         if(!isThereAnyPossibleMove()){
             turnPlayerDiscardsCard();
+            //int index = selectCardToDiscard();
+            //Handcards.getInstance().discardHandcard(index);
             //nextTurn();
         }
     }
@@ -242,7 +250,7 @@ public class GameManager {
         this.lastTurn = lastTurn;
     }
 
-    public void moveWormholes() {
+    public void initiateMoveWormholes() {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
@@ -282,7 +290,7 @@ public class GameManager {
         playingField.repairWormholeVisuals();
     }
 
-    public boolean isHasCheated() {
+    public boolean hasCheated() {
         return hasCheated;
     }
 
@@ -305,4 +313,17 @@ public class GameManager {
     public Card getSelectedCard() {
         return selectedCard;
     }
+
+    public void setCurrentTurnPhase(TurnPhase currentTurnPhase) {
+        this.currentTurnPhase = currentTurnPhase;
+    }
+
+    public int getCheatModifier() {
+        return cheatModifier;
+    }
+
+    public void setCheatModifier(int cheatModifier) {
+        this.cheatModifier = cheatModifier;
+    }
+
 }

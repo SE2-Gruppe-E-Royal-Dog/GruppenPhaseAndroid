@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -57,6 +60,95 @@ public class PlayCardTest {
     }
 
     @Test
+    public void playCard_FigureIsNull(){
+        Card card = new Card(Cardtype.TWO);
+
+        assertThrows(IllegalArgumentException.class, () -> card.playCard(null, -1, null));
+    }
+
+    @Test
+    public void playEqualNum(){
+        Field expected = figure1.getCurrentField().getNextField().getNextField();
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.TWO);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        card.playCard(figure1, -1, null);
+
+        assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playEqualEqual(){
+        Field expected = figure1.getCurrentField().getNextField().getNextField();
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.EQUAL);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        assertThrows(IllegalArgumentException.class, () -> card.playCard(figure1, -1, null));
+    }
+
+    @Test
+    public void playEqualStart(){
+        figure1.setCurrentField(playingField.getRedStartingField().getPreviousStartingArea());
+        Field expected = playingField.getRedStartingField();
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        card.playCard(figure1, 0, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playEqualEffect(){
+        Field expected = figure1.getCurrentField().getNextField();
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        card.playCard(figure1, 1, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playEqualSwitch(){
+        figure2.setCurrentField(playingField.getBlueStartingField());
+        figure1.setCurrentField(playingField.getRedStartingField());
+        Field expected1 = figure2.getCurrentField();
+        Field expected2 = figure1.getCurrentField();
+        Card card = new Card(Cardtype.EQUAL);
+        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        lastTurn.setCardtype(Cardtype.SWITCH);
+        GameManager.getInstance().setLastTurn(lastTurn);
+
+        card.playCard(figure1, -1, figure2);
+
+        Assert.assertEquals(expected1, figure1.getCurrentField());
+        Assert.assertEquals(expected2, figure2.getCurrentField());
+    }
+
+    @Test
+    public void playMAGNET() {
+        figure2.setCurrentField(playingField.getBlueStartingField());
+        playingField.getBlueStartingField().setCurrentFigure(figure2);
+        figure1.setCurrentField(playingField.getRedStartingField());
+        playingField.getRedStartingField().setCurrentFigure(figure1);
+        Field expected = figure2.getCurrentField().getPreviousField();
+        Card card = new Card(Cardtype.MAGNET);
+
+        card.playCard(figure1, -1, null);
+
+        Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
     public void playNumberCard() {
         Field expected = figure1.getCurrentField().getNextField().getNextField();
         Card card = new Card(Cardtype.TWO);
@@ -64,6 +156,13 @@ public class PlayCardTest {
         card.playCard(figure1, -1, null);
 
         Assert.assertEquals(expected, figure1.getCurrentField());
+    }
+
+    @Test
+    public void playNonEffectCard_Exception(){
+        Card card = new Card(Cardtype.ONEORELEVEN_START);
+
+        assertThrows(IllegalArgumentException.class, () ->card.playCard(figure1, -1, null));
     }
 
     @Test
@@ -150,17 +249,10 @@ public class PlayCardTest {
     }
 
     @Test
-    public void playMAGNET() {
-        figure2.setCurrentField(playingField.getBlueStartingField());
-        playingField.getBlueStartingField().setCurrentFigure(figure2);
-        figure1.setCurrentField(playingField.getRedStartingField());
-        playingField.getRedStartingField().setCurrentFigure(figure1);
-        Field expected = figure2.getCurrentField().getPreviousField();
-        Card card = new Card(Cardtype.MAGNET);
+    public void playEffectCard_Exception(){
+        Card card = new Card(Cardtype.TWO);
 
-        card.playCard(figure1, -1, null);
-
-        Assert.assertEquals(expected, figure1.getCurrentField());
+        assertThrows(IllegalArgumentException.class, () ->card.playCard(figure1, 0, null));
     }
 
     @Test
@@ -177,17 +269,17 @@ public class PlayCardTest {
         Assert.assertEquals(expected2, figure2.getCurrentField());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
+    public void playSwitchCard_Exception(){
+        Card card = new Card(Cardtype.TWO);
+
+        assertThrows(IllegalArgumentException.class, () ->card.playCard(figure1, -1, figure2));
+    }
+
+    @Test
     public void illegalCombinationOfValues() {
         Card card = new Card(Cardtype.TWO);
 
-        card.playCard(figure1, -1, figure2);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void myFigureIsNull() {
-        Card card = new Card(Cardtype.TWO);
-
-        card.playCard(null, 0, null);
+        assertThrows(IllegalArgumentException.class, () ->card.playCard(figure1, -1, figure2));
     }
 }

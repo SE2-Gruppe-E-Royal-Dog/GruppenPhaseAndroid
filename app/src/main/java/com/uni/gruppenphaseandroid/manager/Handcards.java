@@ -26,4 +26,12 @@ public class Handcards {
     public void addCardToHand(LinkedList<Card> cards) {
         myCards.addAll(cards);
     }
+
+    public void discardHandcard(int index){
+        myCards.remove(index);
+    }
+
+    public void setMyCards(LinkedList<Card> myCards) {
+        this.myCards = myCards;
+    }
 }
