@@ -36,11 +36,13 @@ public class GameManagerWormholeTest {
     Client socketClient;
     ArrayList<Wormhole> wormholeList;
     String lobbyID;
+    String playerID;
     Message message;
 
     @Before
     public void setUp() {
         lobbyID = "id";
+        playerID = "playerID";
         view = mock(View.class);
         playingField = mock(PlayingField.class);
         GameManager.getInstance().setPlayingField(playingField);
@@ -60,7 +62,7 @@ public class GameManagerWormholeTest {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
 
-        GameManager.getInstance().startGame(4, 2, lobbyID, figureManager);
+        GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());
     }
 

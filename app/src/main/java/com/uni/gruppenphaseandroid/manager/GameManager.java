@@ -48,14 +48,16 @@ public class GameManager {
     private Card selectedCard;
     private int currentEffect;                          //int for special cards
     private String lobbyID;
+    private String playerID;
     private boolean hasCheated = false;
     private Figure currentlySelectedFigure;
 
 
     private int cheatModifier = 0;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID, FigureManager figureManager) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager) {
         this.lobbyID = lobbyID;
+        this.playerID = playerID;
 
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
@@ -93,14 +95,14 @@ public class GameManager {
         }
     }
 
-    public void figureGotSelected(Figure figure) throws Exception {
-        if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn()) {
+    public void figureGotSelected(Figure figure){
+        if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
         }
         else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
             figureSelectedSwitchCase(figure);
         }
-        selectedCard = null;
+        //selectedCard = null;
     }
 
     private void figureSelectedNormalCase(Figure figure){
@@ -144,25 +146,25 @@ public class GameManager {
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
-        if (currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
-            Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
-            Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
-            Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
-            Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
+        Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
+        Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
+        Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
+        Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
 
-            lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
+        lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
 
-            if (!isItMyTurn()) { //for the turnplayer, the update took place already
-                playingField.moveFigureToField(figure1, figure1newField);
-                if (figure2 != null && figure2newField != null) {
-                    playingField.moveFigureToField(figure2, figure2newField);
-                }
+        Log.e("figure", "Is it my turn check should now start");
+        if (!isItMyTurn()) { //for the turnplayer, the update took place already
+            Log.e("figure", "Figure with ID "+figure1.getId() +" should be moved now");
+            playingField.moveFigureToField(figure1, figure1newField);
+            if (figure2 != null && figure2newField != null) {
+                playingField.moveFigureToField(figure2, figure2newField);
             }
-            //play the card
             lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
-            //TODO: update card UI
-            nextTurn();
         }
+
+        //TODO: update card UI
+        nextTurn();
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
@@ -332,5 +334,9 @@ public class GameManager {
 
     public void setCurrentEffect(int currentEffect) {
         this.currentEffect = currentEffect;
+    }
+
+    public String getPlayerID() {
+        return playerID;
     }
 }

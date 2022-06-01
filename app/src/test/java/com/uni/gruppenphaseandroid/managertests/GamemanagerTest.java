@@ -40,7 +40,7 @@ public class GamemanagerTest {
 
     @Test
     public void startGameTest() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager);
         Assert.assertEquals(TurnPhase.CHOOSECARD, GameManager.getInstance().getCurrentTurnPhase());
         Assert.assertEquals(0, GameManager.getInstance().getMyTurnNumber());
         Assert.assertEquals(0, GameManager.getInstance().getCurrentTurnPlayerNumber());
@@ -49,7 +49,7 @@ public class GamemanagerTest {
 
     @Test
     public void nextTurnTestOnce() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id","id", figureManager);
         GameManager.getInstance().nextTurn();
         Assert.assertEquals(1, GameManager.getInstance().getCurrentTurnPlayerNumber());
         Assert.assertEquals(TurnPhase.CHOOSECARD, GameManager.getInstance().getCurrentTurnPhase());
@@ -57,7 +57,7 @@ public class GamemanagerTest {
 
     @Test
     public void nextTurnTestTwice() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id","id", figureManager);
         GameManager.getInstance().nextTurn();
         GameManager.getInstance().nextTurn();
         Assert.assertEquals(2, GameManager.getInstance().getCurrentTurnPlayerNumber());
@@ -66,7 +66,7 @@ public class GamemanagerTest {
 
     @Test
     public void nextTurnTestWholeRound() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id","id", figureManager);
         GameManager.getInstance().nextTurn();
         GameManager.getInstance().nextTurn();
         GameManager.getInstance().nextTurn();
@@ -77,20 +77,20 @@ public class GamemanagerTest {
 
     @Test
     public void isItMyTurnTestTrue() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id","id", figureManager);
         Assert.assertEquals(true, GameManager.getInstance().isItMyTurn());
     }
 
     @Test
     public void isItMyTurnTestFalse() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id","id", figureManager);
         GameManager.getInstance().nextTurn();
         Assert.assertEquals(false, GameManager.getInstance().isItMyTurn());
     }
 
     @Test
     public void cardGotPlayedTest() {
-        GameManager.getInstance().startGame(4, 0, "id", figureManager);
+        GameManager.getInstance().startGame(4, 0, "id","id", figureManager);
         GameManager.getInstance().cardGotPlayed(card);
         Assert.assertEquals(TurnPhase.CHOOSEFIGURE, GameManager.getInstance().getCurrentTurnPhase());
         Assert.assertEquals(card, GameManager.getInstance().getSelectedCard());

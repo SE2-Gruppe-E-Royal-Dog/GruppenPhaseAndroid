@@ -82,7 +82,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
 
         view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
-*/
+*/      btnCardholder.setVisibility(View.VISIBLE);
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button

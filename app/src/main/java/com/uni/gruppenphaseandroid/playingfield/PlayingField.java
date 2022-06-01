@@ -238,11 +238,19 @@ public class PlayingField {
                 throw new IllegalStateException("Unexpected value: " + figure.getColor());
         }
 
+        Figure figureToOvertake = newField.getCurrentFigure();
+        if(figureToOvertake!=null){
+            overtake(figureToOvertake);
+        }
+
         figure.getCurrentField().setCurrentFigure(null);
         newField.setCurrentFigure(figure);
         figure.setCurrentField(newField);
         figure.getFigureUI().moveFigureToPosition(newField.getFieldUIobject());
         newField.triggerSpecialFieldEffect();
+
+        LastTurn lastTurn = new LastTurn(figure, figureToOvertake, figure.getCurrentField(), (figureToOvertake!=null)?figureToOvertake.getCurrentField():null, 1);
+        GameManager.getInstance().setLastTurn(lastTurn);
 
         return newField;
     }
@@ -284,22 +292,19 @@ public class PlayingField {
 
         newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
 
-            if (newPositionFigure1.getCurrentFigure() != null) {
-                figure2 = newPositionFigure1.getCurrentFigure(); // figure is beaten and has to be set to Starting Area
-                figure2.setCurrentField(getRightStartingAreaField(figure2.getColor()));
-                figure2.getFigureUI().moveFigureToPosition(figure2.getCurrentField().getFieldUIobject()); // visual movement on board
-            } else {
-                figure2 = null;
-            }
+        figure2 = newPositionFigure1.getCurrentFigure();
+        if (figure2 != null) {
+            overtake(figure2);
+        }
 
-            figure1.getCurrentField().setCurrentFigure(null);
-            newPositionFigure1.setCurrentFigure(figure1);
-            figure1.setCurrentField(newPositionFigure1);
-            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
-            newPositionFigure1.triggerSpecialFieldEffect();
+        figure1.getCurrentField().setCurrentFigure(null);
+        newPositionFigure1.setCurrentFigure(figure1);
+        figure1.setCurrentField(newPositionFigure1);
+        figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
+        newPositionFigure1.triggerSpecialFieldEffect();
 
-            LastTurn lastTurn = new LastTurn(figure1, figure2, newPositionFigure1, figure2 != null ? figure2.getCurrentField() : null, fieldsToMove);
-            GameManager.getInstance().setLastTurn(lastTurn);
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null, fieldsToMove);
+        GameManager.getInstance().setLastTurn(lastTurn);
     }
 
     private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
@@ -413,9 +418,15 @@ public class PlayingField {
                 return applyCheatModifierForGoalField(field);
             } else{ // Field is regular field
                     return field.getFieldAtDistance(GameManager.getInstance().getCheatModifier(), Color.BLACK);
-                }
-            }
         }
+    }
+
+    private void overtake(Figure figureToOvertake){
+        figureToOvertake.getCurrentField().setCurrentFigure(null);
+        figureToOvertake.setCurrentField(getRightStartingAreaField(figureToOvertake.getColor()));
+        figureToOvertake.getFigureUI().moveFigureToPosition(figureToOvertake.getCurrentField().getFieldUIobject()); // visual movement on board
+    }
+}
 
 
 
