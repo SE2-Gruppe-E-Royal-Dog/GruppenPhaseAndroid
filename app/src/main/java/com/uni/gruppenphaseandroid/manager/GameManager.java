@@ -153,9 +153,7 @@ public class GameManager {
 
         lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
 
-        Log.e("figure", "Is it my turn check should now start");
         if (!isItMyTurn()) { //for the turnplayer, the update took place already
-            Log.e("figure", "Figure with ID "+figure1.getId() +" should be moved now");
             playingField.moveFigureToField(figure1, figure1newField);
             if (figure2 != null && figure2newField != null) {
                 playingField.moveFigureToField(figure2, figure2newField);
