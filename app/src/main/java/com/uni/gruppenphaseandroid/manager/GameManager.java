@@ -146,23 +146,28 @@ public class GameManager {
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
+        if (!isItMyTurn()) { //for the turnplayer, the update took place already
+            lastTurn = generateLastTurnObject(updateBoardPayload);
+
+            playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
+            if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
+                playingField.moveFigureToField(lastTurn.getFigure2(), lastTurn.getNewFigure2Field());
+            }
+
+        }
+        //TODO: update card UI
+        nextTurn();
+    }
+
+    private LastTurn generateLastTurnObject(UpdateBoardPayload updateBoardPayload){
         Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
         Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
         Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
         Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
 
-        lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
-
-        if (!isItMyTurn()) { //for the turnplayer, the update took place already
-            playingField.moveFigureToField(figure1, figure1newField);
-            if (figure2 != null && figure2newField != null) {
-                playingField.moveFigureToField(figure2, figure2newField);
-            }
-            lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
-        }
-
-        //TODO: update card UI
-        nextTurn();
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
+        lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
+        return lastTurn;
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
@@ -186,21 +191,21 @@ public class GameManager {
                     //TODO: equal card?
                     case ONETOSEVEN:
                         for(int i = 1; i <=7;i++ ){
-                            flag = flag | card.checkIfCardIsPlayable(figure, i, null);
+                            flag = flag || card.checkIfCardIsPlayable(figure, i, null);
                         }
                         break;
                     case FOUR_PLUSMINUS:
-                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
                         //TODO: which effect nr is -4?
                         break;
                     case ONEORELEVEN_START:
-                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
-                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
-                        flag = flag | card.checkIfCardIsPlayable(figure, 11, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 11, null);
                         break;
                     case THIRTEEN_START:
-                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
-                        flag = flag | card.checkIfCardIsPlayable(figure, 13, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 13, null);
                         break;
                     case SWITCH:
                         for(int i = 1;i<=16;i++){
@@ -208,11 +213,11 @@ public class GameManager {
                                 continue;
                             }
                             Figure targetFigure = figuremanager.getFigureWithID(i);
-                            flag = flag | card.checkIfCardIsPlayable(figure, -1, targetFigure);
+                            flag = flag || card.checkIfCardIsPlayable(figure, -1, targetFigure);
                         }
                         break;
                     default:
-                        flag = flag | card.checkIfCardIsPlayable(figure, -1, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, -1, null);
                 }
                 if(flag) break; //early break for performance reasons
             }
@@ -253,9 +258,6 @@ public class GameManager {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
-
-
-
         hasCheated = true;
 
         playingField.moveAllWormholesRandomly();
@@ -266,15 +268,6 @@ public class GameManager {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
-    }
-
-
-    public void moveFigureShowcase(int figureID, int distance) {
-        try {
-            playingField.move(figuremanager.getFigureWithID(figureID), distance);
-        } catch (Exception e) {
-            Log.d("game_manager", "Exception in moveFigureShowcase", e);
-        }
     }
 
     public String getLobbyID() {
