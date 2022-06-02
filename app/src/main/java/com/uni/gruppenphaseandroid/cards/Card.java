@@ -22,6 +22,8 @@ public class Card {
             throw new IllegalArgumentException("myFigure cannot be null");
         }
 
+        GameManager.getInstance().getLastTurn().setCardtype(cardtype);
+
         if(getCardtype()==Cardtype.EQUAL){
             //Gets last played Card
             playEqualCard(myFigure, effect, targetFigure);

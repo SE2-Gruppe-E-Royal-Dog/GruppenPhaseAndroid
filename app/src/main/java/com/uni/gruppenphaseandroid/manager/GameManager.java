@@ -4,8 +4,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -151,6 +153,7 @@ public class GameManager {
             Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
 
             lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
+            InGameFragment.setStackImage();
 
             if (!isItMyTurn()) { //for the turnplayer, the update took place already
                 playingField.moveFigureToField(figure1, figure1newField);
