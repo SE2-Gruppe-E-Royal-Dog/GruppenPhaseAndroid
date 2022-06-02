@@ -34,26 +34,23 @@ public class GameManager {
         return instance;
     }
 
-    private int currentTurnPlayerNumber;
-
-
-
-    private TurnPhase currentTurnPhase;
-    private PlayingField playingField;
-    private int numberOfPlayers;
-    private int myTurnNumber;
-    private Client webSocketClient;
-    private LastTurn lastTurn;
-    private FigureManager figuremanager;
-    private Card selectedCard;
-    private int currentEffect;                          //int for special cards
     private String lobbyID;
     private String playerID;
-    private boolean hasCheated = false;
+
+    private int currentTurnPlayerNumber;
+    private TurnPhase currentTurnPhase;
+    private int myTurnNumber;
+    private int numberOfPlayers;
+
+    private PlayingField playingField;
+    private Client webSocketClient;
+    private FigureManager figuremanager;
+    private LastTurn lastTurn;
+    private Card selectedCard;
+    private int currentEffect;                          //int for special cards
     private Figure currentlySelectedFigure;
-
-
     private int cheatModifier = 0;
+    private boolean hasCheated = false;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager) {
         this.lobbyID = lobbyID;
@@ -102,7 +99,6 @@ public class GameManager {
         else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
             figureSelectedSwitchCase(figure);
         }
-        //selectedCard = null;
     }
 
     private void figureSelectedNormalCase(Figure figure){
@@ -142,6 +138,7 @@ public class GameManager {
 
     private void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
+        selectedCard = null;
         webSocketClient.send(lastTurn.generateServerMessage());
     }
 
