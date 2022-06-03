@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,8 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class AccusationFragment extends DialogFragment {
     Button playerOne, playerTwo, playerThree, leaveFragment;
+    TextView text;
+
 
     @Nullable
     @Override
@@ -26,9 +29,14 @@ public class AccusationFragment extends DialogFragment {
     playerTwo = view.findViewById(R.id.btn_PlayerTwo);
     playerThree = view.findViewById(R.id.btn_PlayerThree);
     leaveFragment = view.findViewById(R.id.btn_returnGame);
+    text = view.findViewById(R.id.textView);
+
 
     if (GameManager.getInstance().isItMyTurn()) {
+        text.setText("Who do you accusate?");
         setButtons();
+    } else {
+         text.setText("Wait until your turn!");
     }
 
     leaveFragment.setOnClickListener(new View.OnClickListener() {
@@ -67,9 +75,9 @@ public class AccusationFragment extends DialogFragment {
     public void setButtons (){
         int players = GameManager.getInstance().getNumberOfPlayers();
         switch (players-1) {
-            case 2: playerThree.setVisibility(View.VISIBLE);
-            case 1: playerTwo.setVisibility(View.VISIBLE);
-            case 0: playerOne.setVisibility(View.VISIBLE);
+            case 3: playerThree.setVisibility(View.VISIBLE);
+            case 2: playerTwo.setVisibility(View.VISIBLE);
+            case 1: playerOne.setVisibility(View.VISIBLE);
         }
 
         int i = 0;
@@ -79,19 +87,19 @@ public class AccusationFragment extends DialogFragment {
                 switch (j) {
                     case 2:
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
-                            playerThree.setBackgroundColor(assignColor(2));
+                            playerThree.setBackgroundColor(assignColor(i));
                         i++;
                         j++;
                         break;
                     case 1:
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
-                            playerTwo.setBackgroundColor(assignColor(1));
+                            playerTwo.setBackgroundColor(assignColor(i));
                         i++;
                         j++;
                         break;
                     case 0:
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
-                            playerOne.setBackgroundColor(assignColor(0));
+                            playerOne.setBackgroundColor(assignColor(i));
                         i++;
                         j++;
                         break;
