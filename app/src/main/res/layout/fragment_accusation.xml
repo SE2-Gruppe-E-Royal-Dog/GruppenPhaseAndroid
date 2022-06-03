@@ -63,6 +63,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="60dp"
             android:text="Who do you accusate?"
+            android:textAlignment="center"
             android:textColorLink="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -63,24 +63,37 @@ public class AccusationFragment extends DialogFragment {
     }
 
     public void setButtons (){
-        switch (GameManager.getInstance().getNumberOfPlayers()){
-            case 3: playerThree.setVisibility(View.VISIBLE);
-            playerThree.setBackgroundColor(assignColor(3));
-            case 2: playerTwo.setVisibility(View.VISIBLE);
-            playerTwo.setBackgroundColor(assignColor(2));
-            case 1: playerOne.setVisibility(View.VISIBLE);
-            playerOne.setBackgroundColor(assignColor(1));
+        int players = GameManager.getInstance().getNumberOfPlayers();
+        for (int i = 0; i<players; i++) {
+            if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient()) {
+                switch (i) {
+                    case 2:
+                        playerThree.setVisibility(View.VISIBLE);
+                        playerThree.setBackgroundColor(assignColor(3));
+                        break;
+                    case 1:
+                        playerTwo.setVisibility(View.VISIBLE);
+                        playerTwo.setBackgroundColor(assignColor(2));
+                        break;
+                    case 0:
+                        playerOne.setVisibility(View.VISIBLE);
+                        playerOne.setBackgroundColor(assignColor(1));
+                        break;
+                }
+            }
         }
+
     }
     public int assignColor(int playerIndex){
         switch (GameManager.getInstance().getColorOfClient(playerIndex)){
+            case GREEN: return Color.GREEN;
             case RED: return Color.RED;
             case YELLOW: return Color.YELLOW;
             case BLUE: return Color.BLUE;
-            case GREEN: return Color.GREEN;
+
         }
         return 0;
-
     }
+
 
 }
