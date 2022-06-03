@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid.cards;
 
-import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
