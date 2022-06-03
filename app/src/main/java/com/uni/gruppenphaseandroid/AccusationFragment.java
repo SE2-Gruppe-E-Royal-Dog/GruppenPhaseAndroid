@@ -27,7 +27,9 @@ public class AccusationFragment extends DialogFragment {
     playerThree = view.findViewById(R.id.btn_PlayerThree);
     leaveFragment = view.findViewById(R.id.btn_returnGame);
 
-    setButtons();
+    if (GameManager.getInstance().isItMyTurn()) {
+        setButtons();
+    }
 
     leaveFragment.setOnClickListener(new View.OnClickListener() {
         @Override
