@@ -181,7 +181,7 @@ public class CardUI  {
             case SWITCH:
                 return R.drawable.ic_card_switch;
             default:
-                throw new IllegalStateException("Unexpected value: " + cardtype);
+                throw new NullPointerException("Cardtype cannot be null");
         }
     }
 
