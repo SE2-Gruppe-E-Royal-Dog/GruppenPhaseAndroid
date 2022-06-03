@@ -333,4 +333,11 @@ public class GameManager {
     public void setCurrentEffect(int currentEffect) {
         this.currentEffect = currentEffect;
     }
+
+    public Color getColorOfClient(int playerIndex){
+        return Color.values()[playerIndex];
+    }
+    public Color getColorOfMyClient(){
+        return getColorOfClient(myTurnNumber);
+    }
 }
