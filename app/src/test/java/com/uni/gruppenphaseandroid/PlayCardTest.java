@@ -70,7 +70,7 @@ public class PlayCardTest {
     public void playEqualNum(){
         Field expected = figure1.getCurrentField().getNextField().getNextField();
         Card card = new Card(Cardtype.EQUAL);
-        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        LastTurn lastTurn = new LastTurn(null, null, null, null);
         lastTurn.setCardtype(Cardtype.TWO);
         GameManager.getInstance().setLastTurn(lastTurn);
 
@@ -83,7 +83,7 @@ public class PlayCardTest {
     public void playEqualEqual(){
         Field expected = figure1.getCurrentField().getNextField().getNextField();
         Card card = new Card(Cardtype.EQUAL);
-        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        LastTurn lastTurn = new LastTurn(null, null, null, null);
         lastTurn.setCardtype(Cardtype.EQUAL);
         GameManager.getInstance().setLastTurn(lastTurn);
 
@@ -95,7 +95,7 @@ public class PlayCardTest {
         figure1.setCurrentField(playingField.getRedStartingField().getPreviousStartingArea());
         Field expected = playingField.getRedStartingField();
         Card card = new Card(Cardtype.EQUAL);
-        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        LastTurn lastTurn = new LastTurn(null, null, null, null);
         lastTurn.setCardtype(Cardtype.ONEORELEVEN_START);
         GameManager.getInstance().setLastTurn(lastTurn);
 
@@ -108,7 +108,7 @@ public class PlayCardTest {
     public void playEqualEffect(){
         Field expected = figure1.getCurrentField().getNextField();
         Card card = new Card(Cardtype.EQUAL);
-        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        LastTurn lastTurn = new LastTurn(null, null, null, null);
         lastTurn.setCardtype(Cardtype.ONEORELEVEN_START);
         GameManager.getInstance().setLastTurn(lastTurn);
 
@@ -124,7 +124,7 @@ public class PlayCardTest {
         Field expected1 = figure2.getCurrentField();
         Field expected2 = figure1.getCurrentField();
         Card card = new Card(Cardtype.EQUAL);
-        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        LastTurn lastTurn = new LastTurn(null, null, null, null);
         lastTurn.setCardtype(Cardtype.SWITCH);
         GameManager.getInstance().setLastTurn(lastTurn);
 

@@ -162,7 +162,7 @@ public class GameManager {
         Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
         Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
 
-        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField);
         lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
         return lastTurn;
     }

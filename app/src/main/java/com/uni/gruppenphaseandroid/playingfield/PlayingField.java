@@ -249,7 +249,7 @@ public class PlayingField {
         figure.getFigureUI().moveFigureToPosition(newField.getFieldUIobject());
         newField.triggerSpecialFieldEffect();
 
-        LastTurn lastTurn = new LastTurn(figure, figureToOvertake, figure.getCurrentField(), (figureToOvertake!=null)?figureToOvertake.getCurrentField():null, 1);
+        LastTurn lastTurn = new LastTurn(figure, figureToOvertake, figure.getCurrentField(), (figureToOvertake!=null)?figureToOvertake.getCurrentField():null);
         GameManager.getInstance().setLastTurn(lastTurn);
 
         return newField;
@@ -303,7 +303,7 @@ public class PlayingField {
         figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
         newPositionFigure1.triggerSpecialFieldEffect();
 
-        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null, fieldsToMove);
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
         GameManager.getInstance().setLastTurn(lastTurn);
     }
 

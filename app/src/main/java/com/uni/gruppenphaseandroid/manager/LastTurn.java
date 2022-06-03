@@ -14,7 +14,6 @@ public class LastTurn {
     private Figure figure2;
     private Field newFigure1Field;
     private Field newFigure2Field;
-    private int distanceMovedByFigure1;
     private Cardtype cardtype;
     private int cheatModifier = 0;
 
@@ -28,12 +27,11 @@ public class LastTurn {
         return message;
     }
 
-    public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field, int distanceMovedByFigure1) {
+    public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field) {
         this.figure1 = figure1;
         this.figure2 = figure2;
         this.newFigure1Field = newFigure1Field;
         this.newFigure2Field = newFigure2Field;
-        this.distanceMovedByFigure1 = distanceMovedByFigure1;
     }
 
     public Figure getFigure1() {
@@ -66,14 +64,6 @@ public class LastTurn {
 
     public void setNewFigure2Field(Field newFigure2Field) {
         this.newFigure2Field = newFigure2Field;
-    }
-
-    public int getDistanceMovedByFigure1() {
-        return distanceMovedByFigure1;
-    }
-
-    public void setDistanceMovedByFigure1(int distanceMovedByFigure1) {
-        this.distanceMovedByFigure1 = distanceMovedByFigure1;
     }
     public Cardtype getCardtype() {
         return cardtype;
