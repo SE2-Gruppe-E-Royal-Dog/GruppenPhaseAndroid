@@ -207,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            //start game
-            Log.d("server_communication", "Server message received!!!!!!");
             GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager());
 
             //TODO hide startgame button and show chardholder

@@ -1,13 +1,21 @@
 package com.uni.gruppenphaseandroid.managertests;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.view.View;
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
+import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
+import com.uni.gruppenphaseandroid.playingfield.Color;
+import com.uni.gruppenphaseandroid.playingfield.Field;
+import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
@@ -94,6 +102,28 @@ public class GamemanagerTest {
         GameManager.getInstance().cardGotPlayed(card);
         Assert.assertEquals(TurnPhase.CHOOSEFIGURE, GameManager.getInstance().getCurrentTurnPhase());
         Assert.assertEquals(card, GameManager.getInstance().getSelectedCard());
+    }
+
+    @Test
+    public void testUpdateBoard(){
+        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager);
+        GameManager.getInstance().nextTurn();
+        Figure figure1 = new Figure();
+        Field field1 = new Field();
+        UpdateBoardPayload updateBoardPayload = new UpdateBoardPayload(1, -1, 3, -1, 4, 0, "id", "id");
+        LastTurn expected = new LastTurn(figure1, null, field1, null);
+        when(figureManager.getFigureWithID(1)).thenReturn(figure1);
+        when(playingField.getFieldWithID(3)).thenReturn(field1);
+
+        GameManager.getInstance().updateBoard(updateBoardPayload);
+
+        verify(figureManager, times(1)).getFigureWithID(1);
+        verify(playingField, times(1)).getFieldWithID(3);
+        verify(playingField, times(1)).moveFigureToField(figure1, field1);
+        LastTurn actualLastTurn = GameManager.getInstance().getLastTurn();
+        Assert.assertEquals(expected.getFigure1(), actualLastTurn.getFigure1());
+        Assert.assertEquals(expected.getFigure2(), actualLastTurn.getFigure2());
+
     }
 
 }

@@ -21,6 +21,7 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
@@ -316,4 +317,5 @@ public class GameManager {
     public String getPlayerID() {
         return playerID;
     }
+
 }
