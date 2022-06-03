@@ -66,24 +66,42 @@ public class AccusationFragment extends DialogFragment {
 
     public void setButtons (){
         int players = GameManager.getInstance().getNumberOfPlayers();
-        for (int i = 0; i<players; i++) {
-            if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient()) {
-                switch (i) {
+        switch (players-1) {
+            case 2: playerThree.setVisibility(View.VISIBLE);
+            case 1: playerTwo.setVisibility(View.VISIBLE);
+            case 0: playerOne.setVisibility(View.VISIBLE);
+        }
+
+        int i = 0;
+        int j = 0;
+        do{
+            if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient()){
+                switch (j) {
                     case 2:
-                        playerThree.setVisibility(View.VISIBLE);
-                        playerThree.setBackgroundColor(assignColor(3));
+                        if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
+                            playerThree.setBackgroundColor(assignColor(2));
+                        i++;
+                        j++;
                         break;
                     case 1:
-                        playerTwo.setVisibility(View.VISIBLE);
-                        playerTwo.setBackgroundColor(assignColor(2));
+                        if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
+                            playerTwo.setBackgroundColor(assignColor(1));
+                        i++;
+                        j++;
                         break;
                     case 0:
-                        playerOne.setVisibility(View.VISIBLE);
-                        playerOne.setBackgroundColor(assignColor(1));
+                        if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
+                            playerOne.setBackgroundColor(assignColor(0));
+                        i++;
+                        j++;
                         break;
                 }
+            } else {
+                i++;
             }
-        }
+
+        } while (i < players);
+
 
     }
     public int assignColor(int playerIndex){
