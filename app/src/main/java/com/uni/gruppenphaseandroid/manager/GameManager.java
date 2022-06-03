@@ -225,13 +225,12 @@ public class GameManager {
     }
 
     public void turnPlayerDiscardsCard(){
-        int index = 0;
         /*
         TODO: Select Card to Discard
         index = cardIndexInHandcards
-         */
         Handcards.getInstance().discardHandcard(index);
         InGameFragment.setStackImage();
+         */
     }
 
     public PlayingField getPlayingField() {
