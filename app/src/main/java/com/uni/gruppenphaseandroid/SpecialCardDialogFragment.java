@@ -72,7 +72,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
                      optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                          @Override
                          public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
-                             selectedCardEffect = value;
+                             selectedCardEffect = value+1;
 
 
                              int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
