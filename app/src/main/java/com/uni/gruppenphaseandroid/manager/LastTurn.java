@@ -7,6 +7,8 @@ import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
+import com.uni.gruppenphaseandroid.playingfield.FigureManager;
+import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class LastTurn {
 
@@ -32,6 +34,17 @@ public class LastTurn {
         this.figure2 = figure2;
         this.newFigure1Field = newFigure1Field;
         this.newFigure2Field = newFigure2Field;
+    }
+
+    public static LastTurn generateLastTurnObject(UpdateBoardPayload updateBoardPayload, FigureManager figureManager, PlayingField playingField){
+        Figure figure1 = figureManager.getFigureWithID(updateBoardPayload.getFigure1ID());
+        Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figureManager.getFigureWithID(updateBoardPayload.getFigure2ID());
+        Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
+        Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
+
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField);
+        lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
+        return lastTurn;
     }
 
     public Figure getFigure1() {

@@ -144,7 +144,7 @@ public class GameManager {
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (!isItMyTurn()) { //for the turnplayer, the update took place already
-            lastTurn = generateLastTurnObject(updateBoardPayload);
+            lastTurn = LastTurn.generateLastTurnObject(updateBoardPayload, figuremanager, playingField);
 
             playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
             if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
@@ -154,17 +154,6 @@ public class GameManager {
         }
         //TODO: update card UI
         nextTurn();
-    }
-
-    private LastTurn generateLastTurnObject(UpdateBoardPayload updateBoardPayload){
-        Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
-        Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
-        Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
-        Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
-
-        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField);
-        lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
-        return lastTurn;
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
