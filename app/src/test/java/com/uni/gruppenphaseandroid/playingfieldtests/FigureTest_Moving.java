@@ -115,6 +115,10 @@ public class FigureTest_Moving {
         imageView = null;
     }
 
+    /**
+     * Test innerhalb einer Farbe auf Move
+     * 2 => Überholen; 1 => Rausschmeißen
+     */
     @Test
     public void checkMovingRedJerkByRedCitizen2() { // OK
         jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
@@ -298,6 +302,262 @@ public class FigureTest_Moving {
     }
 
      */
+
+    /**
+     * Test Rausschmeißen zwischen Farben
+     * Ausnahme King kann nur von King geschmissen werden.
+     */
+    @Test
+    public void checkMovingRedJerkByBlueJerk2() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertTrue(jerkBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedJerkByBlueJerk1() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertTrue(jerkBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedJerkByBlueCitizen2() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedJerkByBlueCitizen1() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedJerkByBlueKnight2() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedJerkByBlueKnight1() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkMoving(1));
+    }
+
+
+    /*@Test
+    public void checkMovingRedJerkByBlueKing2() {
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedJerkByBlueKing1() {
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(1));
+    }
+
+     */
+
+
+    @Test
+    public void checkMovingRedCitizenByBlueJerk2() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedCitizenByBlueJerk1() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertTrue(jerkBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedCitizenByBlueCitizen2() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedCitizenByBlueCitizen1() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedCitizenByBlueKnight2() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedCitizenByBlueKnight1() { // OK
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkMoving(1));
+    }
+
+
+    /*@Test
+    public void checkMovingRedCitizenByBlueKing2() {
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedCitizenByBlueKing1() {
+        citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(1));
+    }
+
+     */
+
+
+    @Test
+    public void checkMovingRedKnightByBlueJerk2() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKnightByBlueJerk1() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertTrue(jerkBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedKnightByBlueCitizen2() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertFalse(citizenBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKnightByBlueCitizen1() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertTrue(citizenBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedKnightByBlueKnight2() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKnightByBlueKnight1() { // OK
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkMoving(1));
+    }
+
+/*
+    @Test
+    public void checkMovingRedKnightByBlueKing2() {
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKnightByBlueKing1() {
+        knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedKingByBlueJerk2() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKingByBlueJerk1() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        Assert.assertFalse(jerkBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedKingByBlueCitizen2() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertFalse(citizenBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKingByBlueCitizen1() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        Assert.assertFalse(citizenBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedKingByBlueKnight2() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKingByBlueKnight1() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingRedKingByBlueKing2() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingRedKingByBlueKing1() {
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(1));
+    }
+
+ */
+
+
+
+
+
+
+
 
     //Playfield
     /*@Test
