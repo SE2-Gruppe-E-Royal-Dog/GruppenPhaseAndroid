@@ -59,10 +59,12 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
      * @param fieldsToMove - fields to move
      * @return true if moving possible
      */
-    @Override
+    /*@Override
     public boolean checkMoving(int fieldsToMove) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
 
 
         return true;
     }
+
+     */
 }

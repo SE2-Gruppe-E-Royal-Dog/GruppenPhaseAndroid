@@ -61,11 +61,13 @@ public class Figure {
     }
 
     private boolean checkOvertakingPossible() {
-        if (checkGreenCard()) {
+        /*if (checkGreenCard()) {
             return true;
         } else {
+
+         */
             return checkOvertaking();
-        }
+
     }
 
     /**
