@@ -180,7 +180,7 @@ public class CardUI  {
             case SWITCH:
                 return R.drawable.ic_card_switch;
             default:
-                throw new NullPointerException("Cardtype cannot be null");
+                return -1;
         }
     }
 
