@@ -244,14 +244,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKnightByRedKing2() { //
+    public void checkMovingRedKnightByRedKing2() { // OK
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKnightByRedKing1() { //
+    public void checkMovingRedKnightByRedKing1() { // OK
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(1));
@@ -259,14 +259,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByRedJerk2() { //
+    public void checkMovingRedKingByRedJerk2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
         Assert.assertFalse(jerkRed.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByRedJerk1() {
+    public void checkMovingRedKingByRedJerk1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
         Assert.assertFalse(jerkRed.checkMoving(1));
@@ -274,14 +274,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByRedCitizen2() {
+    public void checkMovingRedKingByRedCitizen2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
         Assert.assertFalse(citizenRed.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByRedCitizen1() {
+    public void checkMovingRedKingByRedCitizen1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
         Assert.assertFalse(citizenRed.checkMoving(1));
@@ -289,14 +289,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByRedKnight2() {
+    public void checkMovingRedKingByRedKnight2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
         Assert.assertFalse(knightRed.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByRedKnight1() {
+    public void checkMovingRedKingByRedKnight1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
         Assert.assertFalse(knightRed.checkMoving(1));
@@ -353,14 +353,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedJerkByBlueKing2() {
+    public void checkMovingRedJerkByBlueKing2() { // OK
         jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedJerkByBlueKing1() {
+    public void checkMovingRedJerkByBlueKing1() { // OK
         jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(1));
@@ -413,14 +413,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedCitizenByBlueKing2() {
+    public void checkMovingRedCitizenByBlueKing2() { // OK
         citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedCitizenByBlueKing1() {
+    public void checkMovingRedCitizenByBlueKing1() { // OK
         citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(1));
@@ -473,14 +473,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKnightByBlueKing2() {
+    public void checkMovingRedKnightByBlueKing2() { // OK
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKnightByBlueKing1() {
+    public void checkMovingRedKnightByBlueKing1() { // OK
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(1));
@@ -488,14 +488,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByBlueJerk2() {
+    public void checkMovingRedKingByBlueJerk2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
         Assert.assertFalse(jerkBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByBlueJerk1() {
+    public void checkMovingRedKingByBlueJerk1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
         Assert.assertFalse(jerkBlue.checkMoving(1));
@@ -503,14 +503,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByBlueCitizen2() {
+    public void checkMovingRedKingByBlueCitizen2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
         Assert.assertFalse(citizenBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByBlueCitizen1() {
+    public void checkMovingRedKingByBlueCitizen1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
         Assert.assertFalse(citizenBlue.checkMoving(1));
@@ -518,14 +518,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByBlueKnight2() {
+    public void checkMovingRedKingByBlueKnight2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
         Assert.assertFalse(knightBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByBlueKnight1() {
+    public void checkMovingRedKingByBlueKnight1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
         Assert.assertFalse(knightBlue.checkMoving(1));
@@ -533,14 +533,14 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByBlueKing2() {
+    public void checkMovingRedKingByBlueKing2() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKingByBlueKing1() {
+    public void checkMovingRedKingByBlueKing1() { // OK
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(1));
