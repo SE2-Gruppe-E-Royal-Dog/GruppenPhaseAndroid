@@ -528,4 +528,6 @@ public class FigureTest_Beaten {
      */
     // TODO: Test Noch offen
 
+
+
 }

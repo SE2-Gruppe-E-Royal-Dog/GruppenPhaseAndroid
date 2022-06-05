@@ -305,4 +305,8 @@ public class GameManager {
     public Card getSelectedCard() {
         return selectedCard;
     }
+
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
 }

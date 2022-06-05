@@ -51,7 +51,7 @@ public class Figure {
      * Green Card (4 +/- and 10) cancel overtaking rules.
      * @return true if overtaking possible
      */
-    private boolean checkGreenCard() {
+    public boolean checkGreenCard() {
         Card card = GameManager.getInstance().getSelectedCard();
         if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
             return true;
@@ -60,14 +60,12 @@ public class Figure {
         }
     }
 
-    private boolean checkOvertakingPossible() {
-        /*if (checkGreenCard()) {
+    public boolean checkOvertakingPossible() {
+        if (checkGreenCard()) {
             return true;
         } else {
-
-         */
             return checkOvertaking();
-
+        }
     }
 
     /**
