@@ -7,6 +7,7 @@ import com.uni.gruppenphaseandroid.MainActivity;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Cheater extends Fragment {
     private String playerID;                    //for now - String evtl in int ändern
     private boolean cheatingAllowed;
     private static List<Cheater> cheaters = new ArrayList<>();
-    private Client websocketClient;
+
 
 
     public Cheater() {
@@ -34,8 +35,12 @@ public class Cheater extends Fragment {
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
     public boolean cheatingAllowed(String playerID) {
-        this.cheatingAllowed = (( getRoundIndex() - getLastCheat(playerID)) >= 5);
+        this.cheatingAllowed = !GameManager.getInstance().hasCheated(); /**(( getRoundIndex() - getLastCheat(playerID)) >= 5);**/
         return cheatingAllowed;
+        }
+
+        public boolean cheatingAllowedForThisClient(){
+        return !GameManager.getInstance().hasCheated();
         }
 
     public void cheating(Cheater cheater) {

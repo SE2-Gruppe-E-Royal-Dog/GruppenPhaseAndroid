@@ -1,13 +1,10 @@
 package com.uni.gruppenphaseandroid.manager;
 
 import android.util.Log;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.InGameFragment;
-import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cards.Card;
-import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -50,8 +47,12 @@ public class GameManager {
     private Card selectedCard;
     private int currentEffect;                          //int for special cards
     private String lobbyID;
-    private boolean hasCheated = false;
+    private boolean hasMovedWormholes = false;
     private Figure currentlySelectedFigure;
+
+
+
+    private boolean hasCheated = false;
 
 
     private int cheatModifier = 0;
@@ -173,6 +174,7 @@ public class GameManager {
     }
 
     private void everyOneDraws5Cards() {
+        hasMovedWormholes = false;
         hasCheated = false;
     }
 
@@ -264,7 +266,7 @@ public class GameManager {
 
 
 
-        hasCheated = true;
+        hasMovedWormholes = true;
 
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
@@ -298,7 +300,7 @@ public class GameManager {
     }
 
     public boolean hasCheated() {
-        return hasCheated;
+        return hasMovedWormholes;
     }
 
     public int getCurrentTurnPlayerNumber() {
@@ -347,5 +349,14 @@ public class GameManager {
     }
     public Color getColorOfMyClient(){
         return getColorOfClient(myTurnNumber);
+    }
+
+    public boolean isHasCheated() {
+
+        return hasCheated;
+    }
+
+    public void setHasCheated(boolean hasCheated) {
+        this.hasCheated = hasCheated;
     }
 }
