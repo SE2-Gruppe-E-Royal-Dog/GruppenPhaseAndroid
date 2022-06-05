@@ -28,7 +28,8 @@ public class Handcards {
     }
 
     public void discardHandcard(int index){
-        myCards.remove(index);
+        Card toBeRemoved = myCards.remove(index);
+        GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
     }
 
     public void setMyCards(LinkedList<Card> myCards) {

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment implements SensorEventListener, CardViewFragment.OnInputListener, SpecialCardDialogFragment.OnCardInputListener {
@@ -39,6 +41,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private Cardtype selectedCardtype;
     private CardViewFragment cardholder;
     private SpecialCardDialogFragment specialCardDialog;
+    private ImageView stack;
+    private static InGameFragment inGameFragment;
 
     @Override
     public View onCreateView(
@@ -46,7 +50,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             Bundle savedInstanceState
     ) {
 
-
+        inGameFragment = this;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
@@ -62,6 +66,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
         btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
+        stack = playingField.getView().findViewById(R.id.stack);
+
+        stack.setImageResource(R.drawable.ic_card_ablagestapel);
 
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
@@ -211,6 +218,15 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         //TODO maybe adjust fab to special card icon
 
 
+    }
+
+    public static void setStackImage(){
+        LastTurn lastTurn = GameManager.getInstance().getLastTurn();
+        if(lastTurn.getCardtype()==null){
+            throw new IllegalArgumentException("No Cardtype has been set");
+        }
+
+        inGameFragment.stack.setImageResource(CardUI.getInstance().cardtypeToId(lastTurn.getCardtype()));
     }
 
 
