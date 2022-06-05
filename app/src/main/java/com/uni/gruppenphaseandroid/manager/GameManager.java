@@ -45,6 +45,7 @@ public class GameManager {
     private PlayingField playingField;
     private Client webSocketClient;
     private FigureManager figuremanager;
+    private VisualEffectsManager visualEffectsManager;
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;                          //int for special cards
@@ -53,17 +54,19 @@ public class GameManager {
     private boolean hasMovedWormholes = false;
     private boolean hasCheated = false;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager, VisualEffectsManager visualEffectsManager) {
         this.lobbyID = lobbyID;
         this.playerID = playerID;
 
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
         this.figuremanager = figureManager;
+        this.visualEffectsManager = visualEffectsManager;
         for (int i = 0; i < numberOfPlayers; i++) {
             createFigureSet(Color.values()[i]);
         }
         currentTurnPlayerNumber = numberOfPlayers - 1;
+        visualEffectsManager.setInitialStackImage();
         nextTurn();
     }
 
@@ -146,7 +149,8 @@ public class GameManager {
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (!isItMyTurn()) { //for the turnplayer, the update took place already
             lastTurn = LastTurn.generateLastTurnObject(updateBoardPayload, figuremanager, playingField);
-            InGameFragment.setStackImage();
+            InGameFragment.setStackImage(); //TODO: move the functionality of this line into visualEffectsManager.setStackImage()
+            visualEffectsManager.setStackImage();
             playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
             if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
                 playingField.moveFigureToField(lastTurn.getFigure2(), lastTurn.getNewFigure2Field());

@@ -8,6 +8,9 @@ import static org.mockito.Mockito.when;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
@@ -19,6 +22,7 @@ import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
+import com.uni.gruppenphaseandroid.manager.VisualEffectsManager;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -87,7 +91,28 @@ public class GamemanagerTest {
         message2.setType(MessageType.UPDATE_BOARD);
         message2.setPayload(new Gson().toJson(updateBoardPayloadTwoFigures));
 
-        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager);
+        VisualEffectsManager visualEffectsManager = new VisualEffectsManager() {
+            @Override
+            protected void setStackImage() {
+
+            }
+
+            @Override
+            protected void setInitialStackImage() {
+
+            }
+
+            @Override
+            protected void showIllegalMoveMessage() {
+
+            }
+
+            @Override
+            protected void showWinningScreen() {
+
+            }
+        };
+        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager);
     }
 
     @After

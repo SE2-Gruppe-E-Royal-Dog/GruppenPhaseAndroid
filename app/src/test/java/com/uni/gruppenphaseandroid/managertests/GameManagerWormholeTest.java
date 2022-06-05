@@ -15,6 +15,7 @@ import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.VisualEffectsManager;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.Wormhole;
@@ -62,7 +63,28 @@ public class GameManagerWormholeTest {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
 
-        GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager);
+        VisualEffectsManager visualEffectsManager = new VisualEffectsManager() {
+            @Override
+            protected void setStackImage() {
+
+            }
+
+            @Override
+            protected void setInitialStackImage() {
+
+            }
+
+            @Override
+            protected void showIllegalMoveMessage() {
+
+            }
+
+            @Override
+            protected void showWinningScreen() {
+
+            }
+        };
+        GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager, visualEffectsManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());
     }
 
