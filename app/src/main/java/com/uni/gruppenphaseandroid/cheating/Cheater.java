@@ -3,10 +3,6 @@ package com.uni.gruppenphaseandroid.cheating;
 
 import androidx.fragment.app.Fragment;
 
-import com.uni.gruppenphaseandroid.MainActivity;
-import com.uni.gruppenphaseandroid.communication.Client;
-import com.uni.gruppenphaseandroid.communication.dto.Message;
-import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.ArrayList;
@@ -35,12 +31,12 @@ public class Cheater extends Fragment {
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
     public boolean cheatingAllowed(String playerID) {
-        this.cheatingAllowed = !GameManager.getInstance().hasCheated(); /**(( getRoundIndex() - getLastCheat(playerID)) >= 5);**/
+        this.cheatingAllowed = !GameManager.getInstance().getHasCheated(); /**(( getRoundIndex() - getLastCheat(playerID)) >= 5);**/
         return cheatingAllowed;
         }
 
         public boolean cheatingAllowedForThisClient(){
-        return !GameManager.getInstance().hasCheated();
+        return !GameManager.getInstance().getHasCheated();
         }
 
     public void cheating(Cheater cheater) {

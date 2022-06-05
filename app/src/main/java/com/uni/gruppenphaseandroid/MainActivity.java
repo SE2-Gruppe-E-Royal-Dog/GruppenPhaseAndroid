@@ -33,6 +33,7 @@ import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
+import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
@@ -211,9 +212,7 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            //start game
-            Log.d("server_communication", "Server message received!!!!!!");
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, new FigureManager());
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack)));
 
             //TODO hide startgame button and show chardholder
         }

@@ -2,6 +2,7 @@ package com.uni.gruppenphaseandroid;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.uni.gruppenphaseandroid.cheating.Cheater;
@@ -36,7 +37,7 @@ public class CheaterTest {
     @Test
     public void cheatingAllowedForThisClientFalse() {
         GameManager.getInstance().setHasCheated(true);
-        assertTrue(cheater.cheatingAllowedForThisClient());
+        assertFalse(cheater.cheatingAllowedForThisClient());
         GameManager.getInstance().setHasCheated(false);
     }
 

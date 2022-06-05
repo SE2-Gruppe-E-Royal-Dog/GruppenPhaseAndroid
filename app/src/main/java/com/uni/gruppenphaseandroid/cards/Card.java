@@ -32,7 +32,7 @@ public class Card {
             playEqualCard(myFigure, effect, targetFigure);
         }
 
-        GameManager.getInstance().getLastTurn().setCardtype(cardtype);
+        //GameManager.getInstance().getLastTurn().setCardtype(cardtype);
 
         if(effect==-1 && targetFigure==null){
             //Cards with only one Effect
