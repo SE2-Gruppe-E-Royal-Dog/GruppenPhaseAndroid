@@ -166,6 +166,15 @@ public class CardUITest {
     }
 
     @Test
+    public void cardtypeToId_ELEVEN(){
+        Cardtype cardtype = Cardtype.ONEORELEVEN_START;
+
+        int res = cardUI.cardtypeToId(cardtype);
+
+        Assert.assertEquals(R.drawable.ic_card_11, res);
+    }
+
+    @Test
     public void cardtypeToId_THIRTEEN(){
         Cardtype cardtype = Cardtype.THIRTEEN_START;
 
