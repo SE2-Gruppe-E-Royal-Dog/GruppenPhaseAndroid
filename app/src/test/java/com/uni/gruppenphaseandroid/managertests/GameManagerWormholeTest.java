@@ -78,7 +78,7 @@ public class GameManagerWormholeTest {
         GameManager.getInstance().initiateMoveWormholes();
         verify(playingField,times(1)).moveAllWormholesRandomly();
         verify(playingField,times(1)).getWormholeList();
-        Assert.assertTrue(GameManager.getInstance().hasCheated());
+        Assert.assertTrue(GameManager.getInstance().getHasMovedWormholes());
         verify(socketClient,times(1)).send(argumentCaptor.capture());
         Assert.assertEquals(message.getPayload(), argumentCaptor.getValue().getPayload());
     }

@@ -61,7 +61,7 @@ public class HandcardsTest {
         when(card.getCardtype()).thenReturn(Cardtype.TWO);
         list.add(card);
         handcards.setMyCards(list);
-        LastTurn lastTurn = new LastTurn(null, null, null, null, 0);
+        LastTurn lastTurn = new LastTurn(null, null, null, null);
         GameManager.getInstance().setLastTurn(lastTurn);
 
         Assert.assertEquals(1, handcards.getMyCards().size());

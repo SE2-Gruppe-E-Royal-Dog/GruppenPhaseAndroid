@@ -154,7 +154,6 @@ public class GameManager {
 
         }
         //TODO: update card UI
-        lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
         nextTurn();
     }
 
@@ -252,9 +251,6 @@ public class GameManager {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
-
-
-
         hasMovedWormholes = true;
 
         playingField.moveAllWormholesRandomly();
@@ -279,7 +275,7 @@ public class GameManager {
         playingField.repairWormholeVisuals();
     }
 
-    public boolean hasCheated() {
+    public boolean getHasMovedWormholes() {
         return hasMovedWormholes;
     }
 
@@ -336,8 +332,7 @@ public class GameManager {
         return getColorOfClient(myTurnNumber);
     }
 
-    public boolean isHasCheated() {
-
+    public boolean getHasCheated() {
         return hasCheated;
     }
 

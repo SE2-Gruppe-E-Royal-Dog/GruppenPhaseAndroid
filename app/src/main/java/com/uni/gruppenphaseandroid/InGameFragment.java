@@ -148,7 +148,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
 
-        if (x < 40 && !GameManager.getInstance().hasCheated()) {
+        if (x < 40 && !GameManager.getInstance().getHasMovedWormholes()) {
             Log.e("Code", "sensor_light");
             GameManager.getInstance().initiateMoveWormholes();
 
@@ -221,6 +221,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     }
 
     public static void setStackImage(){
+        if(inGameFragment == null){
+            return;
+        }
         LastTurn lastTurn = GameManager.getInstance().getLastTurn();
         if(lastTurn.getCardtype()==null){
             throw new IllegalArgumentException("No Cardtype has been set");

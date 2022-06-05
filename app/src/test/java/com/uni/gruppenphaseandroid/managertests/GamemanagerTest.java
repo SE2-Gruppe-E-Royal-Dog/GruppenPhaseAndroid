@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
