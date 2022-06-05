@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
+import android.text.style.CharacterStyle;
 import android.view.View;
 
 import com.uni.gruppenphaseandroid.cards.Card;
@@ -407,6 +408,7 @@ public class PlayingField {
     public Field applyCheatModifier(Field field, Color figureColor){
         if (GameManager.getInstance().getCheatModifier() == 0) {
             return field; }
+        GameManager.getInstance().setHasCheated(true);
         if (field instanceof StartingField) {
             return applyCheatModifierForStartingField((StartingField) field, figureColor);
         } else if (field instanceof GoalField) {
