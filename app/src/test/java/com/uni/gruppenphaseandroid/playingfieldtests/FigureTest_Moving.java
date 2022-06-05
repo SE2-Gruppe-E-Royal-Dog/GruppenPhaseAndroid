@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -106,6 +108,9 @@ public class FigureTest_Moving {
         figureUI10 = mock(FigureUIimpl.class);
         figureUI11 = mock(FigureUIimpl.class);
         figureUI12 = mock(FigureUIimpl.class);
+
+        Card greencard = new Card(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setSelectedCard(greencard);
     }
 
     @After
@@ -149,20 +154,18 @@ public class FigureTest_Moving {
     }
 
 
-    /*@Test
-    public void checkMovingRedJerkByRedKing2() { // TODO: NOK card
+    @Test
+    public void checkMovingRedJerkByRedKing2() { // OK
         jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(2));
     }
     @Test
-    public void checkMovingRedJerkByRedKing1() { // TODO: NOK card
+    public void checkMovingRedJerkByRedKing1() { // OK
         jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(1));
     }
-
-     */
 
 
     @Test
@@ -195,21 +198,19 @@ public class FigureTest_Moving {
     }
 
 
-    /*@Test
-    public void checkMovingRedCitizenByRedKing2() { // TODO: NOK
+    @Test
+    public void checkMovingRedCitizenByRedKing2() { // OK
         citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedCitizenByRedKing1() { // TODO: NOK
+    public void checkMovingRedCitizenByRedKing1() { // OK
         citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(1));
     }
-
-     */
 
 
     @Test
@@ -242,15 +243,15 @@ public class FigureTest_Moving {
     }
 
 
-    /*@Test
-    public void checkMovingRedKnightByRedKing2() { // TODO: NOK
+    @Test
+    public void checkMovingRedKnightByRedKing2() { //
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(2));
     }
 
     @Test
-    public void checkMovingRedKnightByRedKing1() { // TODO: NOK
+    public void checkMovingRedKnightByRedKing1() { //
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         Assert.assertTrue(kingRed.checkMoving(1));
@@ -258,7 +259,7 @@ public class FigureTest_Moving {
 
 
     @Test
-    public void checkMovingRedKingByRedJerk2() { // TODO: NOK
+    public void checkMovingRedKingByRedJerk2() { //
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
         Assert.assertFalse(jerkRed.checkMoving(2));
@@ -301,7 +302,6 @@ public class FigureTest_Moving {
         Assert.assertFalse(knightRed.checkMoving(1));
     }
 
-     */
 
     /**
      * Test Rausschmeißen zwischen Farben
@@ -352,7 +352,7 @@ public class FigureTest_Moving {
     }
 
 
-    /*@Test
+    @Test
     public void checkMovingRedJerkByBlueKing2() {
         jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
@@ -365,8 +365,6 @@ public class FigureTest_Moving {
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(1));
     }
-
-     */
 
 
     @Test
@@ -414,7 +412,7 @@ public class FigureTest_Moving {
     }
 
 
-    /*@Test
+    @Test
     public void checkMovingRedCitizenByBlueKing2() {
         citizenRed = new Citizen(2, Color.RED, field2, Typ.CITIZEN, figureUI2);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
@@ -427,8 +425,6 @@ public class FigureTest_Moving {
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(1));
     }
-
-     */
 
 
     @Test
@@ -475,7 +471,7 @@ public class FigureTest_Moving {
         Assert.assertTrue(knightBlue.checkMoving(1));
     }
 
-/*
+
     @Test
     public void checkMovingRedKnightByBlueKing2() {
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
@@ -550,7 +546,7 @@ public class FigureTest_Moving {
         Assert.assertTrue(kingBlue.checkMoving(1));
     }
 
- */
+
 
 
 
