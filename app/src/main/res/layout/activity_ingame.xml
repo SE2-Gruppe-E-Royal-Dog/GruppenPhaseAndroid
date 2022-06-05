@@ -101,6 +101,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_accusation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_dialog_alert" />
+
     <org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView
         android:id="@+id/twoWayScrollView"
         android:layout_width="match_parent"
@@ -1002,6 +1013,15 @@
                     android:layout_marginTop="283dp"
                     android:tag="f21"
                     app:srcCompat="@drawable/ic_regularfield" />
+
+                <ImageView
+                    android:id="@+id/stack"
+                    android:layout_width="118dp"
+                    android:layout_height="195dp"
+                    android:layout_marginLeft="524dp"
+                    android:layout_marginTop="489dp"
+                    android:tag="s01"
+                    app:srcCompat="@drawable/ic_card_ablagestapel" />
 
             </RelativeLayout>
 

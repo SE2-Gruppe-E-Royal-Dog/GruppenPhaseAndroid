@@ -1,10 +1,9 @@
 package com.uni.gruppenphaseandroid.manager;
 
 import android.util.Log;
-import android.view.View;
 
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
@@ -51,6 +50,7 @@ public class GameManager {
     private int currentEffect;                          //int for special cards
     private Figure currentlySelectedFigure;
     private int cheatModifier = 0;
+    private boolean hasMovedWormholes = false;
     private boolean hasCheated = false;
 
     public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager) {
@@ -146,7 +146,7 @@ public class GameManager {
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (!isItMyTurn()) { //for the turnplayer, the update took place already
             lastTurn = LastTurn.generateLastTurnObject(updateBoardPayload, figuremanager, playingField);
-
+            InGameFragment.setStackImage();
             playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
             if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
                 playingField.moveFigureToField(lastTurn.getFigure2(), lastTurn.getNewFigure2Field());
@@ -154,6 +154,7 @@ public class GameManager {
 
         }
         //TODO: update card UI
+        lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
         nextTurn();
     }
 
@@ -162,6 +163,7 @@ public class GameManager {
     }
 
     private void everyOneDraws5Cards() {
+        hasMovedWormholes = false;
         hasCheated = false;
     }
 
@@ -214,7 +216,12 @@ public class GameManager {
     }
 
     public void turnPlayerDiscardsCard(){
-
+        /*
+        TODO: Select Card to Discard
+        index = cardIndexInHandcards
+        Handcards.getInstance().discardHandcard(index);
+        InGameFragment.setStackImage();
+         */
     }
 
     public PlayingField getPlayingField() {
@@ -245,7 +252,10 @@ public class GameManager {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
-        hasCheated = true;
+
+
+
+        hasMovedWormholes = true;
 
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
@@ -270,7 +280,7 @@ public class GameManager {
     }
 
     public boolean hasCheated() {
-        return hasCheated;
+        return hasMovedWormholes;
     }
 
     public int getCurrentTurnPlayerNumber() {
@@ -318,4 +328,20 @@ public class GameManager {
         return playerID;
     }
 
+
+    public Color getColorOfClient(int playerIndex){
+        return Color.values()[playerIndex];
+    }
+    public Color getColorOfMyClient(){
+        return getColorOfClient(myTurnNumber);
+    }
+
+    public boolean isHasCheated() {
+
+        return hasCheated;
+    }
+
+    public void setHasCheated(boolean hasCheated) {
+        this.hasCheated = hasCheated;
+    }
 }

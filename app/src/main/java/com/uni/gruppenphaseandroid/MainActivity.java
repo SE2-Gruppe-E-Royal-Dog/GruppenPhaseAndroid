@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.CardUI;
+import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bindService();
         doRegisterReceiver();
+        setPlayerIdInCardView();
     }
 
     @Override
@@ -164,7 +166,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
-                    break;
+            /**    case CHEATING:
+                    handleCheatingMove(msg.getPayload());
+                    break;**/
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
@@ -224,4 +228,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-}
+
+    private void setPlayerIdInCardView(){
+        CardViewFragment.setPlayerId(playerId);
+
+    }
+
+  //TODO  private void  handleCheatingMove(Cheater cheater){
+
+
+    }
