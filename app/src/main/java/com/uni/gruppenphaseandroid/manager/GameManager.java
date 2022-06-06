@@ -149,7 +149,6 @@ public class GameManager {
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (!isItMyTurn()) { //for the turnplayer, the update took place already
             lastTurn = LastTurn.generateLastTurnObject(updateBoardPayload, figuremanager, playingField);
-            InGameFragment.setStackImage(); //TODO: move the functionality of this line into visualEffectsManager.setStackImage()
             visualEffectsManager.setStackImage();
             playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
             if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
