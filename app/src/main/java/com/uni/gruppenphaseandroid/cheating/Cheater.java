@@ -12,7 +12,7 @@ public class Cheater extends Fragment {
 
     private int roundIndex;
     private int currentRoundIndex;
-    private String playerID;                    //for now - String evtl in int ändern
+    private int playerID;                    //for now - String evtl in int ändern
     private boolean cheatingAllowed;
     private static List<Cheater> cheaters = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class Cheater extends Fragment {
     public Cheater() {
     }
 
-    public Cheater(String playerID, int roundIndex) {
+    public Cheater(int playerID, int roundIndex) {
         this.playerID = playerID;                             //bis jetzt nur am Server --> von gameManager?
         this.roundIndex = roundIndex;                         //merkt sich die Runde, in der geschummelt wurde
     }
@@ -47,12 +47,12 @@ public class Cheater extends Fragment {
         cheaters.add(cheater);
     }
 
-    public int getLastCheat(String playerID) {
+    public int getLastCheat(int playerID) {
 
         int round = 0;
         if (!cheaters.isEmpty()) {
             for (Cheater c : cheaters) {
-                if (c.getPlayerID().equals(playerID)) {
+                if (c.getPlayerID() == (playerID)) {
                     round = c.getRoundIndex();
                 }
             }
@@ -83,11 +83,11 @@ public class Cheater extends Fragment {
         this.currentRoundIndex = currentRoundIndex;
     }
 
-    public String getPlayerID() {
+    public int getPlayerID() {
         return playerID;
     }
 
-    public void setPlayerID(String playerID) {
+    public void setPlayerID(int playerID) {
         this.playerID = playerID;
     }
 
@@ -98,6 +98,18 @@ public class Cheater extends Fragment {
 
     public static List<Cheater> getCheaters() {
         return cheaters;
+    }
+
+    public static void makeAccusation(int playerID, int currentRoundIndex, int numberOfPlayer) {
+        for (int i=0; i<cheaters.size(); i++){
+            if (cheaters.get(i).playerID == playerID){
+                if (currentRoundIndex - (cheaters.get(i).getRoundIndex()) <= numberOfPlayer-1) {
+                    GameManager.getInstance().punishPlayer(playerID);
+                    return;
+                }
+            }
+        }
+        GameManager.getInstance().punishPlayer(GameManager.getInstance().getCurrentTurnPlayerNumber());
     }
 
 

@@ -355,5 +355,14 @@ public class GameManager {
         return roundIndex;
     }
 
+    public boolean hasThisClientFigureOnBoard(){
+        return figuremanager.checkIfPlayerHasFigureOnBoard(getColorOfMyClient());
+
+    }
+
+    public void punishPlayer(int playerID){
+        //TODO Random Figuren zurücksetzten
+    }
+
 
 }

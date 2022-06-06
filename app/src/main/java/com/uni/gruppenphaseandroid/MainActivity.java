@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
             GameManager.getInstance().updateBoard(updateBoardPayload);
             if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
-                Cheater.noteCheating(new Cheater(updateBoardPayload.getPlayerID(), GameManager.getInstance().getRoundIndex()));
+                Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
             }
         }
 

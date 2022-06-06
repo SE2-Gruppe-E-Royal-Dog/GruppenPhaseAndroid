@@ -32,12 +32,15 @@ public class AccusationFragment extends DialogFragment {
     text = view.findViewById(R.id.textView);
 
 
-    if (GameManager.getInstance().isItMyTurn()) {
+    if (GameManager.getInstance().isItMyTurn() && GameManager.getInstance().hasThisClientFigureOnBoard()) {
         text.setText("Who do you accusate?");
         setButtons();
+    } else if (GameManager.getInstance().isItMyTurn() && !(GameManager.getInstance().hasThisClientFigureOnBoard())) {
+        text.setText("You can only cheat, while you have a Figure on Board");
     } else {
-         text.setText("Wait until your turn!");
-    }
+                text.setText("Wait until your turn!");
+            }
+
 
     leaveFragment.setOnClickListener(new View.OnClickListener() {
         @Override

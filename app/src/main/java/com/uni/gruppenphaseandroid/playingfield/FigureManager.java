@@ -108,4 +108,18 @@ public class FigureManager {
         return figureSet;
     }
 
+    public boolean checkIfPlayerHasFigureOnBoard(Color color){
+        boolean hasFigureOnBoard = false;
+        for (Figure figure:figureList){
+            if(figure.getColor() == color){
+                if (!(figure.getCurrentField() instanceof StartingAreaField)){
+                    hasFigureOnBoard = true;
+                }
+            }
+
+        }
+        return hasFigureOnBoard;
+
+    }
+
 }
