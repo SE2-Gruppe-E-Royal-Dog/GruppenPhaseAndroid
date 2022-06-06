@@ -305,6 +305,7 @@ public class PlayingField {
         newPositionFigure1.triggerSpecialFieldEffect();
 
         LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
+        lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
         GameManager.getInstance().setLastTurn(lastTurn);
     }
 
