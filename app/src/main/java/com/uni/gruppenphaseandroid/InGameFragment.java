@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment implements SensorEventListener, CardViewFragment.OnInputListener, SpecialCardDialogFragment.OnCardInputListener {
@@ -39,6 +41,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private Cardtype selectedCardtype;
     private CardViewFragment cardholder;
     private SpecialCardDialogFragment specialCardDialog;
+    private ImageView stack;
+    private static InGameFragment inGameFragment;
 
     @Override
     public View onCreateView(
@@ -46,7 +50,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             Bundle savedInstanceState
     ) {
 
-
+        inGameFragment = this;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
@@ -62,6 +66,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
         btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
+        stack = playingField.getView().findViewById(R.id.stack);
+
+        stack.setImageResource(R.drawable.ic_card_ablagestapel);
 
         view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
             websocketClient = ((MainActivity) getContext()).getService().getClient();
@@ -82,7 +89,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
 
         view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
-*/
+*/      btnCardholder.setVisibility(View.VISIBLE);
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
@@ -100,6 +107,13 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
             websocketClient.send(message);
 
+
+        });
+
+        view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
+          AccusationFragment accusation = new AccusationFragment();
+          accusation.show(getFragmentManager(), "Anschuldigung");
+          accusation.setTargetFragment(InGameFragment.this, 1);
 
         });
 
@@ -134,7 +148,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
 
-        if (x < 40 && !GameManager.getInstance().hasCheated()) {
+        if (x < 40 && !GameManager.getInstance().getHasMovedWormholes()) {
             Log.e("Code", "sensor_light");
             GameManager.getInstance().initiateMoveWormholes();
 
@@ -204,6 +218,18 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         //TODO maybe adjust fab to special card icon
 
 
+    }
+
+    public static void setStackImage(){
+        if(inGameFragment == null){
+            return;
+        }
+        LastTurn lastTurn = GameManager.getInstance().getLastTurn();
+        if(lastTurn.getCardtype()==null){
+            throw new IllegalArgumentException("No Cardtype has been set");
+        }
+
+        inGameFragment.stack.setImageResource(CardUI.getInstance().cardtypeToId(lastTurn.getCardtype()));
     }
 
 

@@ -7,6 +7,8 @@ import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
+import com.uni.gruppenphaseandroid.playingfield.FigureManager;
+import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class LastTurn {
 
@@ -14,7 +16,6 @@ public class LastTurn {
     private Figure figure2;
     private Field newFigure1Field;
     private Field newFigure2Field;
-    private int distanceMovedByFigure1;
     private Cardtype cardtype;
     private int cheatModifier = 0;
 
@@ -23,17 +24,27 @@ public class LastTurn {
         message.setType(MessageType.UPDATE_BOARD);
         int figure2ID = (figure2 == null) ? -1 : figure2.getId();
         int newFigure2FieldID = (newFigure2Field == null) ? -1 : newFigure2Field.getFieldID();
-        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.getValue(), cheatModifier, GameManager.getInstance().getLobbyID());
+        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.ordinal(), cheatModifier, GameManager.getInstance().getLobbyID(), GameManager.getInstance().getPlayerID());
         message.setPayload(new Gson().toJson(payload));
         return message;
     }
 
-    public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field, int distanceMovedByFigure1) {
+    public LastTurn(Figure figure1, Figure figure2, Field newFigure1Field, Field newFigure2Field) {
         this.figure1 = figure1;
         this.figure2 = figure2;
         this.newFigure1Field = newFigure1Field;
         this.newFigure2Field = newFigure2Field;
-        this.distanceMovedByFigure1 = distanceMovedByFigure1;
+    }
+
+    public static LastTurn generateLastTurnObject(UpdateBoardPayload updateBoardPayload, FigureManager figureManager, PlayingField playingField){
+        Figure figure1 = figureManager.getFigureWithID(updateBoardPayload.getFigure1ID());
+        Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figureManager.getFigureWithID(updateBoardPayload.getFigure2ID());
+        Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
+        Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
+
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField);
+        lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
+        return lastTurn;
     }
 
     public Figure getFigure1() {
@@ -66,14 +77,6 @@ public class LastTurn {
 
     public void setNewFigure2Field(Field newFigure2Field) {
         this.newFigure2Field = newFigure2Field;
-    }
-
-    public int getDistanceMovedByFigure1() {
-        return distanceMovedByFigure1;
-    }
-
-    public void setDistanceMovedByFigure1(int distanceMovedByFigure1) {
-        this.distanceMovedByFigure1 = distanceMovedByFigure1;
     }
     public Cardtype getCardtype() {
         return cardtype;
