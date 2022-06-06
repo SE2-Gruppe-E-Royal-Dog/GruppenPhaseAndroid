@@ -24,7 +24,7 @@ public class Jerk extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (super.checkOvertaking() == true) {
+        if (super.checkOvertaking()) {
             switch (figure2.getTyp()) {
                 case JERK:
                     return true;
@@ -47,7 +47,7 @@ public class Jerk extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.checkBeaten() == true && figure2.getTyp() == Typ.KING) || super.checkBeaten() == false) {
+        if((super.checkBeaten() && figure2.getTyp() == Typ.KING) || !super.checkBeaten()) {
             return false;
         } return true;
     }
@@ -65,7 +65,7 @@ public class Jerk extends Figure {
         Field newPositionFigure1 = super.setNewPosition(fieldsToMove);
 
         if (getCurrentField() instanceof StartingField && ((StartingField) getCurrentField()).getColor() == getColor()) {
-            GoalField goalfield = ((StartingField) getCurrentField()).getNextGoalField();
+            ((StartingField) getCurrentField()).getNextGoalField();
             if (fieldsToMove <= 6) {
                 switch (fieldsToMove) {
                     case 6:

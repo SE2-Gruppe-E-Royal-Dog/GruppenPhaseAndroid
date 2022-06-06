@@ -21,7 +21,7 @@ public class Knight extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking() == true) {
+        if(super.checkOvertaking()) {
             switch (figure2.getTyp()) {
                 case JERK:
                 case CITIZEN:
@@ -45,7 +45,7 @@ public class Knight extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.checkBeaten() == true && figure2.getTyp() == Typ.KING) || super.checkBeaten() == false) {
+        if((super.checkBeaten() && figure2.getTyp() == Typ.KING) || !super.checkBeaten()) {
             return false;
         } return true;
     }

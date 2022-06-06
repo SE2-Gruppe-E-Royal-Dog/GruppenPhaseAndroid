@@ -26,4 +26,13 @@ public class Handcards {
     public void addCardToHand(LinkedList<Card> cards) {
         myCards.addAll(cards);
     }
+
+    public void discardHandcard(int index){
+        Card toBeRemoved = myCards.remove(index);
+        GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
+    }
+
+    public void setMyCards(LinkedList<Card> myCards) {
+        this.myCards = myCards;
+    }
 }

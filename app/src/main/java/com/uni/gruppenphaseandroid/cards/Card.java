@@ -1,6 +1,7 @@
 package com.uni.gruppenphaseandroid.cards;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
@@ -15,12 +16,23 @@ public class Card {
         return cardtype;
     }
 
+    public void setCardtype(Cardtype cardtype) {
+        this.cardtype = cardtype;
+    }
+
     private static final String INVALID_ARGUMENTS= "Invalid Combination of values";
 
     public void playCard(Figure myFigure, int effect, Figure targetFigure) {
         if(myFigure==null){
             throw new IllegalArgumentException("myFigure cannot be null");
         }
+
+        if(getCardtype()==Cardtype.EQUAL){
+            //Gets last played Card
+            playEqualCard(myFigure, effect, targetFigure);
+        }
+
+        //GameManager.getInstance().getLastTurn().setCardtype(cardtype);
 
         if(effect==-1 && targetFigure==null){
             //Cards with only one Effect
@@ -34,6 +46,11 @@ public class Card {
         }else{
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
+    }
+
+    private void playEqualCard(Figure myFigure, int effect, Figure targetFigure){
+        Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
+        setCardtype(newCardtype);
     }
 
     private void playNonEffectCard(Figure myFigure) {
@@ -97,7 +114,7 @@ public class Card {
                 break;
 
             default:
-                throw new IllegalArgumentException(INVALID_ARGUMENTS);
+                throw new IllegalArgumentException(getCardtype().toString());
         }
     }
 
@@ -106,7 +123,7 @@ public class Card {
         if (getCardtype().equals(Cardtype.SWITCH)) {
             playingField.switchPositions(figure1, figure2);
         } else {
-            throw new IllegalArgumentException(INVALID_ARGUMENTS);
+            throw new IllegalArgumentException(getCardtype().toString());
         }
     }
 
@@ -116,8 +133,10 @@ public class Card {
         if(myFigure==null){
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }
-
-        if(effect==-1 && targetFigure==null){
+        if(getCardtype()==Cardtype.EQUAL){
+            //Cards with Cardtype EQUAL
+            return checkEqualCard(myFigure, effect, targetFigure);
+        }else if(effect==-1 && targetFigure==null){
             //Cards with only one Effect
             return checkNonEffectCard(myFigure);
         }else if(effect>=0 && effect<=13 && targetFigure==null){
@@ -128,6 +147,16 @@ public class Card {
             return checkSwitchCard(myFigure, targetFigure);
         }else{
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
+        }
+    }
+
+    private boolean checkEqualCard(Figure myFigure, int effect, Figure targetFigure){
+        Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
+        if(newCardtype==Cardtype.EQUAL){
+            return false;
+        }else{
+            Card newCard = new Card(newCardtype);
+            return newCard.checkIfCardIsPlayable(myFigure, effect, targetFigure);
         }
     }
 

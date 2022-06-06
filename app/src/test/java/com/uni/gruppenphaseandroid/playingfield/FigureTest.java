@@ -14,6 +14,7 @@ public class FigureTest {
     }
     */
 
+    /*
     @Test
     public void givenFigure_whenCheckingIfBeaten_expectTrue() {
         var field1 = new Field();
@@ -26,6 +27,7 @@ public class FigureTest {
 
         assertTrue(figure1.checkBeaten());
     }
+    */
 
     /*
     @Test
@@ -42,6 +44,7 @@ public class FigureTest {
     }
     */
 
+    /*
     @Test
     public void givenFigure_whenCheckingIfBeatenOnStartField_expectFalse() {
         var field1 = new Field();
@@ -60,4 +63,5 @@ public class FigureTest {
 
         assertTrue(figure2.checkBeaten());
     }
+    */
 }

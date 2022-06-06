@@ -1,10 +1,9 @@
 package com.uni.gruppenphaseandroid.manager;
 
 import android.util.Log;
-import android.view.View;
 
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
@@ -21,6 +20,7 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
@@ -34,30 +34,39 @@ public class GameManager {
         return instance;
     }
 
+    private String lobbyID;
+    private String playerID;
+
     private int currentTurnPlayerNumber;
     private TurnPhase currentTurnPhase;
-    private PlayingField playingField;
-    private int numberOfPlayers;
     private int myTurnNumber;
-    private Client webSocketClient;
-    private LastTurn lastTurn;
-    private FigureManager figuremanager;
-    private Card selectedCard;
-    private int currentEffect;
-    private String lobbyID;
-    private boolean hasCheated = false;
-    private Figure currentlySelectedFigure;
+    private int numberOfPlayers;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID, FigureManager figureManager) {
+    private PlayingField playingField;
+    private Client webSocketClient;
+    private FigureManager figuremanager;
+    private VisualEffectsManager visualEffectsManager;
+    private LastTurn lastTurn;
+    private Card selectedCard;
+    private int currentEffect;                          //int for special cards
+    private Figure currentlySelectedFigure;
+    private int cheatModifier = 0;
+    private boolean hasMovedWormholes = false;
+    private boolean hasCheated = false;
+
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager, VisualEffectsManager visualEffectsManager) {
         this.lobbyID = lobbyID;
+        this.playerID = playerID;
 
         this.numberOfPlayers = numberOfPlayers;
         this.myTurnNumber = playerTurnNumber;
         this.figuremanager = figureManager;
+        this.visualEffectsManager = visualEffectsManager;
         for (int i = 0; i < numberOfPlayers; i++) {
             createFigureSet(Color.values()[i]);
         }
         currentTurnPlayerNumber = numberOfPlayers - 1;
+        visualEffectsManager.setInitialStackImage();
         nextTurn();
     }
 
@@ -74,6 +83,8 @@ public class GameManager {
 
         if(!isThereAnyPossibleMove()){
             turnPlayerDiscardsCard();
+            //int index = selectCardToDiscard();
+            //Handcards.getInstance().discardHandcard(index);
             //nextTurn();
         }
     }
@@ -85,14 +96,13 @@ public class GameManager {
         }
     }
 
-    public void figureGotSelected(Figure figure) throws Exception {
-        if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn()) {
+    public void figureGotSelected(Figure figure){
+        if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
         }
         else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
             figureSelectedSwitchCase(figure);
         }
-        selectedCard = null;
     }
 
     private void figureSelectedNormalCase(Figure figure){
@@ -105,8 +115,7 @@ public class GameManager {
             return;
         }
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
-        int effect = 1;//TODO: set effect
-        selectedCard.playCard(figure, effect, null);
+        selectedCard.playCard(figure, currentEffect, null);
         //send message to server
         sendLastTurnServerMessage();
     }
@@ -133,29 +142,23 @@ public class GameManager {
 
     private void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
+        selectedCard = null;
         webSocketClient.send(lastTurn.generateServerMessage());
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
-        if (currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
-            Figure figure1 = figuremanager.getFigureWithID(updateBoardPayload.getFigure1ID());
-            Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figuremanager.getFigureWithID(updateBoardPayload.getFigure2ID());
-            Field figure1newField = playingField.getFieldWithID(updateBoardPayload.getNewField1ID());
-            Field figure2newField = (updateBoardPayload.getNewField2ID() == -1) ? null : playingField.getFieldWithID(updateBoardPayload.getNewField2ID());
-
-            lastTurn = new LastTurn(figure1, figure2, figure1newField, figure2newField, 0);
-
-            if (!isItMyTurn()) { //for the turnplayer, the update took place already
-                playingField.moveFigureToField(figure1, figure1newField);
-                if (figure2 != null && figure2newField != null) {
-                    playingField.moveFigureToField(figure2, figure2newField);
-                }
+        if (!isItMyTurn()) { //for the turnplayer, the update took place already
+            lastTurn = LastTurn.generateLastTurnObject(updateBoardPayload, figuremanager, playingField);
+            InGameFragment.setStackImage(); //TODO: move the functionality of this line into visualEffectsManager.setStackImage()
+            visualEffectsManager.setStackImage();
+            playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
+            if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
+                playingField.moveFigureToField(lastTurn.getFigure2(), lastTurn.getNewFigure2Field());
             }
-            //play the card
-            lastTurn.setCardtype(Cardtype.values()[updateBoardPayload.getCardType()]);
-            //TODO: update card UI
-            nextTurn();
+
         }
+        //TODO: update card UI
+        nextTurn();
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
@@ -163,6 +166,7 @@ public class GameManager {
     }
 
     private void everyOneDraws5Cards() {
+        hasMovedWormholes = false;
         hasCheated = false;
     }
 
@@ -179,21 +183,21 @@ public class GameManager {
                     //TODO: equal card?
                     case ONETOSEVEN:
                         for(int i = 1; i <=7;i++ ){
-                            flag = flag | card.checkIfCardIsPlayable(figure, i, null);
+                            flag = flag || card.checkIfCardIsPlayable(figure, i, null);
                         }
                         break;
                     case FOUR_PLUSMINUS:
-                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
                         //TODO: which effect nr is -4?
                         break;
                     case ONEORELEVEN_START:
-                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
-                        flag = flag | card.checkIfCardIsPlayable(figure, 1, null);
-                        flag = flag | card.checkIfCardIsPlayable(figure, 11, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 11, null);
                         break;
                     case THIRTEEN_START:
-                        flag = flag | card.checkIfCardIsPlayable(figure, 0, null);
-                        flag = flag | card.checkIfCardIsPlayable(figure, 13, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 0, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, 13, null);
                         break;
                     case SWITCH:
                         for(int i = 1;i<=16;i++){
@@ -201,11 +205,11 @@ public class GameManager {
                                 continue;
                             }
                             Figure targetFigure = figuremanager.getFigureWithID(i);
-                            flag = flag | card.checkIfCardIsPlayable(figure, -1, targetFigure);
+                            flag = flag || card.checkIfCardIsPlayable(figure, -1, targetFigure);
                         }
                         break;
                     default:
-                        flag = flag | card.checkIfCardIsPlayable(figure, -1, null);
+                        flag = flag || card.checkIfCardIsPlayable(figure, -1, null);
                 }
                 if(flag) break; //early break for performance reasons
             }
@@ -215,7 +219,12 @@ public class GameManager {
     }
 
     public void turnPlayerDiscardsCard(){
-
+        /*
+        TODO: Select Card to Discard
+        index = cardIndexInHandcards
+        Handcards.getInstance().discardHandcard(index);
+        InGameFragment.setStackImage();
+         */
     }
 
     public PlayingField getPlayingField() {
@@ -242,14 +251,11 @@ public class GameManager {
         this.lastTurn = lastTurn;
     }
 
-    public void moveWormholes() {
+    public void initiateMoveWormholes() {
         if (isItMyTurn() || currentTurnPhase == TurnPhase.CURRENTLYMOVING) {
             return;
         }
-
-
-
-        hasCheated = true;
+        hasMovedWormholes = true;
 
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
@@ -259,15 +265,6 @@ public class GameManager {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
-    }
-
-
-    public void moveFigureShowcase(int figureID, int distance) {
-        try {
-            playingField.move(figuremanager.getFigureWithID(figureID), distance);
-        } catch (Exception e) {
-            Log.d("game_manager", "Exception in moveFigureShowcase", e);
-        }
     }
 
     public String getLobbyID() {
@@ -282,8 +279,8 @@ public class GameManager {
         playingField.repairWormholeVisuals();
     }
 
-    public boolean isHasCheated() {
-        return hasCheated;
+    public boolean getHasMovedWormholes() {
+        return hasMovedWormholes;
     }
 
     public int getCurrentTurnPlayerNumber() {
@@ -306,7 +303,44 @@ public class GameManager {
         return selectedCard;
     }
 
-    public void setSelectedCard(Card selectedCard) {
-        this.selectedCard = selectedCard;
+    public void setCurrentTurnPhase(TurnPhase currentTurnPhase) {
+        this.currentTurnPhase = currentTurnPhase;
+    }
+
+    public int getCheatModifier() {
+        return cheatModifier;
+    }
+
+    public void setCheatModifier(int cheatModifier) {
+        this.cheatModifier = cheatModifier;
+    }
+
+
+    public int getCurrentEffect() {
+        return currentEffect;
+    }
+
+    public void setCurrentEffect(int currentEffect) {
+        this.currentEffect = currentEffect;
+    }
+
+    public String getPlayerID() {
+        return playerID;
+    }
+
+
+    public Color getColorOfClient(int playerIndex){
+        return Color.values()[playerIndex];
+    }
+    public Color getColorOfMyClient(){
+        return getColorOfClient(myTurnNumber);
+    }
+
+    public boolean getHasCheated() {
+        return hasCheated;
+    }
+
+    public void setHasCheated(boolean hasCheated) {
+        this.hasCheated = hasCheated;
     }
 }
