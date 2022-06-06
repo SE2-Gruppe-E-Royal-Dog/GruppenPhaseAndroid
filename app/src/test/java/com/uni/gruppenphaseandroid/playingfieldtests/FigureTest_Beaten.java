@@ -1,5 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
-
+// TODO: König noch offen - Code umschreiben
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -7,8 +7,6 @@ import static org.mockito.Mockito.when;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.uni.gruppenphaseandroid.cards.Card;
-import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
