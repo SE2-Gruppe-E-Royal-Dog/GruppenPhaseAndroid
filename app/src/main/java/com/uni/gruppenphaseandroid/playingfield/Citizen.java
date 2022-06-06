@@ -1,8 +1,6 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import com.uni.gruppenphaseandroid.cards.Card;
-
-public class Citizen extends Figure { // TODO: Sonderfeld offen
+public class Citizen extends Figure {
 
     public Citizen(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
@@ -50,21 +48,4 @@ public class Citizen extends Figure { // TODO: Sonderfeld offen
             return false;
         } return true;
     }
-
-    /**
-     * If moving to a special field clockwise and taking a card,
-     * citizen is allowed to jump to the next special field -
-     * no matter of blocked starting fields or higher degree.
-     * this figure - figure who moves
-     * @param fieldsToMove - fields to move
-     * @return true if moving possible
-     */
-    /*@Override
-    public boolean checkMoving(int fieldsToMove) { // TODO: Sonderfeld einbauen für Karte ziehen? - bleibt offen
-
-
-        return true;
-    }
-
-     */
 }

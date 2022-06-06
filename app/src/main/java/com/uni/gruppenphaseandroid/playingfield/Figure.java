@@ -130,7 +130,7 @@ public class Figure {
      * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
-    protected Field setNewPosition(int fieldsToMove) {
+    public Field setNewPosition(int fieldsToMove) {
         if (checkMoving(fieldsToMove)) { // check if moving possible
             Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
             return newPositionFigure1;

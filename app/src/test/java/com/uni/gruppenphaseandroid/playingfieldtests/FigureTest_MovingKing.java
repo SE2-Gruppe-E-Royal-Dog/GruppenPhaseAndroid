@@ -1,5 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
-
+// TODO: Optionen für Startfeld und andere Figuren testen
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -12,7 +12,6 @@ import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
-import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureUI;
 import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
 import com.uni.gruppenphaseandroid.playingfield.King;
@@ -48,10 +47,6 @@ public class FigureTest_MovingKing {
         field2 = field1.getNextField();
         field3 = field2.getNextField();
 
-        Field startingAreaField = playingField.getGreenStartingField().getPreviousStartingArea();
-        startingAreaField.setCurrentFigure(new Figure());
-        startingAreaField.getPreviousField().setCurrentFigure(new Figure());
-
         figureUI4 = mock(FigureUIimpl.class);
         figureUI8 = mock(FigureUIimpl.class);
     }
@@ -66,7 +61,6 @@ public class FigureTest_MovingKing {
     /**
      * Test für King - Overtaking, Beaten, Move possible
      */
-
     @Test
     public void checkMovingKingOneToSeven2() { // OK
         Card card1 = new Card(Cardtype.ONETOSEVEN);
@@ -160,7 +154,6 @@ public class FigureTest_MovingKing {
     /**
      * Test für King - Overtaking, Beaten, Move NOT possible
      */
-
     @Test
     public void checkMovingKingFourPlusMinus2() { // OK
         Card card1 = new Card(Cardtype.FOUR_PLUSMINUS);

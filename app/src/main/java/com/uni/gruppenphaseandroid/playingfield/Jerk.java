@@ -60,7 +60,7 @@ public class Jerk extends Figure {
      * @return new Position of Jerk within Goal Area.
      */
     @Override
-    protected Field setNewPosition ( int fieldsToMove){
+    public Field setNewPosition ( int fieldsToMove){
         Card card = GameManager.getInstance().getSelectedCard();
         Field newPositionFigure1 = super.setNewPosition(fieldsToMove);
 
