@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.CardUI;
+import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -32,6 +33,7 @@ import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
+import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         bindService();
         doRegisterReceiver();
+        setPlayerIdInCardView();
     }
 
     @Override
@@ -164,7 +167,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
-                    break;
+            /**    case CHEATING:
+                    handleCheatingMove(msg.getPayload());
+                    break;**/
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
@@ -207,9 +212,7 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            //start game
-            Log.d("server_communication", "Server message received!!!!!!");
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, new FigureManager());
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack)));
 
             //TODO hide startgame button and show chardholder
         }
@@ -226,4 +229,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-}
+
+    private void setPlayerIdInCardView(){
+        CardViewFragment.setPlayerId(playerId);
+
+    }
+
+  //TODO  private void  handleCheatingMove(Cheater cheater){
+
+
+    }

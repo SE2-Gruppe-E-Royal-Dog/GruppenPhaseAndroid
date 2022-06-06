@@ -36,7 +36,6 @@ public class FigureUIimpl extends FigureUI {
             public void onClick(View view) {
 
                 try {
-                    Log.e("Figur", "Figure was selected!");
                     GameManager.getInstance().figureGotSelected(figure);
                     //TODO EFFECT
                 } catch (Exception e) {
