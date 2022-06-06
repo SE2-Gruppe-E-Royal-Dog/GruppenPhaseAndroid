@@ -26,7 +26,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
     private Button optionTwo;
     private Button ok;
     private Button chancel;
-    private SeekBar optionOneTwoSeven;
+    private SeekBar optionOneToSeven;
     private Cardtype cardtype;
     private int selectedCardEffect;
     public TextView tv_seekbar;
@@ -49,16 +49,16 @@ public class SpecialCardDialogFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_special_card_dialog, container, false);
 
-         TextView textView = view.findViewById(R.id.txt_userInfo);
-         Button optionOne = view.findViewById(R.id.btn_optionOne);
+         textView = view.findViewById(R.id.txt_userInfo);
+         optionOne = view.findViewById(R.id.btn_optionOne);
          optionOne.setVisibility(View.INVISIBLE);
-         Button optionTwo = view.findViewById(R.id.btn_optionTwo);
+         optionTwo = view.findViewById(R.id.btn_optionTwo);
          optionTwo.setVisibility(View.INVISIBLE);
-         Button ok = view.findViewById(R.id.btn_playOneToSeven);
+         ok = view.findViewById(R.id.btn_playOneToSeven);
          ok.setVisibility(View.INVISIBLE);
-         SeekBar optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
+         optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
          optionOne.setVisibility(View.INVISIBLE);
-         Button chancel = view.findViewById(R.id.btn_chancel);
+         chancel = view.findViewById(R.id.btn_chancel);
          tv_seekbar = view.findViewById(R.id.tv_seekbar);
 
              textView.setText("Choose the value of your card:");
@@ -77,7 +77,7 @@ public class SpecialCardDialogFragment extends DialogFragment {
 
                              int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
                              tv_seekbar.setVisibility(View.VISIBLE);
-                             tv_seekbar.setText("" + (value + 1));
+                             tv_seekbar.setText("" + value );
                              int valHelp = seekBar.getThumbOffset()/2;
                              tv_seekbar.setX(seekBar.getX() + val + valHelp);
                              //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar

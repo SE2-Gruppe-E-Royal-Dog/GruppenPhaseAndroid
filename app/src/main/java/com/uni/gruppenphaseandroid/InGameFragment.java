@@ -37,7 +37,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private SensorManager sensorManager;
     private Sensor sensor;
     private ImageButton btnCardholder;
-    private FloatingActionButton btnSpecialCards;
+   // private FloatingActionButton btnSpecialCards;
     private Cardtype selectedCardtype;
     private CardViewFragment cardholder;
     private SpecialCardDialogFragment specialCardDialog;
@@ -65,7 +65,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
-        btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
+       // btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
         stack = playingField.getView().findViewById(R.id.stack);
 
         stack.setImageResource(R.drawable.ic_card_ablagestapel);
@@ -85,11 +85,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
-/*
-        view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
-
-        view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
-*/      btnCardholder.setVisibility(View.VISIBLE);
+      btnCardholder.setVisibility(View.VISIBLE);
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
@@ -126,14 +122,14 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 cardholder.setTargetFragment(InGameFragment.this, 1);
             }
         });
-        btnSpecialCards.setOnClickListener(new View.OnClickListener() {
+        /*btnSpecialCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
                 specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
                 specialCardDialog.setTargetFragment(InGameFragment.this, 1);
             }
-        });
+        });*/
     }
 
     @Override
@@ -194,11 +190,11 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
             if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
                 Log.d("check card", "choosen card is a special card, open new dialog window");
-                btnSpecialCards.setVisibility(View.VISIBLE);
+                //btnSpecialCards.setVisibility(View.VISIBLE);
                 new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
 
             } else {
-                btnSpecialCards.setVisibility(View.INVISIBLE);
+               // btnSpecialCards.setVisibility(View.INVISIBLE);
                 GameManager.getInstance().setCurrentEffect(-1);
                 GameManager.getInstance().cardGotPlayed(new Card(selectedCardtype));
             }
