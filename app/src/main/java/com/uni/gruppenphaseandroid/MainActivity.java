@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        //TODO add leave game option
 
         return super.onOptionsItemSelected(item);
     }
