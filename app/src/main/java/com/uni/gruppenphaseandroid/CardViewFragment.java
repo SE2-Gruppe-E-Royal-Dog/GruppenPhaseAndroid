@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,6 +47,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     }
 
     public OnInputListener cardInputListener;
+
 
 
     @Override
@@ -134,6 +137,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }
+
 
 
 

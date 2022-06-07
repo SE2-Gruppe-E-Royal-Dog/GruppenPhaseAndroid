@@ -99,7 +99,9 @@
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/btn_cardholderButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_info" />
+        app:srcCompat="@android:drawable/ic_dialog_info"
+        android:contentDescription="@string/string_specialcards_fab"
+        android:focusable="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_accusation"
@@ -110,7 +112,9 @@
         android:clickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_alert" />
+        app:srcCompat="@android:drawable/ic_dialog_alert"
+        android:contentDescription="@string/string_fab_cheating"
+        android:focusable="true" />
 
     <org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView
         android:id="@+id/twoWayScrollView"
