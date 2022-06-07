@@ -11,6 +11,7 @@
         android:id="@+id/as_leaveGame"
         android:orderInCategory="100"
         android:title="@string/action_leaveGame"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:visible="false"/>
 
 </menu>

@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         menu.clear();       //to get rid of dublicated menu items
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.getItem(1).setVisible(false);
         return true;
     }
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        //TODO add leave game option
 
         return super.onOptionsItemSelected(item);
     }

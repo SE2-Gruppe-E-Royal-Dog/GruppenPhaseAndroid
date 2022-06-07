@@ -1,5 +1,6 @@
 package com.uni.gruppenphaseandroid;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,14 +11,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -60,13 +64,16 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     }
 
 
+
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
 
         PlayingField playingField = new PlayingField(view);
         GameManager.getInstance().setPlayingField(playingField);
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
+
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
        // btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
@@ -143,6 +150,14 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear();       //to get rid of dublicated menu items
+        menuInflater.inflate(R.menu.menu_main, menu);
+        menu.getItem(1).setVisible(true);
+
+    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
