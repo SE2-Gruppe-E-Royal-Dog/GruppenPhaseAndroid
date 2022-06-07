@@ -81,22 +81,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         stack.setImageResource(R.drawable.ic_card_ablagestapel);
 
-        view.findViewById(R.id.bttn_leave_game).setOnClickListener(view1 -> {
-            websocketClient = ((MainActivity) getContext()).getService().getClient();
-            var lobbyId = ((MainActivity) getContext()).getLobbyId();
-            var playerId = ((MainActivity) getContext()).getPlayerId();
-            var message = new Message();
-            message.setType(MessageType.LEAVE_LOBBY);
-            var payload = new LeaveLobbyPayload(lobbyId, playerId);
-
-            message.setPayload(gson.toJson(payload));
-
-            websocketClient.send(message);
-            NavHostFragment.findNavController(InGameFragment.this)
-                    .navigate(R.id.action_InGameFragment_to_FirstFragment);
-        });
-
-      btnCardholder.setVisibility(View.VISIBLE);
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
@@ -157,6 +141,30 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         menuInflater.inflate(R.menu.menu_main, menu);
         menu.getItem(1).setVisible(true);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                return true;
+            case R.id.as_leaveGame:{
+                websocketClient = ((MainActivity) getContext()).getService().getClient();
+                var lobbyId = ((MainActivity) getContext()).getLobbyId();
+                var playerId = ((MainActivity) getContext()).getPlayerId();
+                var message = new Message();
+                message.setType(MessageType.LEAVE_LOBBY);
+                var payload = new LeaveLobbyPayload(lobbyId, playerId);
+
+                message.setPayload(gson.toJson(payload));
+
+                websocketClient.send(message);
+                NavHostFragment.findNavController(InGameFragment.this)
+                        .navigate(R.id.action_InGameFragment_to_FirstFragment);
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

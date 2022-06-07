@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -208,7 +209,8 @@ public class MainActivity extends AppCompatActivity {
             var payload = gson.fromJson(body, StartGamePayload.class);
             GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack)));
 
-            //TODO hide startgame button and show chardholder
+            findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
+            findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
         }
 
         private void handleUpdateBoard(String body) {
