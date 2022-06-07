@@ -33,6 +33,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         public ImageView getImageView() {
             return imageView;
         }
+
+
     }
 
     public CardAdapter(ItemClickListener itemClickListener) {
@@ -55,9 +57,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.imageView.setImageResource(imageCardList.get(position));
 
         holder.itemView.setOnClickListener((view -> {
-            mItemClickListener.onItemClick(imageCardList.get(position));
+            mItemClickListener.onItemClick(imageCardList.get(position),position);
         }));
-        }
+    }
 
     @Override
     public int getItemCount() {
@@ -66,6 +68,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
 
     public interface ItemClickListener{
-        void onItemClick(int card);
+        void onItemClick(int card, int possition);
     }
 }

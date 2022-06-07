@@ -117,6 +117,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 cardholder.setTargetFragment(InGameFragment.this, 1);
             }
         });
+
+        //unsure if it should be included/if it is nessecary
         /*btnSpecialCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,6 +213,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
+            GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
         }
     }
 
@@ -254,8 +257,5 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         inGameFragment.stack.setImageResource(CardUI.getInstance().cardtypeToId(lastTurn.getCardtype()));
     }
-
-
-    //TODO visual note for cheating! findViewById(R.id.tv_cheater);
 
 }

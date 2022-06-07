@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,7 +35,8 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
-    private int roundIndex; // TODO get from Game Manager
+    private int roundIndex; // TODO get from Game Manager ... needed?
+    private int postitionCardToDischarge;
 
 
     private static String playerId;
@@ -69,10 +68,11 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
         CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
-            public void onItemClick(int card) {
+            public void onItemClick(int card, int possition) {
                 if(GameManager.getInstance().isItMyTurn()) {
                     btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
+                    postitionCardToDischarge = possition;
                 }
             }
         });
@@ -93,11 +93,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("card_input", "input:" + clickedCard);
+                Log.e("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
                     if(GameManager.getInstance().isThereAnyPossibleMove()){
                         //TODO discharge card and end turn
+                        textView.setText("Select one card to discharge:");
                         cardInputListener.sendInputCardFragment("-1");
                         getDialog().dismiss();
                     }else {
@@ -228,6 +229,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardViewFragment.playerId = playerId;
     }
 
-
-        
+    public int getPostitionCardToDischarge() {
+        return postitionCardToDischarge;
+    }
 }

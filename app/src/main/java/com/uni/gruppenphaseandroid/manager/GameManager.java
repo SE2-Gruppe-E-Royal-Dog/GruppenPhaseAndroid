@@ -49,6 +49,7 @@ public class GameManager {
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;                          //int for special cards
+    private int selectCardToDiscardIndex;
     private Figure currentlySelectedFigure;
     private int cheatModifier = 0;
     private boolean hasMovedWormholes = false;
@@ -90,11 +91,10 @@ public class GameManager {
 
         if(!isThereAnyPossibleMove()){
             turnPlayerDiscardsCard();
-            //int index = selectCardToDiscard();
-            //Handcards.getInstance().discardHandcard(index);
-            //nextTurn();
+            nextTurn();
         }
     }
+
 
     public void cardGotPlayed(Card card) {
         if (currentTurnPhase == TurnPhase.CHOOSECARD && isItMyTurn()) {
@@ -226,12 +226,10 @@ public class GameManager {
     }
 
     public void turnPlayerDiscardsCard(){
-        /*
-        TODO: Select Card to Discard
-        index = cardIndexInHandcards
-        Handcards.getInstance().discardHandcard(index);
+        //TODO: Select Card to Discard
+        Handcards.getInstance().discardHandcard(selectCardToDiscardIndex);
         InGameFragment.setStackImage();
-         */
+
     }
 
     public PlayingField getPlayingField() {
@@ -355,5 +353,11 @@ public class GameManager {
         return roundIndex;
     }
 
+    public int getSelectCardToDiscardIndex() {
+        return selectCardToDiscardIndex;
+    }
 
+    public void setSelectCardToDiscardIndex(int selectCardToDiscardIndex) {
+        this.selectCardToDiscardIndex = selectCardToDiscardIndex;
+    }
 }
