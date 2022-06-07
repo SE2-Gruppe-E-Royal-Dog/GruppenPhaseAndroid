@@ -34,6 +34,7 @@ import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
+import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
@@ -62,8 +63,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
     }
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -109,13 +108,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         });
 
 
-        btnCardholder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnCardholder.setOnClickListener(view1 ->  {
                 cardholder = new CardViewFragment();
                 cardholder.show(getFragmentManager(), "cardholder Dialog");
                 cardholder.setTargetFragment(InGameFragment.this, 1);
-            }
         });
 
         //unsure if it should be included/if it is nessecary
@@ -213,7 +209,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
+            Handcards.getInstance().discardHandcard(cardholder.getPostitionCardToDischarge());
+            setStackImage();
             GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
+            GameManager.getInstance().nextTurn();
         }
     }
 
@@ -242,8 +241,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         Log.d("selectedSpecialcArd", input);
 
         //TODO maybe adjust fab to special card icon
-
-
     }
 
     public static void setStackImage(){

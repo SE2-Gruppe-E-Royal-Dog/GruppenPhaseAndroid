@@ -69,10 +69,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int card, int possition) {
+
                 if(GameManager.getInstance().isItMyTurn()) {
                     btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
                     postitionCardToDischarge = possition;
+
                 }
             }
         });
@@ -97,7 +99,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 //capture input
                 if (!clickedCard.equals("")) {
                     if(GameManager.getInstance().isThereAnyPossibleMove()){
-                        //TODO discharge card and end turn
                         textView.setText("Select one card to discharge:");
                         cardInputListener.sendInputCardFragment("-1");
                         getDialog().dismiss();

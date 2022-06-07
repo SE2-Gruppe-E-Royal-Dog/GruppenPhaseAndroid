@@ -2,8 +2,12 @@ package com.uni.gruppenphaseandroid.manager;
 
 import android.util.Log;
 
+import androidx.cardview.widget.CardView;
+
 import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.CardViewFragment;
 import com.uni.gruppenphaseandroid.InGameFragment;
+import com.uni.gruppenphaseandroid.SpecialCardDialogFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
@@ -89,10 +93,9 @@ public class GameManager {
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
 
-        if(!isThereAnyPossibleMove()){
-            turnPlayerDiscardsCard();
+        /*if(!isThereAnyPossibleMove()){
             nextTurn();
-        }
+        }*/
     }
 
 
@@ -223,13 +226,6 @@ public class GameManager {
             if(flag) break; //early break for performance reasons
         }
         return flag;
-    }
-
-    public void turnPlayerDiscardsCard(){
-        //TODO: Select Card to Discard
-        Handcards.getInstance().discardHandcard(selectCardToDiscardIndex);
-        InGameFragment.setStackImage();
-
     }
 
     public PlayingField getPlayingField() {
