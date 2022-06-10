@@ -33,10 +33,10 @@ public class AccusationFragment extends DialogFragment {
 
 
     if (GameManager.getInstance().isItMyTurn() && GameManager.getInstance().hasThisClientFigureOnBoard()) {
-        text.setText("Who do you accusate?");
+        text.setText("Who do you accuse");
         setButtons();
     } else if (GameManager.getInstance().isItMyTurn() && !(GameManager.getInstance().hasThisClientFigureOnBoard())) {
-        text.setText("You can only cheat, while you have a Figure on Board");
+        text.setText("No Figure on Board");
     } else {
                 text.setText("Wait until your turn!");
             }
