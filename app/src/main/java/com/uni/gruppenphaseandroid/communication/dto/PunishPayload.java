@@ -1,19 +1,16 @@
 package com.uni.gruppenphaseandroid.communication.dto;
 
 public class PunishPayload {
-    String LobbyID;
+    String lobbyID;
     int figureID;
 
-
-
-
     public PunishPayload(String lobbyID, int figureID) {
-        LobbyID = lobbyID;
+        this.lobbyID = lobbyID;
         this.figureID = figureID;
     }
 
     public String getLobbyID() {
-        return LobbyID;
+        return lobbyID;
     }
 
 

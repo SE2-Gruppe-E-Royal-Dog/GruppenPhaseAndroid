@@ -3,7 +3,9 @@ package com.uni.gruppenphaseandroid;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 public class AccusationFragment extends DialogFragment {
     Button playerOne, playerTwo, playerThree, leaveFragment;
     TextView text;
+    com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor, buttonTwoColor, buttonThreeColor;
 
 
     @Nullable
@@ -56,7 +59,7 @@ public class AccusationFragment extends DialogFragment {
             public void onClick(View view) {
 
                 getDialog().dismiss();
-                onAccusationBtnClick(playerOne);
+                Cheater.makeAccusation(buttonOneColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
             }
         });
 
@@ -64,7 +67,7 @@ public class AccusationFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 getDialog().dismiss();
-                onAccusationBtnClick(playerTwo);
+                Cheater.makeAccusation(buttonTwoColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
             }
         });
 
@@ -72,7 +75,7 @@ public class AccusationFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 getDialog().dismiss();
-                onAccusationBtnClick(playerThree);
+                Cheater.makeAccusation(buttonThreeColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
             }
         });
 
@@ -98,18 +101,21 @@ public class AccusationFragment extends DialogFragment {
                 switch (j) {
                     case 2:
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
+                            buttonThreeColor = GameManager.getInstance().getColorOfClient(i);
                             playerThree.setBackgroundColor(assignColor(i));
                         i++;
                         j++;
                         break;
                     case 1:
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
+                            buttonTwoColor = GameManager.getInstance().getColorOfClient(i);
                             playerTwo.setBackgroundColor(assignColor(i));
                         i++;
                         j++;
                         break;
                     case 0:
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
+                            buttonOneColor = GameManager.getInstance().getColorOfClient(i);
                             playerOne.setBackgroundColor(assignColor(i));
                         i++;
                         j++;
@@ -137,26 +143,6 @@ public class AccusationFragment extends DialogFragment {
 
         }
         return 0;
-    }
-
-    public int playerIndexFromAndroidColor(int color) {
-        switch (color) {
-            case Color.GREEN:
-                return com.uni.gruppenphaseandroid.playingfield.Color.GREEN.ordinal();
-            case Color.RED:
-                return com.uni.gruppenphaseandroid.playingfield.Color.RED.ordinal();
-            case Color.YELLOW:
-                return com.uni.gruppenphaseandroid.playingfield.Color.YELLOW.ordinal();
-            case Color.BLUE:
-                return com.uni.gruppenphaseandroid.playingfield.Color.BLUE.ordinal();
-            default: return -1;
-
-        }
-
-    }
-    private void onAccusationBtnClick(Button btn) {
-        ColorDrawable oneBackground = (ColorDrawable) btn.getBackground();
-        Cheater.makeAccusation(playerIndexFromAndroidColor(oneBackground.getColor()), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
     }
 }
 
