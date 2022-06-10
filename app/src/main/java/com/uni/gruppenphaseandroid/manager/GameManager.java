@@ -382,4 +382,5 @@ public class GameManager {
     public void executePunishment(int figureID){
         playingField.overtake(figuremanager.getFigureWithID(figureID));
     }
+
 }
