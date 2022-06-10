@@ -39,4 +39,9 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
     protected void showWinningScreen() {
 
     }
+
+    @Override
+    protected void showCanNotAcccusePlayerMessage() {
+
+    }
 }

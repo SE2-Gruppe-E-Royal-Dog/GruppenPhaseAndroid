@@ -9,6 +9,8 @@ import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.dto.Payload;
+import com.uni.gruppenphaseandroid.communication.dto.PunishPayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -354,5 +356,30 @@ public class GameManager {
         return roundIndex;
     }
 
+    public boolean hasThisClientFigureOnBoard(){
+        return figuremanager.checkIfPlayerHasFigureOnBoard(getColorOfMyClient());
+
+    }
+
+    public void punishPlayer(int playerID){
+        if (!(figuremanager.checkIfPlayerHasFigureOnBoard(getColorOfClient(playerID)))){
+            visualEffectsManager.showCanNotAcccusePlayerMessage();
+            return;
+        }
+        sendPunishmentMessage(figuremanager.getRandomFigureIdOfPlayerOnBoard(getColorOfClient(playerID)));
+    }
+
+    private void sendPunishmentMessage(int figureID){
+        var payload = new PunishPayload(lobbyID, figureID);
+        var message = new Message();
+        message.setType(MessageType.PUNISHMENT_MESSAGE);
+        message.setPayload(new Gson().toJson(payload));
+        webSocketClient.send(message);
+
+    }
+
+    public void executePunishment(int figureID){
+        playingField.overtake(figuremanager.getFigureWithID(figureID));
+    }
 
 }

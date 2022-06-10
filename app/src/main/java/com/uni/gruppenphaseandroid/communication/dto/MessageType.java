@@ -11,5 +11,5 @@ public enum MessageType {
     WORMHOLE_MOVE,
     REQUEST_CARDS,
     SEND_CARDS,
-    CHEATING
+    PUNISHMENT_MESSAGE
 }

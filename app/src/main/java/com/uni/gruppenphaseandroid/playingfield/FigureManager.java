@@ -5,6 +5,7 @@ import android.widget.RelativeLayout;
 import com.uni.gruppenphaseandroid.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class FigureManager {
 
@@ -106,6 +107,34 @@ public class FigureManager {
             }
         }
         return figureSet;
+    }
+
+    public boolean checkIfPlayerHasFigureOnBoard(Color color){
+        boolean hasFigureOnBoard = false;
+        for (Figure figure:figureList){
+            if(figure.getColor() == color){
+                if (!(figure.getCurrentField() instanceof StartingAreaField)){
+                    hasFigureOnBoard = true;
+                }
+            }
+
+        }
+        return hasFigureOnBoard;
+
+    }
+
+    public int getRandomFigureIdOfPlayerOnBoard(Color color){
+        Random random = new Random();
+        int max = 3;
+        int min = 0;
+        ArrayList <Figure> figuresOfColour = getFiguresOfColour(color);
+        while (true){
+            int randomIndex = random.nextInt(max - min) + min;
+            Figure figure = figuresOfColour.get(randomIndex);
+            if (!(figure.getCurrentField() instanceof StartingAreaField)){
+                return figure.getId();
+            }
+        }
     }
 
 }

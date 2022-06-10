@@ -109,9 +109,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         });
 
         view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
-          AccusationFragment accusation = new AccusationFragment();
-          accusation.show(getFragmentManager(), "Anschuldigung");
-          accusation.setTargetFragment(InGameFragment.this, 1);
+                AccusationFragment accusation = new AccusationFragment();
+                accusation.show(getFragmentManager(), "Anschuldigung");
+                accusation.setTargetFragment(InGameFragment.this, 1);
+
 
         });
 
