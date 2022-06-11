@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        var id = item.getItemId();
 
         switch (item.getItemId()){
             case R.id.action_settings:
@@ -223,6 +222,8 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
             findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
+            showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
+            //TODO set players name on tv_plyerColor
         }
 
         private void handleUpdateBoard(String body) {
