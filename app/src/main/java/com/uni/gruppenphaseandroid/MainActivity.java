@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack)));
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext()));
 
             //TODO hide startgame button and show chardholder
         }

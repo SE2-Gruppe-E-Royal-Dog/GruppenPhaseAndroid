@@ -89,12 +89,15 @@ public class GameManager {
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
-        checkForDiscarding();
+        if(isItMyTurn()){
+            checkForDiscarding();
+        }
     }
 
     private void checkForDiscarding(){
         if(!isThereAnyPossibleMove()){
             turnPlayerDiscardsCard();
+            visualEffectsManager.showNoPossibleMoveMessage();
             //int index = selectCardToDiscard();
             //Handcards.getInstance().discardHandcard(index);
             //nextTurn();
@@ -145,7 +148,7 @@ public class GameManager {
 
     private boolean doCheckAndShowFeedback(Figure figure1, Figure figure2){
         if (!selectedCard.checkIfCardIsPlayable(figure1, currentEffect, figure2)) {
-            //show feedback
+            visualEffectsManager.showIllegalMoveMessage();
             currentTurnPhase = TurnPhase.CHOOSECARD;
             return false;
         }
@@ -213,16 +216,16 @@ public class GameManager {
                 }
                 break;
             case FOUR_PLUSMINUS:
-                flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
+                flag = card.checkIfCardIsPlayable(figure, 1, null);
                 flag = flag || card.checkIfCardIsPlayable(figure, 2, null);
                 break;
             case ONEORELEVEN_START:
-                flag = flag || card.checkIfCardIsPlayable(figure, 0, null);
+                flag = card.checkIfCardIsPlayable(figure, 0, null);
                 flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
                 flag = flag || card.checkIfCardIsPlayable(figure, 11, null);
                 break;
             case THIRTEEN_START:
-                flag = flag || card.checkIfCardIsPlayable(figure, 0, null);
+                flag = card.checkIfCardIsPlayable(figure, 0, null);
                 flag = flag || card.checkIfCardIsPlayable(figure, 13, null);
                 break;
             case SWITCH:
@@ -235,7 +238,7 @@ public class GameManager {
                 }
                 break;
             default:
-                flag = flag || card.checkIfCardIsPlayable(figure, -1, null);
+                flag =  card.checkIfCardIsPlayable(figure, -1, null);
         }
         return flag;
     }

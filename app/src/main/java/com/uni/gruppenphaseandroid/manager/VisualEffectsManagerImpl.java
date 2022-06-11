@@ -1,6 +1,8 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.content.Context;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cards.CardUI;
@@ -8,10 +10,12 @@ import com.uni.gruppenphaseandroid.cards.CardUI;
 public class VisualEffectsManagerImpl extends VisualEffectsManager{
 
     ImageView stackImage;
+    Context context;
     //other attributes...
 
-    public VisualEffectsManagerImpl(ImageView stackImage) {
+    public VisualEffectsManagerImpl(ImageView stackImage, Context context) {
         this.stackImage = stackImage;
+        this.context = context;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
 
     @Override
     protected void showIllegalMoveMessage() {
-
+        showToast("This is not a legal move. Choose a new card.");
     }
 
     @Override
@@ -47,6 +51,14 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
 
     @Override
     protected void showNoPossibleMoveMessage() {
-
+        showToast("No possible move with this hand. Please discard 1 card.");
     }
+    private void showToast(String message) {
+        var toast = Toast.makeText(context,
+                message,
+                Toast.LENGTH_LONG);
+
+        toast.show();
+    }
+
 }
