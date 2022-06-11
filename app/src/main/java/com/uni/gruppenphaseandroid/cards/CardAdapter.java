@@ -17,10 +17,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     private LinkedList<Integer> imageCardList;
     private ItemClickListener mItemClickListener;
+    public static int mPreviousIndex = -1;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
+        private final ImageView background;
 
         public ViewHolder(View view) {
             super(view);
@@ -28,6 +30,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             // Define click listener for the ViewHolder's View.
             view.setOnClickListener(v -> Log.d("code", "Element " + getAdapterPosition() + " clicked."));
             imageView = (ImageView) view.findViewById(R.id.imageView);
+            background = (ImageView) view.findViewById(R.id.imageView_selectedBackground);
         }
 
         public ImageView getImageView() {
@@ -54,13 +57,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (mPreviousIndex == position){
+            holder.background.setVisibility(View.VISIBLE);
+        }else{
+            holder.background.setVisibility(View.INVISIBLE);
+        }
         holder.imageView.setImageResource(imageCardList.get(position));
-
-        /*holder.imageView.getLayoutParams().height+=10;
-        holder.imageView.getLayoutParams().width+=10;
-*/
         holder.itemView.setOnClickListener((view -> {
             mItemClickListener.onItemClick(imageCardList.get(position),position);
+            notifyDataSetChanged();
         }));
     }
 
@@ -73,4 +78,5 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public interface ItemClickListener{
         void onItemClick(int card, int possition);
     }
+
 }

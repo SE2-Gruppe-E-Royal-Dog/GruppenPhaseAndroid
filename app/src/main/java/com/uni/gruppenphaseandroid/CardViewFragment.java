@@ -37,12 +37,13 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private String clickedCard;
     private int roundIndex; // TODO get from Game Manager ... needed?
     private int postitionCardToDischarge;
+    private String cheaterNote;
 
 
     private static String playerId;
 
     public interface OnInputListener{
-        void sendInputCardFragment(String input);
+        void sendInputCardFragment(String input, String cheaterNote);
     }
 
     public OnInputListener cardInputListener;
@@ -68,12 +69,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
         CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
             @Override
-            public void onItemClick(int card, int possition) {
-
+            public void onItemClick(int card, int position) {
+                CardAdapter.mPreviousIndex = position;
                 if(GameManager.getInstance().isItMyTurn()) {
                     btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
-                    postitionCardToDischarge = possition;
+                    postitionCardToDischarge = position;
 
                 }
             }
@@ -95,15 +96,15 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("card_input", "input:" + clickedCard);
+                Log.d("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
                     if(GameManager.getInstance().isThereAnyPossibleMove()){
                         textView.setText("Select one card to discharge:");
-                        cardInputListener.sendInputCardFragment("-1");
+                        cardInputListener.sendInputCardFragment("-1", cheaterNote);
                         getDialog().dismiss();
                     }else {
-                        cardInputListener.sendInputCardFragment(clickedCard);
+                        cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
                         getDialog().dismiss();
                     }
                 }
@@ -142,8 +143,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
 
 
-
-
     /**
      * Mehtoden die notwendig für den Sensor sind
      */
@@ -165,7 +164,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Cheater cheater = new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex());
-        TextView note = getActivity().findViewById(R.id.tv_cheater);
+        cheaterNote = "0";
 
         textView = getView().findViewById(R.id.tv_cheater);
         float x = sensorEvent.values[0];
@@ -177,8 +176,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             if (x < 0 && cheating) { //tilt to right
                 cheater.cheating(cheater);
                 GameManager.getInstance().setCheatModifier(-1);
-                note.setText("-1");
-                note.setVisibility(View.VISIBLE);
+                cheaterNote = "-1";
 
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
@@ -200,8 +198,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 if (x > 0 && cheating) { //tilt to left
                     cheater.cheating(cheater);
                     GameManager.getInstance().setCheatModifier(+1);
-                    note.setText("+1");
-                    note.setVisibility(View.VISIBLE);
+                    cheaterNote = "+1";
 
                     textView.setText("Cheater Cheater + 1");
                     textView.setVisibility(View.VISIBLE);

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -199,10 +200,17 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     //method for Dialog Fragment - Card Holder
     @Override
-    public void sendInputCardFragment(String input) {               //get's input from cardholder aka choosen card
+    public void sendInputCardFragment(String input, String cheaterNote) {               //get's input from cardholder aka choosen card
         getActivity().findViewById(R.id.btn_cardholderButton).setBackgroundResource(Integer.parseInt(input));
         setCardViewImage(Integer.parseInt(input));
-        //TODO set Cheater note here!!!!!!!!!!!!!!!
+
+        //set's cheater note over cardholder
+        if (!cheaterNote.equals("0")){
+        TextView note = getActivity().findViewById(R.id.tv_cheater);
+        note.setText(cheaterNote);
+        note.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void setCardViewImage (int imageID){                     //set's the cardholder image to the choosen card, so the player sees what card he has choosen
@@ -245,7 +253,5 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         //TODO maybe adjust fab to special card icon
     }
-
-    //TODO visual note for cheating! findViewById(R.id.tv_cheater);
 
 }
