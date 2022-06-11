@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -16,14 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.CardUI;
@@ -146,7 +143,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         switch (item.getItemId()){
             case R.id.action_settings:
                 return true;
-            case R.id.as_leaveGame:{
+            case R.id.action_leaveGame:{
                 websocketClient = ((MainActivity) getContext()).getService().getClient();
                 var lobbyId = ((MainActivity) getContext()).getLobbyId();
                 var playerId = ((MainActivity) getContext()).getPlayerId();
@@ -159,6 +156,12 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 websocketClient.send(message);
                 NavHostFragment.findNavController(InGameFragment.this)
                         .navigate(R.id.action_InGameFragment_to_FirstFragment);
+                return true;
+            }
+            case R.id.action_howPlay: {
+                HowToPlayFragment dialog = new HowToPlayFragment();
+                dialog.show(getFragmentManager(), "NoticeDialogFragment");
+                return true;
             }
             default:
                 return super.onOptionsItemSelected(item);
@@ -199,6 +202,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     public void sendInputCardFragment(String input) {               //get's input from cardholder aka choosen card
         getActivity().findViewById(R.id.btn_cardholderButton).setBackgroundResource(Integer.parseInt(input));
         setCardViewImage(Integer.parseInt(input));
+        //TODO set Cheater note here!!!!!!!!!!!!!!!
     }
 
     public void setCardViewImage (int imageID){                     //set's the cardholder image to the choosen card, so the player sees what card he has choosen
@@ -238,7 +242,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     @Override
     public void sendInputSpecialCardFragment(String input) {
 
-        Log.d("selectedSpecialcArd", input);
+        Log.d("selectedSpecialCard", input);
 
         //TODO maybe adjust fab to special card icon
     }

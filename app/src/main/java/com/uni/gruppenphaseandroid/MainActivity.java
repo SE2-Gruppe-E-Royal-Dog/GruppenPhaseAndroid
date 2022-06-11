@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         menu.clear();       //to get rid of dublicated menu items
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
         return true;
     }
 
@@ -94,12 +97,21 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         var id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                return true;
+            //case R.id.action_leaveGame:
+
+
+            case R.id.action_howPlay: {
+                DialogFragment dialog = new HowToPlayFragment();
+                dialog.show(getSupportFragmentManager(), "howPlayDialogFragment");
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
 
