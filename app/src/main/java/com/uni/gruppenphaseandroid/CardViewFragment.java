@@ -164,7 +164,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     //What happens if sensor change detected
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        Cheater cheater = new Cheater(playerId, roundIndex);
+        Cheater cheater = new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex());
         TextView note = getActivity().findViewById(R.id.tv_cheater);
 
         textView = getView().findViewById(R.id.tv_cheater);

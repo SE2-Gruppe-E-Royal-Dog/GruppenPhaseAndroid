@@ -2,12 +2,8 @@ package com.uni.gruppenphaseandroid.manager;
 
 import android.util.Log;
 
-import androidx.cardview.widget.CardView;
-
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.CardViewFragment;
 import com.uni.gruppenphaseandroid.InGameFragment;
-import com.uni.gruppenphaseandroid.SpecialCardDialogFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
@@ -159,7 +155,6 @@ public class GameManager {
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
         if (!isItMyTurn()) { //for the turnplayer, the update took place already
             lastTurn = LastTurn.generateLastTurnObject(updateBoardPayload, figuremanager, playingField);
-            InGameFragment.setStackImage(); //TODO: move the functionality of this line into visualEffectsManager.setStackImage()
             visualEffectsManager.setStackImage();
             playingField.moveFigureToField(lastTurn.getFigure1(), lastTurn.getNewFigure1Field());
             if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
@@ -349,6 +344,31 @@ public class GameManager {
         return roundIndex;
     }
 
+    public boolean hasThisClientFigureOnBoard(){
+        return figuremanager.checkIfPlayerHasFigureOnBoard(getColorOfMyClient());
+
+    }
+
+    public void punishPlayer(int playerID){
+        if (!(figuremanager.checkIfPlayerHasFigureOnBoard(getColorOfClient(playerID)))){
+            visualEffectsManager.showCanNotAcccusePlayerMessage();
+            return;
+        }
+        sendPunishmentMessage(figuremanager.getRandomFigureIdOfPlayerOnBoard(getColorOfClient(playerID)));
+    }
+
+    private void sendPunishmentMessage(int figureID){
+        var payload = new PunishPayload(lobbyID, figureID);
+        var message = new Message();
+        message.setType(MessageType.PUNISHMENT_MESSAGE);
+        message.setPayload(new Gson().toJson(payload));
+        webSocketClient.send(message);
+
+    }
+
+    public void executePunishment(int figureID){
+        playingField.overtake(figuremanager.getFigureWithID(figureID));
+    }
     public int getSelectCardToDiscardIndex() {
         return selectCardToDiscardIndex;
     }

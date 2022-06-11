@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.CardUI;
@@ -46,15 +47,12 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private CardViewFragment cardholder;
     private SpecialCardDialogFragment specialCardDialog;
     private ImageView stack;
-    private static InGameFragment inGameFragment;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-        inGameFragment = this;
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
@@ -69,7 +67,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         PlayingField playingField = new PlayingField(view);
         GameManager.getInstance().setPlayingField(playingField);
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
-
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
        // btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
@@ -98,9 +95,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         });
 
         view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
-          AccusationFragment accusation = new AccusationFragment();
-          accusation.show(getFragmentManager(), "Anschuldigung");
-          accusation.setTargetFragment(InGameFragment.this, 1);
+                AccusationFragment accusation = new AccusationFragment();
+                accusation.show(getFragmentManager(), "Anschuldigung");
+                accusation.setTargetFragment(InGameFragment.this, 1);
 
         });
 
@@ -214,7 +211,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
             Handcards.getInstance().discardHandcard(cardholder.getPostitionCardToDischarge());
-            setStackImage();
             GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
             GameManager.getInstance().nextTurn();
         }
@@ -247,16 +243,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         //TODO maybe adjust fab to special card icon
     }
 
-    public static void setStackImage(){
-        if(inGameFragment == null){
-            return;
-        }
-        LastTurn lastTurn = GameManager.getInstance().getLastTurn();
-        if(lastTurn.getCardtype()==null){
-            throw new IllegalArgumentException("No Cardtype has been set");
-        }
-
-        inGameFragment.stack.setImageResource(CardUI.getInstance().cardtypeToId(lastTurn.getCardtype()));
-    }
+    //TODO visual note for cheating! findViewById(R.id.tv_cheater);
 
 }

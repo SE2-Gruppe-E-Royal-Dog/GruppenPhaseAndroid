@@ -83,6 +83,11 @@ public class GameManagerWormholeTest {
             protected void showWinningScreen() {
 
             }
+
+            @Override
+            protected void showCanNotAcccusePlayerMessage() {
+
+            }
         };
         GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager, visualEffectsManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());

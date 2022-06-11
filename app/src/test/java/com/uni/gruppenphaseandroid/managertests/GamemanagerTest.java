@@ -111,6 +111,11 @@ public class GamemanagerTest {
             protected void showWinningScreen() {
 
             }
+
+            @Override
+            protected void showCanNotAcccusePlayerMessage() {
+
+            }
         };
         GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager);
     }
