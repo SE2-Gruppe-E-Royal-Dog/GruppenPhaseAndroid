@@ -15,6 +15,7 @@ import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.CardManager;
+import com.uni.gruppenphaseandroid.manager.CommunicationManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManager;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
@@ -35,6 +36,7 @@ public class GameManagerWormholeTest {
     View view;
     FigureManager figureManager;
     CardManager cardManager;
+    CommunicationManager communicationManager;
     Card card;
     Client socketClient;
     ArrayList<Wormhole> wormholeList;
@@ -67,7 +69,8 @@ public class GameManagerWormholeTest {
         message.setPayload(new Gson().toJson(payload));
 
         VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
-        GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager, visualEffectsManager, cardManager);
+        communicationManager = new CommunicationManager(socketClient, lobbyID, playerID);
+        GameManager.getInstance().startGame(4, 2, figureManager, visualEffectsManager, cardManager, communicationManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());
     }
 

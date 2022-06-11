@@ -30,9 +30,6 @@ public class GameManager {
         return instance;
     }
 
-    private String lobbyID;
-    private String playerID;
-
     private int currentTurnPlayerNumber;
     private TurnPhase currentTurnPhase;
     private int myTurnNumber;
@@ -43,6 +40,7 @@ public class GameManager {
     private FigureManager figuremanager;
     private VisualEffectsManager visualEffectsManager;
     private CardManager cardManager;
+    private CommunicationManager communicationManager;
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;                          //int for special cards
@@ -55,9 +53,7 @@ public class GameManager {
 
     int roundIndex;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager, VisualEffectsManager visualEffectsManager, CardManager cardManager) {
-        this.lobbyID = lobbyID;
-        this.playerID = playerID;
+    public void startGame(int numberOfPlayers, int playerTurnNumber, FigureManager figureManager, VisualEffectsManager visualEffectsManager, CardManager cardManager, CommunicationManager communicationManager) {
         this.roundIndex = 0;
 
         this.numberOfPlayers = numberOfPlayers;
@@ -65,17 +61,17 @@ public class GameManager {
         this.figuremanager = figureManager;
         this.visualEffectsManager = visualEffectsManager;
         this.cardManager = cardManager;
+        this.communicationManager = communicationManager;
+
         for (int i = 0; i < numberOfPlayers; i++) {
             figureManager.createFigureSetOfColor(Color.values()[i], playingField);
         }
         currentTurnPlayerNumber = numberOfPlayers - 1;
         visualEffectsManager.setInitialStackImage();
         nextTurn();
-
     }
 
     public void nextTurn() {
-
         currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
         visualEffectsManager.showNextTurnMessage(playerNames[currentTurnPlayerNumber], Color.values()[currentTurnPlayerNumber].name());
 
@@ -88,8 +84,6 @@ public class GameManager {
             }
         }
     }
-
-
 
     public void cardGotPlayed(Card card) {
         if (currentTurnPhase == TurnPhase.CHOOSECARD && isItMyTurn()) {
@@ -145,7 +139,8 @@ public class GameManager {
     private void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
         selectedCard = null;
-        webSocketClient.send(lastTurn.generateServerMessage());
+        communicationManager.sendUpdateBoardMessage(lastTurn);
+        //webSocketClient.send(lastTurn.generateServerMessage());
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
@@ -156,7 +151,6 @@ public class GameManager {
             if (lastTurn.getFigure2() != null && lastTurn.getNewFigure2Field() != null) {
                 playingField.moveFigureToField(lastTurn.getFigure2(), lastTurn.getNewFigure2Field());
             }
-
         }
         //TODO: update card UI
         nextTurn();
@@ -176,18 +170,12 @@ public class GameManager {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
-
-
     public PlayingField getPlayingField() {
         return playingField;
     }
 
     public void setPlayingField(PlayingField playingField) {
         this.playingField = playingField;
-    }
-
-    public WebSocketClient getWebSocketClient() {
-        return webSocketClient;
     }
 
     public void setWebSocketClient(Client webSocketClient) {
@@ -211,15 +199,11 @@ public class GameManager {
         playingField.moveAllWormholesRandomly();
         List<Wormhole> wormholeList = playingField.getWormholeList();
 
-        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(), lobbyID);
+        var payload = new WormholeSwitchPayload(wormholeList.get(0).getFieldID(), wormholeList.get(1).getFieldID(), wormholeList.get(2).getFieldID(), wormholeList.get(3).getFieldID(), communicationManager.lobbyID);
         var message = new Message();
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
-    }
-
-    public String getLobbyID() {
-        return lobbyID;
     }
 
     public void moveWormholes(int[] newFieldIDs) {
@@ -275,11 +259,6 @@ public class GameManager {
         this.currentEffect = currentEffect;
     }
 
-    public String getPlayerID() {
-        return playerID;
-    }
-
-
     public Color getColorOfClient(int playerIndex){
         return Color.values()[playerIndex];
     }
@@ -313,12 +292,11 @@ public class GameManager {
     }
 
     private void sendPunishmentMessage(int figureID){
-        var payload = new PunishPayload(lobbyID, figureID);
+        var payload = new PunishPayload(communicationManager.lobbyID, figureID);
         var message = new Message();
         message.setType(MessageType.PUNISHMENT_MESSAGE);
         message.setPayload(new Gson().toJson(payload));
         webSocketClient.send(message);
-
     }
 
     public void executePunishment(int figureID){

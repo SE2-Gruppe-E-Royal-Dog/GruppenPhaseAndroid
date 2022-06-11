@@ -19,12 +19,12 @@ public class LastTurn {
     private Cardtype cardtype;
     private int cheatModifier = 0;
 
-    public Message generateServerMessage() {
+    public Message generateServerMessage(String lobbyID, String playerID) {
         Message message = new Message();
         message.setType(MessageType.UPDATE_BOARD);
         int figure2ID = (figure2 == null) ? -1 : figure2.getId();
         int newFigure2FieldID = (newFigure2Field == null) ? -1 : newFigure2Field.getFieldID();
-        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.ordinal(), cheatModifier, GameManager.getInstance().getLobbyID(), GameManager.getInstance().getPlayerID());
+        var payload = new UpdateBoardPayload(figure1.getId(), figure2ID, newFigure1Field.getFieldID(), newFigure2FieldID, cardtype.ordinal(), cheatModifier, lobbyID, playerID);
         message.setPayload(new Gson().toJson(payload));
         return message;
     }

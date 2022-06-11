@@ -33,6 +33,7 @@ import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.CardManager;
+import com.uni.gruppenphaseandroid.manager.CommunicationManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
@@ -217,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
             CardManager cardManager = new CardManager();
             FigureManager figureManager = new FigureManager();
             cardManager.setFigureManager(figureManager);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId,figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext()), cardManager);
+            CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext()), cardManager, communicationManager);
 
             //TODO hide startgame button and show chardholder
         }
