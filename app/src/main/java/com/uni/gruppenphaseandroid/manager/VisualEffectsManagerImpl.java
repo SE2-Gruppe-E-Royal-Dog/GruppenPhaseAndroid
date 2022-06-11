@@ -53,6 +53,12 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
     protected void showNoPossibleMoveMessage() {
         showToast("No possible move with this hand. Please discard 1 card.");
     }
+
+    @Override
+    protected void showNextTurnMessage(String turnPlayerName, String colorName) {
+        showToast("It's " +turnPlayerName+"'s/ "+colorName+"'s turn now!");
+    }
+
     private void showToast(String message) {
         var toast = Toast.makeText(context,
                 message,

@@ -56,7 +56,7 @@ public class GameManager {
     private boolean hasMovedWormholes = false;
     private boolean hasCheated = false;
 
-
+    private String[] playerNames = {"Player1", "Player2", "Player3", "Player4"};
 
     int roundIndex;
 
@@ -86,6 +86,7 @@ public class GameManager {
     public void nextTurn() {
 
         currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
+        visualEffectsManager.showNextTurnMessage(playerNames[currentTurnPlayerNumber], Color.values()[currentTurnPlayerNumber].name());
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
