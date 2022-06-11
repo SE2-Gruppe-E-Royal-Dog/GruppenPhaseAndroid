@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uni.gruppenphaseandroid.cards.CardAdapter;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
+import com.uni.gruppenphaseandroid.manager.CardManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;

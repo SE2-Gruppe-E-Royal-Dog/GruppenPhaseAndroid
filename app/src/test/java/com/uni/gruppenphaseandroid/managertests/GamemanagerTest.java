@@ -19,6 +19,7 @@ import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
+import com.uni.gruppenphaseandroid.manager.CardManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
@@ -41,6 +42,7 @@ public class GamemanagerTest {
     PlayingField playingField;
     View view;
     FigureManager figureManager;
+    CardManager cardManager;
     Card cardEight;
     Card cardSwitch;
 
@@ -60,6 +62,7 @@ public class GamemanagerTest {
         playingField = mock(PlayingField.class);
         GameManager.getInstance().setPlayingField(playingField);
         figureManager = mock(FigureManager.class);
+        cardManager = mock(CardManager.class);
         cardEight = mock(Card.class);
         cardSwitch = mock(Card.class);
         when(cardEight.getCardtype()).thenReturn(Cardtype.EIGTH);
@@ -93,7 +96,7 @@ public class GamemanagerTest {
         message2.setPayload(new Gson().toJson(updateBoardPayloadTwoFigures));
 
         VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
-        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager);
+        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager, cardManager);
     }
 
     @After

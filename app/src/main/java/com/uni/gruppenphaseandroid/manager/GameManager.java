@@ -1,20 +1,15 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
-import com.uni.gruppenphaseandroid.communication.dto.Payload;
 import com.uni.gruppenphaseandroid.communication.dto.PunishPayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.playingfield.Color;
-import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
@@ -22,7 +17,6 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
@@ -48,6 +42,7 @@ public class GameManager {
     private Client webSocketClient;
     private FigureManager figuremanager;
     private VisualEffectsManager visualEffectsManager;
+    private CardManager cardManager;
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;                          //int for special cards
@@ -60,7 +55,7 @@ public class GameManager {
 
     int roundIndex;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager, VisualEffectsManager visualEffectsManager) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, String lobbyID,String playerID, FigureManager figureManager, VisualEffectsManager visualEffectsManager, CardManager cardManager) {
         this.lobbyID = lobbyID;
         this.playerID = playerID;
         this.roundIndex = 0;
@@ -69,18 +64,14 @@ public class GameManager {
         this.myTurnNumber = playerTurnNumber;
         this.figuremanager = figureManager;
         this.visualEffectsManager = visualEffectsManager;
+        this.cardManager = cardManager;
         for (int i = 0; i < numberOfPlayers; i++) {
-            createFigureSet(Color.values()[i]);
+            figureManager.createFigureSetOfColor(Color.values()[i], playingField);
         }
         currentTurnPlayerNumber = numberOfPlayers - 1;
         visualEffectsManager.setInitialStackImage();
         nextTurn();
 
-    }
-
-
-    void createFigureSet(Color color) {
-        figuremanager.createFigureSetOfColor(color, playingField);
     }
 
     public void nextTurn() {
@@ -91,19 +82,14 @@ public class GameManager {
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
         if(isItMyTurn()){
-            checkForDiscarding();
+            if(cardManager.discardCardIfNecessary(myTurnNumber, lastTurn)){
+                visualEffectsManager.showNoPossibleMoveMessage();
+                //nextTurn();
+            }
         }
     }
 
-    private void checkForDiscarding(){
-        if(!isThereAnyPossibleMove()){
-            turnPlayerDiscardsCard();
-            visualEffectsManager.showNoPossibleMoveMessage();
-            //int index = selectCardToDiscard();
-            //Handcards.getInstance().discardHandcard(index);
-            //nextTurn();
-        }
-    }
+
 
     public void cardGotPlayed(Card card) {
         if (currentTurnPhase == TurnPhase.CHOOSECARD && isItMyTurn()) {
@@ -177,6 +163,7 @@ public class GameManager {
     }
 
     public boolean doesAnyoneHaveCardsLeftInHand() {
+        //TODO: implement
         return true;
     }
 
@@ -189,69 +176,7 @@ public class GameManager {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
-    public boolean isThereAnyPossibleMove(){
-        boolean flag = false;
-        for(Card card : Handcards.getInstance().getMyCards()){
-            for(Figure figure : figuremanager.getFiguresOfColour(Color.values()[myTurnNumber])){
 
-                Card tempCard = card;
-                if(card.getCardtype() == Cardtype.EQUAL){
-                    if(lastTurn == null){
-                        continue;
-                    }
-                    tempCard = new Card(lastTurn.getCardtype());
-                }
-                flag = flag || checkIfMoveIsPossibleForSingleCard(tempCard, figure);
-            }
-            if(flag) break; //early break for performance reasons
-        }
-        return flag;
-    }
-
-    private boolean checkIfMoveIsPossibleForSingleCard(Card card, Figure figure){
-        boolean flag = false;
-        switch (card.getCardtype()){
-            case ONETOSEVEN:
-                for(int i = 1; i <=7;i++ ){
-                    flag = flag || card.checkIfCardIsPlayable(figure, i, null);
-                }
-                break;
-            case FOUR_PLUSMINUS:
-                flag = card.checkIfCardIsPlayable(figure, 1, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 2, null);
-                break;
-            case ONEORELEVEN_START:
-                flag = card.checkIfCardIsPlayable(figure, 0, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 11, null);
-                break;
-            case THIRTEEN_START:
-                flag = card.checkIfCardIsPlayable(figure, 0, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 13, null);
-                break;
-            case SWITCH:
-                for(int i = 1;i<=16;i++){
-                    if(i == figure.getId()){
-                        continue;
-                    }
-                    Figure targetFigure = figuremanager.getFigureWithID(i);
-                    flag = flag || card.checkIfCardIsPlayable(figure, -1, targetFigure);
-                }
-                break;
-            default:
-                flag =  card.checkIfCardIsPlayable(figure, -1, null);
-        }
-        return flag;
-    }
-
-    public void turnPlayerDiscardsCard(){
-        /*
-        TODO: Select Card to Discard
-        index = cardIndexInHandcards
-        Handcards.getInstance().discardHandcard(index);
-        InGameFragment.setStackImage();
-         */
-    }
 
     public PlayingField getPlayingField() {
         return playingField;
@@ -399,8 +324,11 @@ public class GameManager {
     public void executePunishment(int figureID){
         playingField.overtake(figuremanager.getFigureWithID(figureID));
         if(isItMyTurn()){
-            checkForDiscarding(); //since the field changed, there may be no playable card in hand
+            cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
         }
     }
 
+    public boolean isThereAnyPossibleMove() {
+        return cardManager.isThereAnyPossibleMove(myTurnNumber, lastTurn);
+    }
 }
