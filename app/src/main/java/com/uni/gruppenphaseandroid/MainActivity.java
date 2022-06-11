@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private String lobbyId;
     private String playerId;
     private final Gson gson = new Gson();
-    private LinkedList<String> playerNames = new LinkedList<>();
+    private LinkedList<String> playerNames = new LinkedList<>();        //TODO fill with playernames in correct order inkl mine
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -196,19 +196,13 @@ public class MainActivity extends AppCompatActivity {
 
             showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
 
-            //delete player of playerName list
             removePlayerNamesOnBoard(payload.getPlayerName());
-            playerNames.remove(payload.getPlayerName());
-
         }
 
         private void handleNewPlayerJoinedMessage(String body) {
             var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
 
             showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
-
-            //add playername to list
-            playerNames.add(payload.getPlayerName());
         }
 
         private void handleJoinedLobbyMessage(String body) {
@@ -235,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
             findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
             showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
-            //TODO set players name on tv_plyerColor
+
             setPlayerNamesOnBoard();
         }
 
