@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,8 @@ import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
    private Client websocketClient;
     private WebSocketService.WebSocketBinder binder;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private String lobbyId;
     private String playerId;
     private final Gson gson = new Gson();
+    private LinkedList<String> playerNames = new LinkedList<>();
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -191,12 +195,20 @@ public class MainActivity extends AppCompatActivity {
             var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
 
             showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
+
+            //delete player of playerName list
+            removePlayerNamesOnBoard(payload.getPlayerName());
+            playerNames.remove(payload.getPlayerName());
+
         }
 
         private void handleNewPlayerJoinedMessage(String body) {
             var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
 
             showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
+
+            //add playername to list
+            playerNames.add(payload.getPlayerName());
         }
 
         private void handleJoinedLobbyMessage(String body) {
@@ -224,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
             showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
             //TODO set players name on tv_plyerColor
+            setPlayerNamesOnBoard();
         }
 
         private void handleUpdateBoard(String body) {
@@ -243,6 +256,56 @@ public class MainActivity extends AppCompatActivity {
             GameManager.getInstance().moveWormholes(wormholeIDs);
         }
 
+    }
+
+    private void removePlayerNamesOnBoard(String playerId) {
+        TextView name;
+        for (int i = 0; i < 4; i++){
+            if (playerNames.get(i).equals(playerId)) {
+                switch (i) {
+                    case 0:
+                        name = findViewById(R.id.tv_playerGreen);
+                        name.setText("");
+                        break;
+                    case 1:
+                        name = findViewById(R.id.tv_playerYellow);
+                        name.setText("");
+                        break;
+                    case 2:
+                        name = findViewById(R.id.tv_playerRed);
+                        name.setText("");
+                        break;
+                    case 3:
+                        name = findViewById(R.id.tv_playerBlue);
+                        name.setText("");
+                        break;
+                }
+            }
+        }
+    }
+
+    private void setPlayerNamesOnBoard() {
+        TextView name;
+        for (int i = 0; i < 4; i++){
+            switch (i){
+                case 0:
+                    name = findViewById(R.id.tv_playerGreen);
+                    name.setText(playerNames.get(i));
+                    break;
+                case 1:
+                    name = findViewById(R.id.tv_playerYellow);
+                    name.setText(playerNames.get(i));
+                    break;
+                case 2:
+                    name = findViewById(R.id.tv_playerRed);
+                    name.setText(playerNames.get(i));
+                    break;
+                case 3:
+                    name = findViewById(R.id.tv_playerBlue);
+                    name.setText(playerNames.get(i));
+                    break;
+            }
+        }
     }
 
     private void setPlayerIdInCardView(){
