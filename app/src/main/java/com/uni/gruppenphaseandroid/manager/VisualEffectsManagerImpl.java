@@ -44,4 +44,9 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
     protected void showCanNotAcccusePlayerMessage() {
 
     }
+
+    @Override
+    protected void showNoPossibleMoveMessage() {
+
+    }
 }

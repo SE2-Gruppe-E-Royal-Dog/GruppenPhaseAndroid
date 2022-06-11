@@ -11,4 +11,6 @@ public abstract class VisualEffectsManager {
     protected abstract void showWinningScreen();
 
     protected abstract void showCanNotAcccusePlayerMessage();
+
+    protected abstract void showNoPossibleMoveMessage();
 }

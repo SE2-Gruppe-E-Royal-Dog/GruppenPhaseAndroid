@@ -63,32 +63,7 @@ public class GameManagerWormholeTest {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
 
-        VisualEffectsManager visualEffectsManager = new VisualEffectsManager() {
-            @Override
-            protected void setStackImage() {
-
-            }
-
-            @Override
-            protected void setInitialStackImage() {
-
-            }
-
-            @Override
-            protected void showIllegalMoveMessage() {
-
-            }
-
-            @Override
-            protected void showWinningScreen() {
-
-            }
-
-            @Override
-            protected void showCanNotAcccusePlayerMessage() {
-
-            }
-        };
+        VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
         GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager, visualEffectsManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());
     }

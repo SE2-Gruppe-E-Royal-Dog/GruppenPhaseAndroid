@@ -23,6 +23,7 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManager;
+import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -91,32 +92,7 @@ public class GamemanagerTest {
         message2.setType(MessageType.UPDATE_BOARD);
         message2.setPayload(new Gson().toJson(updateBoardPayloadTwoFigures));
 
-        VisualEffectsManager visualEffectsManager = new VisualEffectsManager() {
-            @Override
-            protected void setStackImage() {
-
-            }
-
-            @Override
-            protected void setInitialStackImage() {
-
-            }
-
-            @Override
-            protected void showIllegalMoveMessage() {
-
-            }
-
-            @Override
-            protected void showWinningScreen() {
-
-            }
-
-            @Override
-            protected void showCanNotAcccusePlayerMessage() {
-
-            }
-        };
+        VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
         GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager);
     }
 
