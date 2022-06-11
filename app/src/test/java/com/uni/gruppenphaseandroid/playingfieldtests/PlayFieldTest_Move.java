@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -18,6 +20,7 @@ import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.King;
 import com.uni.gruppenphaseandroid.playingfield.Knight;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.StartingAreaField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
 import org.junit.After;
@@ -106,6 +109,9 @@ public class PlayFieldTest_Move {
         figureUI10 = mock(FigureUIimpl.class);
         figureUI11 = mock(FigureUIimpl.class);
         figureUI12 = mock(FigureUIimpl.class);
+
+        Card greencard = new Card(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setSelectedCard(greencard);
     }
 
     @After
@@ -118,27 +124,107 @@ public class PlayFieldTest_Move {
     /**
      * Test auf reine Vorwärtsbewegung
      */
-    /*@Test
-    public void checkMovejerkRed() { // TODO: NOK - figure2 is null
+    @Test
+    public void checkMoveJerkRed() { // OK
         jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
-        Assert.assertEquals(field5, playingField.move(jerkRed,4));
+        playingField.move(jerkRed,4);
+        Assert.assertEquals(field5, jerkRed.getCurrentField());
     }
 
     @Test
-    public void checkMoveCitizenRedBeatenJerkGreenPositionCitizen() { // OK
+    public void checkMoveJerkRedBeatenJerkGreenPositionJerkRed() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
-        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
-        Assert.assertEquals(field2, playingField.move(citizenRed,1));
+        jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
+        playingField.move(jerkRed,1);
+        Assert.assertEquals(field2, jerkRed.getCurrentField());
     }
 
     @Test
-    public void checkMoveCitizenRedBeatenJerkGreenPositionJerk() { // TODO: NOK - Findet Position nicht
+    public void checkMoveJerkRedBeatenJerkGreenPositionJerkGreen() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
+        playingField.move(jerkRed,1);
+        Assert.assertTrue(jerkGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveJerkRedOvertakingJerkGreenPositionJerkRed() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        jerkRed = new Jerk(1, Color.RED, field1, Typ.JERK, figureUI1);
+        playingField.move(jerkRed,2);
+        Assert.assertEquals(field3, jerkRed.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveCitizenRedBeatenJerkGreenPositionCitizenRed() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
         citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
         playingField.move(citizenRed,1);
-        Assert.assertEquals(startingAreaField.getPreviousField(), jerkGreen.getCurrentField());
+        Assert.assertEquals(field2, citizenRed.getCurrentField());
     }
 
-     */
+    @Test
+    public void checkMoveCitizenRedBeatenJerkGreenPositionJerkGreen() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
+        playingField.move(citizenRed,1);
+        Assert.assertTrue(jerkGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveCitizenRedOvertakingJerkGreenPositionCitizenRed() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
+        playingField.move(citizenRed,2);
+        Assert.assertEquals(field3, citizenRed.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKnightRedBeatenJerkGreenPositionKnightRed() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        playingField.move(knightRed,1);
+        Assert.assertEquals(field2, knightRed.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKnightRedBeatenJerkGreenPositionJerkGreen() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        playingField.move(knightRed,1);
+        Assert.assertTrue(jerkGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveKnightRedOvertakingJerkGreenPositionKnightRed() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        playingField.move(knightRed,2);
+        Assert.assertEquals(field3, knightRed.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKingRedBeatenJerkGreenPositionKingRed() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
+        playingField.move(kingRed,1);
+        Assert.assertEquals(field2, kingRed.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKingRedBeatenJerkGreenPositionJerkGreen() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
+        playingField.move(kingRed,1);
+        Assert.assertTrue(jerkGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveKingRedOvertakingJerkGreenPositionKing() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
+        kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
+        playingField.move(kingRed,2);
+        Assert.assertEquals(field3, kingRed.getCurrentField());
+    }
 
 }
