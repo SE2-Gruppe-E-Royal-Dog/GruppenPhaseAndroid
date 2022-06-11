@@ -14,55 +14,86 @@ public class CardManager {
         boolean flag = false;
         for(Card card : Handcards.getInstance().getMyCards()){
             for(Figure figure : figureManager.getFiguresOfColour(Color.values()[turnPlayerID])){
-
-                Card tempCard = card;
                 if(card.getCardtype() == Cardtype.EQUAL){
-                    if(lastTurn == null){
-                        continue;
-                    }
-                    tempCard = new Card(lastTurn.getCardtype());
+                    flag = flag ||checkIfMoveIsPossibleEqualCard(figure, lastTurn);
                 }
-                flag = flag || checkIfMoveIsPossibleForSingleCard(tempCard, figure);
+                else {
+                    flag = flag || checkIfMoveIsPossibleForSingleCard(card, figure);
+                }
             }
             if(flag) break; //early break for performance reasons
         }
         return flag;
     }
 
+    private boolean checkIfMoveIsPossibleEqualCard(Figure figure, LastTurn lastTurn){
+        if(lastTurn == null){
+            return  false;
+        }
+        Card tempCard = new Card(lastTurn.getCardtype());
+        return checkIfMoveIsPossibleForSingleCard(tempCard, figure);
+    }
+
     private boolean checkIfMoveIsPossibleForSingleCard(Card card, Figure figure){
-        boolean flag = false;
+        boolean flag;
         switch (card.getCardtype()){
             case ONETOSEVEN:
-                for(int i = 1; i <=7;i++ ){
-                    flag = flag || card.checkIfCardIsPlayable(figure, i, null);
-                }
+                flag = checkOneToSeven(card, figure);
                 break;
             case FOUR_PLUSMINUS:
-                flag = card.checkIfCardIsPlayable(figure, 1, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 2, null);
+                flag = checkFourPlusMinus(card, figure);
                 break;
             case ONEORELEVEN_START:
-                flag = card.checkIfCardIsPlayable(figure, 0, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 11, null);
+                flag = checkOneOrElevenStart(card, figure);
                 break;
             case THIRTEEN_START:
-                flag = card.checkIfCardIsPlayable(figure, 0, null);
-                flag = flag || card.checkIfCardIsPlayable(figure, 13, null);
+                flag = checkThirteenStart(card, figure);
                 break;
             case SWITCH:
-                for(int i = 1;i<=16;i++){
-                    if(i == figure.getId()){
-                        continue;
-                    }
-                    Figure targetFigure = figureManager.getFigureWithID(i);
-                    flag = flag || card.checkIfCardIsPlayable(figure, -1, targetFigure);
-                }
+                flag = checkSwitch(card, figure);
                 break;
             default:
                 flag =  card.checkIfCardIsPlayable(figure, -1, null);
         }
         return flag;
+    }
+
+    private boolean checkOneToSeven(Card card, Figure figure){
+        boolean flag = false;
+        for(int i = 1; i <=7;i++ ){
+            flag = flag || card.checkIfCardIsPlayable(figure, i, null);
+        }
+        return flag;
+    }
+    private  boolean checkFourPlusMinus(Card card, Figure figure){
+        boolean flag;
+        flag = card.checkIfCardIsPlayable(figure, 1, null);
+        flag = flag || card.checkIfCardIsPlayable(figure, 2, null);
+        return flag;
+    }
+    private boolean checkOneOrElevenStart(Card  card, Figure figure){
+        boolean flag;
+        flag = card.checkIfCardIsPlayable(figure, 0, null);
+        flag = flag || card.checkIfCardIsPlayable(figure, 1, null);
+        flag = flag || card.checkIfCardIsPlayable(figure, 11, null);
+        return flag;
+    }
+    private boolean checkThirteenStart(Card card, Figure figure){
+        boolean flag;
+        flag = card.checkIfCardIsPlayable(figure, 0, null);
+        flag = flag || card.checkIfCardIsPlayable(figure, 13, null);
+        return flag;
+    }
+    private boolean checkSwitch(Card card, Figure figure){
+        boolean flag = false;
+        for(int i = 1;i<=16;i++){
+            if(i == figure.getId()){
+                continue;
+            }
+            Figure targetFigure = figureManager.getFigureWithID(i);
+            flag = flag || card.checkIfCardIsPlayable(figure, -1, targetFigure);
+        }
+        return  flag;
     }
 
     public void setFigureManager(FigureManager figureManager){
