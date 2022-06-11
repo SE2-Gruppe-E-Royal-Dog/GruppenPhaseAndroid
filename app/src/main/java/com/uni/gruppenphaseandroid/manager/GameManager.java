@@ -9,6 +9,7 @@ import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
+import com.uni.gruppenphaseandroid.communication.dto.PunishPayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.playingfield.Color;

@@ -101,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_settings:
                 return true;
-            //case R.id.action_leaveGame:
-
-
             case R.id.action_howPlay: {
                 DialogFragment dialog = new HowToPlayFragment();
                 dialog.show(getSupportFragmentManager(), "howPlayDialogFragment");
@@ -225,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
             findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+            findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
         }
 
         private void handleUpdateBoard(String body) {
@@ -232,6 +230,9 @@ public class MainActivity extends AppCompatActivity {
             GameManager.getInstance().updateBoard(updateBoardPayload);
             if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
                 Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
+            }
+            if (GameManager.getInstance().isItMyTurn()){        //notifies player if it's their turn TODO check if it works ... should work tho
+                showPlayerToast("It's your turn");
             }
         }
 

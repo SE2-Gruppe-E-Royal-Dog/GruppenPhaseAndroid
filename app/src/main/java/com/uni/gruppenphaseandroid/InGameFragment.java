@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -108,7 +109,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 cardholder.setTargetFragment(InGameFragment.this, 1);
         });
 
-        //unsure if it should be included/if it is nessecary
+        //TODO unsure if it should be included/if it is nessecary
         /*btnSpecialCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +118,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 specialCardDialog.setTargetFragment(InGameFragment.this, 1);
             }
         });*/
+
+
     }
 
     @Override

@@ -96,14 +96,15 @@
         android:id="@+id/btn_accusation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
+        android:contentDescription="@string/string_fab_cheating"
+        android:focusable="true"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_alert"
-        android:contentDescription="@string/string_fab_cheating"
-        android:focusable="true" />
+        app:srcCompat="@android:drawable/ic_dialog_alert" />
 
     <org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView
         android:id="@+id/twoWayScrollView"
@@ -136,10 +137,10 @@
                 android:layout_marginBottom="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.057"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.65">
+                app:layout_constraintVertical_bias="0.0">
 
                 <ImageView
                     android:id="@+id/regularPlayingField19"
@@ -1011,10 +1012,57 @@
                     android:id="@+id/stack"
                     android:layout_width="118dp"
                     android:layout_height="195dp"
-                    android:layout_marginLeft="524dp"
+                    android:layout_marginLeft="512dp"
                     android:layout_marginTop="489dp"
                     android:tag="s01"
                     app:srcCompat="@drawable/ic_card_ablagestapel" />
+
+                <TextView
+                    android:id="@+id/tv_playersturn"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="421dp"
+                    android:layout_marginTop="460dp"
+                    android:text="it's Playersname turn"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tv_playerBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="53dp"
+                    android:layout_marginTop="960dp"
+                    android:text="Player's Name" />
+
+                <TextView
+                    android:id="@+id/tv_playerGreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginEnd="-198dp"
+                    android:layout_toStartOf="@+id/greenStartingArea1"
+                    android:text="Players name"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    android:id="@+id/tv_playerYellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/yellowStartingArea1"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="-209dp"
+                    android:text="players Nmae"
+                    android:textAlignment="textEnd" />
+
+                <TextView
+                    android:id="@+id/tv_playerRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="950dp"
+                    android:layout_marginTop="1067dp"
+                    android:text="players name" />
 
             </RelativeLayout>
 
