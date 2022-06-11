@@ -42,7 +42,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private CardViewFragment cardholder;
     private SpecialCardDialogFragment specialCardDialog;
     private ImageView stack;
-    private static InGameFragment inGameFragment;
 
     @Override
     public View onCreateView(
@@ -50,7 +49,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             Bundle savedInstanceState
     ) {
 
-        inGameFragment = this;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
@@ -219,19 +217,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
 
     }
-
-    public static void setStackImage(){
-        if(inGameFragment == null){
-            return;
-        }
-        LastTurn lastTurn = GameManager.getInstance().getLastTurn();
-        if(lastTurn.getCardtype()==null){
-            throw new IllegalArgumentException("No Cardtype has been set");
-        }
-
-        inGameFragment.stack.setImageResource(CardUI.getInstance().cardtypeToId(lastTurn.getCardtype()));
-    }
-
 
     //TODO visual note for cheating! findViewById(R.id.tv_cheater);
 

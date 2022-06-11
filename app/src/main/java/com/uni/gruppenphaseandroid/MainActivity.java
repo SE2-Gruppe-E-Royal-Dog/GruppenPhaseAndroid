@@ -167,9 +167,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
-            /**    case CHEATING:
-                    handleCheatingMove(msg.getPayload());
-                    break;**/
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
@@ -220,6 +217,9 @@ public class MainActivity extends AppCompatActivity {
         private void handleUpdateBoard(String body) {
             var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
             GameManager.getInstance().updateBoard(updateBoardPayload);
+            if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
+                Cheater.noteCheating(new Cheater(updateBoardPayload.getPlayerID(), GameManager.getInstance().getRoundIndex()));
+            }
         }
 
         private void handleWormholeMove(String body) {
@@ -234,8 +234,6 @@ public class MainActivity extends AppCompatActivity {
         CardViewFragment.setPlayerId(playerId);
 
     }
-
-  //TODO  private void  handleCheatingMove(Cheater cheater){
 
 
     }
