@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
             showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
 
-            removePlayerNamesOnBoard(payload.getPlayerName());
+            //TODO removePlayerNamesOnBoard(payload.getPlayerName()); needed?
         }
 
         private void handleNewPlayerJoinedMessage(String body) {
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
             showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
 
-            setPlayerNamesOnBoard();
+            //TODO setPlayerNamesOnBoard(); when list works
         }
 
         private void handleUpdateBoard(String body) {
