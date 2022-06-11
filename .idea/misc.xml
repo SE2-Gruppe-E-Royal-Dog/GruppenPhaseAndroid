@@ -9,15 +9,17 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_main.xml" value="0.2441123188405797" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/menu_fragment.xml" value="0.36041666666666666" />
         <entry key="..\:/Users/Lenovo/Documents/Dokumente/UNI/Software Engineering 2/GruppenPhaseAndroid/app/src/main/res/layout/fragment_accusation.xml" value="0.26367781155015196" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable-anydpi/ic_action_cat.xml" value="0.197" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2965" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluecitizen.xml" value="0.1565" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluefield.xml" value="0.1565" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_cat.xml" value="0.197" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_draw2field.xml" value="0.156" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_greencitizen.xml" value="0.156" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1565" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_playingfieldbackground.xml" value="0.235" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_ingame.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_main.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_main.xml" value="0.508500772797527" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/card_view_fragment.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/content_main.xml" value="0.146875" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_accusation.xml" value="0.16032608695652173" />
@@ -47,5 +49,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.40970654627539504" />
+      </ProjectState>
+    </option>
   </component>
 </project>
