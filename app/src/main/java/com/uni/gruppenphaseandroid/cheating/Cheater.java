@@ -104,11 +104,10 @@ public class Cheater extends Fragment {
 
     public static void makeAccusation(int playerID, int currentRoundIndex, int numberOfPlayer) {
         for (int i=0; i<cheaters.size(); i++){
-            if (cheaters.get(i).playerID == playerID){
-                if (currentRoundIndex - (cheaters.get(i).getRoundIndex()) <= numberOfPlayer-1) {
-                    GameManager.getInstance().punishPlayer(playerID);
-                    return;
-                }
+            if (cheaters.get(i).playerID == playerID &&
+                    currentRoundIndex - (cheaters.get(i).getRoundIndex()) <= numberOfPlayer - 1) {
+                GameManager.getInstance().punishPlayer(playerID);
+                return;
             }
         }
         GameManager.getInstance().punishPlayer(GameManager.getInstance().getCurrentTurnPlayerNumber());

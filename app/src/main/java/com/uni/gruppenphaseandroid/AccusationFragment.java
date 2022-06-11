@@ -1,11 +1,7 @@
 package com.uni.gruppenphaseandroid;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +16,11 @@ import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class AccusationFragment extends DialogFragment {
-    Button playerOne, playerTwo, playerThree, leaveFragment;
-    TextView text;
-    com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor, buttonTwoColor, buttonThreeColor;
+    private Button playerOne, playerTwo, playerThree, leaveFragment;
+    private TextView text;
+    private com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor;
+    private com.uni.gruppenphaseandroid.playingfield.Color buttonTwoColor ;
+    private com.uni.gruppenphaseandroid.playingfield.Color buttonThreeColor;
 
 
     @Nullable
@@ -47,36 +45,22 @@ public class AccusationFragment extends DialogFragment {
         }
 
 
-        leaveFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
+        leaveFragment.setOnClickListener(view1 -> getDialog().dismiss());
+
+        playerOne.setOnClickListener(view12 -> {
+
+            getDialog().dismiss();
+            Cheater.makeAccusation(buttonOneColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
         });
 
-        playerOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                getDialog().dismiss();
-                Cheater.makeAccusation(buttonOneColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
-            }
+        playerTwo.setOnClickListener(view13 -> {
+            getDialog().dismiss();
+            Cheater.makeAccusation(buttonTwoColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
         });
 
-        playerTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-                Cheater.makeAccusation(buttonTwoColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
-            }
-        });
-
-        playerThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-                Cheater.makeAccusation(buttonThreeColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
-            }
+        playerThree.setOnClickListener(view14 -> {
+            getDialog().dismiss();
+            Cheater.makeAccusation(buttonThreeColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
         });
 
 

@@ -96,14 +96,11 @@ public class SpecialCardDialogFragment extends DialogFragment {
                          }
                      });
 
-                     ok.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             GameManager.getInstance().setCurrentEffect(selectedCardEffect);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
-                             getDialog().dismiss();
+                     ok.setOnClickListener(view1 -> {
+                         GameManager.getInstance().setCurrentEffect(selectedCardEffect);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
+                         getDialog().dismiss();
 
-                         }
                      });
 
                      break;
@@ -116,29 +113,20 @@ public class SpecialCardDialogFragment extends DialogFragment {
                      optionTwo.setVisibility(View.VISIBLE);
                      ok.setVisibility(View.VISIBLE);
 
-                     optionOne.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             GameManager.getInstance().setCurrentEffect(1);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
-                             getDialog().dismiss();
-                         }
+                     optionOne.setOnClickListener(view12 -> {
+                         GameManager.getInstance().setCurrentEffect(1);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                         getDialog().dismiss();
                      });
-                     optionTwo.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             GameManager.getInstance().setCurrentEffect(2);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
-                             getDialog().dismiss();
-                         }
+                     optionTwo.setOnClickListener(view13 -> {
+                         GameManager.getInstance().setCurrentEffect(2);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                         getDialog().dismiss();
                      });
-                     ok.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             GameManager.getInstance().setCurrentEffect(0);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
-                             getDialog().dismiss();
-                         }
+                     ok.setOnClickListener(view14 -> {
+                         GameManager.getInstance().setCurrentEffect(0);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                         getDialog().dismiss();
                      });
 
                      break;
@@ -149,32 +137,21 @@ public class SpecialCardDialogFragment extends DialogFragment {
                      optionOne.setVisibility(View.VISIBLE);
                      optionTwo.setVisibility(View.VISIBLE);
 
-                     optionOne.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             GameManager.getInstance().setCurrentEffect(1);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
-                             getDialog().dismiss();
-                         }
+                     optionOne.setOnClickListener(view15 -> {
+                         GameManager.getInstance().setCurrentEffect(1);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         getDialog().dismiss();
                      });
-                     optionTwo.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
+                     optionTwo.setOnClickListener(view16 -> {
 
-                             GameManager.getInstance().setCurrentEffect(0);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
-                             getDialog().dismiss();
-                         }
+                         GameManager.getInstance().setCurrentEffect(0);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         getDialog().dismiss();
                      });
                      break;
              }
 
-             chancel.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     getDialog().dismiss();
-                 }
-             });
+             chancel.setOnClickListener(view17 -> getDialog().dismiss());
 
         return view;
     }

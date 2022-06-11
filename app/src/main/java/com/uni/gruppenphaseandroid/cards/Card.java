@@ -32,8 +32,6 @@ public class Card {
             playEqualCard(myFigure, effect, targetFigure);
         }
 
-        //GameManager.getInstance().getLastTurn().setCardtype(cardtype);
-
         if(effect==-1 && targetFigure==null){
             //Cards with only one Effect
             playNonEffectCard(myFigure);
@@ -128,7 +126,6 @@ public class Card {
     }
 
     //////////CHECKS IF MOVE IS POSSIBLE//////////
-
     public boolean checkIfCardIsPlayable(Figure myFigure, int effect, Figure targetFigure){
         if(myFigure==null){
             throw new IllegalArgumentException(INVALID_ARGUMENTS);

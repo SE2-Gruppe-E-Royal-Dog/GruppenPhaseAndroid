@@ -12,11 +12,11 @@ import androidx.fragment.app.Fragment;
 
 public class LeaderboardFragment extends Fragment {
 
-    private TextView first_playerName;
-    private TextView second_playerName;
-    private TextView third_playerName;
-    private TextView fourth_playerName;
-    private Button exit_button;
+    private TextView firstPlayerName;
+    private TextView secondPlayerName;
+    private TextView thirdPlayerName;
+    private TextView fourthPlayerName;
+    private Button exitButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,11 +28,11 @@ public class LeaderboardFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        first_playerName = view.findViewById(R.id.first_playerName);
-        second_playerName = view.findViewById(R.id.second_playerName);
-        third_playerName = view.findViewById(R.id.third_playerName);
-        fourth_playerName = view.findViewById(R.id.fourth_playerName);
-        exit_button = view.findViewById(R.id.exit_button);
+        firstPlayerName = view.findViewById(R.id.first_playerName);
+        secondPlayerName = view.findViewById(R.id.second_playerName);
+        thirdPlayerName = view.findViewById(R.id.third_playerName);
+        fourthPlayerName = view.findViewById(R.id.fourth_playerName);
+        exitButton = view.findViewById(R.id.exit_button);
 
         /*
         TODO:
@@ -42,7 +42,7 @@ public class LeaderboardFragment extends Fragment {
         fourth_playerName.setText();
          */
 
-        exit_button.setOnClickListener(view1 -> {
+        exitButton.setOnClickListener(view1 -> {
             /*
             TODO: Exit Game
              */

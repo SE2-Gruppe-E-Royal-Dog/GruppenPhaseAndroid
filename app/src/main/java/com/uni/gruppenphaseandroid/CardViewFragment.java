@@ -64,13 +64,10 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(int card) {
-                if(GameManager.getInstance().isItMyTurn()) {
-                    btnPlayCard.setVisibility(View.VISIBLE);
-                    clickedCard = Integer.toString(card);
-                }
+        CardAdapter cardAdapter = new CardAdapter(card -> {
+            if(GameManager.getInstance().isItMyTurn()) {
+                btnPlayCard.setVisibility(View.VISIBLE);
+                clickedCard = Integer.toString(card);
             }
         });
         recyclerView.setAdapter(cardAdapter);
@@ -78,29 +75,21 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 .findFirstCompletelyVisibleItemPosition());
 
         //return to board button
-        view.findViewById(R.id.btn_returnToGame).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
-        });
+        view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> getDialog().dismiss());
 
 
         //select card and return to board
-        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("card_input", "input:" + clickedCard);
-                //capture input
-                if (!clickedCard.equals("")) {
-                    if(GameManager.getInstance().isThereAnyPossibleMove()){
-                        //TODO discharge card and end turn
-                        cardInputListener.sendInputCardFragment("-1");
-                        getDialog().dismiss();
-                    }else {
-                        cardInputListener.sendInputCardFragment(clickedCard);
-                        getDialog().dismiss();
-                    }
+        view.findViewById(R.id.btn_playCard).setOnClickListener(view12 -> {
+            Log.d("card_input", "input:" + clickedCard);
+            //capture input
+            if (!clickedCard.equals("")) {
+                if(GameManager.getInstance().isThereAnyPossibleMove()){
+                    //TODO discharge card and end turn
+                    cardInputListener.sendInputCardFragment("-1");
+                    getDialog().dismiss();
+                }else {
+                    cardInputListener.sendInputCardFragment(clickedCard);
+                    getDialog().dismiss();
                 }
             }
         });
@@ -120,7 +109,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }catch (NullPointerException e){
             Log.d("Sensor error tilt", e.getMessage());
-        };
+        }
 
     }
 
@@ -129,8 +118,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         super.onAttach(context);
         try{
             cardInputListener = (OnInputListener) getTargetFragment();
-        }catch (ClassCastException e){
-
+        } catch (ClassCastException e){
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }

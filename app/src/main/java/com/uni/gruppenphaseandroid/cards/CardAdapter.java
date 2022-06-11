@@ -54,9 +54,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imageView.setImageResource(imageCardList.get(position));
 
-        holder.itemView.setOnClickListener((view -> {
-            mItemClickListener.onItemClick(imageCardList.get(position));
-        }));
+        holder.itemView.setOnClickListener((view -> mItemClickListener.onItemClick(imageCardList.get(position))));
         }
 
     @Override

@@ -83,11 +83,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                     .navigate(R.id.action_InGameFragment_to_FirstFragment);
         });
 
-/*
-        view.findViewById(R.id.move_button).setOnClickListener(view13 -> GameManager.getInstance().moveFigureShowcase(1, 1));
-
-        view.findViewById(R.id.move2).setOnClickListener(view14 -> GameManager.getInstance().moveFigureShowcase(3, 3));
-*/      btnCardholder.setVisibility(View.VISIBLE);
+       btnCardholder.setVisibility(View.VISIBLE);
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
             //deactivate start game button
@@ -110,28 +106,20 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
                 AccusationFragment accusation = new AccusationFragment();
-                accusation.show(getFragmentManager(), "Anschuldigung");
+                accusation.show(getParentFragmentManager(), "Anschuldigung");
                 accusation.setTargetFragment(InGameFragment.this, 1);
-
-
         });
 
 
-        btnCardholder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardholder = new CardViewFragment();
-                cardholder.show(getFragmentManager(), "cardholder Dialog");
-                cardholder.setTargetFragment(InGameFragment.this, 1);
-            }
+        btnCardholder.setOnClickListener(view13 -> {
+            cardholder = new CardViewFragment();
+            cardholder.show(getParentFragmentManager(), "cardholder Dialog");
+            cardholder.setTargetFragment(InGameFragment.this, 1);
         });
-        btnSpecialCards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
-                specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
-                specialCardDialog.setTargetFragment(InGameFragment.this, 1);
-            }
+        btnSpecialCards.setOnClickListener(view14 -> {
+            specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
+            specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
+            specialCardDialog.setTargetFragment(InGameFragment.this, 1);
         });
     }
 
