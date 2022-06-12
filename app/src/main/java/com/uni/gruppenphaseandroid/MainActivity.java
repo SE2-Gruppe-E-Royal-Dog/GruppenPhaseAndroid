@@ -225,14 +225,17 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack)));
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack), findViewById(R.id.btn_cardholderButton)));
 
             findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
             findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
             showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
 
-            //TODO setPlayerNamesOnBoard(); when list works
+            GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
+
+            for (int i = 0; i < payload.getNumberOfPlayers(); i++)
+                Log.e("Handlestart", GameManager.getInstance().getPlayerNameWithIndex(i));
         }
 
         private void handleUpdateBoard(String body) {

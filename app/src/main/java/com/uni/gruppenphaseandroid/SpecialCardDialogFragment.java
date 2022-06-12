@@ -26,7 +26,6 @@ public class SpecialCardDialogFragment extends DialogFragment {
     private Button optionOne;
     private Button optionTwo;
     private Button ok;
-    private Button chancel;
     private SeekBar optionOneToSeven;
     private Cardtype cardtype;
     private int selectedCardEffect;
@@ -60,7 +59,6 @@ public class SpecialCardDialogFragment extends DialogFragment {
          ok.setVisibility(View.INVISIBLE);
          optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
          optionOne.setVisibility(View.INVISIBLE);
-         chancel = view.findViewById(R.id.btn_chancel);
          tv_seekbar = view.findViewById(R.id.tv_seekbar);
 
              textView.setText("Choose the value of your card:");
@@ -144,10 +142,6 @@ public class SpecialCardDialogFragment extends DialogFragment {
                      });
                      break;
              }
-
-             chancel.setOnClickListener(view1 ->  {
-                     getDialog().dismiss();
-                 });
 
         return view;
     }

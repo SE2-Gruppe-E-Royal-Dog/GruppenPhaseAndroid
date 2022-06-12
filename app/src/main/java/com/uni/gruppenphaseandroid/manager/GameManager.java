@@ -22,6 +22,7 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 import org.java_websocket.client.WebSocketClient;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GameManager {
@@ -55,6 +56,7 @@ public class GameManager {
     private int cheatModifier = 0;
     private boolean hasMovedWormholes = false;
     private boolean hasCheated = false;
+    private LinkedList<String> playerNames;
 
 
 
@@ -163,7 +165,7 @@ public class GameManager {
             }
 
         }
-        //TODO: update card UI
+        visualEffectsManager.setCardHolderUI();
         nextTurn();
     }
 
@@ -343,6 +345,14 @@ public class GameManager {
 
     public int getRoundIndex() {
         return roundIndex;
+    }
+
+    public void setPlayerNames(LinkedList<String> playerNames) {
+        this.playerNames = playerNames;
+    }
+
+    public String getPlayerNameWithIndex(int index){
+        return this.playerNames.get(index);
     }
 
     public boolean hasThisClientFigureOnBoard(){
