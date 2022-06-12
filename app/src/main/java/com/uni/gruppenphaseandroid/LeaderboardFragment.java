@@ -10,6 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.uni.gruppenphaseandroid.manager.PlayerRanking;
+
+import java.util.LinkedList;
+
 public class LeaderboardFragment extends Fragment {
 
     private TextView first_playerName;
@@ -34,13 +38,15 @@ public class LeaderboardFragment extends Fragment {
         fourth_playerName = view.findViewById(R.id.fourth_playerName);
         exit_button = view.findViewById(R.id.exit_button);
 
-        /*
-        TODO:
-        first_playerName.setText();
-        second_playerName.setText();
-        third_playerName.setText();
-        fourth_playerName.setText();
-         */
+        PlayerRanking playerRanking = new PlayerRanking();
+
+        LinkedList<String> names = playerRanking.getRankedList();
+
+        first_playerName.setText(names.get(0));
+        second_playerName.setText(names.get(1));
+        third_playerName.setText(names.get(2));
+        fourth_playerName.setText(names.get(3));
+
 
         exit_button.setOnClickListener(view1 -> {
             /*
