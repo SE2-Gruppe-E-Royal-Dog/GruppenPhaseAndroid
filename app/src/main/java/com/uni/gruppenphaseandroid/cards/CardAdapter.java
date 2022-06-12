@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.cards;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             view.setOnClickListener(v -> Log.d("code", "Element " + getAdapterPosition() + " clicked."));
             imageView = (ImageView) view.findViewById(R.id.imageView);
             background = (ImageView) view.findViewById(R.id.imageView_selectedBackground);
+            background.setColorFilter(Color.GRAY);
         }
 
         public ImageView getImageView() {
@@ -76,7 +79,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
 
     public interface ItemClickListener{
-        void onItemClick(int card, int possition);
+        void onItemClick(int card, int position);
     }
 
 }

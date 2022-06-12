@@ -1,7 +1,9 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cards.CardUI;
@@ -10,11 +12,13 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
 
     ImageView stackImage;
     ImageButton cardHolder;
+    TextView cheaterNote;
     //other attributes...
 
-    public VisualEffectsManagerImpl(ImageView stackImage, ImageButton cardHolder) {
+    public VisualEffectsManagerImpl(ImageView stackImage, ImageButton cardHolder, TextView cheaterNote) {
         this.stackImage = stackImage;
         this.cardHolder = cardHolder;
+        this.cheaterNote = cheaterNote;
     }
 
     @Override
@@ -51,5 +55,6 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager{
     @Override
     protected void setCardHolderUI() {
         cardHolder.setImageResource(R.drawable.ic_card_cardholder);
+        cheaterNote.setVisibility(View.INVISIBLE);
     }
 }

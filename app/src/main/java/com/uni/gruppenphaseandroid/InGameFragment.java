@@ -44,7 +44,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private SensorManager sensorManager;
     private Sensor sensor;
     private ImageButton btnCardholder;
-   // private FloatingActionButton btnSpecialCards;
     private Cardtype selectedCardtype;
     private CardViewFragment cardholder;
     private SpecialCardDialogFragment specialCardDialog;
@@ -71,7 +70,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
-       // btnSpecialCards = playingField.getView().findViewById(R.id.fab_specialCards);
         stack = playingField.getView().findViewById(R.id.stack);
 
         stack.setImageResource(R.drawable.ic_card_ablagestapel);
@@ -109,16 +107,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 cardholder.show(getFragmentManager(), "cardholder Dialog");
                 cardholder.setTargetFragment(InGameFragment.this, 1);
         });
-
-        //TODO unsure if it should be included/if it is nessecary
-        /*btnSpecialCards.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                specialCardDialog = new SpecialCardDialogFragment(selectedCardtype);
-                specialCardDialog.show(getFragmentManager(), "Special Card Dialog");
-                specialCardDialog.setTargetFragment(InGameFragment.this, 1);
-            }
-        });*/
 
 
     }
@@ -206,7 +194,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         //set's cheater note over cardholder
         if (!cheaterNote.equals("0")){
-        TextView note = getActivity().findViewById(R.id.tv_cheater);
+        TextView note = getActivity().findViewById(R.id.txt_cheater);
         note.setText(cheaterNote);
         note.setVisibility(View.VISIBLE);
         }

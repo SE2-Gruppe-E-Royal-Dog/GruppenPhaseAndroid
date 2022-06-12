@@ -50,7 +50,7 @@ public class GameManager {
     private VisualEffectsManager visualEffectsManager;
     private LastTurn lastTurn;
     private Card selectedCard;
-    private int currentEffect;                          //int for special cards
+    private int currentEffect;
     private int selectCardToDiscardIndex;
     private Figure currentlySelectedFigure;
     private int cheatModifier = 0;

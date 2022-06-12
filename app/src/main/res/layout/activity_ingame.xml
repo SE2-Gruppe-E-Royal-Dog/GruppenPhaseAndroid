@@ -10,15 +10,15 @@
         android:layout_width="39dp"
         android:layout_height="19dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:elevation="5dp"
         android:text="+1"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/fab_specialCards"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cardholderButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -1025,7 +1025,8 @@
                     android:layout_marginTop="460dp"
                     android:text="it's Playersname turn"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/tv_playerBlue"
@@ -1034,7 +1035,8 @@
                     android:layout_marginLeft="53dp"
                     android:layout_marginTop="960dp"
                     android:text="Player's Name"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/tv_playerGreen"
@@ -1045,7 +1047,8 @@
                     android:layout_toStartOf="@+id/greenStartingArea1"
                     android:text="Players name"
                     android:textAlignment="textEnd"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/tv_playerYellow"
@@ -1058,7 +1061,8 @@
                     android:layout_marginBottom="-209dp"
                     android:text="players Nmae"
                     android:textAlignment="textEnd"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/tv_playerRed"
@@ -1067,7 +1071,8 @@
                     android:layout_marginLeft="950dp"
                     android:layout_marginTop="1067dp"
                     android:text="players name"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:visibility="invisible" />
 
             </RelativeLayout>
 

@@ -198,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
 
             showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
 
-            //TODO removePlayerNamesOnBoard(payload.getPlayerName()); needed?
         }
 
         private void handleNewPlayerJoinedMessage(String body) {
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack), findViewById(R.id.btn_cardholderButton)));
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)));
 
             findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
@@ -236,6 +235,8 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < payload.getNumberOfPlayers(); i++)
                 Log.e("Handlestart", GameManager.getInstance().getPlayerNameWithIndex(i));
+
+            setPlayerNamesOnBoard();
         }
 
         private void handleUpdateBoard(String body) {
@@ -244,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
             if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
                 Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
             }
-            if (GameManager.getInstance().isItMyTurn()){        //notifies player if it's their turn TODO check if it works ... should work tho
+            if (GameManager.getInstance().isItMyTurn()){
                 showPlayerToast("It's your turn");
             }
         }
@@ -259,24 +260,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void removePlayerNamesOnBoard(String playerId) {
         TextView name;
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
             if (playerNames.get(i).equals(playerId)) {
                 switch (i) {
                     case 0:
                         name = findViewById(R.id.tv_playerGreen);
-                        name.setText("");
+                        name.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
                         name = findViewById(R.id.tv_playerYellow);
-                        name.setText("");
+                        name.setVisibility(View.INVISIBLE);
                         break;
                     case 2:
                         name = findViewById(R.id.tv_playerRed);
-                        name.setText("");
+                        name.setVisibility(View.INVISIBLE);
                         break;
                     case 3:
                         name = findViewById(R.id.tv_playerBlue);
-                        name.setText("");
+                        name.setVisibility(View.INVISIBLE);
                         break;
                 }
             }
@@ -285,23 +286,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void setPlayerNamesOnBoard() {
         TextView name;
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
             switch (i){
                 case 0:
                     name = findViewById(R.id.tv_playerGreen);
-                    name.setText(playerNames.get(i));
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
                     break;
                 case 1:
                     name = findViewById(R.id.tv_playerYellow);
-                    name.setText(playerNames.get(i));
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
                     break;
                 case 2:
                     name = findViewById(R.id.tv_playerRed);
-                    name.setText(playerNames.get(i));
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
                     break;
                 case 3:
                     name = findViewById(R.id.tv_playerBlue);
-                    name.setText(playerNames.get(i));
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
                     break;
             }
         }

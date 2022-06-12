@@ -35,9 +35,8 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
-    private int roundIndex; // TODO get from Game Manager ... needed?
     private int postitionCardToDischarge;
-    private String cheaterNote;
+    private String cheaterNote = "0";
 
 
     private static String playerId;
@@ -164,7 +163,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Cheater cheater = new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex());
-        cheaterNote = "0";
+
 
         textView = getView().findViewById(R.id.tv_cheater);
         float x = sensorEvent.values[0];
