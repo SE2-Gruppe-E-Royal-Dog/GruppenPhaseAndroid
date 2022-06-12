@@ -182,10 +182,11 @@ public class GameManager {
         return (currentTurnPlayerNumber == myTurnNumber);
     }
 
-    public boolean isThereAnyPossibleMove(){
+    public boolean isThereAnyPossibleMove() {
 
         boolean flag = false;
-        for(Card card : Handcards.getInstance().getMyCards()){
+        var cards = Handcards.getInstance().getMyCards();
+        for(Card card : cards){
             for(Figure figure : figuremanager.getFiguresOfColour(Color.values()[myTurnNumber])){
                 switch (card.getCardtype()){
                     //TODO: equal card?
