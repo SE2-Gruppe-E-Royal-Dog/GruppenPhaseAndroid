@@ -107,7 +107,6 @@ public class GameManagerWormholeTest {
             verify(wormholeList.get(i), times(1)).switchField(null);
             verify(playingField, times(1)).getFieldWithID(newFieldID[i]);
         }
-
     }
 
 

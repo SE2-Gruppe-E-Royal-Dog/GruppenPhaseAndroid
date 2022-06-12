@@ -9,6 +9,7 @@ import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -94,6 +95,15 @@ public class CardManagerTest {
         when(oneOrElevenCard.checkIfCardIsPlayable(figure2, 11, null)).thenReturn(false);
         when(eightCard.checkIfCardIsPlayable(figure2, -1, null)).thenReturn(true);
         Assert.assertTrue(cardManager.isThereAnyPossibleMove(2, new LastTurn()));
+
+        verify(oneOrElevenCard, times(1)).checkIfCardIsPlayable(figure1, 0, null);
+        verify(oneOrElevenCard, times(1)).checkIfCardIsPlayable(figure1, 1, null);
+        verify(oneOrElevenCard, times(1)).checkIfCardIsPlayable(figure1, 11, null);
+        verify(eightCard, times(1)).checkIfCardIsPlayable(figure1, -1, null);
+        verify(oneOrElevenCard, times(1)).checkIfCardIsPlayable(figure1, 0, null);
+        verify(oneOrElevenCard, times(1)).checkIfCardIsPlayable(figure1, 1, null);
+        verify(oneOrElevenCard, times(1)).checkIfCardIsPlayable(figure2, 11, null);
+        verify(eightCard, times(1)).checkIfCardIsPlayable(figure2, -1, null);
     }
 
     @Test
@@ -101,12 +111,19 @@ public class CardManagerTest {
         Handcards.getInstance().setMyCards(handCards2);
         when(thirteenCard.checkIfCardIsPlayable(figure1, 0, null)).thenReturn(false);
         when(thirteenCard.checkIfCardIsPlayable(figure1, 13, null)).thenReturn(false);
-        when(switchCard.checkIfCardIsPlayable(figure1, -1, null)).thenReturn(true);
+        when(switchCard.checkIfCardIsPlayable(figure1, -1, null)).thenReturn(false);
 
         when(thirteenCard.checkIfCardIsPlayable(figure2, 0, null)).thenReturn(false);
         when(thirteenCard.checkIfCardIsPlayable(figure2, 13, null)).thenReturn(true);
         when(switchCard.checkIfCardIsPlayable(figure2, -1, null)).thenReturn(false);
         Assert.assertTrue(cardManager.isThereAnyPossibleMove(2, new LastTurn()));
+
+        verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure1, 0, null);
+        verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure1, 13, null);
+        verify(switchCard, times(16)).checkIfCardIsPlayable(figure1, -1, null);
+        verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure2, 0, null);
+        verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure2, 13, null);
+        verify(switchCard, times(16)).checkIfCardIsPlayable(figure2, -1, null);
     }
 
     @Test
@@ -116,12 +133,21 @@ public class CardManagerTest {
             when(oneToSevenCard.checkIfCardIsPlayable(figure1, i, null)).thenReturn(false);
             when(oneToSevenCard.checkIfCardIsPlayable(figure2, i, null)).thenReturn(false);
         }
-        when(fourPlusMinus.checkIfCardIsPlayable(figure1, 1, null)).thenReturn(true);
+        when(fourPlusMinus.checkIfCardIsPlayable(figure1, 1, null)).thenReturn(false);
         when(fourPlusMinus.checkIfCardIsPlayable(figure1, 2, null)).thenReturn(false);
 
-        when(fourPlusMinus.checkIfCardIsPlayable(figure2, 1, null)).thenReturn(true);
+        when(fourPlusMinus.checkIfCardIsPlayable(figure2, 1, null)).thenReturn(false);
         when(fourPlusMinus.checkIfCardIsPlayable(figure2, 2, null)).thenReturn(true);
         Assert.assertTrue(cardManager.isThereAnyPossibleMove(2, new LastTurn()));
+
+        for(int i = 1; i <= 7;i++){
+            verify(oneToSevenCard, times(1)).checkIfCardIsPlayable(figure1, i, null);
+            verify(oneToSevenCard, times(1)).checkIfCardIsPlayable(figure2, i, null);
+        }
+        verify(fourPlusMinus, times(1)).checkIfCardIsPlayable(figure1, 1, null);
+        verify(fourPlusMinus, times(1)).checkIfCardIsPlayable(figure1, 2, null);
+        verify(fourPlusMinus, times(1)).checkIfCardIsPlayable(figure2, 1, null);
+        verify(fourPlusMinus, times(1)).checkIfCardIsPlayable(figure2, 2, null);
     }
 
     @Test
