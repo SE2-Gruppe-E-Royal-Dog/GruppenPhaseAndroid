@@ -58,7 +58,19 @@ public class PlayerRanking {
     }
 
     private void addRanksToNames() {
+        String connector = ": ";
+        int rank = 1;
+        for (int j = 0; j < names.size(); j++) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(rank);
+            sb.append(connector);
+            sb.append(names.remove(j));
+            names.add(j, sb.toString());
 
+            if (points.get(j) > points.get(j + 1)) {
+                rank++;
+            }
+        }
     }
 
     public LinkedList<String> getRankedList() {
