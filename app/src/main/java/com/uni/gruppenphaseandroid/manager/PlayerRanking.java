@@ -44,7 +44,17 @@ public class PlayerRanking {
     }
 
     private void sortLists() {
-
+        int size = names.size();
+        for (int i = 0; i < size; i++) {
+            for (int j = 1; j < (size - i); j++) {
+                if (points.get(j - 1) > points.get(j)) {
+                    int tempPoints = points.remove(j - 1);
+                    String tempNames = names.remove(j - 1);
+                    points.add(j, tempPoints);
+                    names.add(j, tempNames);
+                }
+            }
+        }
     }
 
     private void addRanksToNames() {
