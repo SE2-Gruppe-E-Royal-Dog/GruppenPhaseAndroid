@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     private String lobbyId;
     private String playerId;
     private final Gson gson = new Gson();
-    private LinkedList<String> playerNames = new LinkedList<>();        //TODO fill with playernames in correct order inkl mine
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -258,10 +257,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void removePlayerNamesOnBoard(String playerId) {
+    private void removePlayerNamesOnBoard(String playerId) {        //TODO remove name when player leaves the lobby - nessesary??
         TextView name;
         for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
-            if (playerNames.get(i).equals(playerId)) {
+            if (GameManager.getInstance().getPlayerNameWithIndex(i).equals(playerId)) {
                 switch (i) {
                     case 0:
                         name = findViewById(R.id.tv_playerGreen);

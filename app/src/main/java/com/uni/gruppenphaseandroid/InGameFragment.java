@@ -222,7 +222,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
                 new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
 
             } else {
-               // btnSpecialCards.setVisibility(View.INVISIBLE);
                 GameManager.getInstance().setCurrentEffect(-1);
                 GameManager.getInstance().cardGotPlayed(new Card(selectedCardtype));
             }
@@ -239,7 +238,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
         Log.d("selectedSpecialCard", input);
 
-        //TODO maybe adjust fab to special card icon
     }
 
 }
