@@ -116,6 +116,11 @@ public class GamemanagerTest {
             protected void showCanNotAcccusePlayerMessage() {
 
             }
+
+            @Override
+            protected void setCardHolderUI() {
+
+            }
         };
         GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager);
     }

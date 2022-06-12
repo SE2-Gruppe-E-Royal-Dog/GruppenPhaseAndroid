@@ -88,6 +88,11 @@ public class GameManagerWormholeTest {
             protected void showCanNotAcccusePlayerMessage() {
 
             }
+
+            @Override
+            protected void setCardHolderUI() {
+
+            }
         };
         GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager, visualEffectsManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());
