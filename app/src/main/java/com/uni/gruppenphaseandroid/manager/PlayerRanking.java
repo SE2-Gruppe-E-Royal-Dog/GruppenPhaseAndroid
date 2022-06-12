@@ -33,7 +33,14 @@ public class PlayerRanking {
     }
 
     private int calcPoints(GoalField goalField) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < 4; i++) {
+            if (goalField.getCurrentFigure() != null) {
+                count++;
+            }
+            goalField = (GoalField)goalField.getNextField();
+        }
+        return count;
     }
 
     private void sortLists() {
