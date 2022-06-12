@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.util.Log;
+
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -11,6 +13,7 @@ public class CardManager {
     FigureManager figureManager;
 
     public boolean isThereAnyPossibleMove(int turnPlayerID, LastTurn lastTurn){
+        Log.e("card", Handcards.getInstance().getMyCards().toString());
         boolean flag = false;
         for(Card card : Handcards.getInstance().getMyCards()){
             for(Figure figure : figureManager.getFiguresOfColour(Color.values()[turnPlayerID])){

@@ -79,7 +79,7 @@ public class CardManagerTest {
 
     @After
     public void tearDown(){
-        Handcards.getInstance().setMyCards(null);
+        Handcards.getInstance().setMyCards(new LinkedList<>());
     }
 
     @Test
