@@ -13,7 +13,7 @@ public class CardManager {
     FigureManager figureManager;
 
     public boolean isThereAnyPossibleMove(int turnPlayerID, LastTurn lastTurn){
-        Log.e("card", Handcards.getInstance().getMyCards().toString());
+        //Log.e("card", Handcards.getInstance().getMyCards().toString());
         boolean flag = false;
         for(Card card : Handcards.getInstance().getMyCards()){
             for(Figure figure : figureManager.getFiguresOfColour(Color.values()[turnPlayerID])){
