@@ -122,7 +122,7 @@ public class PlayFieldTest_Move {
     }
 
     /**
-     * Test auf reine Vorwärtsbewegung
+     * Test auf alle Figuren von Green
      */
     @Test
     public void checkMoveJerkRed() { // OK
@@ -220,11 +220,108 @@ public class PlayFieldTest_Move {
     }
 
     @Test
-    public void checkMoveKingRedOvertakingJerkGreenPositionKing() { // OK
+    public void checkMoveKingRedOvertakingJerkGreenPositionKingRed() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field2, Typ.JERK, figureUI9);
         kingRed = new King(4, Color.RED, field1, Typ.KING, figureUI4);
         playingField.move(kingRed,2);
         Assert.assertEquals(field3, kingRed.getCurrentField());
+    }
+
+
+    @Test
+    public void checkMoveJerkBlueBeatenCitizenGreenPositionJerkBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        playingField.move(jerkBlue,1);
+        Assert.assertEquals(field2, jerkBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveJerkBlueBeatenCitizenGreenPositionCitizenGreen() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        playingField.move(jerkBlue,1);
+        Assert.assertTrue(citizenGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveJerkBlueOvertakingCitizenGreenPositionJerkBlue() { // NOK TODO: Check mit Nermin ob Null ok
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        jerkBlue = new Jerk(5, Color.BLUE, field1, Typ.JERK, figureUI5);
+        playingField.move(jerkBlue,2);
+        Assert.assertNull(jerkBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveCitizenBlueBeatenCitizenGreenPositionCitizenBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        playingField.move(citizenBlue,1);
+        Assert.assertEquals(field2, citizenBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveCitizenBlueBeatenCitizenGreenPositionCitizenGreen() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        playingField.move(citizenBlue,1);
+        Assert.assertTrue(citizenGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveCitizenBlueOvertakingCitizenGreenPositionCitizenBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        citizenBlue = new Citizen(6, Color.BLUE, field1, Typ.CITIZEN, figureUI6);
+        playingField.move(citizenBlue,2);
+        Assert.assertEquals(field3, citizenBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKnightBlueBeatenCitizenGreenPositionKnightBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        playingField.move(knightBlue,1);
+        Assert.assertEquals(field2, knightBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKnightBlueBeatenCitizenGreenPositionCitizenGreen() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        playingField.move(knightBlue,1);
+        Assert.assertTrue(citizenGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveKnightBlueOvertakingCitizenGreenPositionKnightBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        playingField.move(knightBlue,2);
+        Assert.assertEquals(field3, knightBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKingBlueBeatenCitizenGreenPositionKingBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        playingField.move(kingBlue,1);
+        Assert.assertEquals(field2, kingBlue.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveKingBlueBeatenCitizenGreenPositionCitizenGreen() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        playingField.move(kingBlue,1);
+        Assert.assertTrue(citizenGreen.getCurrentField() instanceof StartingAreaField);
+    }
+
+    @Test
+    public void checkMoveKingBlueOvertakingCitizenGreenPositionKingBlue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field2, Typ.CITIZEN, figureUI10);
+        kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
+        playingField.move(kingBlue,2);
+        Assert.assertEquals(field3, kingBlue.getCurrentField());
     }
 
 }
