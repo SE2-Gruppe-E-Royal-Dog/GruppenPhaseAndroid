@@ -51,7 +51,7 @@ public class Figure {
      * Green Card (4 +/- and 10) cancel overtaking rules.
      * @return true if overtaking possible
      */
-    private boolean checkGreenCard() {
+    public boolean checkGreenCard() {
         Card card = GameManager.getInstance().getSelectedCard();
         if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
             return true;
@@ -60,7 +60,7 @@ public class Figure {
         }
     }
 
-    private boolean checkOvertakingPossible() {
+    public boolean checkOvertakingPossible() {
         if (checkGreenCard()) {
             return true;
         } else {
@@ -131,7 +131,7 @@ public class Figure {
      * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
-    protected Field setNewPosition(int fieldsToMove) {
+    public Field setNewPosition(int fieldsToMove) {
         if (checkMoving(fieldsToMove)) { // check if moving possible
             Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
             return newPositionFigure1;

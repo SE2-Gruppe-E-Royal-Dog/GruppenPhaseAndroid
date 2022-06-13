@@ -288,25 +288,25 @@ public class PlayingField {
     }
 
   public void move(Figure figure1, int fieldsToMove) {
-        Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
-        Figure figure2;
+            Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
+            Figure figure2;
 
-        newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
+            newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
 
-        figure2 = newPositionFigure1.getCurrentFigure();
-        if (figure2 != null) {
-            overtake(figure2);
-        }
+            figure2 = newPositionFigure1.getCurrentFigure();
+            if (figure2 != null) {
+                overtake(figure2);
+            }
 
-        figure1.getCurrentField().setCurrentFigure(null);
-        newPositionFigure1.setCurrentFigure(figure1);
-        figure1.setCurrentField(newPositionFigure1);
-        figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
-        newPositionFigure1.triggerSpecialFieldEffect();
+            figure1.getCurrentField().setCurrentFigure(null);
+            newPositionFigure1.setCurrentFigure(figure1);
+            figure1.setCurrentField(newPositionFigure1);
+            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
+            newPositionFigure1.triggerSpecialFieldEffect();
 
-        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
-        lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
-        GameManager.getInstance().setLastTurn(lastTurn);
+            LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
+            lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
+            GameManager.getInstance().setLastTurn(lastTurn);
     }
 
     private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten

@@ -109,6 +109,18 @@ public class FigureManager {
         return figureSet;
     }
 
+
+    public boolean isWinner(Color color) {
+        boolean winner = true;
+        for (Figure figure: figureList) {
+            if (figure.getColor() == color) {
+                if (!(figure.getCurrentField() instanceof GoalField)) {
+                    winner = false;
+                }
+            }
+        } return winner;
+    }
+
     public boolean checkIfPlayerHasFigureOnBoard(Color color){
         boolean hasFigureOnBoard = false;
         for (Figure figure:figureList){
