@@ -53,7 +53,6 @@ public class GameManager {
     private boolean hasCheated = false;
     private LinkedList<String> playerNames;
 
-    private String[] playerNames = {"Player1", "Player2", "Player3", "Player4"};
 
     int roundIndex;
 
@@ -77,7 +76,7 @@ public class GameManager {
 
     public void nextTurn() {
         currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
-        visualEffectsManager.showNextTurnMessage(playerNames[currentTurnPlayerNumber], Color.values()[currentTurnPlayerNumber].name());
+        visualEffectsManager.showNextTurnMessage(playerNames.get(currentTurnPlayerNumber));
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
@@ -296,6 +295,7 @@ public class GameManager {
     public String getPlayerNameWithIndex(int index){
         return this.playerNames.get(index);
     }
+
 
     public boolean hasThisClientFigureOnBoard(){
         return figuremanager.checkIfPlayerHasFigureOnBoard(getColorOfMyClient());

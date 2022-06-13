@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
             case R.id.action_howPlay: {
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
+    }
 
     public Client getWebsocketClient() {
         return websocketClient;
@@ -179,11 +179,12 @@ public class MainActivity extends AppCompatActivity {
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
                 case PUNISHMENT_MESSAGE:
-                        handlePunishmentMessage(msg.getPayload());
+                    handlePunishmentMessage(msg.getPayload());
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
         }
+    }
 
         private void handleSendCardsMessage(String sendCardsPayload) {
             var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
@@ -222,19 +223,19 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
+            GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
             CardManager cardManager = new CardManager();
             FigureManager figureManager = new FigureManager();
             cardManager.setFigureManager(figureManager);
             CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
             GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext()), cardManager, communicationManager);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)));
 
             findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
             findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
             showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
 
-            GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
+
 
             for (int i = 0; i < payload.getNumberOfPlayers(); i++)
                 Log.e("Handlestart", GameManager.getInstance().getPlayerNameWithIndex(i));
@@ -248,9 +249,7 @@ public class MainActivity extends AppCompatActivity {
             if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
                 Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
             }
-            if (GameManager.getInstance().isItMyTurn()){
-                showPlayerToast("It's your turn");
-            }
+
         }
 
         private void handleWormholeMove(String body) {

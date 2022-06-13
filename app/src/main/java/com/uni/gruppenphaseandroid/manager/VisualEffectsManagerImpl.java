@@ -18,14 +18,11 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
     Context context;
     //other attributes...
 
-    public VisualEffectsManagerImpl(ImageView stackImage, ImageButton cardHolder, TextView cheaterNote, Context context) {
-
-            this.stackImage = stackImage;
-            this.cardHolder = cardHolder;
-            this.cheaterNote = cheaterNote;
-            this.context = context;
-
+    public VisualEffectsManagerImpl(ImageView stackImage, Context context) {
+        this.stackImage = stackImage;
+        this.context = context;
     }
+
         @Override
         protected void setInitialStackImage () {
             stackImage.setImageResource(R.drawable.ic_card_ablagestapel);
@@ -69,8 +66,8 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
         }
 
         @Override
-        protected void showNextTurnMessage (String turnPlayerName, String colorName){
-            showToast("It's " + turnPlayerName + "'s/ " + colorName + "'s turn now!");
+        protected void showNextTurnMessage (String turnPlayerName){
+            showToast("It's " + turnPlayerName + "'s turn now!");
         }
 
         private void showToast (String message){
