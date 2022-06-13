@@ -89,7 +89,7 @@ public class CardManager {
     }
     private boolean checkSwitch(Card card, Figure figure){
         boolean flag = false;
-        for(int i = 1;i<=16;i++){
+        for(int i = 1;i<= figureManager.getNumberOfTotalFigures();i++){
             if(i == figure.getId()){
                 continue;
             }
