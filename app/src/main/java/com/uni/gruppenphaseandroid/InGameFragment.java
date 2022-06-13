@@ -227,7 +227,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     }
 
     public boolean checkIfSpecialNumberCardEffect(Cardtype cardtype){
-        return cardtype == Cardtype.ONEORELEVEN_START || cardtype == Cardtype.FOUR_PLUSMINUS || cardtype == Cardtype.ONETOSEVEN;
+        return cardtype == Cardtype.ONEORELEVEN_START || cardtype == Cardtype.FOUR_PLUSMINUS || cardtype == Cardtype.ONETOSEVEN || cardtype == Cardtype.THIRTEEN_START;
 
     }
 

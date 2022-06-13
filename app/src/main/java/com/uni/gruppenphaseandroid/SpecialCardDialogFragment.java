@@ -141,6 +141,24 @@ public class SpecialCardDialogFragment extends DialogFragment {
                              getDialog().dismiss();
                      });
                      break;
+                 case THIRTEEN_START:
+                     optionOne.setText("Start");
+                     optionTwo.setText("Thirteen");
+
+                     optionOne.setVisibility(View.VISIBLE);
+                     optionTwo.setVisibility(View.VISIBLE);
+
+                     optionOne.setOnClickListener(view1 ->  {
+                         GameManager.getInstance().setCurrentEffect(0);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         getDialog().dismiss();
+                     });
+                     optionTwo.setOnClickListener(view1 ->  {
+                         GameManager.getInstance().setCurrentEffect(1);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         getDialog().dismiss();
+                     });
+                     break;
              }
 
         return view;
