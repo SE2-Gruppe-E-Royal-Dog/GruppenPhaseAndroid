@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.cards;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +19,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     private LinkedList<Integer> imageCardList;
     private ItemClickListener mItemClickListener;
+    public static int mPreviousIndex = -1;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
+        private final ImageView background;
 
         public ViewHolder(View view) {
             super(view);
@@ -28,11 +32,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             // Define click listener for the ViewHolder's View.
             view.setOnClickListener(v -> Log.d("code", "Element " + getAdapterPosition() + " clicked."));
             imageView = (ImageView) view.findViewById(R.id.imageView);
+            background = (ImageView) view.findViewById(R.id.imageView_selectedBackground);
+            background.setColorFilter(Color.GRAY);
         }
 
         public ImageView getImageView() {
             return imageView;
         }
+
+
     }
 
     public CardAdapter(ItemClickListener itemClickListener) {
@@ -52,12 +60,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView.setImageResource(imageCardList.get(position));
-
-        holder.itemView.setOnClickListener((view -> {
-            mItemClickListener.onItemClick(imageCardList.get(position));
-        }));
+        if (mPreviousIndex == position){
+            holder.background.setVisibility(View.VISIBLE);
+        }else{
+            holder.background.setVisibility(View.INVISIBLE);
         }
+        holder.imageView.setImageResource(imageCardList.get(position));
+        holder.itemView.setOnClickListener((view -> {
+            mItemClickListener.onItemClick(imageCardList.get(position),position);
+            notifyDataSetChanged();
+        }));
+    }
 
     @Override
     public int getItemCount() {
@@ -66,6 +79,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
 
     public interface ItemClickListener{
-        void onItemClick(int card);
+        void onItemClick(int card, int position);
     }
+
 }

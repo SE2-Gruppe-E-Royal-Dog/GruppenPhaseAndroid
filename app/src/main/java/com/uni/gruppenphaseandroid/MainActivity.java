@@ -12,16 +12,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
@@ -40,6 +45,8 @@ import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
+
+import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
    private Client websocketClient;
@@ -75,22 +82,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" CAT ROYAL");
+        getSupportActionBar().setIcon(R.drawable.ic_action_cat);
         bindService();
         doRegisterReceiver();
         setPlayerIdInCardView();
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear();       //to get rid of dublicated menu items
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.getItem(2).setVisible(false);
         return true;
     }
 
@@ -99,16 +103,19 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        var id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_howPlay: {
+                DialogFragment dialog = new HowToPlayFragment();
+                dialog.show(getSupportFragmentManager(), "howPlayDialogFragment");
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
-
 
     public Client getWebsocketClient() {
         return websocketClient;
@@ -172,11 +179,12 @@ public class MainActivity extends AppCompatActivity {
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
                 case PUNISHMENT_MESSAGE:
-                        handlePunishmentMessage(msg.getPayload());
+                    handlePunishmentMessage(msg.getPayload());
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
         }
+    }
 
         private void handleSendCardsMessage(String sendCardsPayload) {
             var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
@@ -215,13 +223,24 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
+            GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
             CardManager cardManager = new CardManager();
             FigureManager figureManager = new FigureManager();
             cardManager.setFigureManager(figureManager);
             CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
             GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext()), cardManager, communicationManager);
 
-            //TODO hide startgame button and show chardholder
+            findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
+            findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+            findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
+            showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
+
+
+
+            for (int i = 0; i < payload.getNumberOfPlayers(); i++)
+                Log.e("Handlestart", GameManager.getInstance().getPlayerNameWithIndex(i));
+
+            setPlayerNamesOnBoard();
         }
 
         private void handleUpdateBoard(String body) {
@@ -230,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
             if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
                 Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
             }
+
         }
 
         private void handleWormholeMove(String body) {
@@ -238,6 +258,59 @@ public class MainActivity extends AppCompatActivity {
             GameManager.getInstance().moveWormholes(wormholeIDs);
         }
 
+
+    private void removePlayerNamesOnBoard(String playerId) {        //TODO remove name when player leaves the lobby - nessesary??
+        TextView name;
+        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
+            if (GameManager.getInstance().getPlayerNameWithIndex(i).equals(playerId)) {
+                switch (i) {
+                    case 0:
+                        name = findViewById(R.id.tv_playerGreen);
+                        name.setVisibility(View.INVISIBLE);
+                        break;
+                    case 1:
+                        name = findViewById(R.id.tv_playerYellow);
+                        name.setVisibility(View.INVISIBLE);
+                        break;
+                    case 2:
+                        name = findViewById(R.id.tv_playerRed);
+                        name.setVisibility(View.INVISIBLE);
+                        break;
+                    case 3:
+                        name = findViewById(R.id.tv_playerBlue);
+                        name.setVisibility(View.INVISIBLE);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void setPlayerNamesOnBoard() {
+        TextView name;
+        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
+            switch (i){
+                case 0:
+                    name = findViewById(R.id.tv_playerGreen);
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    name = findViewById(R.id.tv_playerYellow);
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    name = findViewById(R.id.tv_playerRed);
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
+                    break;
+                case 3:
+                    name = findViewById(R.id.tv_playerBlue);
+                    name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
+                    name.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 
     private void setPlayerIdInCardView(){

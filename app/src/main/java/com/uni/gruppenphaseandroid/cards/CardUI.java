@@ -12,7 +12,6 @@ public class CardUI  {
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
 
-    static LinkedList<Card> myCards;        //für test zwecke
 
 
     public static CardUI getInstance() {
