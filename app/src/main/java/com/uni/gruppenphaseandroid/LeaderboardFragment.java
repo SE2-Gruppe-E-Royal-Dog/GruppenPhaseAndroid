@@ -40,12 +40,12 @@ public class LeaderboardFragment extends Fragment {
 
         PlayerRanking playerRanking = new PlayerRanking();
 
-        LinkedList<String> names = playerRanking.getRankedList();
+        String[] names = playerRanking.getRankedNames();
 
-        first_playerName.setText(names.get(0));
-        second_playerName.setText(names.get(1));
-        third_playerName.setText(names.get(2));
-        fourth_playerName.setText(names.get(3));
+        first_playerName.setText(names[0]);
+        second_playerName.setText(names[1]);
+        third_playerName.setText(names[2]);
+        fourth_playerName.setText(names[3]);
 
 
         exit_button.setOnClickListener(view1 -> {
