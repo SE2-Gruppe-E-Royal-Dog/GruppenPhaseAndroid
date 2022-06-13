@@ -9,27 +9,38 @@ import java.util.List;
 
 public class PlayerRanking {
 
-    private LinkedList<String> names;
-    private LinkedList<Integer> points;
+    private int numOfPlayers;
+    private String[] names;
+    private int[] points;
 
     public PlayerRanking() {
         GameManager gameManager = GameManager.getInstance();
         PlayingField playingField = gameManager.getPlayingField();
 
-        names = gameManager.getPlayerNames();
-        points = new LinkedList<>();
-        points.addLast(calcPoints(playingField.getGreenStartingField().getNextGoalField()));
-        if (names.get(1) != null) {
-            points.addLast(calcPoints(playingField.getYellowStartingField().getNextGoalField()));
+        numOfPlayers = gameManager.getNumberOfPlayers();
+        names = gameManager.getModifiedPlayerNamesArray();
+
+        points = new int[4];
+        points[0] = calcPoints(playingField.getGreenStartingField().getNextGoalField());
+        if (names[1] != null) {
+            points[1] = calcPoints(playingField.getYellowStartingField().getNextGoalField());
+        }else{
+            points[1] = -1;
         }
-        if (names.get(2) != null) {
-            points.addLast(calcPoints(playingField.getRedStartingField().getNextGoalField()));
+        if (names[2] != null) {
+            points[2] = calcPoints(playingField.getRedStartingField().getNextGoalField());
+        }else{
+            points[2] = -1;
         }
-        if (names.get(3) != null) {
-            points.addLast(calcPoints(playingField.getBlueStartingField().getNextGoalField()));
+        if (names[3] != null) {
+            points[3] = calcPoints(playingField.getBlueStartingField().getNextGoalField());
+        }else{
+            points[3] = -1;
         }
 
         sortLists();
+        addRanksToNames();
+
     }
 
     private int calcPoints(GoalField goalField) {
@@ -44,14 +55,15 @@ public class PlayerRanking {
     }
 
     private void sortLists() {
-        int size = names.size();
-        for (int i = 0; i < size; i++) {
-            for (int j = 1; j < (size - i); j++) {
-                if (points.get(j - 1) > points.get(j)) {
-                    int tempPoints = points.remove(j - 1);
-                    String tempNames = names.remove(j - 1);
-                    points.add(j, tempPoints);
-                    names.add(j, tempNames);
+        for (int i = 0; i < names.length; i++) {
+            for (int j = i + 1; j < names.length; j++) {
+                if (points[i] < points[j]) {
+                    int tmpNum = points[i];
+                    String tmpName = names[i];
+                    points[i] = points[j];
+                    names[i] = names[j];
+                    points[j] = tmpNum;
+                    names[j] = tmpName;
                 }
             }
         }
@@ -60,20 +72,25 @@ public class PlayerRanking {
     private void addRanksToNames() {
         String connector = ": ";
         int rank = 1;
-        for (int j = 0; j < names.size(); j++) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(rank);
-            sb.append(connector);
-            sb.append(names.remove(j));
-            names.add(j, sb.toString());
-
-            if (points.get(j) > points.get(j + 1)) {
+        int prev = 4;
+        for (int j = 0; j < names.length; j++) {
+            if (points[j] < prev) {
                 rank++;
             }
+            if(names[j]==null){
+                names[j] = "";
+            }else {
+                StringBuilder sb = new StringBuilder();
+                sb.append(rank);
+                sb.append(connector);
+                sb.append(names[j]);
+                names[j] = sb.toString();
+            }
+            prev = points[j];
         }
     }
 
-    public LinkedList<String> getRankedList() {
+    public String[] getRankedNames() {
         return names;
     }
 }
