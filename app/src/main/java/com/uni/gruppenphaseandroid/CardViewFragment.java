@@ -48,7 +48,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     public OnInputListener cardInputListener;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -139,6 +138,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }
+
 
 
 
