@@ -45,10 +45,13 @@ public class CardManagerTest {
         figureManager = mock(FigureManager.class);
         figures = new ArrayList<>();
         figure1 = new Figure();
+        figure1.setId(1);
         figure2 = new Figure();
+        figure2.setId(2);
         figures.add(figure1);
         figures.add(figure2);
         when(figureManager.getFiguresOfColour(Color.RED)).thenReturn(figures);
+        when(figureManager.getNumberOfTotalFigures()).thenReturn(2);
         cardManager.setFigureManager(figureManager);
 
         handCards1 = new LinkedList<>();
@@ -120,10 +123,10 @@ public class CardManagerTest {
 
         verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure1, 0, null);
         verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure1, 13, null);
-        verify(switchCard, times(16)).checkIfCardIsPlayable(figure1, -1, null);
+        verify(switchCard, times(1)).checkIfCardIsPlayable(figure1, -1, null);
         verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure2, 0, null);
         verify(thirteenCard, times(1)).checkIfCardIsPlayable(figure2, 13, null);
-        verify(switchCard, times(16)).checkIfCardIsPlayable(figure2, -1, null);
+        verify(switchCard, times(1)).checkIfCardIsPlayable(figure2, -1, null);
     }
 
     @Test
