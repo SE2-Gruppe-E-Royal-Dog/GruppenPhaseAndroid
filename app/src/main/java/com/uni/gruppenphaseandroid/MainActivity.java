@@ -27,6 +27,7 @@ import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Payload;
 import com.uni.gruppenphaseandroid.communication.dto.PlayerLeftLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.PunishPayload;
 import com.uni.gruppenphaseandroid.communication.dto.SendCardsPayload;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
@@ -167,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
+                case PUNISHMENT_MESSAGE:
+                        handlePunishmentMessage(msg.getPayload());
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
@@ -218,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
             GameManager.getInstance().updateBoard(updateBoardPayload);
             if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
-                Cheater.noteCheating(new Cheater(updateBoardPayload.getPlayerID(), GameManager.getInstance().getRoundIndex()));
+                Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
             }
         }
 
@@ -233,6 +236,10 @@ public class MainActivity extends AppCompatActivity {
     private void setPlayerIdInCardView(){
         CardViewFragment.setPlayerId(playerId);
 
+    }
+    private void handlePunishmentMessage(String body){
+        var updatePunishPayload = gson.fromJson(body, PunishPayload.class);
+        GameManager.getInstance().executePunishment(updatePunishPayload.getFigureID());
     }
 
 

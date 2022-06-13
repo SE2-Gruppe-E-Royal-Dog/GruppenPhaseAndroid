@@ -8,6 +8,8 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_ingame.xml" value="0.36041666666666666" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_main.xml" value="0.2441123188405797" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/menu_fragment.xml" value="0.36041666666666666" />
+        <entry key="..\:/Users/Lenovo/Documents/Dokumente/UNI/Software Engineering 2/GruppenPhaseAndroid/app/src/main/res/layout/activity_ingame.xml" value="0.35989583333333336" />
+        <entry key="..\:/Users/Lenovo/Documents/Dokumente/UNI/Software Engineering 2/GruppenPhaseAndroid/app/src/main/res/layout/fragment_accusation.xml" value="0.26367781155015196" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2965" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluecitizen.xml" value="0.1565" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluefield.xml" value="0.1565" />
@@ -24,11 +26,9 @@
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/menu/menu_main.xml" value="0.3046875" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.235" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.235" />
-
         <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_11.xml" value="0.1" />
         <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_ablagestapel.xml" value="0.1785" />
         <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_discard_card.xml" value="0.25" />
-        <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_ingame.xml" value="0.1" />
         <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_card_view.xml" value="0.25" />
         <entry key="..\:/Users/lukas/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_leaderboard.xml" value="0.22333333333333336" />

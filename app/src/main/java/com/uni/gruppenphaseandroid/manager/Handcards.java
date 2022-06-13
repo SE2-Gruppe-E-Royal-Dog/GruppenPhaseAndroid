@@ -3,10 +3,11 @@ package com.uni.gruppenphaseandroid.manager;
 import com.uni.gruppenphaseandroid.cards.Card;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Handcards {
     private static Handcards hand;
-    private LinkedList<Card> myCards;
+    private List<Card> myCards;
 
     private Handcards() {
         myCards = new LinkedList<>();
@@ -19,11 +20,11 @@ public class Handcards {
         return hand;
     }
 
-    public LinkedList<Card> getMyCards() {
+    public List<Card> getMyCards() {
         return myCards;
     }
 
-    public void addCardToHand(LinkedList<Card> cards) {
+    public void addCardToHand(List<Card> cards) {
         myCards.addAll(cards);
     }
 
@@ -32,7 +33,7 @@ public class Handcards {
         GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
     }
 
-    public void setMyCards(LinkedList<Card> myCards) {
+    public void setMyCards(List<Card> myCards) {
         this.myCards = myCards;
     }
 }

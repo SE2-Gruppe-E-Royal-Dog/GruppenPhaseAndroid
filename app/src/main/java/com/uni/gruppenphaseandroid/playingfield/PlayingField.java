@@ -424,7 +424,7 @@ public class PlayingField {
         }
     }
 
-    private void overtake(Figure figureToOvertake){
+    public void overtake(Figure figureToOvertake){
         figureToOvertake.getCurrentField().setCurrentFigure(null);
         figureToOvertake.setCurrentField(getRightStartingAreaField(figureToOvertake.getColor()));
         figureToOvertake.getFigureUI().moveFigureToPosition(figureToOvertake.getCurrentField().getFieldUIobject()); // visual movement on board
