@@ -339,4 +339,24 @@ public class GameManager {
     public boolean isThereAnyPossibleMove() {
         return cardManager.isThereAnyPossibleMove(myTurnNumber, lastTurn);
     }
+
+    public String[] getModifiedPlayerNamesArray() {
+        String[] names = new String[4];
+        for(int i=0;i<4;i++){
+            if(i>=numberOfPlayers){
+                names[i] = null;
+            }else{
+                names[i] = playerNames[i];
+            }
+        }
+        return names;
+    }
+
+    public void setPlayerNames(String[] playerNames) {
+        this.playerNames = playerNames;
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
 }
