@@ -9,7 +9,6 @@ import java.util.List;
 
 public class PlayerRanking {
 
-    private int numOfPlayers;
     private String[] names;
     private int[] points;
 
@@ -17,7 +16,6 @@ public class PlayerRanking {
         GameManager gameManager = GameManager.getInstance();
         PlayingField playingField = gameManager.getPlayingField();
 
-        numOfPlayers = gameManager.getNumberOfPlayers();
         names = gameManager.getModifiedPlayerNamesArray();
 
         points = new int[4];
