@@ -175,7 +175,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     //method for Dialog Fragment - Card Holder
     @Override
     public void sendInputCardFragment(String input) {               //get's input from cardholder aka choosen card
-        getActivity().findViewById(R.id.btn_cardholderButton).setBackgroundResource(Integer.parseInt(input));
+        //getActivity().findViewById(R.id.btn_cardholderButton).setBackgroundResource(Integer.parseInt(input));
         setCardViewImage(Integer.parseInt(input));
     }
 
