@@ -8,8 +8,17 @@
         android:title="@string/action_settings"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/as_leaveGame"
-        android:orderInCategory="100"
-        android:title="Leave Game"
+        android:id="@+id/action_howPlay"
+        android:orderInCategory="101"
+        android:title="@string/action_howPlay"
+        android:visible="true"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_leaveGame"
+        android:orderInCategory="102"
+        android:title="@string/action_leaveGame"
+        android:visible="true"
         app:showAsAction="never" />
+
+
 </menu>

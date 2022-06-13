@@ -5,9 +5,24 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_card_10" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imageView_selectedBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_selectedcardcackground" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_card_10" />
+    </RelativeLayout>
+
 </LinearLayout>

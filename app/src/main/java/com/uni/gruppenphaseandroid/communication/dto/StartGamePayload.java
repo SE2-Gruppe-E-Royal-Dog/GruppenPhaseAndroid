@@ -1,9 +1,12 @@
 package com.uni.gruppenphaseandroid.communication.dto;
 
+import java.util.LinkedList;
+
 public class StartGamePayload {
     String lobbyID;
     int numberOfPlayers;
     int clientPlayerNumber;
+    LinkedList<String> playerNames;
 
     public StartGamePayload(String lobbyID, int numberOfPlayers, int clientPlayerNumber) {
         this.lobbyID = lobbyID;
@@ -21,5 +24,9 @@ public class StartGamePayload {
 
     public int getClientPlayerNumber() {
         return clientPlayerNumber;
+    }
+
+    public LinkedList<String> getPlayerNames() {
+        return playerNames;
     }
 }

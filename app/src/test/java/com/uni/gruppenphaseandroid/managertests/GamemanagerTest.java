@@ -19,10 +19,13 @@ import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
+import com.uni.gruppenphaseandroid.manager.CardManager;
+import com.uni.gruppenphaseandroid.manager.CommunicationManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.manager.TurnPhase;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManager;
+import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -40,6 +43,8 @@ public class GamemanagerTest {
     PlayingField playingField;
     View view;
     FigureManager figureManager;
+    CardManager cardManager;
+    CommunicationManager communicationManager;
     Card cardEight;
     Card cardSwitch;
 
@@ -59,6 +64,7 @@ public class GamemanagerTest {
         playingField = mock(PlayingField.class);
         GameManager.getInstance().setPlayingField(playingField);
         figureManager = mock(FigureManager.class);
+        cardManager = mock(CardManager.class);
         cardEight = mock(Card.class);
         cardSwitch = mock(Card.class);
         when(cardEight.getCardtype()).thenReturn(Cardtype.EIGTH);
@@ -91,33 +97,9 @@ public class GamemanagerTest {
         message2.setType(MessageType.UPDATE_BOARD);
         message2.setPayload(new Gson().toJson(updateBoardPayloadTwoFigures));
 
-        VisualEffectsManager visualEffectsManager = new VisualEffectsManager() {
-            @Override
-            protected void setStackImage() {
-
-            }
-
-            @Override
-            protected void setInitialStackImage() {
-
-            }
-
-            @Override
-            protected void showIllegalMoveMessage() {
-
-            }
-
-            @Override
-            protected void showWinningScreen() {
-
-            }
-
-            @Override
-            protected void showCanNotAcccusePlayerMessage() {
-
-            }
-        };
-        GameManager.getInstance().startGame(4, 0, "id", "id", figureManager, visualEffectsManager);
+        VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
+        CommunicationManager communicationManager = new CommunicationManager(socketClient, "id", "id");
+        GameManager.getInstance().startGame(4, 0,  figureManager, visualEffectsManager, cardManager, communicationManager);
     }
 
     @After

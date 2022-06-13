@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,15 +20,13 @@ import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class SpecialCardDialogFragment extends DialogFragment {
-
     //options for special cards | 4+- | 1-7 | 1 or 11
 
     private TextView textView;          //Display the titel of the card (one or eleven||4 +-||1-7) and asks to specificate the value
     private Button optionOne;
     private Button optionTwo;
     private Button ok;
-    private Button chancel;
-    private SeekBar optionOneTwoSeven;
+    private SeekBar optionOneToSeven;
     private Cardtype cardtype;
     private int selectedCardEffect;
     public TextView tv_seekbar;
@@ -44,47 +44,41 @@ public class SpecialCardDialogFragment extends DialogFragment {
         this.cardtype = cardtype;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_special_card_dialog, container, false);
 
-         TextView textView = view.findViewById(R.id.txt_userInfo);
-         Button optionOne = view.findViewById(R.id.btn_optionOne);
+         textView = view.findViewById(R.id.txt_userInfo);
+         optionOne = view.findViewById(R.id.btn_optionOne);
          optionOne.setVisibility(View.INVISIBLE);
-         Button optionTwo = view.findViewById(R.id.btn_optionTwo);
+         optionTwo = view.findViewById(R.id.btn_optionTwo);
          optionTwo.setVisibility(View.INVISIBLE);
-         Button ok = view.findViewById(R.id.btn_playOneToSeven);
+         ok = view.findViewById(R.id.btn_playOneToSeven);
          ok.setVisibility(View.INVISIBLE);
-         SeekBar optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
+         optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
          optionOne.setVisibility(View.INVISIBLE);
-         Button chancel = view.findViewById(R.id.btn_chancel);
          tv_seekbar = view.findViewById(R.id.tv_seekbar);
 
              textView.setText("Choose the value of your card:");
 
              switch (cardtype) {
                  case ONETOSEVEN:
-
                      optionOneToSeven.setVisibility(View.VISIBLE);
                      ok.setText("OK");
                      ok.setVisibility(View.VISIBLE);
                      optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                          @Override
                          public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
-                             selectedCardEffect = value;
-
+                             selectedCardEffect = value+1;
 
                              int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
                              tv_seekbar.setVisibility(View.VISIBLE);
-                             tv_seekbar.setText("" + (value + 1));
+                             tv_seekbar.setText("" + (value+1));
                              int valHelp = seekBar.getThumbOffset()/2;
                              tv_seekbar.setX(seekBar.getX() + val + valHelp);
-                             //textView.setY(100); just added a value set this properly using screen with height aspect ratio , if you do not set it by default it will be there below seek bar
-
-
                          }
-
                          @Override
                          public void onStartTrackingTouch(SeekBar seekBar) {
 
@@ -96,14 +90,10 @@ public class SpecialCardDialogFragment extends DialogFragment {
                          }
                      });
 
-                     ok.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
+                     ok.setOnClickListener(view1 ->  {
                              GameManager.getInstance().setCurrentEffect(selectedCardEffect);
                              GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
                              getDialog().dismiss();
-
-                         }
                      });
 
                      break;
@@ -116,29 +106,20 @@ public class SpecialCardDialogFragment extends DialogFragment {
                      optionTwo.setVisibility(View.VISIBLE);
                      ok.setVisibility(View.VISIBLE);
 
-                     optionOne.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
+                     optionOne.setOnClickListener(view1 ->  {
                              GameManager.getInstance().setCurrentEffect(1);
                              GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
                              getDialog().dismiss();
-                         }
                      });
-                     optionTwo.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
+                     optionTwo.setOnClickListener(view1 -> {
                              GameManager.getInstance().setCurrentEffect(2);
                              GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
                              getDialog().dismiss();
-                         }
                      });
-                     ok.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
+                     ok.setOnClickListener(view1 ->  {
                              GameManager.getInstance().setCurrentEffect(0);
                              GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
                              getDialog().dismiss();
-                         }
                      });
 
                      break;
@@ -149,32 +130,36 @@ public class SpecialCardDialogFragment extends DialogFragment {
                      optionOne.setVisibility(View.VISIBLE);
                      optionTwo.setVisibility(View.VISIBLE);
 
-                     optionOne.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
+                     optionOne.setOnClickListener(view1 ->  {
                              GameManager.getInstance().setCurrentEffect(1);
                              GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
                              getDialog().dismiss();
-                         }
                      });
-                     optionTwo.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-
+                     optionTwo.setOnClickListener(view1 ->  {
                              GameManager.getInstance().setCurrentEffect(0);
                              GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
                              getDialog().dismiss();
-                         }
+                     });
+                     break;
+                 case THIRTEEN_START:
+                     optionOne.setText("Start");
+                     optionTwo.setText("Thirteen");
+
+                     optionOne.setVisibility(View.VISIBLE);
+                     optionTwo.setVisibility(View.VISIBLE);
+
+                     optionOne.setOnClickListener(view1 ->  {
+                         GameManager.getInstance().setCurrentEffect(0);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         getDialog().dismiss();
+                     });
+                     optionTwo.setOnClickListener(view1 ->  {
+                         GameManager.getInstance().setCurrentEffect(1);
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         getDialog().dismiss();
                      });
                      break;
              }
-
-             chancel.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     getDialog().dismiss();
-                 }
-             });
 
         return view;
     }

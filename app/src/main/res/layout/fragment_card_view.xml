@@ -8,7 +8,6 @@
     android:scrollbars="horizontal"
     tools:context=".CardViewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <Button
         android:id="@+id/btn_returnToGame"
@@ -72,17 +71,6 @@
             android:scrollbarAlwaysDrawHorizontalTrack="false"
             android:scrollbars="horizontal" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_instrucitons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="There is no possible move. \n choose one card to drop"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCards"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_cheater" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

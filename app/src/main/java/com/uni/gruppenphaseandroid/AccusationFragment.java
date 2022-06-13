@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -103,6 +105,7 @@ public class AccusationFragment extends DialogFragment {
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
                             buttonThreeColor = GameManager.getInstance().getColorOfClient(i);
                             playerThree.setBackgroundColor(assignColor(i));
+                            playerThree.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
                         i++;
                         j++;
                         break;
@@ -110,6 +113,7 @@ public class AccusationFragment extends DialogFragment {
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
                             buttonTwoColor = GameManager.getInstance().getColorOfClient(i);
                             playerTwo.setBackgroundColor(assignColor(i));
+                            playerTwo.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
                         i++;
                         j++;
                         break;
@@ -117,6 +121,7 @@ public class AccusationFragment extends DialogFragment {
                         if (GameManager.getInstance().getColorOfClient(i) != GameManager.getInstance().getColorOfMyClient())
                             buttonOneColor = GameManager.getInstance().getColorOfClient(i);
                             playerOne.setBackgroundColor(assignColor(i));
+                            playerOne.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
                         i++;
                         j++;
                         break;

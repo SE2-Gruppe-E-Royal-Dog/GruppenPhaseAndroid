@@ -4,6 +4,7 @@ import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class CardUI  {
 
@@ -11,7 +12,6 @@ public class CardUI  {
     private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
 
-    static LinkedList<Card> myCards;        //für test zwecke
 
 
     public static CardUI getInstance() {
@@ -27,29 +27,10 @@ public class CardUI  {
 
 
     public void addCardToHand() {
-
         imageCardList = new LinkedList<>();
-        LinkedList<Card> cards = Handcards.getInstance().getMyCards();
+        List<Card> cards = Handcards.getInstance().getMyCards();
 
-//test cards
-         LinkedList<Card> testCards = new LinkedList<>();
-
-        Card card1 = new Card(Cardtype.EIGTH);
-        testCards.add(card1);
-        Card card2 = new Card(Cardtype.TWO);
-        testCards.add(card2);
-        Card card3 = new Card(Cardtype.NINE);
-        testCards.add(card1);
-        Card card4 = new Card(Cardtype.FOUR_PLUSMINUS);
-        testCards.add(card4);
-        Card card5 = new Card(Cardtype.ONETOSEVEN);
-        testCards.add(card5);
-        Card card6 = new Card(Cardtype.ONEORELEVEN_START);
-        testCards.add(card6);
-        testCards.add(card1);
-//test cards end
-
-       for (Card c : testCards){
+       for (Card c : cards){
            findImageView(c);
         }
     }
