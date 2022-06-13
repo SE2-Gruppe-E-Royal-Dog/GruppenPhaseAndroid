@@ -1,5 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
-
+// TODO: König noch offen - Code umschreiben
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -529,5 +529,7 @@ public class FigureTest_Beaten {
      * Rausschmeißen im Ziel nicht möglich.
      */
     // TODO: Test Noch offen
+
+
 
 }

@@ -238,6 +238,10 @@ public class GameManager {
         return selectedCard;
     }
 
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
+
     public void setCurrentTurnPhase(TurnPhase currentTurnPhase) {
         this.currentTurnPhase = currentTurnPhase;
     }

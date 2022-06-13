@@ -1,14 +1,14 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.view.View;
 import android.widget.ImageView;
 
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -481,7 +481,170 @@ public class FigureTest_Overtaking {
     /**
      * CheckGreenCard und checkOvertakingPossible mit Green Card
      */
+    @Test
+    public void checkGreenCardOvertakingFourPlusMinus() { // OK
+        Card greencard = new Card(Cardtype.FOUR_PLUSMINUS);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        Assert.assertTrue(kingRed.checkGreenCard());
+    }
 
-    // TODO: Test noch offen
+    @Test
+    public void checkGreenCardOvertakingTen() { // OK
+        Card greencard = new Card(Cardtype.TEN);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        Assert.assertTrue(kingRed.checkGreenCard());
+    }
 
+    @Test
+    public void checkGreenCardOvertakingThree() { // OK
+        Card greencard = new Card(Cardtype.THREE);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        Assert.assertFalse(kingRed.checkGreenCard());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingOneToSeven() { // OK
+        Card greencard = new Card(Cardtype.ONETOSEVEN);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        Assert.assertFalse(kingRed.checkGreenCard());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingGreenKingByBlueKnightStartingFieldFourPlusMinus() { // OK
+        Card greencard = new Card(Cardtype.FOUR_PLUSMINUS);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldFourPlusMinus() { // OK
+        Card greencard = new Card(Cardtype.FOUR_PLUSMINUS);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingGreenKingByBlueKnightStartingFieldTen() { // OK
+        Card greencard = new Card(Cardtype.TEN);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldTen() { // OK
+        Card greencard = new Card(Cardtype.TEN);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertTrue(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingGreenKingByBlueKnightStartingFieldThirteenStart() { // OK
+        Card greencard = new Card(Cardtype.THIRTEEN_START);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldSwitch() { // OK
+        Card greencard = new Card(Cardtype.SWITCH);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldTwo() { // OK
+        Card greencard = new Card(Cardtype.TWO);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldFive() { // OK
+        Card greencard = new Card(Cardtype.FIVE);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldSix() { // OK
+        Card greencard = new Card(Cardtype.SIX);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldEigth() { // OK
+        Card greencard = new Card(Cardtype.EIGTH);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldNine() { // OK
+        Card greencard = new Card(Cardtype.NINE);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldOneOrElevenStart() { // OK
+        Card greencard = new Card(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldTwelve() { // OK
+        Card greencard = new Card(Cardtype.TWELVE);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldEqual() { // OK
+        Card greencard = new Card(Cardtype.EQUAL);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
+
+    @Test
+    public void checkGreenCardOvertakingRedKingByBlueKnightNormalFieldMagnet() { // OK
+        Card greencard = new Card(Cardtype.MAGNET);
+        GameManager.getInstance().setSelectedCard(greencard);
+        kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
+        knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
+        Assert.assertFalse(knightBlue.checkOvertakingPossible());
+    }
 }
