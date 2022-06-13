@@ -51,7 +51,7 @@ public class GameManager {
     private int cheatModifier = 0;
     private boolean hasMovedWormholes = false;
     private boolean hasCheated = false;
-    private LinkedList<String> playerNames;
+    private String[] playerNames = {"Player1", "Player2", "Player3", "Player4"};
 
 
     int roundIndex;
@@ -76,7 +76,7 @@ public class GameManager {
 
     public void nextTurn() {
         currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
-        visualEffectsManager.showNextTurnMessage(playerNames.get(currentTurnPlayerNumber));
+        visualEffectsManager.showNextTurnMessage(playerNames[currentTurnPlayerNumber]);
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
@@ -289,11 +289,15 @@ public class GameManager {
     }
 
     public void setPlayerNames(LinkedList<String> playerNames) {
-        this.playerNames = playerNames;
+        for (int i = 0; i < playerNames.size(); i++){
+            this.playerNames[i] = playerNames.get(i);
+        }
+
+
     }
 
     public String getPlayerNameWithIndex(int index){
-        return this.playerNames.get(index);
+        return this.playerNames[index];
     }
 
 
