@@ -14,6 +14,8 @@ import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
+import com.uni.gruppenphaseandroid.manager.CardManager;
+import com.uni.gruppenphaseandroid.manager.CommunicationManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManager;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
@@ -33,6 +35,8 @@ public class GameManagerWormholeTest {
     PlayingField playingField;
     View view;
     FigureManager figureManager;
+    CardManager cardManager;
+    CommunicationManager communicationManager;
     Card card;
     Client socketClient;
     ArrayList<Wormhole> wormholeList;
@@ -50,6 +54,7 @@ public class GameManagerWormholeTest {
         socketClient = mock(Client.class);
         GameManager.getInstance().setWebSocketClient(socketClient);
         figureManager = mock(FigureManager.class);
+        cardManager = mock(CardManager.class);
         wormholeList = new ArrayList<>();
         when(playingField.getWormholeList()).thenReturn(wormholeList);
 
@@ -63,33 +68,9 @@ public class GameManagerWormholeTest {
         message.setType(MessageType.WORMHOLE_MOVE);
         message.setPayload(new Gson().toJson(payload));
 
-        VisualEffectsManager visualEffectsManager = new VisualEffectsManager() {
-            @Override
-            protected void setStackImage() {
-
-            }
-
-            @Override
-            protected void setInitialStackImage() {
-
-            }
-
-            @Override
-            protected void showIllegalMoveMessage() {
-
-            }
-
-            @Override
-            protected void showWinningScreen() {
-
-            }
-
-            @Override
-            protected void showCanNotAcccusePlayerMessage() {
-
-            }
-        };
-        GameManager.getInstance().startGame(4, 2, lobbyID, playerID, figureManager, visualEffectsManager);
+        VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
+        communicationManager = new CommunicationManager(socketClient, lobbyID, playerID);
+        GameManager.getInstance().startGame(4, 2, figureManager, visualEffectsManager, cardManager, communicationManager);
       //  Assert.assertFalse(GameManager.getInstance().hasCheated());
     }
 
@@ -126,7 +107,6 @@ public class GameManagerWormholeTest {
             verify(wormholeList.get(i), times(1)).switchField(null);
             verify(playingField, times(1)).getFieldWithID(newFieldID[i]);
         }
-
     }
 
 

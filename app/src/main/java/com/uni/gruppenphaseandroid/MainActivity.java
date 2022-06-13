@@ -32,9 +32,12 @@ import com.uni.gruppenphaseandroid.communication.dto.SendCardsPayload;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.communication.dto.UpdateBoardPayload;
 import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
+import com.uni.gruppenphaseandroid.manager.CardManager;
+import com.uni.gruppenphaseandroid.manager.CommunicationManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
+import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
@@ -212,7 +215,11 @@ public class MainActivity extends AppCompatActivity {
         private void handleStartGame(String body) {
 
             var payload = gson.fromJson(body, StartGamePayload.class);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), lobbyId, playerId, new FigureManager(), new VisualEffectsManagerImpl(findViewById(R.id.stack)));
+            CardManager cardManager = new CardManager();
+            FigureManager figureManager = new FigureManager();
+            cardManager.setFigureManager(figureManager);
+            CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext()), cardManager, communicationManager);
 
             //TODO hide startgame button and show chardholder
         }

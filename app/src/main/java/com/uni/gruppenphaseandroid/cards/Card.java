@@ -3,7 +3,9 @@ package com.uni.gruppenphaseandroid.cards;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
+import com.uni.gruppenphaseandroid.playingfield.GoalField;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.StartingAreaField;
 
 public class Card {
     private Cardtype cardtype;
@@ -161,6 +163,9 @@ public class Card {
     }
 
     private boolean checkNonEffectCard(Figure figure){
+        if(figure.isOnStartingAreaField()){
+            return false;
+        }
         switch (getCardtype()){
             case MAGNET:
                 return figure.checkIfAnotherFigureOnPlayingfield();
@@ -189,10 +194,10 @@ public class Card {
                 }else{
                     value = -4;
                 }
-                return figure.checkMoving(value);
+                return !figure.isOnStartingAreaField() && figure.checkMoving(value);
 
             case ONETOSEVEN:
-                return figure.checkMoving(effect);
+                return !figure.isOnStartingAreaField() && figure.checkMoving(effect);
 
             case ONEORELEVEN_START:
                 if (effect == 0){
@@ -203,13 +208,13 @@ public class Card {
                 }else{
                     value = 11;
                 }
-                return figure.checkMoving(value);
+                return !figure.isOnStartingAreaField() && figure.checkMoving(value);
 
             case THIRTEEN_START:
                 if (effect == 0){
                     return figure.isOnStartingAreaField();
                 }
-                return figure.checkMoving(13);
+                return  !figure.isOnStartingAreaField() && figure.checkMoving(13);
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENTS);

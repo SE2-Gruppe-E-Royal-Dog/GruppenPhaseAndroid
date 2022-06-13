@@ -11,4 +11,8 @@ public abstract class VisualEffectsManager {
     protected abstract void showWinningScreen();
 
     protected abstract void showCanNotAcccusePlayerMessage();
+
+    protected abstract void showNoPossibleMoveMessage();
+
+    protected abstract void showNextTurnMessage(String turnPlayerName, String colorName);
 }

@@ -148,4 +148,9 @@ public class FigureManager {
             }
         }
     }
+
+    public int getNumberOfTotalFigures(){
+        return figureList.size();
+    }
+
 }
