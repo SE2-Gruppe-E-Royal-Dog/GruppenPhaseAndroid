@@ -56,9 +56,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         btnPlayCard = view.findViewById(R.id.btn_playCard);
         //set card default
         clickedCard = "-1";
-        if(GameManager.getInstance().isThereAnyPossibleMove()){
-            view.findViewById(R.id.tv_instrucitons).setVisibility(View.VISIBLE);
-        }
+
 
         //set up for recyclerview
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
