@@ -5,53 +5,45 @@ import static org.mockito.Mockito.when;
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
+import com.uni.gruppenphaseandroid.manager.CardManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.LinkedList;
 
-public class HandcardsTest {
+public class CardManagerTest_Handcards {
 
-    private Handcards handcards;
+    private CardManager cardManager;
     private Card card;
 
 
     @Before
     public void setup() {
-        handcards = Handcards.getInstance();
+        cardManager = new CardManager();
     }
 
     @After
     public void cleanup() {
-        handcards = null;
-    }
-
-    @Test
-    public void singletonTest() {
-        Handcards secondCall = Handcards.getInstance();
-
-        Assert.assertEquals(handcards, secondCall);
+        cardManager = null;
     }
 
     @Test
     public void addCardToHandTest() {
-        Assert.assertEquals(0, handcards.getMyCards().size());
+        Assert.assertEquals(0, cardManager.getMyHandCards().size());
         card = mock(Card.class);
         when(card.getCardtype()).thenReturn(Cardtype.TWO);
 
         LinkedList<Card> list = new LinkedList<>();
         list.add(card);
 
-        handcards.addCardToHand(list);
+        cardManager.addCardToHand(list);
 
-        Assert.assertEquals(1, handcards.getMyCards().size());
+        Assert.assertEquals(1, cardManager.getMyHandCards().size());
     }
 
     @Test
@@ -60,14 +52,14 @@ public class HandcardsTest {
         card = mock(Card.class);
         when(card.getCardtype()).thenReturn(Cardtype.TWO);
         list.add(card);
-        handcards.setMyCards(list);
+        cardManager.setMyHandCards(list);
         LastTurn lastTurn = new LastTurn(null, null, null, null);
         GameManager.getInstance().setLastTurn(lastTurn);
 
-        Assert.assertEquals(1, handcards.getMyCards().size());
+        Assert.assertEquals(1, cardManager.getMyHandCards().size());
 
-        handcards.discardHandcard(0);
+        cardManager.discardHandcard(0);
 
-        Assert.assertEquals(0, handcards.getMyCards().size());
+        Assert.assertEquals(0, cardManager.getMyHandCards().size());
     }
 }
