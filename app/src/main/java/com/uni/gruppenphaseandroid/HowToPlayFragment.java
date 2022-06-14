@@ -26,15 +26,16 @@ public class HowToPlayFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_howtoplay, container, false);
+        View view = inflater.inflate(R.layout.fragment_howtoplay, container, false);
 
+        TextView tv = view.findViewById(R.id.tv_instructions);
+        tv.setText("Spielanleitung hier einfügen");
+        return view;
     }
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
 
-        TextView tv = getView().findViewById(R.id.tv_instructions);
-        tv.setText("Spielanleitung hier einfügen");
     }
 }
