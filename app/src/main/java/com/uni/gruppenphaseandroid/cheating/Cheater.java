@@ -33,7 +33,7 @@ public class Cheater extends Fragment {
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
     public boolean cheatingAllowed(String playerID) {
-        this.cheatingAllowed = !GameManager.getInstance().getHasCheated(); /**(( getRoundIndex() - getLastCheat(playerID)) >= 5);**/
+        this.cheatingAllowed = !GameManager.getInstance().getHasCheated();
         return cheatingAllowed;
         }
 

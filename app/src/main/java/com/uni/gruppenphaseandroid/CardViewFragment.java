@@ -178,18 +178,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 textView.setText("Cheater Cheater -1");
                 textView.setVisibility(View.VISIBLE);
 
-                //shows a textView that is gone after 5 seconds
-                new CountDownTimer(3000, 1000) {
-
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        textView.setVisibility(View.INVISIBLE); //(or GONE)
-                    }
-                }.start();
 
             } else {
                 if (x > 0 && cheating) { //tilt to left
@@ -197,20 +185,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                     GameManager.getInstance().setCheatModifier(+1);
                     cheaterNote = "+1";
 
-                    textView.setText("Cheater Cheater + 1");
+                    textView.setText("Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
 
-                    //shows a textView that is gone after 5 seconds
-                    new CountDownTimer(3000, 1000) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            textView.setVisibility(View.INVISIBLE); //(or GONE)
-                        }
-                    }.start();
                 }
             }
         }
