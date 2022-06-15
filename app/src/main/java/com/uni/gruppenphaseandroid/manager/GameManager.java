@@ -359,4 +359,8 @@ public class GameManager {
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
+
+    public CardManager getCardManager() {
+        return cardManager;
+    }
 }
