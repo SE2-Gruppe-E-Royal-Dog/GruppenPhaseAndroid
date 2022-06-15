@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -19,14 +18,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
-import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
@@ -40,13 +37,9 @@ import com.uni.gruppenphaseandroid.communication.dto.WormholeSwitchPayload;
 import com.uni.gruppenphaseandroid.manager.CardManager;
 import com.uni.gruppenphaseandroid.manager.CommunicationManager;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.manager.VisualEffectsManagerImpl;
-import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
-
-import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
    private Client websocketClient;
@@ -189,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         private void handleSendCardsMessage(String sendCardsPayload) {
             var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
 
-            Handcards.getInstance().addCardToHand(payload.getCards());
+            GameManager.getInstance().getCardManager().addCardToHand(payload.getCards());
             CardUI.getInstance().addCardToHand(); //set UI Card Hand
         }
 

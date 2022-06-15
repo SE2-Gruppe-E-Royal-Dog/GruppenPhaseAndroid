@@ -1,21 +1,26 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import android.util.Log;
-
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CardManager {
 
     FigureManager figureManager;
 
+    public CardManager() {
+        this.myHandCards = new LinkedList<>();
+    }
+
     public boolean isThereAnyPossibleMove(int turnPlayerID, LastTurn lastTurn){
         //Log.e("card", Handcards.getInstance().getMyCards().toString());
         boolean flag = false;
-        for(Card card : Handcards.getInstance().getMyCards()){
+        for(Card card : myHandCards){
             for(Figure figure : figureManager.getFiguresOfColour(Color.values()[turnPlayerID])){
                 if(card.getCardtype() == Cardtype.EQUAL){
                     flag = flag ||checkIfMoveIsPossibleEqualCard(figure, lastTurn);
@@ -120,5 +125,26 @@ public class CardManager {
             return true;
         }
         return false;
+    }
+
+    //HANDCARDS
+
+    private List<Card> myHandCards;
+
+    public List<Card> getMyHandCards() {
+        return myHandCards;
+    }
+
+    public void addCardToHand(List<Card> cards) {
+        myHandCards.addAll(cards);
+    }
+
+    public void discardHandcard(int index){
+        Card toBeRemoved = myHandCards.remove(index);
+        GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
+    }
+
+    public void setMyHandCards(List<Card> myHandCards) {
+        this.myHandCards = myHandCards;
     }
 }
