@@ -57,6 +57,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         //set card default
         clickedCard = "-1";
 
+        textView = view.findViewById(R.id.tv_cheater);
+        textView.setVisibility(View.INVISIBLE);
+
 
         //set up for recyclerview
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
@@ -162,8 +165,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     public void onSensorChanged(SensorEvent sensorEvent) {
         Cheater cheater = new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex());
 
-
-        textView = getView().findViewById(R.id.tv_cheater);
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
 
@@ -175,21 +176,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 GameManager.getInstance().setCheatModifier(-1);
                 cheaterNote = "-1";
 
-                textView.setText("Cheater Cheater -1");
+                textView.setText("Cheater -1");
                 textView.setVisibility(View.VISIBLE);
 
-                //shows a textView that is gone after 5 seconds
-                new CountDownTimer(3000, 1000) {
-
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        textView.setVisibility(View.INVISIBLE); //(or GONE)
-                    }
-                }.start();
 
             } else {
                 if (x > 0 && cheating) { //tilt to left
@@ -197,20 +186,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                     GameManager.getInstance().setCheatModifier(+1);
                     cheaterNote = "+1";
 
-                    textView.setText("Cheater Cheater + 1");
+                    textView.setText("Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
 
-                    //shows a textView that is gone after 5 seconds
-                    new CountDownTimer(3000, 1000) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            textView.setVisibility(View.INVISIBLE); //(or GONE)
-                        }
-                    }.start();
                 }
             }
         }
