@@ -107,13 +107,13 @@ public class Figure {
                 return false;
             }
 
-            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {
+            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {// TODO: Wrong
                 GoalField goalfield = ((StartingField) currentField).getNextGoalField();
                 if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
                     setCurrentField(goalfield);
                     continue;
                 }
-            }
+        }
             setCurrentField(currentField.getFieldAtDistance(1, color));
         }
         setCurrentField(originField);

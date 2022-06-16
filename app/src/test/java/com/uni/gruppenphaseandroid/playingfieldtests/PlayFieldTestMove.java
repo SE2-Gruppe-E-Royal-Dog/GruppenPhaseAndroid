@@ -28,7 +28,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PlayFieldTest_Move {
+public class PlayFieldTestMove extends FigureTest {
     PlayingField playingField;
     View view;
     Jerk jerkRed; // Red
@@ -507,15 +507,13 @@ public class PlayFieldTest_Move {
         Assert.assertNull(jerkRed.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveJerkRedOvertakingJerkGreenPositionJerkRedStart() { // NOK
+    @Test
+    public void checkMoveJerkRedOvertakingJerkGreenPositionJerkRedStart() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         jerkRed = new Jerk(1, Color.RED, field12, Typ.JERK, figureUI1);
-        playingField.move(jerkRed,2);
-        Assert.assertEquals(field14, jerkRed.getCurrentField());
+        Assert.assertNull(jerkRed.setNewPosition(2));
     }
 
-     */
 
     @Test
     public void checkMoveCitizenRedBeatenJerkGreenPositionCitizenRedStart() { // OK
@@ -524,15 +522,13 @@ public class PlayFieldTest_Move {
         Assert.assertNull(citizenRed.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveCitizenRedOvertakingJerkGreenPositionCitizenRedStart() { // NOK
+    @Test
+    public void checkMoveCitizenRedOvertakingJerkGreenPositionCitizenRedStart() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         citizenRed = new Citizen(2, Color.RED, field12, Typ.CITIZEN, figureUI2);
-        playingField.move(citizenRed,2);
-        Assert.assertEquals(field14, citizenRed.getCurrentField());
+        Assert.assertNull(citizenRed.setNewPosition(2));
     }
 
-     */
 
     @Test
     public void checkMoveKnightRedBeatenJerkGreenPositionKnightRedStart() { // OK
@@ -556,15 +552,12 @@ public class PlayFieldTest_Move {
         Assert.assertNull(kingRed.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveKingRedOvertakingJerkGreenPositionKingRedStart() { // NOK
+    @Test
+    public void checkMoveKingRedOvertakingJerkGreenPositionKingRedStart() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
-        playingField.move(kingRed,2);
-        Assert.assertEquals(field14, kingRed.getCurrentField());
+        Assert.assertNull(kingRed.setNewPosition(2));
     }
-
-     */
 
 
     @Test
@@ -589,15 +582,13 @@ public class PlayFieldTest_Move {
         Assert.assertNull(citizenBlue.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveCitizenBlueOvertakingCitizenGreenPositionCitizenBlueStart() { // NOK
+    @Test
+    public void checkMoveCitizenBlueOvertakingCitizenGreenPositionCitizenBlueStart() { // OK
         citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
         citizenBlue = new Citizen(6, Color.BLUE, field12, Typ.CITIZEN, figureUI6);
-        playingField.move(citizenBlue,2);
-        Assert.assertEquals(field14, citizenBlue.getCurrentField());
+        Assert.assertNull(citizenBlue.setNewPosition(2));
     }
 
-     */
 
     @Test
     public void checkMoveKnightBlueBeatenCitizenGreenPositionKnightBlueStart() { // OK
@@ -607,7 +598,7 @@ public class PlayFieldTest_Move {
     }
 
     @Test
-    public void checkMoveKnightBlueOvertakingCitizenGreenPositionKnightBlueStart() { // OK ??
+    public void checkMoveKnightBlueOvertakingCitizenGreenPositionKnightBlueStart() { // OK
         citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
         knightBlue = new Knight(7, Color.BLUE, field12, Typ.KNIGHT, figureUI7);
         playingField.move(knightBlue,2);
@@ -621,15 +612,12 @@ public class PlayFieldTest_Move {
         Assert.assertNull(kingBlue.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveKingBlueOvertakingCitizenGreenPositionKingBlueStart() { // NOK??
+    @Test
+    public void checkMoveKingBlueOvertakingCitizenGreenPositionKingBlueStart() { // OK
         citizenGreen = new Citizen(10, Color.GREEN, field13, Typ.CITIZEN, figureUI10);
         kingBlue = new King(8, Color.BLUE, field12, Typ.KING, figureUI8);
-        playingField.move(kingBlue,2);
-        Assert.assertEquals(field14, kingBlue.getCurrentField());
+        Assert.assertNull(kingBlue.setNewPosition(2));
     }
-
-     */
 
 
     @Test
@@ -684,15 +672,12 @@ public class PlayFieldTest_Move {
         Assert.assertNull(kingRed.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveKingRedOvertakingKnightGreenPositionKingRedStart() { // NOK
+    @Test
+    public void checkMoveKingRedOvertakingKnightGreenPositionKingRedStart() { // OK
         knightGreen = new Knight(11, Color.GREEN, field13, Typ.KNIGHT, figureUI11);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
-        playingField.move(kingRed,2);
-        Assert.assertEquals(field14, kingRed.getCurrentField());
+        Assert.assertNull(kingRed.setNewPosition(2));
     }
-
-     */
 
 
     @Test
@@ -745,14 +730,10 @@ public class PlayFieldTest_Move {
         Assert.assertNull(kingBlue.setNewPosition(1));
     }
 
-    /*@Test
-    public void checkMoveKingBlueOvertakingKingGreenPositionKingBlueStart() { // NOK
+    @Test
+    public void checkMoveKingBlueOvertakingKingGreenPositionKingBlueStart() { // OK
         kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
         kingBlue = new King(8, Color.BLUE, field12, Typ.KING, figureUI8);
-        playingField.move(kingBlue,2);
-        Assert.assertEquals(field14, kingBlue.getCurrentField());
+        Assert.assertNull(kingBlue.setNewPosition(2));
     }
-
-     */
-
 }
