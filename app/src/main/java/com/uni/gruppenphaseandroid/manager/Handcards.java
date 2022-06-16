@@ -30,7 +30,13 @@ public class Handcards {
 
     public void discardHandcard(int index){
         Card toBeRemoved = myCards.remove(index);
-        GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
+        if(GameManager.getInstance().getLastTurn() == null){
+            LastTurn lastTurn = new LastTurn();
+            GameManager.getInstance().setLastTurn(lastTurn);
+        }
+            GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
+            GameManager.getInstance().nextTurn();
+            GameManager.getInstance().sendLastTurnServerMessage();
     }
 
     public void setMyCards(List<Card> myCards) {

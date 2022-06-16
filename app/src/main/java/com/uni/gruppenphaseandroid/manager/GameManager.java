@@ -81,9 +81,6 @@ public class GameManager {
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
 
-        /*if(!isThereAnyPossibleMove()){
-            nextTurn();
-        }*/
     }
 
     public void cardGotPlayed(Card card) {
@@ -137,7 +134,7 @@ public class GameManager {
         return true;
     }
 
-    private void sendLastTurnServerMessage(){
+    public void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
         selectedCard = null;
         communicationManager.sendUpdateBoardMessage(lastTurn);
@@ -292,8 +289,6 @@ public class GameManager {
         for (int i = 0; i < playerNames.size(); i++){
             this.playerNames[i] = playerNames.get(i);
         }
-
-
     }
 
     public String getPlayerNameWithIndex(int index){
