@@ -1,17 +1,5 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import static org.junit.Assert.assertEquals;
-
-import com.uni.gruppenphaseandroid.cards.Cardtype;
-import com.uni.gruppenphaseandroid.communication.dto.MessageType;
-import com.uni.gruppenphaseandroid.playingfield.Color;
-import com.uni.gruppenphaseandroid.playingfield.Field;
-import com.uni.gruppenphaseandroid.playingfield.Figure;
-import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
-import com.uni.gruppenphaseandroid.playingfield.Typ;
-
-import org.junit.Test;
-
 public class LastTurnTest {
 
     /*

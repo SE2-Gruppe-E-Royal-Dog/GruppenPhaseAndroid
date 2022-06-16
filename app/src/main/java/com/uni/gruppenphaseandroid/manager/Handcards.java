@@ -1,9 +1,6 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import android.util.Log;
-
 import com.uni.gruppenphaseandroid.cards.Card;
-import com.uni.gruppenphaseandroid.playingfield.Figure;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -3,7 +3,6 @@ package com.uni.gruppenphaseandroid.managertests;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.CardManager;
-import com.uni.gruppenphaseandroid.manager.Handcards;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
@@ -82,12 +81,12 @@ public class CardManagerTest {
 
     @After
     public void tearDown(){
-        Handcards.getInstance().setMyCards(new LinkedList<>());
+        cardManager.setMyHandCards(new LinkedList<>());
     }
 
     @Test
     public void testCheckIfThereIsAnyPossibleMoveForOneOrElevenAndEight(){
-        Handcards.getInstance().setMyCards(handCards1);
+        cardManager.setMyHandCards(handCards1);
         when(oneOrElevenCard.checkIfCardIsPlayable(figure1, 0, null)).thenReturn(false);
         when(oneOrElevenCard.checkIfCardIsPlayable(figure1, 1, null)).thenReturn(false);
         when(oneOrElevenCard.checkIfCardIsPlayable(figure1, 11, null)).thenReturn(false);
@@ -111,7 +110,7 @@ public class CardManagerTest {
 
     @Test
     public void testCheckIfThereIsAnyPossibleMoveForSwitchAndThirteen(){
-        Handcards.getInstance().setMyCards(handCards2);
+        cardManager.setMyHandCards(handCards2);
         when(thirteenCard.checkIfCardIsPlayable(figure1, 0, null)).thenReturn(false);
         when(thirteenCard.checkIfCardIsPlayable(figure1, 13, null)).thenReturn(false);
         when(switchCard.checkIfCardIsPlayable(figure1, -1, null)).thenReturn(false);
@@ -131,7 +130,7 @@ public class CardManagerTest {
 
     @Test
     public void testCheckIfThereIsAnyPossibleMoveForOneToSevenAndFour(){
-        Handcards.getInstance().setMyCards(handCards3);
+        cardManager.setMyHandCards(handCards3);
         for(int i = 1; i <= 7;i++){
             when(oneToSevenCard.checkIfCardIsPlayable(figure1, i, null)).thenReturn(false);
             when(oneToSevenCard.checkIfCardIsPlayable(figure2, i, null)).thenReturn(false);
@@ -155,7 +154,9 @@ public class CardManagerTest {
 
     @Test
     public void testCheckIfThereIsAnyPossibleMoveNoHand(){
-        Handcards.getInstance().setMyCards(new LinkedList<>());
+        cardManager.setMyHandCards(new LinkedList<>());
         Assert.assertFalse(cardManager.isThereAnyPossibleMove(2, new LastTurn()));
     }
+
+
 }

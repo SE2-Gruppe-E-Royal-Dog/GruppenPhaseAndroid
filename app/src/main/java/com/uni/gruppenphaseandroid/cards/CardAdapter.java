@@ -1,7 +1,6 @@
 package com.uni.gruppenphaseandroid.cards;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

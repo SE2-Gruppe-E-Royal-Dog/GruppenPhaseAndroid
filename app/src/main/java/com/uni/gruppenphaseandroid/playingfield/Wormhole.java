@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-
 import java.util.Random;
 
 public class Wormhole extends Field {

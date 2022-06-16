@@ -93,12 +93,10 @@ public class GameManager {
     public void figureGotSelected(Figure figure){
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
-
         }
         else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
             figureSelectedSwitchCase(figure);
         }
-
     }
 
     private void figureSelectedNormalCase(Figure figure){
@@ -136,7 +134,7 @@ public class GameManager {
         return true;
     }
 
-    public void sendLastTurnServerMessage(){
+    private void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
         selectedCard = null;
         communicationManager.sendUpdateBoardMessage(lastTurn);
@@ -291,6 +289,8 @@ public class GameManager {
         for (int i = 0; i < playerNames.size(); i++){
             this.playerNames[i] = playerNames.get(i);
         }
+
+
     }
 
     public String getPlayerNameWithIndex(int index){
@@ -355,6 +355,10 @@ public class GameManager {
 
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public CardManager getCardManager() {
+        return cardManager;
     }
 
     public FigureManager getFiguremanager (){

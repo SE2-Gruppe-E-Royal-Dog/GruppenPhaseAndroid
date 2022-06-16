@@ -1,7 +1,7 @@
 package com.uni.gruppenphaseandroid.cards;
 
 import com.uni.gruppenphaseandroid.R;
-import com.uni.gruppenphaseandroid.manager.Handcards;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class CardUI  {
 
     public void addCardToHand() {
         imageCardList = new LinkedList<>();
-        List<Card> cards = Handcards.getInstance().getMyCards();
+        List<Card> cards = GameManager.getInstance().getCardManager().getMyHandCards();
 
        for (Card c : cards){
            findImageView(c);

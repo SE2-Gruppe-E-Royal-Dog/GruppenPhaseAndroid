@@ -16,14 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.CardUI;
@@ -34,8 +31,6 @@ import com.uni.gruppenphaseandroid.communication.dto.Message;
 import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.StartGamePayload;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.manager.Handcards;
-import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
 public class InGameFragment extends Fragment implements SensorEventListener, CardViewFragment.OnInputListener, SpecialCardDialogFragment.OnCardInputListener {
@@ -208,9 +203,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
-            GameManager.getInstance().setSelectedCard(Handcards.getInstance().getMyCards().get(cardholder.getPostitionCardToDischarge()));
+            GameManager.getInstance().getCardManager().discardHandcard(cardholder.getPostitionCardToDischarge());
+            //todo GameManager.getInstance().setSelectedCard(Handcards.getInstance().getMyCards().get(cardholder.getPostitionCardToDischarge()));
             GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
-            Handcards.getInstance().discardHandcard(cardholder.getPostitionCardToDischarge());
+           //todo Handcards.getInstance().discardHandcard(cardholder.getPostitionCardToDischarge());
             Log.e("inGAme", "pls do smth");
         }
     }

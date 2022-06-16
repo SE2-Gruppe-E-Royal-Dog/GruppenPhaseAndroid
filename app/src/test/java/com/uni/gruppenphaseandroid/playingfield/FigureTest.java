@@ -1,9 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 public class FigureTest {
     /*
     @Test
