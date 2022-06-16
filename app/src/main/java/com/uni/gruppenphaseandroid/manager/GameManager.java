@@ -134,7 +134,7 @@ public class GameManager {
         return true;
     }
 
-    private void sendLastTurnServerMessage(){
+    public void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
         selectedCard = null;
         communicationManager.sendUpdateBoardMessage(lastTurn);
