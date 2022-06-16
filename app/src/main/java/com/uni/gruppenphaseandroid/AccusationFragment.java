@@ -16,7 +16,10 @@ import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class AccusationFragment extends DialogFragment {
-    Button playerOne, playerTwo, playerThree, leaveFragment;
+    Button playerOne;
+    Button playerTwo;
+    Button playerThree;
+    Button leaveFragment;
     TextView text;
     com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor, buttonTwoColor, buttonThreeColor;
 
