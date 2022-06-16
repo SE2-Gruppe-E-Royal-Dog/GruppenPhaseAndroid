@@ -81,9 +81,6 @@ public class GameManager {
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
 
-        /*if(!isThereAnyPossibleMove()){
-            nextTurn();
-        }*/
     }
 
     public void cardGotPlayed(Card card) {
@@ -94,6 +91,7 @@ public class GameManager {
     }
 
     public void figureGotSelected(Figure figure){
+        cardManager.discardHandcard(selectCardToDiscardIndex);
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
         }
@@ -137,7 +135,7 @@ public class GameManager {
         return true;
     }
 
-    private void sendLastTurnServerMessage(){
+    public void sendLastTurnServerMessage(){
         lastTurn.setCardtype(selectedCard.getCardtype());
         selectedCard = null;
         communicationManager.sendUpdateBoardMessage(lastTurn);
@@ -362,5 +360,9 @@ public class GameManager {
 
     public CardManager getCardManager() {
         return cardManager;
+    }
+
+    public FigureManager getFiguremanager (){
+        return this.figuremanager;
     }
 }

@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.util.Log;
+
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -140,8 +142,16 @@ public class CardManager {
     }
 
     public void discardHandcard(int index){
-        Card toBeRemoved = myHandCards.remove(index);
-        GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
+
+        Card toBeRemoved = myHandCards.get(index);
+        if(GameManager.getInstance().getLastTurn() == null){
+            Figure someFigure = GameManager.getInstance().getFiguremanager().getFigureWithID(1); //just get any figure to prevent nullpointer
+            LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
+            GameManager.getInstance().setLastTurn(lastTurn);
+        }
+        GameManager.getInstance().setSelectedCard(toBeRemoved);
+        GameManager.getInstance().sendLastTurnServerMessage();
+        myHandCards.remove(index);
     }
 
     public void setMyHandCards(List<Card> myHandCards) {

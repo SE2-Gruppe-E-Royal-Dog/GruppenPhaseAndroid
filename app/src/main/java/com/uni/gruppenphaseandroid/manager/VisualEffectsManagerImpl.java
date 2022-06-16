@@ -18,9 +18,11 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
     Context context;
     //other attributes...
 
-    public VisualEffectsManagerImpl(ImageView stackImage, Context context) {
+    public VisualEffectsManagerImpl(ImageView stackImage, Context context, ImageButton cardHolder, TextView cheaterNote) {
         this.stackImage = stackImage;
         this.context = context;
+        this.cardHolder = cardHolder;
+        this.cheaterNote = cheaterNote;
     }
 
         @Override

@@ -148,12 +148,12 @@ public class SpecialCardDialogFragment extends DialogFragment {
 
                      optionOne.setOnClickListener(view1 ->  {
                          GameManager.getInstance().setCurrentEffect(0);
-                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
                          getDialog().dismiss();
                      });
                      optionTwo.setOnClickListener(view1 ->  {
                          GameManager.getInstance().setCurrentEffect(1);
-                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
                          getDialog().dismiss();
                      });
                      break;
