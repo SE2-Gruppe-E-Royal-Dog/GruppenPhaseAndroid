@@ -208,10 +208,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
-            Handcards.getInstance().discardHandcard(cardholder.getPostitionCardToDischarge());
+            GameManager.getInstance().setSelectedCard(Handcards.getInstance().getMyCards().get(cardholder.getPostitionCardToDischarge()));
             GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
+            Handcards.getInstance().discardHandcard(cardholder.getPostitionCardToDischarge());
             Log.e("inGAme", "pls do smth");
-            GameManager.getInstance().nextTurn();
         }
     }
 

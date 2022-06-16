@@ -354,4 +354,8 @@ public class GameManager {
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
+
+    public FigureManager getFiguremanager (){
+        return this.figuremanager;
+    }
 }

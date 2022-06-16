@@ -91,7 +91,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
 
         //select card and return to board
-        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
+        btnPlayCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("card_input", "input:" + clickedCard);

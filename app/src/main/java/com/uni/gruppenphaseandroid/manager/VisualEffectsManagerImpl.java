@@ -57,7 +57,7 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
 
         @Override
         protected void setCardHolderUI () {
-        //todo readd them to constructor
+        //todo add them to constructor
             //cardHolder.setImageResource(R.drawable.ic_card_cardholder);
             //cheaterNote.setVisibility(View.INVISIBLE);
         }
