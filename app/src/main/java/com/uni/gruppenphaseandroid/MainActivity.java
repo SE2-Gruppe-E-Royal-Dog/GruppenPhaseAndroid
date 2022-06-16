@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
 
         private void handleWormholeMove(String body) {
             var updateWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
-            int[] wormholeIDs = {updateWormholePayload.getNewWormholeFieldPosition_1(), updateWormholePayload.getNewWormholeFieldPosition_2(), updateWormholePayload.getNewWormholeFieldPosition_3(), updateWormholePayload.getNewWormholeFieldPosition_4()};
+            int[] wormholeIDs = {updateWormholePayload.getNewWormholeFieldPosition1(), updateWormholePayload.getNewWormholeFieldPosition2(), updateWormholePayload.getNewWormholeFieldPosition3(), updateWormholePayload.getNewWormholeFieldPosition4()};
             GameManager.getInstance().moveWormholes(wormholeIDs);
         }
 
