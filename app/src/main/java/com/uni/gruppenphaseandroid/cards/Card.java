@@ -1,11 +1,8 @@
 package com.uni.gruppenphaseandroid.cards;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.manager.LastTurn;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
-import com.uni.gruppenphaseandroid.playingfield.GoalField;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
-import com.uni.gruppenphaseandroid.playingfield.StartingAreaField;
 
 public class Card {
     private Cardtype cardtype;

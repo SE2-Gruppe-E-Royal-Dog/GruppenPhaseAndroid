@@ -1,18 +1,12 @@
 package com.uni.gruppenphaseandroid;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
-import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -6,14 +6,12 @@ import static org.mockito.Mockito.verify;
 
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
-import com.uni.gruppenphaseandroid.playingfield.FieldUI;
 import com.uni.gruppenphaseandroid.playingfield.FieldUIimpl;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 public class FieldTest {
 

@@ -1,14 +1,8 @@
 package com.uni.gruppenphaseandroid;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,7 +16,10 @@ import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 public class AccusationFragment extends DialogFragment {
-    Button playerOne, playerTwo, playerThree, leaveFragment;
+    Button playerOne;
+    Button playerTwo;
+    Button playerThree;
+    Button leaveFragment;
     TextView text;
     com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor, buttonTwoColor, buttonThreeColor;
 

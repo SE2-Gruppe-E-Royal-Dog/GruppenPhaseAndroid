@@ -3,10 +3,6 @@ package com.uni.gruppenphaseandroid.manager;
 import com.uni.gruppenphaseandroid.playingfield.GoalField;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
 public class PlayerRanking {
 
     private String[] names;
