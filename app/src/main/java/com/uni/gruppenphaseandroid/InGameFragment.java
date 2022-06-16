@@ -206,6 +206,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             GameManager.getInstance().setSelectedCard(GameManager.getInstance().getCardManager().getMyHandCards().get(cardholder.getPostitionCardToDischarge()));
             GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
             GameManager.getInstance().getCardManager().discardHandcard(cardholder.getPostitionCardToDischarge());
+            GameManager.getInstance().sendLastTurnServerMessage();
+
 
         }
     }

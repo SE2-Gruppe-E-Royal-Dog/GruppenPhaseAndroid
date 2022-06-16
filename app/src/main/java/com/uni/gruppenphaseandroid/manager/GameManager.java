@@ -91,7 +91,6 @@ public class GameManager {
     }
 
     public void figureGotSelected(Figure figure){
-        cardManager.discardHandcard(selectCardToDiscardIndex);
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
         }
@@ -111,6 +110,8 @@ public class GameManager {
         }
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(figure, currentEffect, null);
+        cardManager.discardHandcard(selectCardToDiscardIndex);
+
         //send message to server
         sendLastTurnServerMessage();
     }
@@ -122,6 +123,7 @@ public class GameManager {
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(currentlySelectedFigure, -1, figure);
         currentlySelectedFigure = null;
+        cardManager.discardHandcard(selectCardToDiscardIndex);
         //send message to server
         sendLastTurnServerMessage();
     }

@@ -51,6 +51,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
         View view = inflater.inflate(R.layout.fragment_card_view, container, false);
         btnPlayCard = view.findViewById(R.id.btn_playCard);
+        btnPlayCard.setVisibility(View.INVISIBLE);
         //set card default
         clickedCard = "-1";
 
@@ -94,16 +95,19 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 //capture input
                 if (!clickedCard.equals("")) {
                     if(!GameManager.getInstance().isThereAnyPossibleMove()){
-                        textView.setText("Select one card to discharge:");
-                        cardInputListener.sendInputCardFragment("-1", cheaterNote);
-                        getDialog().dismiss();
+                        if(!GameManager.getInstance().isThereAnyPossibleMove()){
+                            textView.setText("Select one card to discharge:");
+                            textView.setVisibility(View.VISIBLE);
+                            cardInputListener.sendInputCardFragment("-1", cheaterNote);
+                            getDialog().dismiss();
                     }else {
                         cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
                         getDialog().dismiss();
                     }
                 }
             }
-        });
+        }});
+
         return view;
     }
 

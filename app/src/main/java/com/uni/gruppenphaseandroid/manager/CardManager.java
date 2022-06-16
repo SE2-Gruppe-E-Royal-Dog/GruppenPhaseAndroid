@@ -150,7 +150,6 @@ public class CardManager {
             GameManager.getInstance().setLastTurn(lastTurn);
         }
         GameManager.getInstance().setSelectedCard(toBeRemoved);
-        GameManager.getInstance().sendLastTurnServerMessage();
         myHandCards.remove(index);
     }
 
