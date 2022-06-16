@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid.playingfieldtests;
+package com.uni.gruppenphaseandroid.playingfieldtests; // fertig
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;

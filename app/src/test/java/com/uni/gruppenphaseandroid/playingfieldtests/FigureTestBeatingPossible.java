@@ -3,6 +3,7 @@ package com.uni.gruppenphaseandroid.playingfieldtests;
 
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
+import com.uni.gruppenphaseandroid.playingfield.GoalField;
 import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.King;
 import com.uni.gruppenphaseandroid.playingfield.Knight;
@@ -246,11 +247,11 @@ public class FigureTestBeatingPossible extends FigureTest {
     public void checkColorStartingField() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         Assert.assertTrue(field13 instanceof StartingField);
-        //Assert.assertSame(((StartingField) field13).getColor(), Jerk.getColor);
+        Assert.assertSame(((StartingField) field13).getColor(), jerkGreen.getColor());
     }
 
     @Test
-    public void checkBeatenGreenJerkByRedKingOnGreenStartingField() { // OK!!
+    public void checkBeatenGreenJerkByRedKingOnGreenStartingField() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field13, Typ.JERK, figureUI9);
         kingRed = new King(4, Color.RED, field12, Typ.KING, figureUI4);
         Assert.assertFalse(kingRed.checkBeaten());
@@ -383,7 +384,7 @@ public class FigureTestBeatingPossible extends FigureTest {
     }
 
     /**
-     * König kann auf fremdem Startfeld von der Figur dieser Farbe geschmissen werden.
+     * König kann auf fremdem Startfeld von der Figur dieser fremden Farbe geschmissen werden.
      * Gleiche Farbe kann Figur der gleichen Farbe auf eigenem Startfeld nicht schmeißen.
      */
     @Test
@@ -426,7 +427,23 @@ public class FigureTestBeatingPossible extends FigureTest {
     /**
      * Rausschmeißen im Ziel nicht möglich.
      */
-    // TODO: Test Noch offen
+    @Test
+    public void checkBeatingGreenJerkByGreenCitizenInGoalFalse() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
+        playingField.move(jerkGreen, 3);
+        citizenGreen = new Citizen(10, Color.GREEN, field11, Typ.CITIZEN, figureUI10);
+        playingField.move(citizenGreen, 3);
+        Assert.assertFalse(citizenGreen.checkBeaten());
+    }
+
+    @Test
+    public void checkBeatingGreenKingByGreenKnightInGoalFalse() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 4);
+        knightGreen = new Knight(11, Color.GREEN, field11, Typ.KNIGHT, figureUI11);
+        playingField.move(knightGreen, 4);
+        Assert.assertFalse(knightGreen.checkBeaten());
+    }
 
 
 
