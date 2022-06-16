@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.uni.gruppenphaseandroid.manager.PlayerRanking;
 
-import java.util.LinkedList;
-
 public class LeaderboardFragment extends Fragment {
 
     private TextView first_playerName;

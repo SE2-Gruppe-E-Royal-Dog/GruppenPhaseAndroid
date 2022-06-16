@@ -1,24 +1,12 @@
 package com.uni.gruppenphaseandroid;
 
-import android.app.Activity;
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.uni.gruppenphaseandroid.cards.CardAdapter;
-import com.uni.gruppenphaseandroid.manager.GameManager;
-
-import java.util.Objects;
 
 public class HowToPlayFragment extends DialogFragment {
 

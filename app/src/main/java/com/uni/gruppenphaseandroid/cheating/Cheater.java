@@ -1,8 +1,5 @@
 package com.uni.gruppenphaseandroid.cheating;
 
-
-import android.util.Log;
-
 import androidx.fragment.app.Fragment;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;

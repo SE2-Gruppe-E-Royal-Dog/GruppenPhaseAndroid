@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import android.text.style.CharacterStyle;
 import android.view.View;
 
 import com.uni.gruppenphaseandroid.cards.Card;
