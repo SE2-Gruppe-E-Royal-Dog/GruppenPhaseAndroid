@@ -94,8 +94,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 Log.d("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
-                    if(!GameManager.getInstance().isThereAnyPossibleMove()){
-                        if(!GameManager.getInstance().isThereAnyPossibleMove()){
+                     if(!GameManager.getInstance().isThereAnyPossibleMove()){
                             textView.setText("Select one card to discharge:");
                             textView.setVisibility(View.VISIBLE);
                             cardInputListener.sendInputCardFragment("-1", cheaterNote);
@@ -104,7 +103,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                         cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
                         getDialog().dismiss();
                     }
-                }
             }
         }});
 

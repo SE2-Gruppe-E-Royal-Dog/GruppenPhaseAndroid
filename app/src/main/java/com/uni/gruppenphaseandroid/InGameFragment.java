@@ -65,9 +65,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         GameManager.getInstance().setWebSocketClient(((MainActivity) getContext()).getWebsocketClient());
 
         btnCardholder = playingField.getView().findViewById(R.id.btn_cardholderButton);
-        stack = playingField.getView().findViewById(R.id.stack);
 
-        stack.setImageResource(R.drawable.ic_card_ablagestapel);
 
 
         view.findViewById(R.id.start_game_button).setOnClickListener(view12 -> {
@@ -215,7 +213,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
             if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
                 Log.d("check card", "choosen card is a special card, open new dialog window");
-                //btnSpecialCards.setVisibility(View.VISIBLE);
                 new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
 
             } else {

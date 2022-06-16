@@ -108,6 +108,7 @@ public class GameManager {
         else if(!doCheckAndShowFeedback(figure, null)){
             return;
         }
+        visualEffectsManager.setStackImageAfterMyMove(cardManager.getMyHandCards().get(selectCardToDiscardIndex));
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(figure, currentEffect, null);
         cardManager.discardHandcard(selectCardToDiscardIndex);
@@ -120,6 +121,7 @@ public class GameManager {
         if(!doCheckAndShowFeedback(currentlySelectedFigure, figure)){
             return;
         }
+        visualEffectsManager.setStackImageAfterMyMove(cardManager.getMyHandCards().get(selectCardToDiscardIndex));
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(currentlySelectedFigure, -1, figure);
         currentlySelectedFigure = null;
@@ -366,5 +368,9 @@ public class GameManager {
 
     public FigureManager getFiguremanager (){
         return this.figuremanager;
+    }
+
+    public VisualEffectsManager getVisualEffectsManager() {
+        return visualEffectsManager;
     }
 }
