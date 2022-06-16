@@ -40,11 +40,11 @@ public class Handcards {
             LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
             GameManager.getInstance().setLastTurn(lastTurn);
         }
-            //GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
-            //GameManager.getInstance().nextTurn();
-            GameManager.getInstance().setSelectedCard(toBeRemoved);
-            GameManager.getInstance().sendLastTurnServerMessage();
-            myCards.remove(index);
+        //GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
+        //GameManager.getInstance().nextTurn();
+        GameManager.getInstance().setSelectedCard(toBeRemoved);
+        GameManager.getInstance().sendLastTurnServerMessage();
+        myCards.remove(index);
     }
 
     public void setMyCards(List<Card> myCards) {
