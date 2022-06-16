@@ -18,10 +18,11 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
     Context context;
     //other attributes...
 
-    public VisualEffectsManagerImpl(ImageView stackImage, Context context, ImageButton cardHolder) {
+    public VisualEffectsManagerImpl(ImageView stackImage, Context context, ImageButton cardHolder, TextView cheaterNote) {
         this.stackImage = stackImage;
         this.context = context;
         this.cardHolder = cardHolder;
+        this.cheaterNote = cheaterNote;
     }
 
         @Override
@@ -58,8 +59,8 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
         @Override
         protected void setCardHolderUI () {
         //todo add them to constructor
-            //cardHolder.setImageResource(R.drawable.ic_card_cardholder);
-            //cheaterNote.setVisibility(View.INVISIBLE);
+            cardHolder.setImageResource(R.drawable.ic_card_cardholder);
+            cheaterNote.setVisibility(View.INVISIBLE);
         }
 
         @Override

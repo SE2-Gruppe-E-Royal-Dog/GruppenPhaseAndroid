@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             FigureManager figureManager = new FigureManager();
             cardManager.setFigureManager(figureManager);
             CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext(), findViewById(R.id.btn_cardholderButton)), cardManager, communicationManager);
+            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext(), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)), cardManager, communicationManager);
 
             findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
             findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);

@@ -91,6 +91,7 @@ public class GameManager {
     }
 
     public void figureGotSelected(Figure figure){
+        cardManager.discardHandcard(selectCardToDiscardIndex);
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
         }
