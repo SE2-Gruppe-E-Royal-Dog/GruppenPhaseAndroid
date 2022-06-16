@@ -83,4 +83,5 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         void onItemClick(int card, int position);
     }
 
+
 }

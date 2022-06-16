@@ -39,7 +39,6 @@ public class Handcards {
             Figure someFigure = GameManager.getInstance().getFiguremanager().getFigureWithID(1); //just get any figure to prevent nullpointer
             LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
             GameManager.getInstance().setLastTurn(lastTurn);
-            Log.e("handcards", "yo there?");
         }
             //GameManager.getInstance().getLastTurn().setCardtype(toBeRemoved.getCardtype());
             //GameManager.getInstance().nextTurn();

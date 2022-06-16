@@ -93,10 +93,12 @@ public class GameManager {
     public void figureGotSelected(Figure figure){
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
+
         }
         else if(currentTurnPhase == TurnPhase.CHOOSESECONDFIGURE && isItMyTurn()){
             figureSelectedSwitchCase(figure);
         }
+
     }
 
     private void figureSelectedNormalCase(Figure figure){

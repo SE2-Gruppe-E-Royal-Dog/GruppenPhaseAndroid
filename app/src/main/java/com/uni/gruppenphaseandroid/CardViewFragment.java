@@ -60,7 +60,6 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         textView = view.findViewById(R.id.tv_cheater);
         textView.setVisibility(View.INVISIBLE);
 
-
         //set up for recyclerview
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
