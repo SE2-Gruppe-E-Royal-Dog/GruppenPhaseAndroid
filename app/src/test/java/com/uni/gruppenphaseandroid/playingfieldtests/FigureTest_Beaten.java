@@ -26,7 +26,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FigureTestBeaten {
+public class FigureTest_Beaten {
     PlayingField playingField;
     View view;
     Jerk jerkRed; // Red

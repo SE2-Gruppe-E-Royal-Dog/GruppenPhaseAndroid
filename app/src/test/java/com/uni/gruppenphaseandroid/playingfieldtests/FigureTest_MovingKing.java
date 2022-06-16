@@ -23,7 +23,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FigureTestMovingKing {
+public class FigureTest_MovingKing {
     PlayingField playingField;
     View view;
     King kingRed;
