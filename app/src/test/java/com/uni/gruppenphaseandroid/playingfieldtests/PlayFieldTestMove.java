@@ -725,7 +725,7 @@ public class PlayFieldTestMove extends FigureTest {
     }
 
     @Test
-    public void checkMoveGreenKingIntoGoalFieldsViaStartingFieldFalse() { // TODO: OK - soltle so sein?
+    public void checkMoveGreenKingIntoGoalFieldsViaStartingFieldFalse() { // OK
         kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
         playingField.move(kingGreen, 1);
         Assert.assertTrue(kingGreen.getCurrentField() instanceof StartingField);

@@ -95,6 +95,7 @@ public class Figure {
      * if its current position is the own starting field or own goal area.
      * Exception: Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
+     * Moving into Goal Area starting/pausing from/on the Starting Field isnot possible!
      * this figure - figure who moves
      * @param fieldsToMove - number of fields to move
      * @return true if moving is possible

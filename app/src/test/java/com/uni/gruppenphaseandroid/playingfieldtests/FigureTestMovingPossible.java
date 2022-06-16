@@ -1,5 +1,4 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
-// TODO: Optionen für Startfeld und Zielfelder testen => grüne Figuren
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -12,13 +11,13 @@ import com.uni.gruppenphaseandroid.playingfield.Knight;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FigureTestMovingPossible extends FigureTest {
 
-    @Before
-    public void setUp(){ // TODO: NOK
+    @Override
+    public void setUp(){
+        super.setUp();
         Card greencard = new Card(Cardtype.ONEORELEVEN_START);
         GameManager.getInstance().setSelectedCard(greencard);
     }
@@ -449,17 +448,71 @@ public class FigureTestMovingPossible extends FigureTest {
         Assert.assertTrue(kingBlue.checkMoving(1));
     }
 
+    /**
+     * Test Moving auf Startfeld
+     */
+
     @Test
-    public void checkMovingGreenKingByBlueKing13() { // NOK
+    public void checkMovingGreenKingOvertakenByBlueKingStartingFieldFalse() { // OK
         kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
         kingBlue = new King(8, Color.BLUE, field12, Typ.KING, figureUI8);
         Assert.assertFalse(kingBlue.checkMoving(2));
     }
 
     @Test
-    public void checkMovingGreenKingByBlueKing14() { // NOK
+    public void checkMovingGreenKingBeatenByBlueKingOnStartingFieldFalse() { // OK
+        kingGreen = new King(12, Color.GREEN, field13, Typ.KING, figureUI12);
+        kingBlue = new King(8, Color.BLUE, field12, Typ.KING, figureUI8);
+        Assert.assertFalse(kingBlue.checkMoving(1));
+    }
+
+
+    @Test
+    public void checkMovingGreenKingOvertakenByBlueKingOnNormalFieldTrue() { // OK
         kingGreen = new King(12, Color.GREEN, field14, Typ.KING, figureUI12);
         kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
         Assert.assertTrue(kingBlue.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingGreenKingBeatenByBlueKingOnNormalFieldTrue() { // OK
+        kingGreen = new King(12, Color.GREEN, field14, Typ.KING, figureUI12);
+        kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
+        Assert.assertTrue(kingBlue.checkMoving(1));
+    }
+
+    /**
+     * Test Moving auf Zielfeld
+     */
+    @Test
+    public void checkMovingGreenKingBeatenByGreenKnightOnGoalFieldFalse() {
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 2);
+        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        Assert.assertFalse(knightGreen.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingGreenKingOvertakenByGreenKnightOnGoalFieldFalse() {
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 2);
+        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        Assert.assertFalse(knightGreen.checkMoving(3));
+    }
+
+    @Test
+    public void checkMovingGreenKnightBeatenByGreenKingOnGoalFieldFalse() {
+        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        playingField.move(knightGreen, 2);
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        Assert.assertFalse(kingGreen.checkMoving(2));
+    }
+
+    @Test
+    public void checkMovingGreenKnightOvertakenByGreenKingOnGoalFieldTrue() {
+        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        playingField.move(knightGreen, 2);
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        Assert.assertFalse(kingGreen.checkMoving(3));
     }
 }

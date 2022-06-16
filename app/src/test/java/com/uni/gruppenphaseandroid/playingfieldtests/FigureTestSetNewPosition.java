@@ -13,13 +13,13 @@ import com.uni.gruppenphaseandroid.playingfield.Knight;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FigureTestSetNewPosition extends FigureTest {
 
-    @Before
-    public void setUp(){ // TODO: NOK
+    @Override
+    public void setUp(){
+        super.setUp();
         Card greencard = new Card(Cardtype.ONEORELEVEN_START);
         GameManager.getInstance().setSelectedCard(greencard);
     }

@@ -3,7 +3,6 @@ package com.uni.gruppenphaseandroid.playingfieldtests;
 
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
-import com.uni.gruppenphaseandroid.playingfield.GoalField;
 import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.King;
 import com.uni.gruppenphaseandroid.playingfield.Knight;
