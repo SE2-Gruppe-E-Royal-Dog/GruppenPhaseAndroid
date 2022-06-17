@@ -46,36 +46,22 @@ public class AccusationFragment extends DialogFragment {
         }
 
 
-        leaveFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
+        leaveFragment.setOnClickListener(view1 -> getDialog().dismiss());
+
+        playerOne.setOnClickListener(view12 -> {
+
+            getDialog().dismiss();
+            Cheater.makeAccusation(buttonOneColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
         });
 
-        playerOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                getDialog().dismiss();
-                Cheater.makeAccusation(buttonOneColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
-            }
+        playerTwo.setOnClickListener(view13 -> {
+            getDialog().dismiss();
+            Cheater.makeAccusation(buttonTwoColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
         });
 
-        playerTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-                Cheater.makeAccusation(buttonTwoColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
-            }
-        });
-
-        playerThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-                Cheater.makeAccusation(buttonThreeColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
-            }
+        playerThree.setOnClickListener(view14 -> {
+            getDialog().dismiss();
+            Cheater.makeAccusation(buttonThreeColor.ordinal(), GameManager.getInstance().getRoundIndex(), GameManager.getInstance().getNumberOfPlayers());
         });
 
 
