@@ -11,7 +11,6 @@ public class Cheater extends Fragment {
 
     private int roundIndex;
     private int playerID;                    //for now - String evtl in int ändern
-    private boolean cheatingAllowed;
     private static List<Cheater> cheaters = new ArrayList<>();
 
     public Cheater(int playerID, int roundIndex) {
@@ -23,8 +22,9 @@ public class Cheater extends Fragment {
     /**
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
-    public boolean cheatingAllowed(String playerID) {
-        this.cheatingAllowed = !GameManager.getInstance().getHasCheated();
+    public boolean cheatingAllowed(String playerId) {
+        boolean cheatingAllowed = true;
+        cheatingAllowed = !GameManager.getInstance().getHasCheated();
         return cheatingAllowed;
         }
 
@@ -60,19 +60,15 @@ public class Cheater extends Fragment {
 
 
     public static void makeAccusation(int playerID, int currentRoundIndex, int numberOfPlayer) {
-        for (int i=0; i<cheaters.size(); i++){
-            if (cheaters.get(i).playerID == playerID){
-                if (currentRoundIndex - (cheaters.get(i).getRoundIndex()) <= numberOfPlayer-1) {
-                    GameManager.getInstance().punishPlayer(playerID);
-                    return;
-                }
+        for (int i=0; i<cheaters.size(); i++)
+            if (cheaters.get(i).playerID == playerID && (currentRoundIndex - (cheaters.get(i).getRoundIndex()) <= numberOfPlayer - 1)) {
+                GameManager.getInstance().punishPlayer(playerID);
+                return;
             }
-        }
         GameManager.getInstance().punishPlayer(GameManager.getInstance().getCurrentTurnPlayerNumber());
     }
 
 
-    //getter setter
     public int getRoundIndex() {
         return roundIndex;
     }
