@@ -43,15 +43,16 @@ public class Wormhole extends Field {
 
     public void setPartnerWormhole(Wormhole partnerWormhole) {
         this.partnerWormhole = partnerWormhole;
+        partnerWormhole.partnerWormhole = this;
     }
 
-    public Wormhole(FieldUI fieldUIobject, Field nextField, Field previousField, Figure currentFigure, int fieldID) {
-        super(fieldUIobject, nextField, previousField, currentFigure, fieldID);
+    public Wormhole(FieldUI fieldUIObject, Field nextField, Field previousField, Figure currentFigure, int fieldID) {
+        super(fieldUIObject, nextField, previousField, currentFigure, fieldID);
     }
 
     public void moveWormholeToRandomPosition() {
         int value = generateRandomNumber();
-        Field targetField = getNewFieldforWormholeSwitch(value);
+        Field targetField = getNewFieldForWormholeSwitch(value);
 
         switchField(targetField);
     }
@@ -63,7 +64,7 @@ public class Wormhole extends Field {
         return random.nextInt(max - min) + min;
     }
 
-    public Field getNewFieldforWormholeSwitch(int value) {
+    public Field getNewFieldForWormholeSwitch(int value) {
         Field targetField = getFieldAtDistance(value, Color.BLACK);
 
         while (targetField instanceof StartingField || targetField instanceof GoalField || targetField instanceof  Wormhole || targetField.getCurrentFigure() != null) {
