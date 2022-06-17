@@ -4,7 +4,7 @@ public class Knight extends Figure {
 
     public Knight(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
-        typ = Typ.KNIGHT;
+        this.typ = Typ.KNIGHT;
     }
 
     public Knight() {
