@@ -39,8 +39,8 @@ public class FigureManagerTest {
     @Test
     public void createFigureSetOfColorTestID(){
         figureManager.createFigureObjects(Color.RED, playingField);
-        Assert.assertNotNull(figureManager.getFigureWithID(1)!=null);
-        Assert.assertNotNull(figureManager.getFigureWithID(4)!=null);
+        Assert.assertNotNull(figureManager.getFigureWithID(1)==null);
+        Assert.assertNotNull(figureManager.getFigureWithID(4)==null);
         try{
             Assert.assertNotNull(figureManager.getFigureWithID(5)==null);
         }catch (IllegalArgumentException e)         {
@@ -75,7 +75,7 @@ public class FigureManagerTest {
         figureManager.createFigureObjects(Color.RED, playingField);
         figureManager.createFigureObjects(Color.BLUE, playingField);
 
-        Assert.assertNotNull(figureManager.getFigureWithID(16)!= null);
+        Assert.assertNotNull(figureManager.getFigureWithID(16)== null);
     }
 
     @Test
