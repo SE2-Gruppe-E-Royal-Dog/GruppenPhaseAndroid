@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -17,7 +19,6 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class GameManager {
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;
-    private int selectCardToDiscardIndex;
+    private int selectCardIndex;
     private Figure currentlySelectedFigure;
     private int cheatModifier = 0;
     private boolean hasMovedWormholes = false;
@@ -91,7 +92,6 @@ public class GameManager {
     }
 
     public void figureGotSelected(Figure figure){
-        cardManager.discardHandcard(selectCardToDiscardIndex);
         if (currentTurnPhase == TurnPhase.CHOOSEFIGURE && isItMyTurn() && figure.getColor() == Color.values()[myTurnNumber]) {
             figureSelectedNormalCase(figure);
         }
@@ -111,6 +111,8 @@ public class GameManager {
         }
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(figure, currentEffect, null);
+        cardManager.discardHandcard(selectCardIndex);
+
         //send message to server
         sendLastTurnServerMessage();
     }
@@ -122,6 +124,7 @@ public class GameManager {
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(currentlySelectedFigure, -1, figure);
         currentlySelectedFigure = null;
+        cardManager.discardHandcard(selectCardIndex);
         //send message to server
         sendLastTurnServerMessage();
     }
@@ -327,12 +330,12 @@ public class GameManager {
             cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
         }
     }
-    public int getSelectCardToDiscardIndex() {
-        return selectCardToDiscardIndex;
+    public int getSelectCardIndex() {
+        return selectCardIndex;
     }
 
-    public void setSelectCardToDiscardIndex(int selectCardToDiscardIndex) {
-        this.selectCardToDiscardIndex = selectCardToDiscardIndex;
+    public void setSelectCardIndex(int selectCardIndex) {
+        this.selectCardIndex = selectCardIndex;
     }
     public boolean isThereAnyPossibleMove() {
         return cardManager.isThereAnyPossibleMove(myTurnNumber, lastTurn);
@@ -364,5 +367,9 @@ public class GameManager {
 
     public FigureManager getFiguremanager (){
         return this.figuremanager;
+    }
+
+    public VisualEffectsManager getVisualEffectsManager() {
+        return visualEffectsManager;
     }
 }

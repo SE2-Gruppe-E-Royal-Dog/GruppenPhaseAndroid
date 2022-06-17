@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import com.uni.gruppenphaseandroid.cards.Card;
+
 public abstract class VisualEffectsManager {
 
     protected abstract void setStackImage();
@@ -17,4 +19,6 @@ public abstract class VisualEffectsManager {
     protected abstract void showNoPossibleMoveMessage();
 
     protected abstract void showNextTurnMessage(String turnPlayerName);
+
+    public abstract void setStackImageAfterMyMove (Card card);
 }

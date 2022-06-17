@@ -32,7 +32,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
-    private int postitionCardToDischarge;
+    private int clickedCardIndex;
     private String cheaterNote = "0";
 
 
@@ -51,6 +51,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
         View view = inflater.inflate(R.layout.fragment_card_view, container, false);
         btnPlayCard = view.findViewById(R.id.btn_playCard);
+        btnPlayCard.setVisibility(View.INVISIBLE);
         //set card default
         clickedCard = "-1";
 
@@ -69,10 +70,11 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 if(GameManager.getInstance().isItMyTurn()) {
                     btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
-                    postitionCardToDischarge = position;
+                    clickedCardIndex = position;
                 }
             }
         });
+
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
                 .findFirstCompletelyVisibleItemPosition());
@@ -93,17 +95,18 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 Log.d("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
-                    if(!GameManager.getInstance().isThereAnyPossibleMove()){
-                        textView.setText("Select one card to discharge:");
-                        cardInputListener.sendInputCardFragment("-1", cheaterNote);
-                        getDialog().dismiss();
+                     if(!GameManager.getInstance().isThereAnyPossibleMove()){
+                            textView.setText("Select one card to discharge:");
+                            textView.setVisibility(View.VISIBLE);
+                            cardInputListener.sendInputCardFragment("-1", cheaterNote);
+                            getDialog().dismiss();
                     }else {
                         cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
                         getDialog().dismiss();
                     }
-                }
             }
-        });
+        }});
+
         return view;
     }
 
@@ -197,7 +200,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardViewFragment.playerId = playerId;
     }
 
-    public int getPostitionCardToDischarge() {
-        return postitionCardToDischarge;
+    public int getClickedCardIndex() {
+        return clickedCardIndex;
     }
 }

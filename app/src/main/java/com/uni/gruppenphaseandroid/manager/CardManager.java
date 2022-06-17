@@ -20,7 +20,6 @@ public class CardManager {
     }
 
     public boolean isThereAnyPossibleMove(int turnPlayerID, LastTurn lastTurn){
-        //Log.e("card", Handcards.getInstance().getMyCards().toString());
         boolean flag = false;
         for(Card card : myHandCards){
             for(Figure figure : figureManager.getFiguresOfColour(Color.values()[turnPlayerID])){
@@ -110,7 +109,7 @@ public class CardManager {
         this.figureManager = figureManager;
     }
 
-    public void turnPlayerDiscardsCard(){
+    public void turnPlayerDiscardsCard(){       //TODO still needed??
         /*
         TODO: Select Card to Discard
         index = cardIndexInHandcards
@@ -119,7 +118,7 @@ public class CardManager {
          */
     }
 
-    boolean discardCardIfNecessary(int turnPlayerID, LastTurn lastTurn){
+    boolean discardCardIfNecessary(int turnPlayerID, LastTurn lastTurn){        //TODO needed?
         if(!isThereAnyPossibleMove(turnPlayerID, lastTurn)){
             turnPlayerDiscardsCard();
             //int index = selectCardToDiscard();
@@ -143,14 +142,15 @@ public class CardManager {
 
     public void discardHandcard(int index){
 
+        GameManager.getInstance().getVisualEffectsManager().setInitialStackImage();
         Card toBeRemoved = myHandCards.get(index);
+        GameManager.getInstance().getVisualEffectsManager().setStackImageAfterMyMove(toBeRemoved);
         if(GameManager.getInstance().getLastTurn() == null){
             Figure someFigure = GameManager.getInstance().getFiguremanager().getFigureWithID(1); //just get any figure to prevent nullpointer
             LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
             GameManager.getInstance().setLastTurn(lastTurn);
         }
-        GameManager.getInstance().setSelectedCard(toBeRemoved);
-        GameManager.getInstance().sendLastTurnServerMessage();
+        //GameManager.getInstance().setSelectedCard(toBeRemoved);
         myHandCards.remove(index);
     }
 

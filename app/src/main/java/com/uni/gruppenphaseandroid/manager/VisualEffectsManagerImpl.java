@@ -1,6 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.CardUI;
 
 public class VisualEffectsManagerImpl extends VisualEffectsManager {
@@ -32,13 +34,18 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
 
         @Override
         protected void setStackImage () {
-            LastTurn lastTurn = GameManager.getInstance().getLastTurn();
-            if (lastTurn.getCardtype() == null) {
-                throw new IllegalArgumentException("No Cardtype has been set");
-            }
+                LastTurn lastTurn = GameManager.getInstance().getLastTurn();
+                if (lastTurn.getCardtype() == null) {
+                    throw new IllegalArgumentException("No Cardtype has been set");
+                }
 
-            int imageId = CardUI.getInstance().cardtypeToId(lastTurn.getCardtype());
-            stackImage.setImageResource(imageId);
+                int imageId = CardUI.getInstance().cardtypeToId(lastTurn.getCardtype());
+                stackImage.setImageResource(imageId);
+
+        }
+
+        public void setStackImageAfterMyMove (Card card){
+            stackImage.setImageResource(CardUI.getInstance().findImageView(card));
         }
 
         @Override
@@ -58,7 +65,7 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
 
         @Override
         protected void setCardHolderUI () {
-            cardHolder.setImageResource(R.drawable.ic_card_cardholder);
+                        cardHolder.setImageResource(R.drawable.ic_card_cardholder);
             cheaterNote.setVisibility(View.INVISIBLE);
         }
 
