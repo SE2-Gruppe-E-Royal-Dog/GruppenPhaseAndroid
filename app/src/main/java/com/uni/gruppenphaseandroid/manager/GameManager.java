@@ -109,9 +109,6 @@ public class GameManager {
         else if(!doCheckAndShowFeedback(figure, null)){
             return;
         }
-        //visualEffectsManager.setStackImageAfterMyMove(selectedCard);
-        Log.e("GM selected cart", selectedCard.getCardtype().toString());     //TODO REMOVE
-        Log.e("GM  card discharge indx", Integer.toString(selectCardIndex));
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(figure, currentEffect, null);
         cardManager.discardHandcard(selectCardIndex);
@@ -124,7 +121,6 @@ public class GameManager {
         if(!doCheckAndShowFeedback(currentlySelectedFigure, figure)){
             return;
         }
-        //visualEffectsManager.setStackImageAfterMyMove(cardManager.getMyHandCards().get(selectCardToDischargeIndex));
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(currentlySelectedFigure, -1, figure);
         currentlySelectedFigure = null;

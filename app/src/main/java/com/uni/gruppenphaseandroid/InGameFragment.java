@@ -200,7 +200,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             selectedCardtype = CardUI.getInstance().idToCardType(imageID);
             GameManager.getInstance().setSelectedCard(new Card(CardUI.getInstance().idToCardType(imageID)));
             GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
-            Log.e("IG_CHECK", CardUI.getInstance().idToCardType(imageID).toString());         //TODO REMOVE
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
