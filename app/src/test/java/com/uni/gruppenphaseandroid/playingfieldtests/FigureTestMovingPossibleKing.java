@@ -1,62 +1,16 @@
-package com.uni.gruppenphaseandroid.playingfieldtests;
-// TODO: Optionen für Startfeld und andere Figuren testen
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import android.view.View;
-import android.widget.ImageView;
+package com.uni.gruppenphaseandroid.playingfieldtests; //fertig
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Color;
-import com.uni.gruppenphaseandroid.playingfield.Field;
-import com.uni.gruppenphaseandroid.playingfield.FigureUI;
-import com.uni.gruppenphaseandroid.playingfield.FigureUIimpl;
 import com.uni.gruppenphaseandroid.playingfield.King;
-import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 import com.uni.gruppenphaseandroid.playingfield.Typ;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-public class FigureTest_MovingKing {
-    PlayingField playingField;
-    View view;
-    King kingRed;
-    FigureUI figureUI4;
-    King kingBlue;
-    FigureUI figureUI8;
-    ImageView imageView;
-    Field field1;
-    Field field2;
-    Field field3;
-
-    @Before
-    public void setUp() {
-        view = mock(View.class);
-        imageView = mock(ImageView.class);
-        when(view.findViewWithTag(anyString())).thenReturn(imageView);
-
-        playingField = new PlayingField(view);
-        GameManager.getInstance().setPlayingField(playingField);
-        field1 = playingField.getRootField();
-        field2 = field1.getNextField();
-        field3 = field2.getNextField();
-
-        figureUI4 = mock(FigureUIimpl.class);
-        figureUI8 = mock(FigureUIimpl.class);
-    }
-
-    @After
-    public void tearDown() {
-        view = null;
-        playingField = null;
-        imageView = null;
-    }
+public class FigureTestMovingPossibleKing extends FigureTest {
 
     /**
      * Test für King - Overtaking, Beaten, Move possible

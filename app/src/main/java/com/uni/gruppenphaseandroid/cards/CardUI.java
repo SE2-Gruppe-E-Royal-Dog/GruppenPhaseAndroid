@@ -31,59 +31,46 @@ public class CardUI  {
         List<Card> cards = GameManager.getInstance().getCardManager().getMyHandCards();
 
        for (Card c : cards){
-           findImageView(c);
+           imageCardList.add(findImageView(c));
         }
     }
 
-    private void findImageView (Card card) {
+    public int findImageView (Card card) {
 
             switch (card.getCardtype()) {
                 case TWO:
-                    imageCardList.add(R.drawable.ic_card_2);
-                    break;
+                    return R.drawable.ic_card_2;
                 case THREE:
-                    imageCardList.add(R.drawable.ic_card_3);
-                    break;
+                    return R.drawable.ic_card_3;
                 case FIVE:
-                    imageCardList.add(R.drawable.ic_card_5);
-                    break;
+                    return R.drawable.ic_card_5;
                 case SIX:
-                    imageCardList.add(R.drawable.ic_card_6);
-                    break;
+                    return R.drawable.ic_card_6;
                 case EIGTH:
-                    imageCardList.add(R.drawable.ic_card_8);
-                    break;
+                    return R.drawable.ic_card_8;
                 case NINE:
-                    imageCardList.add(R.drawable.ic_card_9);
-                    break;
+                    return R.drawable.ic_card_9;
                 case TEN:
-                    imageCardList.add(R.drawable.ic_card_10);
-                    break;
+                    return R.drawable.ic_card_10;
                 case TWELVE:
-                    imageCardList.add(R.drawable.ic_card_12);
-                    break;
+                    return R.drawable.ic_card_12;
                 case EQUAL:
-                    imageCardList.add(R.drawable.ic_card_copy);
-                    break;
+                    return R.drawable.ic_card_copy;
                 case FOUR_PLUSMINUS:
-                    imageCardList.add(R.drawable.ic_card_4);
-                    break;
+                    return R.drawable.ic_card_4;
                 case ONETOSEVEN:
-                    imageCardList.add(R.drawable.ic_card_7);
-                    break;
+                    return R.drawable.ic_card_7;
                 case ONEORELEVEN_START:
-                    imageCardList.add(R.drawable.ic_card_11);
-                    break;
+                    return R.drawable.ic_card_11;
                 case THIRTEEN_START:
-                    imageCardList.add(R.drawable.ic_card_13);
-                    break;
+                    return R.drawable.ic_card_13;
                 case MAGNET:
-                    imageCardList.add(R.drawable.ic_card_magnet);
-                    break;
+                    return R.drawable.ic_card_magnet;
                 case SWITCH:
-                    imageCardList.add(R.drawable.ic_card_switch);
-                    break;
+                    return R.drawable.ic_card_switch;
+
             }
+            return 0;
     }
 
     public Cardtype idToCardType (int card) {

@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +18,12 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.uni.gruppenphaseandroid.cards.CardAdapter;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.EventListener;
 import java.util.Objects;
-
 
 public class CardViewFragment extends DialogFragment implements EventListener, SensorEventListener {
 
@@ -35,7 +32,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
-    private int postitionCardToDischarge;
+    private int clickedCardIndex;
     private String cheaterNote = "0";
 
 
@@ -54,12 +51,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
         View view = inflater.inflate(R.layout.fragment_card_view, container, false);
         btnPlayCard = view.findViewById(R.id.btn_playCard);
+        btnPlayCard.setVisibility(View.INVISIBLE);
         //set card default
         clickedCard = "-1";
 
         textView = view.findViewById(R.id.tv_cheater);
         textView.setVisibility(View.INVISIBLE);
-
 
         //set up for recyclerview
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviewCard);
@@ -73,11 +70,11 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 if(GameManager.getInstance().isItMyTurn()) {
                     btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
-                    postitionCardToDischarge = position;
-
+                    clickedCardIndex = position;
                 }
             }
         });
+
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
                 .findFirstCompletelyVisibleItemPosition());
@@ -92,23 +89,24 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
 
         //select card and return to board
-        view.findViewById(R.id.btn_playCard).setOnClickListener(new View.OnClickListener() {
+        btnPlayCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("card_input", "input:" + clickedCard);
                 //capture input
                 if (!clickedCard.equals("")) {
-                    if(GameManager.getInstance().isThereAnyPossibleMove()){
-                        textView.setText("Select one card to discharge:");
-                        cardInputListener.sendInputCardFragment("-1", cheaterNote);
-                        getDialog().dismiss();
+                     if(!GameManager.getInstance().isThereAnyPossibleMove()){
+                            textView.setText("Select one card to discharge:");
+                            textView.setVisibility(View.VISIBLE);
+                            cardInputListener.sendInputCardFragment("-1", cheaterNote);
+                            getDialog().dismiss();
                     }else {
                         cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
                         getDialog().dismiss();
                     }
-                }
             }
-        });
+        }});
+
         return view;
     }
 
@@ -202,7 +200,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardViewFragment.playerId = playerId;
     }
 
-    public int getPostitionCardToDischarge() {
-        return postitionCardToDischarge;
+    public int getClickedCardIndex() {
+        return clickedCardIndex;
     }
 }

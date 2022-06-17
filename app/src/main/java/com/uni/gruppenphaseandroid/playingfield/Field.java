@@ -23,6 +23,7 @@ public class Field {
     }
 
     protected void triggerSpecialFieldEffect() {
+        //default implementation ignored
     }
 
     public Field getFieldAtDistance(int distance, Color color) {

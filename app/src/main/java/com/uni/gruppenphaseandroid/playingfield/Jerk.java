@@ -1,13 +1,10 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import com.uni.gruppenphaseandroid.cards.Card;
-import com.uni.gruppenphaseandroid.manager.GameManager;
-
 public class Jerk extends Figure {
 
     public Jerk(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
         super(id, color, currentField, typ, figureUI);
-        typ = Typ.JERK;
+        this.typ = Typ.JERK;
     }
 
     public Jerk() {
@@ -61,23 +58,23 @@ public class Jerk extends Figure {
      */
     @Override
     public Field setNewPosition ( int fieldsToMove){
-        Card card = GameManager.getInstance().getSelectedCard();
-        Field newPositionFigure1 = super.setNewPosition(fieldsToMove);
+        if (checkMoving(fieldsToMove)) {
 
-        if (getCurrentField() instanceof StartingField && ((StartingField) getCurrentField()).getColor() == getColor()) {
-            ((StartingField) getCurrentField()).getNextGoalField();
-            if (fieldsToMove <= 6) {
-                switch (fieldsToMove) {
-                    case 6:
-                        newPositionFigure1 = getCurrentField().getFieldAtDistance(fieldsToMove - 2, getColor());
-                        break;
-                    case 5:
-                        newPositionFigure1 = getCurrentField().getFieldAtDistance(fieldsToMove - 1, getColor());
-                        break;
-                    default:
-                        newPositionFigure1 = getCurrentField().getFieldAtDistance(fieldsToMove, getColor());
-                }
+            Field positionMinus2 = getCurrentField().getFieldAtDistance(fieldsToMove - 2, getColor());
+            Field positionMinus1 = getCurrentField().getFieldAtDistance(fieldsToMove - 1, getColor());
+            Field positionNormal = getCurrentField().getFieldAtDistance(fieldsToMove, getColor());
+
+            if (positionNormal instanceof GoalField) {
+                return positionNormal;
+            } else if (positionMinus1 instanceof GoalField) {
+                return positionMinus1;
+            } else if (positionMinus2 instanceof GoalField) {
+                return positionMinus2;
+            } else {
+                return positionNormal;
             }
-        } return newPositionFigure1;
+        } else {
+            return null;
+        }
     }
 }

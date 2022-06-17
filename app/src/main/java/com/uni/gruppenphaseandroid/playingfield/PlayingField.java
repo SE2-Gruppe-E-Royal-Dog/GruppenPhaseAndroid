@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import android.text.style.CharacterStyle;
 import android.view.View;
 
 import com.uni.gruppenphaseandroid.cards.Card;
@@ -57,9 +56,7 @@ public class PlayingField {
         }
 
         wormholeList.get(0).setPartnerWormhole(wormholeList.get(1));
-        wormholeList.get(1).setPartnerWormhole(wormholeList.get(0));
         wormholeList.get(2).setPartnerWormhole(wormholeList.get(3));
-        wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
 
         //  moveAllWormholesRandomly(); just show effect
 
@@ -241,7 +238,7 @@ public class PlayingField {
 
         Figure figureToOvertake = newField.getCurrentFigure();
         if(figureToOvertake!=null){
-            overtake(figureToOvertake);
+            beat(figureToOvertake);
         }
 
         figure.getCurrentField().setCurrentFigure(null);
@@ -295,7 +292,7 @@ public class PlayingField {
 
             figure2 = newPositionFigure1.getCurrentFigure();
             if (figure2 != null) {
-                overtake(figure2);
+                beat(figure2);
             }
 
             figure1.getCurrentField().setCurrentFigure(null);
@@ -424,10 +421,12 @@ public class PlayingField {
         }
     }
 
-    public void overtake(Figure figureToOvertake){
-        figureToOvertake.getCurrentField().setCurrentFigure(null);
-        figureToOvertake.setCurrentField(getRightStartingAreaField(figureToOvertake.getColor()));
-        figureToOvertake.getFigureUI().moveFigureToPosition(figureToOvertake.getCurrentField().getFieldUIobject()); // visual movement on board
+    public void beat(Figure figureToBeat){
+        figureToBeat.getCurrentField().setCurrentFigure(null);
+        Field startingAreaField = getRightStartingAreaField(figureToBeat.getColor());
+        figureToBeat.setCurrentField(startingAreaField);
+        startingAreaField.setCurrentFigure(figureToBeat);
+        figureToBeat.getFigureUI().moveFigureToPosition(figureToBeat.getCurrentField().getFieldUIobject()); // visual movement on board
     }
 }
 

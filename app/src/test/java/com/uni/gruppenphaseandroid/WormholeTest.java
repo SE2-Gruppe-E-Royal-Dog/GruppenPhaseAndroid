@@ -17,7 +17,6 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class WormholeTest {
@@ -48,7 +47,7 @@ public class WormholeTest {
     }
 
     @Test
-    public void getNewFieldforWormholeSwitchTest() {
+    public void getNewFieldForWormholeSwitchTest() {
         Field wormhole = playingField.getRootField();
 
         while (!(wormhole instanceof Wormhole)) {
@@ -56,7 +55,7 @@ public class WormholeTest {
 
         }
 
-        wormhole = ((Wormhole) wormhole).getNewFieldforWormholeSwitch(((Wormhole) wormhole).generateRandomNumber());
+        wormhole = ((Wormhole) wormhole).getNewFieldForWormholeSwitch(((Wormhole) wormhole).generateRandomNumber());
         assertFalse(wormhole instanceof Wormhole);
         assertFalse(wormhole instanceof StartingField);
     }

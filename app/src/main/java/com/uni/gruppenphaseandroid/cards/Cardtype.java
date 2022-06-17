@@ -12,7 +12,7 @@ public enum Cardtype {
     TEN(10),
     ONEORELEVEN_START(-1),
     TWELVE(12),
-    THIRTEEN_START(13),
+    THIRTEEN_START(-1),
     EQUAL(-1),
     MAGNET(-1),
     SWITCH(-1);
