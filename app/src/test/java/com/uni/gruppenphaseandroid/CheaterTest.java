@@ -1,6 +1,5 @@
 package com.uni.gruppenphaseandroid;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,25 +7,34 @@ import static org.junit.Assert.assertTrue;
 import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class CheaterTest {
     Cheater cheater;
     Cheater cheater2;
-    String playerID;
+    int playerID;
     int currentRound;
 
 
     @Before
     public void setUp() {
-
         Cheater.emptyCheaters();
-       cheater = new Cheater();
+
+        playerID = 0;
+        currentRound = GameManager.getInstance().getRoundIndex();
+        cheater = new Cheater(playerID,currentRound);
+
+        playerID = 1;
+        currentRound = GameManager.getInstance().getRoundIndex();
+        cheater2 = new Cheater(playerID,currentRound);
     }
 
 
+    @Test
+    public void checkSetUp(){
+        assertEquals(0, Cheater.getCheaters().size());
+    }
 
     @Test
     public void cheatingAllowedForThisClientTrue() {
@@ -47,80 +55,58 @@ public class CheaterTest {
         assertEquals(1, Cheater.getCheaters().size());
     }
 
+    @Test
+    public void addNewCheater(){
+        playerID = 2;
+        currentRound = GameManager.getInstance().getRoundIndex();
+        Cheater cheater3 = new Cheater(playerID,currentRound);
 
- /**   @Test
-    public void noteCheater1() {
-        playerID = "3";
+    }
+
+    @Test
+    public void addNewCheaterToList(){
+        playerID = 0;
+        currentRound = GameManager.getInstance().getRoundIndex();
+        cheater2 = new Cheater(playerID,currentRound);
+
+        assertEquals(0,Cheater.getCheaters().size());
+        cheater2.cheating(cheater2);
+        assertEquals(1,Cheater.getCheaters().size());
+    }
+
+    @Test
+    public void checkCheatingAllowed(){
+        playerID = 0;
+        currentRound = GameManager.getInstance().getRoundIndex();
+        cheater2 = new Cheater(playerID,currentRound);
+
+        GameManager.getInstance().setHasCheated(true);
+        assertFalse(cheater.cheatingAllowed(Integer.toString(cheater.getPlayerID())));
+    }
+
+    @Test
+    public void cheatLastCheat(){
+        playerID = 2;
         currentRound = 3;
-        cheater = new Cheater(playerID, currentRound);
-        Cheater.noteCheating(cheater);
-
-
-        playerID = "3";
-        currentRound = 8;
-        cheater = new Cheater(playerID, currentRound);
-         Cheater.noteCheating(cheater);
-
-
-        assertEquals(2, Cheater.getCheaters().size());
+        Cheater cheater3 = new Cheater(playerID,currentRound);
+        cheater3.cheating(cheater3);
+        assertEquals(3, cheater3.getLastCheat(cheater3.getPlayerID()));
     }
 
     @Test
-    public void noteCheater2() {
+    public void makeAccusationTest(){
+        //TODO Testable..how ;-;
+        /*cheater.cheating(cheater);
+        cheater2.cheating(cheater2);
 
-        playerID = "3";
-        currentRound = 2;
-        cheater = new Cheater(playerID, currentRound);
-        Cheater.noteCheating(cheater);
+        GameManager gm = mock(GameManager.class);
+        FigureManager fm = mock((FigureManager.class));
 
+        Cheater.makeAccusation(playerID, currentRound, 3);
 
-        //should not add a cheater to the list
-        playerID = "3";
-        currentRound = 4;
-        cheater = new Cheater(playerID, currentRound);
-        Cheater.noteCheating(cheater);
+        verify(gm, times(1)).punishPlayer(GameManager.getInstance().getCurrentTurnPlayerNumber());
 
-
-
-
-
-        assertEquals(1, Cheater.getCheaters().size());
-    }
-
-    @Test
-    public void isCheatingAllowed1() {
-        currentRound = 10;
-        playerID = "3";
-
-        cheater = new Cheater(playerID, currentRound);
-        cheater.setRoundIndex(currentRound);
-
-        boolean hija = cheater.cheatingAllowed(playerID);
-        assertTrue(cheater.cheatingAllowed(playerID));
+    */
 
     }
-
-    @Test
-    public void isCheatingAllowed2() {
-        int previousRound = 2;
-        currentRound = 8;
-        playerID = "3";
-
-        cheater = new Cheater(playerID, previousRound);
-        cheater.setRoundIndex(previousRound);
-        assertTrue(cheater.cheatingAllowed(playerID));
-
-
-        cheater2 = new Cheater(playerID, currentRound);
-        cheater2.setRoundIndex(currentRound);
-
-
-        assertTrue(cheater2.cheatingAllowed(playerID));
-
-
-    }
-
-    //TODO add Tests for cheating not allowed
-
-**/
 }

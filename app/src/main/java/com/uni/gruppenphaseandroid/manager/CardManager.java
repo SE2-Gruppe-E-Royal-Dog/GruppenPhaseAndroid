@@ -8,14 +8,20 @@ import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CardManager {
 
     FigureManager figureManager;
 
+    public CardManager() {
+        this.myHandCards = new LinkedList<>();
+    }
+
     public boolean isThereAnyPossibleMove(int turnPlayerID, LastTurn lastTurn){
-        //Log.e("card", Handcards.getInstance().getMyCards().toString());
         boolean flag = false;
-        for(Card card : Handcards.getInstance().getMyCards()){
+        for(Card card : myHandCards){
             for(Figure figure : figureManager.getFiguresOfColour(Color.values()[turnPlayerID])){
                 if(card.getCardtype() == Cardtype.EQUAL){
                     flag = flag ||checkIfMoveIsPossibleEqualCard(figure, lastTurn);
@@ -103,7 +109,7 @@ public class CardManager {
         this.figureManager = figureManager;
     }
 
-    public void turnPlayerDiscardsCard(){
+    public void turnPlayerDiscardsCard(){       //TODO still needed??
         /*
         TODO: Select Card to Discard
         index = cardIndexInHandcards
@@ -112,7 +118,7 @@ public class CardManager {
          */
     }
 
-    boolean discardCardIfNecessary(int turnPlayerID, LastTurn lastTurn){
+    boolean discardCardIfNecessary(int turnPlayerID, LastTurn lastTurn){        //TODO needed?
         if(!isThereAnyPossibleMove(turnPlayerID, lastTurn)){
             turnPlayerDiscardsCard();
             //int index = selectCardToDiscard();
@@ -120,5 +126,35 @@ public class CardManager {
             return true;
         }
         return false;
+    }
+
+    //HANDCARDS
+
+    private List<Card> myHandCards;
+
+    public List<Card> getMyHandCards() {
+        return myHandCards;
+    }
+
+    public void addCardToHand(List<Card> cards) {
+        myHandCards.addAll(cards);
+    }
+
+    public void discardHandcard(int index){
+
+        GameManager.getInstance().getVisualEffectsManager().setInitialStackImage();
+        Card toBeRemoved = myHandCards.get(index);
+        GameManager.getInstance().getVisualEffectsManager().setStackImageAfterMyMove(toBeRemoved);
+        if(GameManager.getInstance().getLastTurn() == null){
+            Figure someFigure = GameManager.getInstance().getFiguremanager().getFigureWithID(1); //just get any figure to prevent nullpointer
+            LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
+            GameManager.getInstance().setLastTurn(lastTurn);
+        }
+        //GameManager.getInstance().setSelectedCard(toBeRemoved);
+        myHandCards.remove(index);
+    }
+
+    public void setMyHandCards(List<Card> myHandCards) {
+        this.myHandCards = myHandCards;
     }
 }

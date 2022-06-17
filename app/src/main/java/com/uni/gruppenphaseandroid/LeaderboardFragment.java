@@ -12,15 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.uni.gruppenphaseandroid.manager.PlayerRanking;
 
-import java.util.LinkedList;
-
 public class LeaderboardFragment extends Fragment {
-
-    private TextView first_playerName;
-    private TextView second_playerName;
-    private TextView third_playerName;
-    private TextView fourth_playerName;
-    private Button exit_button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,23 +24,23 @@ public class LeaderboardFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        first_playerName = view.findViewById(R.id.first_playerName);
-        second_playerName = view.findViewById(R.id.second_playerName);
-        third_playerName = view.findViewById(R.id.third_playerName);
-        fourth_playerName = view.findViewById(R.id.fourth_playerName);
-        exit_button = view.findViewById(R.id.exit_button);
+        TextView firstPlayerName = view.findViewById(R.id.first_playerName);
+        TextView secondPlayerName = view.findViewById(R.id.second_playerName);
+        TextView thirdPlayerName = view.findViewById(R.id.third_playerName);
+        TextView fourthPlayerName = view.findViewById(R.id.fourth_playerName);
+        Button exitButton = view.findViewById(R.id.exit_button);
 
         PlayerRanking playerRanking = new PlayerRanking();
 
         String[] names = playerRanking.getRankedNames();
 
-        first_playerName.setText(names[0]);
-        second_playerName.setText(names[1]);
-        third_playerName.setText(names[2]);
-        fourth_playerName.setText(names[3]);
+        firstPlayerName.setText(names[0]);
+        secondPlayerName.setText(names[1]);
+        thirdPlayerName.setText(names[2]);
+        fourthPlayerName.setText(names[3]);
 
 
-        exit_button.setOnClickListener(view1 -> {
+        exitButton.setOnClickListener(view1 -> {
             /*
             TODO: Exit Game
              */

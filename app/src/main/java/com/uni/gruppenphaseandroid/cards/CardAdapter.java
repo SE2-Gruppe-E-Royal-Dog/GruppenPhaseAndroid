@@ -1,7 +1,6 @@
 package com.uni.gruppenphaseandroid.cards;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.uni.gruppenphaseandroid.R;
 
@@ -81,5 +81,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public interface ItemClickListener{
         void onItemClick(int card, int position);
     }
+
 
 }

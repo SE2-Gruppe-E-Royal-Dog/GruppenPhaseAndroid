@@ -1,8 +1,5 @@
 package com.uni.gruppenphaseandroid.cheating;
 
-
-import android.util.Log;
-
 import androidx.fragment.app.Fragment;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
@@ -13,15 +10,9 @@ import java.util.List;
 public class Cheater extends Fragment {
 
     private int roundIndex;
-    private int currentRoundIndex;
     private int playerID;                    //for now - String evtl in int ändern
     private boolean cheatingAllowed;
     private static List<Cheater> cheaters = new ArrayList<>();
-
-
-
-    public Cheater() {
-    }
 
     public Cheater(int playerID, int roundIndex) {
         this.playerID = playerID;                             //bis jetzt nur am Server --> von gameManager?
@@ -33,7 +24,7 @@ public class Cheater extends Fragment {
      * checks if cheating is permitted --> the player hasn't cheated within 5 rounds
      */
     public boolean cheatingAllowed(String playerID) {
-        this.cheatingAllowed = !GameManager.getInstance().getHasCheated(); /**(( getRoundIndex() - getLastCheat(playerID)) >= 5);**/
+        this.cheatingAllowed = !GameManager.getInstance().getHasCheated();
         return cheatingAllowed;
         }
 
@@ -68,40 +59,6 @@ public class Cheater extends Fragment {
     }
 
 
-    //getter setter
-    public int getRoundIndex() {
-        return roundIndex;
-    }
-
-    public void setRoundIndex(int roundIndex) {
-        this.roundIndex = roundIndex;
-    }
-
-    public int getCurrentRoundIndex() {
-        return currentRoundIndex;
-    }
-
-    public void setCurrentRoundIndex(int currentRoundIndex) {
-        this.currentRoundIndex = currentRoundIndex;
-    }
-
-    public int getPlayerID() {
-        return playerID;
-    }
-
-    public void setPlayerID(int playerID) {
-        this.playerID = playerID;
-    }
-
-    public boolean isCheatingAllowed() {
-        return cheatingAllowed;
-    }
-
-
-    public static List<Cheater> getCheaters() {
-        return cheaters;
-    }
-
     public static void makeAccusation(int playerID, int currentRoundIndex, int numberOfPlayer) {
         for (int i=0; i<cheaters.size(); i++){
             if (cheaters.get(i).playerID == playerID){
@@ -113,6 +70,22 @@ public class Cheater extends Fragment {
         }
         GameManager.getInstance().punishPlayer(GameManager.getInstance().getCurrentTurnPlayerNumber());
     }
+
+
+    //getter setter
+    public int getRoundIndex() {
+        return roundIndex;
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public static List<Cheater> getCheaters() {
+        return cheaters;
+    }
+
+
 
 
 }

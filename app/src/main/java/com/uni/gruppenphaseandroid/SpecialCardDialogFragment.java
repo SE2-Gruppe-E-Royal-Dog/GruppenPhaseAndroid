@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -150,12 +148,12 @@ public class SpecialCardDialogFragment extends DialogFragment {
 
                      optionOne.setOnClickListener(view1 ->  {
                          GameManager.getInstance().setCurrentEffect(0);
-                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
                          getDialog().dismiss();
                      });
                      optionTwo.setOnClickListener(view1 ->  {
                          GameManager.getInstance().setCurrentEffect(1);
-                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
                          getDialog().dismiss();
                      });
                      break;
