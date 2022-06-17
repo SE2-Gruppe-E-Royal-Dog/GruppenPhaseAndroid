@@ -58,18 +58,23 @@ public class Jerk extends Figure {
      */
     @Override
     public Field setNewPosition ( int fieldsToMove){
-        Field positionMinus2 = getCurrentField().getFieldAtDistance(fieldsToMove - 2, getColor());
-        Field positionMinus1 = getCurrentField().getFieldAtDistance(fieldsToMove - 1, getColor());
-        Field positionNormal = getCurrentField().getFieldAtDistance(fieldsToMove, getColor());
+        if (checkMoving(fieldsToMove)) {
 
-        if (positionNormal instanceof GoalField) {
-            return positionNormal;
-        } else if (positionMinus1 instanceof GoalField) {
-            return positionMinus1;
-        } else if (positionMinus2 instanceof GoalField) {
-            return positionMinus2;
+            Field positionMinus2 = getCurrentField().getFieldAtDistance(fieldsToMove - 2, getColor());
+            Field positionMinus1 = getCurrentField().getFieldAtDistance(fieldsToMove - 1, getColor());
+            Field positionNormal = getCurrentField().getFieldAtDistance(fieldsToMove, getColor());
+
+            if (positionNormal instanceof GoalField) {
+                return positionNormal;
+            } else if (positionMinus1 instanceof GoalField) {
+                return positionMinus1;
+            } else if (positionMinus2 instanceof GoalField) {
+                return positionMinus2;
+            } else {
+                return positionNormal;
+            }
         } else {
-            return positionNormal;
+            return null;
         }
     }
 }

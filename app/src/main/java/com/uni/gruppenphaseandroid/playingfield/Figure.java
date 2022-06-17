@@ -138,9 +138,12 @@ public class Figure {
      * @return new Position Field
      */
     public Field setNewPosition(int fieldsToMove) {
-
-        Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
-        return newPositionFigure1;
+        if (checkMoving(fieldsToMove)) { // for testing included
+            Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
+            return newPositionFigure1;
+        } else {
+            return null;
+        }
     }
 
     public boolean isOnStartingAreaField(){
