@@ -28,7 +28,7 @@ public class Card {
 
         if(getCardtype()==Cardtype.EQUAL){
             //Gets last played Card
-            playEqualCard(myFigure, effect, targetFigure);
+            playEqualCard(myFigure);
         }
 
         //GameManager.getInstance().getLastTurn().setCardtype(cardtype);
@@ -47,7 +47,7 @@ public class Card {
         }
     }
 
-    private void playEqualCard(Figure myFigure, int effect, Figure targetFigure){
+    private void playEqualCard(Figure myFigure){
         Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
         setCardtype(newCardtype);
     }
