@@ -363,7 +363,7 @@ public class FigureTestSetNewPosition extends FigureTest {
     public void checkMovingRedKnightByBlueKnight2() { // OK
         knightRed = new Knight(3, Color.RED, field2, Typ.KNIGHT, figureUI3);
         knightBlue = new Knight(7, Color.BLUE, field1, Typ.KNIGHT, figureUI7);
-        Assert.assertTrue(knightBlue.checkMoving(2));
+        Assert.assertTrue(knightBlue.isMoving(2));
     }
 
     @Test

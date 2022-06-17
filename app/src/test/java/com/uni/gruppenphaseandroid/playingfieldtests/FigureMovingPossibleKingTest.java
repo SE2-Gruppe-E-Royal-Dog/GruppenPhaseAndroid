@@ -21,7 +21,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(2));
+        Assert.assertTrue(kingBlue.isMoving(2));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(2));
+        Assert.assertTrue(kingBlue.isMoving(2));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(2));
+        Assert.assertTrue(kingBlue.isMoving(2));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(2));
+        Assert.assertTrue(kingBlue.isMoving(2));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(2));
+        Assert.assertTrue(kingBlue.isMoving(2));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(1));
+        Assert.assertTrue(kingBlue.isMoving(1));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(1));
+        Assert.assertTrue(kingBlue.isMoving(1));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(1));
+        Assert.assertTrue(kingBlue.isMoving(1));
     }
 
     @Test
@@ -93,7 +93,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(1));
+        Assert.assertTrue(kingBlue.isMoving(1));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertTrue(kingBlue.checkMoving(1));
+        Assert.assertTrue(kingBlue.isMoving(1));
     }
 
     /**
@@ -114,7 +114,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -141,7 +141,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -150,7 +150,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -159,7 +159,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -168,7 +168,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -177,7 +177,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -186,7 +186,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -195,7 +195,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(2));
+        Assert.assertFalse(kingBlue.isMoving(2));
     }
 
     @Test
@@ -204,7 +204,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -213,7 +213,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -222,7 +222,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -231,7 +231,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -240,7 +240,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -249,7 +249,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -258,7 +258,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -267,7 +267,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -276,7 +276,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
     @Test
@@ -285,7 +285,7 @@ public class FigureTestMovingPossibleKing extends FigureTest {
         GameManager.getInstance().setSelectedCard(card1);
         kingRed = new King(4, Color.RED, field2, Typ.KING, figureUI4);
         kingBlue = new King(8, Color.BLUE, field1, Typ.KING, figureUI8);
-        Assert.assertFalse(kingBlue.checkMoving(1));
+        Assert.assertFalse(kingBlue.isMoving(1));
     }
 
 }
