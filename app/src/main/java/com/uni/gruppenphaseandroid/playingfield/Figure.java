@@ -8,7 +8,7 @@ public class Figure {
     private int id;
     private Color color;
     private Field currentField;
-    private Typ typ;
+    protected Typ typ;
     private FigureUI figureUI;
 
     public Figure(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
@@ -103,18 +103,22 @@ public class Figure {
     public boolean checkMoving(int fieldsToMove) {
         Field originField = currentField;
 
+
         for (int i = 0; i < fieldsToMove - 1; i++) {
+            if (currentField.getNextField() == null) {
+                return false;
+            }
             if (currentField.getNextField().getCurrentFigure() != null && !checkOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
                 return false;
             }
 
-            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {// TODO: Wrong
+            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {
                 GoalField goalfield = ((StartingField) currentField).getNextGoalField();
                 if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
                     setCurrentField(goalfield);
                     continue;
                 }
-        }
+            }
             setCurrentField(currentField.getFieldAtDistance(1, color));
         }
         setCurrentField(originField);
@@ -129,16 +133,14 @@ public class Figure {
     /**
      * Sets new Position of Figure.
      * this figure - figure who moves
+     * checkMoving is called via GameManager
      * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
     public Field setNewPosition(int fieldsToMove) {
-        if (checkMoving(fieldsToMove)) { // check if moving possible
-            Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
-            return newPositionFigure1;
-        } else {
-            return null;
-        }
+
+        Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
+        return newPositionFigure1;
     }
 
     public boolean isOnStartingAreaField(){

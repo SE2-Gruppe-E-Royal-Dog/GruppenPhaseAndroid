@@ -450,6 +450,7 @@ public class FigureTestMovingPossible extends FigureTest {
 
     /**
      * Test Moving auf Startfeld
+     * rauswerfen = 1, überholen = 2
      */
 
     @Test
@@ -482,37 +483,113 @@ public class FigureTestMovingPossible extends FigureTest {
     }
 
     /**
-     * Test Moving auf Zielfeld
+     * Test Moving auf Zielfeldern
+     * rauswerfen = 1, überholen = 2
      */
     @Test
-    public void checkMovingGreenKingBeatenByGreenKnightOnGoalFieldFalse() {
+    public void checkMovingGreenKingBeatenByGreenKnightOnGoalFieldFalse() { // OK
         kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
-        playingField.move(kingGreen, 2);
-        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        playingField.move(kingGreen, 3);
+        knightGreen = new Knight(11, Color.GREEN, field11, Typ.KNIGHT, figureUI11);
+        playingField.move(knightGreen, 3);
+        Assert.assertFalse(knightGreen.checkMoving(1));
+    }
+
+    @Test
+    public void checkMovingGreenKingOvertakenByGreenKnightOnGoalFieldFalse() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 3);
+        knightGreen = new Knight(11, Color.GREEN, field11, Typ.KNIGHT, figureUI11);
+        playingField.move(knightGreen, 3);
         Assert.assertFalse(knightGreen.checkMoving(2));
     }
 
     @Test
-    public void checkMovingGreenKingOvertakenByGreenKnightOnGoalFieldFalse() {
-        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
-        playingField.move(kingGreen, 2);
+    public void checkMovingGreenKnightBeatenByGreenKingOnGoalFieldFalse() { // OK
         knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
-        Assert.assertFalse(knightGreen.checkMoving(3));
+        playingField.move(knightGreen, 3);
+        kingGreen = new King(12, Color.GREEN, field11, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 3);
+        Assert.assertFalse(kingGreen.checkMoving(1));
     }
 
     @Test
-    public void checkMovingGreenKnightBeatenByGreenKingOnGoalFieldFalse() {
+    public void checkMovingGreenKnightOvertakenByGreenKingOnGoalFieldTrue() { // OK
         knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
-        playingField.move(knightGreen, 2);
-        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
-        Assert.assertFalse(kingGreen.checkMoving(2));
+        playingField.move(knightGreen, 3);
+        kingGreen = new King(12, Color.GREEN, field11, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 3);
+        Assert.assertTrue(kingGreen.checkMoving(2));
+    }
+
+    /**
+     * Zieleinfahrt möglich mit Anzahl Feldern <=4 für alle
+     * Ausnahme Jerk <= 6
+     */
+    @Test
+    public void checkMovingGreenKnightIntoGoalFieldTrue() { // OK
+        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        Assert.assertTrue(knightGreen.checkMoving(5));
     }
 
     @Test
-    public void checkMovingGreenKnightOvertakenByGreenKingOnGoalFieldTrue() {
+    public void checkMovingGreenKnightIntoGoalFieldFalse() { // OK
         knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
-        playingField.move(knightGreen, 2);
-        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
-        Assert.assertFalse(kingGreen.checkMoving(3));
+        Assert.assertTrue(knightGreen.checkMoving(6));
     }
+
+
+
+    @Test
+    public void checkMovingGreenKingIntoGoalFieldTrue() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        Assert.assertTrue(kingGreen.checkMoving(5));
+    }
+
+    @Test
+    public void checkMovingGreenKingIntoGoalFieldFalse() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        Assert.assertTrue(kingGreen.checkMoving(6));
+    }
+
+
+
+    @Test
+    public void checkMovingGreenCitizenIntoGoalFieldTrue() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
+        Assert.assertTrue(citizenGreen.checkMoving(5));
+    }
+
+    @Test
+    public void checkMovingGreenCitizenIntoGoalFieldFalse() { // OK
+        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
+        Assert.assertTrue(citizenGreen.checkMoving(6));
+    }
+
+
+    @Test
+    public void checkMovingGreenJerkIntoGoalFieldTrue() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
+        Assert.assertTrue(jerkGreen.checkMoving(5));
+    }
+
+    @Test
+    public void checkMovingGreenJerkIntoGoalFieldTrueMinus1() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
+        Assert.assertTrue(jerkGreen.checkMoving(6));
+    }
+
+    @Test
+    public void checkMovingGreenJerkIntoGoalFieldTrueMinus2() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
+        Assert.assertTrue(jerkGreen.checkMoving(7));
+    }
+
+    @Test
+    public void checkMovingGreenJerkIntoGoalFieldFalse() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
+        Assert.assertTrue(jerkGreen.checkMoving(8));
+    }
+
+
 }

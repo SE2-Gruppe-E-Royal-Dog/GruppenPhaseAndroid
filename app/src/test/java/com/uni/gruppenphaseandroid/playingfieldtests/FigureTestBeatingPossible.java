@@ -1,6 +1,9 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
 // TODO: König noch offen - Code umschreiben
 
+import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.Cardtype;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
 import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Jerk;
@@ -13,6 +16,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FigureTestBeatingPossible extends FigureTest {
+
+    @Override
+    public void setUp(){
+        super.setUp();
+        Card greencard = new Card(Cardtype.ONEORELEVEN_START);
+        GameManager.getInstance().setSelectedCard(greencard);
+    }
 
     /**
      * Rausschmeißen innerhalb einer Farbe

@@ -1,5 +1,4 @@
-package com.uni.gruppenphaseandroid.playingfieldtests;
-// TODO: Optionen für Startfeld und andere Figuren testen
+package com.uni.gruppenphaseandroid.playingfieldtests; //fertig
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
