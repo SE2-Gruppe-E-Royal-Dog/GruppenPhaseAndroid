@@ -8,7 +8,7 @@ public class Figure {
     private int id;
     private Color color;
     private Field currentField;
-    private Typ typ;
+    protected Typ typ;
     private FigureUI figureUI;
 
     public Figure(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
@@ -95,6 +95,7 @@ public class Figure {
      * if its current position is the own starting field or own goal area.
      * Exception: Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
+     * Moving into Goal Area starting/pausing from/on the Starting Field isnot possible!
      * this figure - figure who moves
      * @param fieldsToMove - number of fields to move
      * @return true if moving is possible
@@ -102,7 +103,11 @@ public class Figure {
     public boolean checkMoving(int fieldsToMove) {
         Field originField = currentField;
 
+
         for (int i = 0; i < fieldsToMove - 1; i++) {
+            if (currentField.getNextField() == null) {
+                return false;
+            }
             if (currentField.getNextField().getCurrentFigure() != null && !checkOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
                 return false;
             }
@@ -128,11 +133,12 @@ public class Figure {
     /**
      * Sets new Position of Figure.
      * this figure - figure who moves
+     * checkMoving is called via GameManager
      * @param fieldsToMove - number of fields to move
      * @return new Position Field
      */
     public Field setNewPosition(int fieldsToMove) {
-        if (checkMoving(fieldsToMove)) { // check if moving possible
+        if (checkMoving(fieldsToMove)) { // for testing included
             Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
             return newPositionFigure1;
         } else {
