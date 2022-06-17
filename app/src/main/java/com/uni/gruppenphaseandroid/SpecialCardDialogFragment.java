@@ -20,23 +20,16 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 public class SpecialCardDialogFragment extends DialogFragment {
     //options for special cards | 4+- | 1-7 | 1 or 11
 
-    private TextView textView;          //Display the titel of the card (one or eleven||4 +-||1-7) and asks to specificate the value
-    private Button optionOne;
-    private Button optionTwo;
-    private Button ok;
-    private SeekBar optionOneToSeven;
     private Cardtype cardtype;
     private int selectedCardEffect;
-    public TextView tv_seekbar;
-    public CardViewFragment.OnInputListener mOnInputListener;
-
-
+    private CardViewFragment.OnInputListener mOnInputListener;
+    private TextView tvSeekbar;
 
     public interface OnCardInputListener{
         void sendInputSpecialCardFragment (String input);
     }
 
-    public OnCardInputListener specialCardInput;
+    private OnCardInputListener specialCardInput;
 
     public SpecialCardDialogFragment(Cardtype cardtype) {
         this.cardtype = cardtype;
@@ -44,20 +37,25 @@ public class SpecialCardDialogFragment extends DialogFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_special_card_dialog, container, false);
 
-         textView = view.findViewById(R.id.txt_userInfo);
-         optionOne = view.findViewById(R.id.btn_optionOne);
-         optionOne.setVisibility(View.INVISIBLE);
-         optionTwo = view.findViewById(R.id.btn_optionTwo);
-         optionTwo.setVisibility(View.INVISIBLE);
-         ok = view.findViewById(R.id.btn_playOneToSeven);
-         ok.setVisibility(View.INVISIBLE);
-         optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
-         optionOne.setVisibility(View.INVISIBLE);
-         tv_seekbar = view.findViewById(R.id.tv_seekbar);
+        TextView textView;
+        Button optionOne;
+        Button optionTwo;
+        Button ok;
+        SeekBar optionOneToSeven;
+
+        textView = view.findViewById(R.id.txt_userInfo);      //Display the titel of the card (one or eleven||4 +-||1-7) and asks to specificate the value
+        optionOne = view.findViewById(R.id.btn_optionOne);
+        optionOne.setVisibility(View.INVISIBLE);
+        optionTwo = view.findViewById(R.id.btn_optionTwo);
+        optionTwo.setVisibility(View.INVISIBLE);
+        ok = view.findViewById(R.id.btn_playOneToSeven);
+        ok.setVisibility(View.INVISIBLE);
+        optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
+        optionOne.setVisibility(View.INVISIBLE);
+        tvSeekbar = view.findViewById(R.id.tv_seekbar);
 
              textView.setText("Choose the value of your card:");
 
@@ -72,10 +70,10 @@ public class SpecialCardDialogFragment extends DialogFragment {
                              selectedCardEffect = value+1;
 
                              int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
-                             tv_seekbar.setVisibility(View.VISIBLE);
-                             tv_seekbar.setText("" + (value+1));
+                             tvSeekbar.setVisibility(View.VISIBLE);
+                             tvSeekbar.setText("" + (value+1));
                              int valHelp = seekBar.getThumbOffset()/2;
-                             tv_seekbar.setX(seekBar.getX() + val + valHelp);
+                             tvSeekbar.setX(seekBar.getX() + val + valHelp);
                          }
                          @Override
                          public void onStartTrackingTouch(SeekBar seekBar) {
