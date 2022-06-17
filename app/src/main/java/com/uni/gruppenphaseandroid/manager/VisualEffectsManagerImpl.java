@@ -39,7 +39,7 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
                     throw new IllegalArgumentException("No Cardtype has been set");
                 }
 
-                int imageId = CardUI.getInstance().cardtypeToId(lastTurn.getCardtype());
+                int imageId = CardUI.getInstance().findImageView(new Card(lastTurn.getCardtype()));
                 stackImage.setImageResource(imageId);
 
         }
