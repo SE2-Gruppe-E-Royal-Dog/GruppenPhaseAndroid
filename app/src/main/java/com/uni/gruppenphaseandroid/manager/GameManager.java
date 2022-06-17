@@ -324,7 +324,7 @@ public class GameManager {
     }
 
     public void executePunishment(int figureID){
-        playingField.overtake(figuremanager.getFigureWithID(figureID));
+        playingField.beat(figuremanager.getFigureWithID(figureID));
         if(isItMyTurn()){
             cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
         }
