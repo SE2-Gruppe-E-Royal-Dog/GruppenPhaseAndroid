@@ -1,5 +1,7 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -17,7 +19,6 @@ import com.uni.gruppenphaseandroid.playingfield.Wormhole;
 
 import org.java_websocket.client.WebSocketClient;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class GameManager {
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;
-    private int selectCardToDiscardIndex;
+    private int selectCardIndex;
     private Figure currentlySelectedFigure;
     private int cheatModifier = 0;
     private boolean hasMovedWormholes = false;
@@ -108,10 +109,12 @@ public class GameManager {
         else if(!doCheckAndShowFeedback(figure, null)){
             return;
         }
-        visualEffectsManager.setStackImageAfterMyMove(cardManager.getMyHandCards().get(selectCardToDiscardIndex));
+        //visualEffectsManager.setStackImageAfterMyMove(selectedCard);
+        Log.e("GM selected cart", selectedCard.getCardtype().toString());     //TODO REMOVE
+        Log.e("GM  card discharge indx", Integer.toString(selectCardIndex));
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(figure, currentEffect, null);
-        cardManager.discardHandcard(selectCardToDiscardIndex);
+        cardManager.discardHandcard(selectCardIndex);
 
         //send message to server
         sendLastTurnServerMessage();
@@ -121,11 +124,11 @@ public class GameManager {
         if(!doCheckAndShowFeedback(currentlySelectedFigure, figure)){
             return;
         }
-        visualEffectsManager.setStackImageAfterMyMove(cardManager.getMyHandCards().get(selectCardToDiscardIndex));
+        //visualEffectsManager.setStackImageAfterMyMove(cardManager.getMyHandCards().get(selectCardToDischargeIndex));
         currentTurnPhase = TurnPhase.CURRENTLYMOVING;
         selectedCard.playCard(currentlySelectedFigure, -1, figure);
         currentlySelectedFigure = null;
-        cardManager.discardHandcard(selectCardToDiscardIndex);
+        cardManager.discardHandcard(selectCardIndex);
         //send message to server
         sendLastTurnServerMessage();
     }
@@ -331,12 +334,12 @@ public class GameManager {
             cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
         }
     }
-    public int getSelectCardToDiscardIndex() {
-        return selectCardToDiscardIndex;
+    public int getSelectCardIndex() {
+        return selectCardIndex;
     }
 
-    public void setSelectCardToDiscardIndex(int selectCardToDiscardIndex) {
-        this.selectCardToDiscardIndex = selectCardToDiscardIndex;
+    public void setSelectCardIndex(int selectCardIndex) {
+        this.selectCardIndex = selectCardIndex;
     }
     public boolean isThereAnyPossibleMove() {
         return cardManager.isThereAnyPossibleMove(myTurnNumber, lastTurn);

@@ -45,9 +45,8 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
         }
 
         public void setStackImageAfterMyMove (Card card){
-        Log.e("i do ", "shit");
+        Log.e("i do shit ", card.getCardtype().toString());     //TODO REMOVE
             stackImage.setImageResource(CardUI.getInstance().findImageView(card));
-
         }
 
         @Override

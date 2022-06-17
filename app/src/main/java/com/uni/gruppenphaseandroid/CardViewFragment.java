@@ -32,7 +32,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private TextView textView;
     private Button btnPlayCard;
     private String clickedCard;
-    private int postitionCardToDischarge;
+    private int clickedCardIndex;
     private String cheaterNote = "0";
 
 
@@ -70,10 +70,11 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 if(GameManager.getInstance().isItMyTurn()) {
                     btnPlayCard.setVisibility(View.VISIBLE);
                     clickedCard = Integer.toString(card);
-                    postitionCardToDischarge = position;
+                    clickedCardIndex = position;
                 }
             }
         });
+
         recyclerView.setAdapter(cardAdapter);
         recyclerView.scrollToPosition(((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager()))
                 .findFirstCompletelyVisibleItemPosition());
@@ -199,7 +200,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         CardViewFragment.playerId = playerId;
     }
 
-    public int getPostitionCardToDischarge() {
-        return postitionCardToDischarge;
+    public int getClickedCardIndex() {
+        return clickedCardIndex;
     }
 }

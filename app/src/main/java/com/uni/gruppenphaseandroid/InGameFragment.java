@@ -198,12 +198,15 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         if (imageID != -1){
             btnCardholder.setImageResource(imageID);
             selectedCardtype = CardUI.getInstance().idToCardType(imageID);
+            GameManager.getInstance().setSelectedCard(new Card(CardUI.getInstance().idToCardType(imageID)));
+            GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
+            Log.e("IG_CHECK", CardUI.getInstance().idToCardType(imageID).toString());         //TODO REMOVE
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
-            GameManager.getInstance().setSelectedCard(GameManager.getInstance().getCardManager().getMyHandCards().get(cardholder.getPostitionCardToDischarge()));
-            GameManager.getInstance().setSelectCardToDiscardIndex(cardholder.getPostitionCardToDischarge());
-            GameManager.getInstance().getCardManager().discardHandcard(cardholder.getPostitionCardToDischarge());
+            GameManager.getInstance().setSelectedCard(new Card(CardUI.getInstance().idToCardType(imageID)));
+            GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
+            GameManager.getInstance().getCardManager().discardHandcard(cardholder.getClickedCardIndex());
             GameManager.getInstance().sendLastTurnServerMessage();
 
 
@@ -212,7 +215,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
             if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
-                Log.d("check card", "choosen card is a special card, open new dialog window");
+                Log.d("IGF_check card", "choosen card is a special card, open new dialog window");
                 new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
 
             } else {
