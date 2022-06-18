@@ -213,14 +213,19 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     }
 
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
-            if (checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
-                Log.d("IGF_check card", "choosen card is a special card, open new dialog window");
-                new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
+            if ((CardUI.getInstance().idToCardType(imageID) == Cardtype.EQUAL && GameManager.getInstance().getLastTurn() != null && checkIfSpecialNumberCardEffect(GameManager.getInstance().getLastTurn().getCardtype()))) {
+                //checks if EQUAL CARD + special card
+                    new SpecialCardDialogFragment(GameManager.getInstance().getLastTurn().getCardtype()).show(getChildFragmentManager(), "specialcarddialog für =");
+                }else {
+                    if (CardUI.getInstance().idToCardType(imageID) != Cardtype.EQUAL && checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
+                    //if not EQUAL, open normal dialog
+                    new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
 
-            } else {
-                GameManager.getInstance().setCurrentEffect(-1);
-                GameManager.getInstance().cardGotPlayed(new Card(selectedCardtype));
+                } else {
+                    GameManager.getInstance().setCurrentEffect(-1);
+                    GameManager.getInstance().cardGotPlayed(new Card(selectedCardtype));
             }
+        }
     }
 
     public boolean checkIfSpecialNumberCardEffect(Cardtype cardtype){
