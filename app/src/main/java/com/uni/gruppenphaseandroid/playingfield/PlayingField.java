@@ -266,6 +266,8 @@ public class PlayingField {
         figure2.getFigureUI().moveFigureToPosition(current1.getFieldUIobject());
         current1.triggerSpecialFieldEffect();
 
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2.getCurrentField());
+        GameManager.getInstance().setLastTurn(lastTurn);
         return figure1.getCurrentField();
     }
 
