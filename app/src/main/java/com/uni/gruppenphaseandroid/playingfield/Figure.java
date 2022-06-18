@@ -101,6 +101,9 @@ public class Figure {
      * @return true if moving is possible
      */
     public boolean checkMoving(int fieldsToMove) {
+        if(fieldsToMove == -4){//-4 is a green card, it will always work, no need to rewrite the logic for backwards-checking
+            return true;
+        }
         Field originField = currentField;
 
 
