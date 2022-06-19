@@ -450,26 +450,26 @@ public class FigureSetNewPositionTest extends FigureTest {
      * Test: Einfahrt ins Ziel
      */
     @Test
-    public void checkSetNewPositionGoalJerkGreenTrue2() {
+    public void checkSetNewPositionGoalJerkGreenTrue2() { //OK
         jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
         Assert.assertNotEquals(field14, jerkGreen.setNewPosition(2));
     }
 
     @Test
-    public void checkSetNewPositionGoalCitizenGreenTrue2() {
+    public void checkSetNewPositionGoalCitizenGreenTrue2() { //OK
         citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
         Assert.assertNotEquals(field14, citizenGreen.setNewPosition(2));
     }
 
     @Test
-    public void checkSetNewPositionGoalKnightGreenTrue2() {
+    public void checkSetNewPositionGoalKnightGreenTrue2() { //OK
         knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
         Assert.assertNotEquals(field14, knightGreen.setNewPosition(2));
     }
 
     @Test
-    public void checkSetNewPositionGoalKingGreenTrue2() {
+    public void checkSetNewPositionGoalKingGreenTrue2() {//OK
         kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
-        Assert.assertNotEquals(field14, knightGreen.setNewPosition(2));
+        Assert.assertNotEquals(field14, kingGreen.setNewPosition(2));
     }
 }
