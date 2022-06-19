@@ -110,9 +110,11 @@ public class Figure {
         }
         for (int i = 0; i < fieldsToMove - 1; i++) {
             if (currentField.getNextField() == null) {
+                setCurrentField(originField);//reset to avoid weird behaviour
                 return false;
             }
             if (currentField.getNextField().getCurrentFigure() != null && !isOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
+                setCurrentField(originField);//reset to avoid weird behaviour
                 return false;
             }
 
@@ -129,9 +131,11 @@ public class Figure {
 
         Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
-            return isBeaten(); // check if figure2 can be beaten
+            boolean beatingPossible = isBeaten(); // check if figure2 can be beaten
+            setCurrentField(originField);//reset to avoid weird behaviour
+            return beatingPossible;
         }
-        setCurrentField(originField);
+        setCurrentField(originField);//reset to avoid weird behaviour
         return true;
     }
 
