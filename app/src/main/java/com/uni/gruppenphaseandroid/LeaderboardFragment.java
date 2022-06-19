@@ -41,9 +41,7 @@ public class LeaderboardFragment extends Fragment {
 
 
         exitButton.setOnClickListener(view1 -> {
-            /*
-            TODO: Exit Game
-             */
+
         });
     }
 }

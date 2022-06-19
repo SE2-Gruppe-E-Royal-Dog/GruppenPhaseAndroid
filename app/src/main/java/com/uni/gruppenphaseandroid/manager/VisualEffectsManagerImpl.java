@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.uni.gruppenphaseandroid.MenuFragment;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.CardUI;
@@ -55,12 +58,13 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
 
         @Override
         protected void showWinningScreen () {
-
+            NavHostFragment.findNavController(getInGameFragment())
+                    .navigate(R.id.end_of_game);
         }
 
         @Override
         protected void showCanNotAcccusePlayerMessage () {
-
+            showToast("Cannot accuse this player since they don't have any figure on board.");
         }
 
         @Override

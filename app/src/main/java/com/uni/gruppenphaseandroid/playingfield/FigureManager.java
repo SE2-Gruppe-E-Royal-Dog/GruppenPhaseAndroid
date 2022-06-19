@@ -113,10 +113,8 @@ public class FigureManager {
     public boolean isWinner(Color color) {
         boolean winner = true;
         for (Figure figure: figureList) {
-            if (figure.getColor() == color) {
-                if (!(figure.getCurrentField() instanceof GoalField)) {
-                    winner = false;
-                }
+            if (figure.getColor() == color && !(figure.getCurrentField() instanceof GoalField)) {
+                winner = false;
             }
         } return winner;
     }

@@ -538,8 +538,6 @@ public class FigureMovingPossibleTest extends FigureTest {
         Assert.assertTrue(knightGreen.isMoving(6));
     }
 
-
-
     @Test
     public void checkMovingGreenKingIntoGoalFieldTrue() { // OK
         kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
@@ -575,6 +573,5 @@ public class FigureMovingPossibleTest extends FigureTest {
         jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
         Assert.assertTrue(jerkGreen.isMoving(8));
     }
-
 
 }
