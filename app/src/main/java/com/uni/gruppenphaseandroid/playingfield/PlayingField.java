@@ -7,7 +7,6 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.manager.LastTurn;
 
 import java.util.ArrayList;
-
 public class PlayingField {
 
     private Field rootField;
@@ -18,7 +17,7 @@ public class PlayingField {
     private StartingField blueStartingField;
     private View view;
     private ArrayList<Wormhole> wormholeList;
-    private Card card;
+
 
     public PlayingField(View view) {
         this.view = view;
@@ -56,9 +55,7 @@ public class PlayingField {
         }
 
         wormholeList.get(0).setPartnerWormhole(wormholeList.get(1));
-        wormholeList.get(1).setPartnerWormhole(wormholeList.get(0));
         wormholeList.get(2).setPartnerWormhole(wormholeList.get(3));
-        wormholeList.get(3).setPartnerWormhole(wormholeList.get(2));
 
         //  moveAllWormholesRandomly(); just show effect
 
@@ -269,6 +266,8 @@ public class PlayingField {
         figure2.getFigureUI().moveFigureToPosition(current1.getFieldUIobject());
         current1.triggerSpecialFieldEffect();
 
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2.getCurrentField());
+        GameManager.getInstance().setLastTurn(lastTurn);
         return figure1.getCurrentField();
     }
 
@@ -277,12 +276,14 @@ public class PlayingField {
 
         while (current.getNextField().getCurrentFigure()==null) {
             current = current.getNextField();
-            myFigure.getCurrentField().setCurrentFigure(null);
-            current.setCurrentFigure(myFigure);
-            myFigure.setCurrentField(current);
-            myFigure.getFigureUI().moveFigureToPosition(current.getFieldUIobject());
-
         }
+        myFigure.getCurrentField().setCurrentFigure(null);
+        current.setCurrentFigure(myFigure);
+        myFigure.setCurrentField(current);
+        myFigure.getFigureUI().moveFigureToPosition(current.getFieldUIobject());
+
+        LastTurn lastTurn = new LastTurn(myFigure, null, myFigure.getCurrentField(), null);
+        GameManager.getInstance().setLastTurn(lastTurn);
         return current;
     }
 
@@ -321,16 +322,16 @@ public class PlayingField {
         repairWormholeVisuals();
     }
 
-    public Field getFieldWithID(int ID){
-        if(ID < 1 || ID > 96){
+    public Field getFieldWithID(int id){
+        if(id < 1 || id > 96){
             return null;
         }
         else {
             Field targetField = rootField;
-            while(targetField.getFieldID() != ID){
+            while(targetField.getFieldID() != id){
                 targetField = targetField.getNextField();
                 if(targetField instanceof StartingField){
-                    Field goalOrStartingField = getFieldWithStartingAndGoalID((StartingField) targetField, ID);
+                    Field goalOrStartingField = getFieldWithStartingAndGoalID((StartingField) targetField, id);
                     if(goalOrStartingField != null){
                         return goalOrStartingField;
                     }
@@ -354,14 +355,14 @@ public class PlayingField {
         }
     }
 
-    private Field getFieldWithStartingAndGoalID(StartingField startingField, int ID){
+    private Field getFieldWithStartingAndGoalID(StartingField startingField, int id){
         Field goalField = startingField.getNextGoalField();
         Field startingAreaField = startingField.getPreviousStartingArea();
         for(int i = 0; i< 4;i++){
-            if(goalField.getFieldID() == ID){
+            if(goalField.getFieldID() == id){
                 return goalField;
             }
-            if(startingAreaField.getFieldID() == ID){
+            if(startingAreaField.getFieldID() == id){
                 return startingAreaField;
             }
             goalField = goalField.getNextField();

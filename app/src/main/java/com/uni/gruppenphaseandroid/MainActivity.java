@@ -171,8 +171,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case WORMHOLE_MOVE:
                     handleWormholeMove(msg.getPayload());
+                    break;
                 case PUNISHMENT_MESSAGE:
                     handlePunishmentMessage(msg.getPayload());
+                    break;
                 default:
                     Log.d("message_handler", "Unknown MessageType: " + msg.getType());
             }
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
         private void handleWormholeMove(String body) {
             var updateWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
-            int[] wormholeIDs = {updateWormholePayload.getNewWormholeFieldPosition_1(), updateWormholePayload.getNewWormholeFieldPosition_2(), updateWormholePayload.getNewWormholeFieldPosition_3(), updateWormholePayload.getNewWormholeFieldPosition_4()};
+            int[] wormholeIDs = {updateWormholePayload.getNewWormholeFieldPosition1(), updateWormholePayload.getNewWormholeFieldPosition2(), updateWormholePayload.getNewWormholeFieldPosition3(), updateWormholePayload.getNewWormholeFieldPosition4()};
             GameManager.getInstance().moveWormholes(wormholeIDs);
         }
 

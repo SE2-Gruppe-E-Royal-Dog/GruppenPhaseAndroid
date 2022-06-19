@@ -23,6 +23,7 @@ public class CardUI  {
 
 
     public CardUI() {
+        //default implementation ignored
     }
 
 

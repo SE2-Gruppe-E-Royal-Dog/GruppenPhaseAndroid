@@ -21,7 +21,9 @@ public class AccusationFragment extends DialogFragment {
     Button playerThree;
     Button leaveFragment;
     TextView text;
-    com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor, buttonTwoColor, buttonThreeColor;
+    com.uni.gruppenphaseandroid.playingfield.Color buttonOneColor;
+    com.uni.gruppenphaseandroid.playingfield.Color buttonTwoColor;
+    com.uni.gruppenphaseandroid.playingfield.Color buttonThreeColor;
 
 
     @Nullable
