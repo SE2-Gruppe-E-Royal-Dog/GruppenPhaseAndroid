@@ -31,8 +31,6 @@ public class Card {
             playEqualCard();
         }
 
-        //GameManager.getInstance().getLastTurn().setCardtype(cardtype);
-
         if(effect==-1 && targetFigure==null){
             //Cards with only one Effect
             playNonEffectCard(myFigure);
@@ -165,7 +163,7 @@ public class Card {
         }
         switch (getCardtype()){
             case MAGNET:
-                return figure.checkIfAnotherFigureOnPlayingfield();
+                return figure.isAnotherFigureOnPlayingField();
 
             case TWO:
             case THREE:
@@ -175,7 +173,7 @@ public class Card {
             case NINE:
             case TEN:
             case TWELVE:
-                return figure.checkMoving(getCardtype().getValue());
+                return !figure.isOnStartingAreaField() && figure.isMoving(getCardtype().getValue());
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENTS);
@@ -191,10 +189,10 @@ public class Card {
                 }else{
                     value = -4;
                 }
-                return !figure.isOnStartingAreaField() && figure.checkMoving(value);
+                return !figure.isOnStartingAreaField() && figure.isMoving(value);
 
             case ONETOSEVEN:
-                return !figure.isOnStartingAreaField() && figure.checkMoving(effect);
+                return !figure.isOnStartingAreaField() && figure.isMoving(effect);
 
             case ONEORELEVEN_START:
                 if (effect == 0){
@@ -205,13 +203,13 @@ public class Card {
                 }else{
                     value = 11;
                 }
-                return !figure.isOnStartingAreaField() && figure.checkMoving(value);
+                return !figure.isOnStartingAreaField() && figure.isMoving(value);
 
             case THIRTEEN_START:
                 if (effect == 0){
                     return figure.isOnStartingAreaField();
                 }
-                return  !figure.isOnStartingAreaField() && figure.checkMoving(13);
+                return  !figure.isOnStartingAreaField() && figure.isMoving(13);
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENTS);
@@ -220,7 +218,7 @@ public class Card {
 
     private boolean checkSwitchCard(Figure figure1, Figure figure2){
         if (getCardtype().equals(Cardtype.SWITCH)) {
-            return figure1.checkisOnNormalField() && figure2.checkisOnNormalField();
+            return figure1.isOnNormalField() && figure2.isOnNormalField();
         } else {
             throw new IllegalArgumentException(INVALID_ARGUMENTS);
         }

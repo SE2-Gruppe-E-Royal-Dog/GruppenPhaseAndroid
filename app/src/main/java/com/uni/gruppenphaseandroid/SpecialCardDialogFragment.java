@@ -20,23 +20,17 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 public class SpecialCardDialogFragment extends DialogFragment {
     //options for special cards | 4+- | 1-7 | 1 or 11
 
-    private TextView textView;          //Display the titel of the card (one or eleven||4 +-||1-7) and asks to specificate the value
-    private Button optionOne;
-    private Button optionTwo;
-    private Button ok;
-    private SeekBar optionOneToSeven;
     private Cardtype cardtype;
     private int selectedCardEffect;
-    public TextView tv_seekbar;
-    public CardViewFragment.OnInputListener mOnInputListener;
+    private TextView tvSeekbar;
+    private CardViewFragment.OnInputListener mOnInputListener;
 
 
-
-    public interface OnCardInputListener{
-        void sendInputSpecialCardFragment (String input);
+    public interface OnCardInputListener {
+        void sendInputSpecialCardFragment(String input);
     }
 
-    public OnCardInputListener specialCardInput;
+    private OnCardInputListener specialCardInput;
 
     public SpecialCardDialogFragment(Cardtype cardtype) {
         this.cardtype = cardtype;
@@ -48,116 +42,123 @@ public class SpecialCardDialogFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_special_card_dialog, container, false);
 
-         textView = view.findViewById(R.id.txt_userInfo);
-         optionOne = view.findViewById(R.id.btn_optionOne);
-         optionOne.setVisibility(View.INVISIBLE);
-         optionTwo = view.findViewById(R.id.btn_optionTwo);
-         optionTwo.setVisibility(View.INVISIBLE);
-         ok = view.findViewById(R.id.btn_playOneToSeven);
-         ok.setVisibility(View.INVISIBLE);
-         optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
-         optionOne.setVisibility(View.INVISIBLE);
-         tv_seekbar = view.findViewById(R.id.tv_seekbar);
+        TextView textView;          //Display the titel of the card (one or eleven||4 +-||1-7) and asks to specificate the value
+        Button optionOne;
+        Button optionTwo;
+        Button ok;
+        SeekBar optionOneToSeven;
 
-             textView.setText("Choose the value of your card:");
+        textView = view.findViewById(R.id.txt_userInfo);
+        optionOne = view.findViewById(R.id.btn_optionOne);
+        optionOne.setVisibility(View.INVISIBLE);
+        optionTwo = view.findViewById(R.id.btn_optionTwo);
+        optionTwo.setVisibility(View.INVISIBLE);
+        ok = view.findViewById(R.id.btn_playOneToSeven);
+        ok.setVisibility(View.INVISIBLE);
+        optionOneToSeven = view.findViewById(R.id.sb_selectOneToSeven);
+        optionOne.setVisibility(View.INVISIBLE);
+        tvSeekbar = view.findViewById(R.id.tv_seekbar);
 
-             switch (cardtype) {
-                 case ONETOSEVEN:
-                     optionOneToSeven.setVisibility(View.VISIBLE);
-                     ok.setText("OK");
-                     ok.setVisibility(View.VISIBLE);
-                     optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                         @Override
-                         public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
-                             selectedCardEffect = value+1;
+        textView.setText("Choose the value of your card:");
 
-                             int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
-                             tv_seekbar.setVisibility(View.VISIBLE);
-                             tv_seekbar.setText("" + (value+1));
-                             int valHelp = seekBar.getThumbOffset()/2;
-                             tv_seekbar.setX(seekBar.getX() + val + valHelp);
-                         }
-                         @Override
-                         public void onStartTrackingTouch(SeekBar seekBar) {
+        switch (cardtype) {
+            case ONETOSEVEN:
+                optionOneToSeven.setVisibility(View.VISIBLE);
+                ok.setText("OK");
+                ok.setVisibility(View.VISIBLE);
+                optionOneToSeven.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int value, boolean b) {
+                        selectedCardEffect = value + 1;
 
-                         }
+                        int val = (value * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
+                        tvSeekbar.setVisibility(View.VISIBLE);
+                        tvSeekbar.setText("" + (value + 1));
+                        int valHelp = seekBar.getThumbOffset() / 2;
+                        tvSeekbar.setX(seekBar.getX() + val + valHelp);
+                    }
 
-                         @Override
-                         public void onStopTrackingTouch(SeekBar seekBar) {
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
 
-                         }
-                     });
+                    }
 
-                     ok.setOnClickListener(view1 ->  {
-                             GameManager.getInstance().setCurrentEffect(selectedCardEffect);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
-                             getDialog().dismiss();
-                     });
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
 
-                     break;
-                 case ONEORELEVEN_START:
-                     optionOne.setText("ONE");
-                     optionTwo.setText("ELEVEN");
-                     ok.setText("Start");
+                    }
+                });
 
-                     optionOne.setVisibility(View.VISIBLE);
-                     optionTwo.setVisibility(View.VISIBLE);
-                     ok.setVisibility(View.VISIBLE);
+                ok.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(selectedCardEffect);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONETOSEVEN));
+                    getDialog().dismiss();
+                });
 
-                     optionOne.setOnClickListener(view1 ->  {
-                             GameManager.getInstance().setCurrentEffect(1);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
-                             getDialog().dismiss();
-                     });
-                     optionTwo.setOnClickListener(view1 -> {
-                             GameManager.getInstance().setCurrentEffect(2);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
-                             getDialog().dismiss();
-                     });
-                     ok.setOnClickListener(view1 ->  {
-                             GameManager.getInstance().setCurrentEffect(0);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
-                             getDialog().dismiss();
-                     });
+                break;
+            case ONEORELEVEN_START:
+                optionOne.setText("ONE");
+                optionTwo.setText("ELEVEN");
+                ok.setText("Start");
 
-                     break;
-                 case FOUR_PLUSMINUS:
-                     optionOne.setText("Four PLUS");
-                     optionTwo.setText("Four MINUS");
+                optionOne.setVisibility(View.VISIBLE);
+                optionTwo.setVisibility(View.VISIBLE);
+                ok.setVisibility(View.VISIBLE);
 
-                     optionOne.setVisibility(View.VISIBLE);
-                     optionTwo.setVisibility(View.VISIBLE);
+                optionOne.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(1);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                    getDialog().dismiss();
+                });
+                optionTwo.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(2);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                    getDialog().dismiss();
+                });
+                ok.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(0);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.ONEORELEVEN_START));
+                    getDialog().dismiss();
+                });
 
-                     optionOne.setOnClickListener(view1 ->  {
-                             GameManager.getInstance().setCurrentEffect(1);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
-                             getDialog().dismiss();
-                     });
-                     optionTwo.setOnClickListener(view1 ->  {
-                             GameManager.getInstance().setCurrentEffect(0);
-                             GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
-                             getDialog().dismiss();
-                     });
-                     break;
-                 case THIRTEEN_START:
-                     optionOne.setText("Start");
-                     optionTwo.setText("Thirteen");
+                break;
+            case FOUR_PLUSMINUS:
+                optionOne.setText("Four PLUS");
+                optionTwo.setText("Four MINUS");
 
-                     optionOne.setVisibility(View.VISIBLE);
-                     optionTwo.setVisibility(View.VISIBLE);
+                optionOne.setVisibility(View.VISIBLE);
+                optionTwo.setVisibility(View.VISIBLE);
 
-                     optionOne.setOnClickListener(view1 ->  {
-                         GameManager.getInstance().setCurrentEffect(0);
-                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
-                         getDialog().dismiss();
-                     });
-                     optionTwo.setOnClickListener(view1 ->  {
-                         GameManager.getInstance().setCurrentEffect(1);
-                         GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
-                         getDialog().dismiss();
-                     });
-                     break;
-             }
+                optionOne.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(1);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                    getDialog().dismiss();
+                });
+                optionTwo.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(0);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.FOUR_PLUSMINUS));
+                    getDialog().dismiss();
+                });
+                break;
+            case THIRTEEN_START:
+                optionOne.setText("Start");
+                optionTwo.setText("Thirteen");
+
+                optionOne.setVisibility(View.VISIBLE);
+                optionTwo.setVisibility(View.VISIBLE);
+
+                optionOne.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(0);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
+                    getDialog().dismiss();
+                });
+                optionTwo.setOnClickListener(view1 -> {
+                    GameManager.getInstance().setCurrentEffect(1);
+                    GameManager.getInstance().cardGotPlayed(new Card(Cardtype.THIRTEEN_START));
+                    getDialog().dismiss();
+                });
+                break;
+        }
 
         return view;
     }
@@ -166,9 +167,9 @@ public class SpecialCardDialogFragment extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {            //Methode für DialogFragement communication
         super.onAttach(context);
-        try{
+        try {
             specialCardInput = (SpecialCardDialogFragment.OnCardInputListener) getTargetFragment();
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
 
             Log.e("SpecialCardDialog", "onAttach: ClassCastException: " + e.getMessage());
         }
