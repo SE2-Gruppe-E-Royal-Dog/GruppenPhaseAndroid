@@ -63,15 +63,12 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        CardAdapter cardAdapter = new CardAdapter(new CardAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(int card, int position) {
-                CardAdapter.mPreviousIndex = position;
-                if(GameManager.getInstance().isItMyTurn()) {
-                    btnPlayCard.setVisibility(View.VISIBLE);
-                    clickedCard = Integer.toString(card);
-                    clickedCardIndex = position;
-                }
+        CardAdapter cardAdapter = new CardAdapter((card, position) -> {
+            CardAdapter.mPreviousIndex = position;
+            if(GameManager.getInstance().isItMyTurn()) {
+                btnPlayCard.setVisibility(View.VISIBLE);
+                clickedCard = Integer.toString(card);
+                clickedCardIndex = position;
             }
         });
 
@@ -80,32 +77,25 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 .findFirstCompletelyVisibleItemPosition());
 
         //return to board button
-        view.findViewById(R.id.btn_returnToGame).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-            }
-        });
+        view.findViewById(R.id.btn_returnToGame).setOnClickListener(view1 -> getDialog().dismiss());
 
 
         //select card and return to board
-        btnPlayCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("card_input", "input:" + clickedCard);
-                //capture input
-                if (!clickedCard.equals("")) {
-                     if(!GameManager.getInstance().isThereAnyPossibleMove()){
-                            textView.setText("Select one card to discharge:");
-                            textView.setVisibility(View.VISIBLE);
-                            cardInputListener.sendInputCardFragment("-1", cheaterNote);
-                            getDialog().dismiss();
-                    }else {
-                        cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
+        btnPlayCard.setOnClickListener(view12 -> {
+            Log.d("card_input", "input:" + clickedCard);
+            //capture input
+            if (!clickedCard.equals("")) {
+                 if(!GameManager.getInstance().isThereAnyPossibleMove()){
+                        textView.setText("Select one card to discharge:");
+                        textView.setVisibility(View.VISIBLE);
+                        cardInputListener.sendInputCardFragment("-1", cheaterNote);
                         getDialog().dismiss();
-                    }
-            }
-        }});
+                }else {
+                    cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
+                    getDialog().dismiss();
+                }
+        }
+    });
 
         return view;
     }

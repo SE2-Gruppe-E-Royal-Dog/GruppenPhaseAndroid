@@ -10,6 +10,7 @@ import com.uni.gruppenphaseandroid.communication.Client;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.concurrent.ExecutionException;
 
 public class WebSocketService extends Service {
     private final Client client;
@@ -27,7 +28,7 @@ public class WebSocketService extends Service {
         };
     }
 
-    public Client getClient() {
+    public Client getClient() throws InterruptedException {
         if (client.isOpen()) {
             return client;
         }
@@ -36,7 +37,7 @@ public class WebSocketService extends Service {
             client.connectToServer();
         } catch (InterruptedException e) {
             Log.d("websocket", "Unable to get client", e);
-            throw new RuntimeException(e);
+            throw e;
         }
         return client;
     }

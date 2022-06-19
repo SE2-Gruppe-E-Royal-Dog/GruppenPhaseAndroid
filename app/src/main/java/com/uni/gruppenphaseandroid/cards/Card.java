@@ -28,10 +28,8 @@ public class Card {
 
         if(getCardtype()==Cardtype.EQUAL){
             //Gets last played Card
-            playEqualCard(myFigure);
+            playEqualCard();
         }
-
-        //GameManager.getInstance().getLastTurn().setCardtype(cardtype);
 
         if(effect==-1 && targetFigure==null){
             //Cards with only one Effect
@@ -47,7 +45,7 @@ public class Card {
         }
     }
 
-    private void playEqualCard(Figure myFigure){
+    private void playEqualCard(){
         Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
         setCardtype(newCardtype);
     }
