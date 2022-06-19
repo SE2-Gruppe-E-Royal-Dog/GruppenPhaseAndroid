@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("MainActivity", "service bound successfully");
             binder = (WebSocketService.WebSocketBinder) iBinder;
             service = binder.getService();
-            websocketClient = service.getClient();
+            websocketClient = getWebSocketClient();
         }
 
         @Override
@@ -67,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
     private void bindService() {
         var bindIntent = new Intent(MainActivity.this, WebSocketService.class);
         bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
+    }
+
+    private Client getWebSocketClient() {
+        try {
+            return getService().getClient();
+        } catch (InterruptedException e) {
+            Log.d("thread", "Thread was interrupted", e);
+        }
+        throw new RuntimeException("Unable to retrieve websocket client");
     }
 
     @Override
@@ -124,16 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
     public String getPlayerId() {
         return playerId;
-    }
-
-    public void sendMessage(MessageType messageType, Payload payload) {
-        websocketClient = getService().getClient();
-        var message = new Message();
-        message.setType(messageType);
-
-        message.setPayload(gson.toJson(payload));
-
-        websocketClient.send(message);
     }
 
     private void doRegisterReceiver() {
@@ -316,6 +315,4 @@ public class MainActivity extends AppCompatActivity {
         var updatePunishPayload = gson.fromJson(body, PunishPayload.class);
         GameManager.getInstance().executePunishment(updatePunishPayload.getFigureID());
     }
-
-
-    }
+}

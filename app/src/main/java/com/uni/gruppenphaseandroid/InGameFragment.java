@@ -74,7 +74,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             //activate cardholder
             btnCardholder.setVisibility(View.VISIBLE);
 
-            websocketClient = ((MainActivity) getContext()).getService().getClient();
+            websocketClient = ((MainActivity)getContext()).getWebsocketClient();
             var lobbyId = ((MainActivity) getContext()).getLobbyId();
             var message = new Message();
             message.setType(MessageType.START_GAME);
@@ -126,7 +126,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             case R.id.action_settings:
                 return true;
             case R.id.action_leaveGame:{
-                websocketClient = ((MainActivity) getContext()).getService().getClient();
+                websocketClient = ((MainActivity)getContext()).getWebsocketClient();
                 var lobbyId = ((MainActivity) getContext()).getLobbyId();
                 var playerId = ((MainActivity) getContext()).getPlayerId();
                 var message = new Message();
