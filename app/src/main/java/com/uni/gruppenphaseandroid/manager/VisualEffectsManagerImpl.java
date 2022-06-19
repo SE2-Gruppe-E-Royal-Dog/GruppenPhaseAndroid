@@ -55,12 +55,12 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
 
         @Override
         protected void showWinningScreen () {
-
+            showToast("Game is over!");
         }
 
         @Override
         protected void showCanNotAcccusePlayerMessage () {
-
+            showToast("Cannot accuse this player since they don't have any figure on board.");
         }
 
         @Override
