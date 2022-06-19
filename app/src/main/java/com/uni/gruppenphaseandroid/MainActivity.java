@@ -25,9 +25,7 @@ import com.uni.gruppenphaseandroid.cheating.Cheater;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.JoinedLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
-import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.communication.dto.NewPlayerJoinedLobbyPayload;
-import com.uni.gruppenphaseandroid.communication.dto.Payload;
 import com.uni.gruppenphaseandroid.communication.dto.PlayerLeftLobbyPayload;
 import com.uni.gruppenphaseandroid.communication.dto.PunishPayload;
 import com.uni.gruppenphaseandroid.communication.dto.SendCardsPayload;
@@ -42,7 +40,7 @@ import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.service.WebSocketService;
 
 public class MainActivity extends AppCompatActivity {
-   private Client websocketClient;
+    private Client websocketClient;
     private WebSocketService.WebSocketBinder binder;
     private WebSocketService service;
     private String lobbyId;
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("thread", "Thread was interrupted", e);
             Thread.currentThread().interrupt();
         }
-        throw new RuntimeException("Unable to retrieve websocket client");
+        return null;
     }
 
     @Override
@@ -120,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Client getWebsocketClient() {
+    public Client getClient() {
         return websocketClient;
     }
 
@@ -181,82 +179,81 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-        private void handleSendCardsMessage(String sendCardsPayload) {
-            var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
+    private void handleSendCardsMessage(String sendCardsPayload) {
+        var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
 
-            GameManager.getInstance().getCardManager().addCardToHand(payload.getCards());
-            CardUI.getInstance().addCardToHand(); //set UI Card Hand
+        GameManager.getInstance().getCardManager().addCardToHand(payload.getCards());
+        CardUI.getInstance().addCardToHand(); //set UI Card Hand
+    }
+
+    private void handlePlayerLeftMessage(String body) {
+        var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
+
+        showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
+    }
+
+    private void handleNewPlayerJoinedMessage(String body) {
+        var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
+
+        showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
+    }
+
+    private void handleJoinedLobbyMessage(String body) {
+        var payload = gson.fromJson(body, JoinedLobbyPayload.class);
+        lobbyId = payload.getLobbyId();
+        playerId = payload.getPlayerId();
+        Log.d("lobby", "Joined lobby with id: " + playerId);
+    }
+
+    private void showPlayerToast(String message) {
+        var toast = Toast.makeText(getApplicationContext(),
+                message,
+                Toast.LENGTH_LONG);
+
+        toast.show();
+    }
+
+    private void handleStartGame(String body) {
+
+        var payload = gson.fromJson(body, StartGamePayload.class);
+        GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
+        CardManager cardManager = new CardManager();
+        FigureManager figureManager = new FigureManager();
+        cardManager.setFigureManager(figureManager);
+        CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
+        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext(), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)), cardManager, communicationManager);
+
+        findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
+        findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
+        showPlayerToast("Your color is: " + GameManager.getInstance().getColorOfMyClient());
+
+
+        for (int i = 0; i < payload.getNumberOfPlayers(); i++)
+            Log.e("Handlestart", GameManager.getInstance().getPlayerNameWithIndex(i));
+
+        setPlayerNamesOnBoard();
+    }
+
+    private void handleUpdateBoard(String body) {
+        var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
+        GameManager.getInstance().updateBoard(updateBoardPayload);
+        if (updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1) {
+            Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
         }
 
-        private void handlePlayerLeftMessage(String body) {
-            var payload = gson.fromJson(body, PlayerLeftLobbyPayload.class);
+    }
 
-            showPlayerToast(String.format("Player %s left your lobby", payload.getPlayerName()));
-        }
-
-        private void handleNewPlayerJoinedMessage(String body) {
-            var payload = gson.fromJson(body, NewPlayerJoinedLobbyPayload.class);
-
-            showPlayerToast(String.format("Player %s joined your lobby", payload.getPlayerName()));
-        }
-
-        private void handleJoinedLobbyMessage(String body) {
-            var payload = gson.fromJson(body, JoinedLobbyPayload.class);
-            lobbyId = payload.getLobbyId();
-            playerId = payload.getPlayerId();
-            Log.d("lobby", "Joined lobby with id: " + playerId);
-        }
-
-        private void showPlayerToast(String message) {
-            var toast = Toast.makeText(getApplicationContext(),
-                    message,
-                    Toast.LENGTH_LONG);
-
-            toast.show();
-        }
-
-        private void handleStartGame(String body) {
-
-            var payload = gson.fromJson(body, StartGamePayload.class);
-            GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
-            CardManager cardManager = new CardManager();
-            FigureManager figureManager = new FigureManager();
-            cardManager.setFigureManager(figureManager);
-            CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
-            GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(),figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext(), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)), cardManager, communicationManager);
-
-            findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
-            findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
-            findViewById(R.id.btn_accusation).setVisibility(View.VISIBLE);
-            showPlayerToast("Your color is: " +GameManager.getInstance().getColorOfMyClient());
-
-
-
-            for (int i = 0; i < payload.getNumberOfPlayers(); i++)
-                Log.e("Handlestart", GameManager.getInstance().getPlayerNameWithIndex(i));
-
-            setPlayerNamesOnBoard();
-        }
-
-        private void handleUpdateBoard(String body) {
-            var updateBoardPayload = gson.fromJson(body, UpdateBoardPayload.class);
-            GameManager.getInstance().updateBoard(updateBoardPayload);
-            if( updateBoardPayload.getCheatModifier() == 1 || updateBoardPayload.getCheatModifier() == -1){
-                Cheater.noteCheating(new Cheater(GameManager.getInstance().getCurrentTurnPlayerNumber(), GameManager.getInstance().getRoundIndex()));
-            }
-
-        }
-
-        private void handleWormholeMove(String body) {
-            var updateWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
-            int[] wormholeIDs = {updateWormholePayload.getNewWormholeFieldPosition1(), updateWormholePayload.getNewWormholeFieldPosition2(), updateWormholePayload.getNewWormholeFieldPosition3(), updateWormholePayload.getNewWormholeFieldPosition4()};
-            GameManager.getInstance().moveWormholes(wormholeIDs);
-        }
+    private void handleWormholeMove(String body) {
+        var updateWormholePayload = gson.fromJson(body, WormholeSwitchPayload.class);
+        int[] wormholeIDs = {updateWormholePayload.getNewWormholeFieldPosition1(), updateWormholePayload.getNewWormholeFieldPosition2(), updateWormholePayload.getNewWormholeFieldPosition3(), updateWormholePayload.getNewWormholeFieldPosition4()};
+        GameManager.getInstance().moveWormholes(wormholeIDs);
+    }
 
 
     private void removePlayerNamesOnBoard(String playerId) {        //TODO remove name when player leaves the lobby - nessesary??
         TextView name;
-        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
+        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++) {
             if (GameManager.getInstance().getPlayerNameWithIndex(i).equals(playerId)) {
                 switch (i) {
                     case 0:
@@ -282,8 +279,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setPlayerNamesOnBoard() {
         TextView name;
-        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++){
-            switch (i){
+        for (int i = 0; i < GameManager.getInstance().getNumberOfPlayers(); i++) {
+            switch (i) {
                 case 0:
                     name = findViewById(R.id.tv_playerGreen);
                     name.setText(GameManager.getInstance().getPlayerNameWithIndex(i));
@@ -308,11 +305,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setPlayerIdInCardView(){
+    private void setPlayerIdInCardView() {
         CardViewFragment.setPlayerId(playerId);
 
     }
-    private void handlePunishmentMessage(String body){
+
+    private void handlePunishmentMessage(String body) {
         var updatePunishPayload = gson.fromJson(body, PunishPayload.class);
         GameManager.getInstance().executePunishment(updatePunishPayload.getFigureID());
     }

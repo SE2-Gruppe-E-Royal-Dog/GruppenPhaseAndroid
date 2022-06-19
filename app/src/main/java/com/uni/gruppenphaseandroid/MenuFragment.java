@@ -36,7 +36,7 @@ public class MenuFragment extends Fragment {
 
 
         view.findViewById(R.id.bttn_join_game).setOnClickListener(view1 -> {
-            websocketClient = ((MainActivity) getContext()).getWebsocketClient();
+            websocketClient = ((MainActivity) getContext()).getClient();
             var message = new Message();
             message.setType(MessageType.JOIN_LOBBY);
 
