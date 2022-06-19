@@ -2,6 +2,7 @@ package com.uni.gruppenphaseandroid;
 
 import static org.junit.Assert.assertThrows;
 
+import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 
@@ -63,142 +64,142 @@ public class CardUITest {
     //TODO add more tests
 
     @Test
-    public void cardtypeToId_TWO(){
-        Cardtype cardtype = Cardtype.TWO;
+    public void findImageView_TWO(){
+        Card card = new Card(Cardtype.TWO);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_2, res);
     }
 
     @Test
-    public void cardtypeToId_THREE(){
-        Cardtype cardtype = Cardtype.THREE;
+    public void findImageView_THREE(){
+        Card card = new Card(Cardtype.THREE);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_3, res);
     }
 
     @Test
-    public void cardtypeToId_FIVE(){
-        Cardtype cardtype = Cardtype.FIVE;
+    public void findImageView_FIVE(){
+        Card card = new Card(Cardtype.FIVE);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_5, res);
     }
 
     @Test
-    public void cardtypeToId_SIX(){
-        Cardtype cardtype = Cardtype.SIX;
+    public void findImageView_SIX(){
+        Card card = new Card(Cardtype.SIX);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_6, res);
     }
 
     @Test
-    public void cardtypeToId_EIGTH(){
-        Cardtype cardtype = Cardtype.EIGTH;
+    public void findImageView_EIGTH(){
+        Card card = new Card(Cardtype.EIGTH);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_8, res);
     }
 
     @Test
-    public void cardtypeToId_NINE(){
-        Cardtype cardtype = Cardtype.NINE;
+    public void findImageView_NINE(){
+        Card card = new Card(Cardtype.NINE);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_9, res);
     }
 
     @Test
-    public void cardtypeToId_TEN(){
-        Cardtype cardtype = Cardtype.TEN;
+    public void findImageView_TEN(){
+        Card card = new Card(Cardtype.TEN);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_10, res);
     }
 
     @Test
-    public void cardtypeToId_TWELVE(){
-        Cardtype cardtype = Cardtype.TWELVE;
+    public void findImageView_TWELVE(){
+        Card card = new Card(Cardtype.TWELVE);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_12, res);
     }
 
     @Test
-    public void cardtypeToId_EQUAL(){
-        Cardtype cardtype = Cardtype.EQUAL;
+    public void findImageView_EQUAL(){
+        Card card = new Card(Cardtype.EQUAL);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_copy, res);
     }
 
     @Test
-    public void cardtypeToId_FOUR(){
-        Cardtype cardtype = Cardtype.FOUR_PLUSMINUS;
+    public void findImageView_FOUR(){
+        Card card = new Card(Cardtype.FOUR_PLUSMINUS);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_4, res);
     }
 
     @Test
-    public void cardtypeToId_SEVEN(){
-        Cardtype cardtype = Cardtype.ONETOSEVEN;
+    public void findImageView_SEVEN(){
+        Card card = new Card(Cardtype.ONETOSEVEN);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_7, res);
     }
 
     @Test
-    public void cardtypeToId_ELEVEN(){
-        Cardtype cardtype = Cardtype.ONEORELEVEN_START;
+    public void findImageView_ELEVEN(){
+        Card card = new Card(Cardtype.ONEORELEVEN_START);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_11, res);
     }
 
     @Test
-    public void cardtypeToId_THIRTEEN(){
-        Cardtype cardtype = Cardtype.THIRTEEN_START;
+    public void findImageView_THIRTEEN(){
+        Card card = new Card(Cardtype.THIRTEEN_START);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_13, res);
     }
 
     @Test
-    public void cardtypeToId_MAGNET(){
-        Cardtype cardtype = Cardtype.MAGNET;
+    public void findImageView_MAGNET(){
+        Card card = new Card(Cardtype.MAGNET);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_magnet, res);
     }
 
     @Test
-    public void cardtypeToId_SWITCH(){
-        Cardtype cardtype = Cardtype.SWITCH;
+    public void findImageView_SWITCH(){
+        Card card = new Card(Cardtype.SWITCH);
 
-        int res = cardUI.cardtypeToId(cardtype);
+        int res = cardUI.findImageView(card);
 
         Assert.assertEquals(R.drawable.ic_card_switch, res);
     }
 
     @Test
-    public void cardtypeToId_Exception(){
-        assertThrows(NullPointerException.class, () ->cardUI.cardtypeToId(null));
+    public void findImageView_Exception(){
+        assertThrows(NullPointerException.class, () ->cardUI.findImageView(null));
     }
 }

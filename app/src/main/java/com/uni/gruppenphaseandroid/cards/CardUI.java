@@ -115,46 +115,6 @@ public class CardUI  {
         addCardToHand();
         return imageCardList;
     }
-
-    public int cardtypeToId(Cardtype cardtype){
-        switch (cardtype) {
-            case TWO:
-                return R.drawable.ic_card_2;
-            case THREE:
-                return R.drawable.ic_card_3;
-            case FIVE:
-                return R.drawable.ic_card_5;
-            case SIX:
-                return R.drawable.ic_card_6;
-            case EIGTH:
-                return R.drawable.ic_card_8;
-            case NINE:
-                return R.drawable.ic_card_9;
-            case TEN:
-                return R.drawable.ic_card_10;
-            case TWELVE:
-                return R.drawable.ic_card_12;
-            case EQUAL:
-                return R.drawable.ic_card_copy;
-            case FOUR_PLUSMINUS:
-                return R.drawable.ic_card_4;
-            case ONETOSEVEN:
-                return R.drawable.ic_card_7;
-            case ONEORELEVEN_START:
-                return R.drawable.ic_card_11;
-            case THIRTEEN_START:
-                return R.drawable.ic_card_13;
-            case MAGNET:
-                return R.drawable.ic_card_magnet;
-            case SWITCH:
-                return R.drawable.ic_card_switch;
-            default:
-                return -1;
-        }
-    }
-
-
-
 }
 
 
