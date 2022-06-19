@@ -89,6 +89,12 @@ public class Figure {
         } return true;
     }
 
+    public boolean isKing(Figure figure2, Field newPosition) {
+        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
+            return true;
+        } return false;
+    }
+
     /**
      * A figure cannot be changed with another one (no matter which color),
      * if its current position is the own starting field or own goal area.
@@ -125,7 +131,6 @@ public class Figure {
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
         }
-
 
         Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
@@ -200,7 +205,7 @@ public class Figure {
     }
 
     public void setId(int id) {
-        this.id = id++;
+        this.id = id;
     }
 
     public Color getColor() {

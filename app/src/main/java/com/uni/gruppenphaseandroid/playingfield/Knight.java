@@ -49,10 +49,4 @@ public class Knight extends Figure {
             return false;
         } return true;
     }
-
-    private boolean isKing(Figure figure2, Field newPosition) {
-        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
-            return true;
-        } return false;
-    }
 }

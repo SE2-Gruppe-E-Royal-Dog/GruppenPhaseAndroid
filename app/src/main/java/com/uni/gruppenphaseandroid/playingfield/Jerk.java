@@ -50,12 +50,6 @@ public class Jerk extends Figure {
         } return true;
     }
 
-    private boolean isKing(Figure figure2, Field newPosition) {
-        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
-            return true;
-        } return false;
-    }
-
     /**
      * Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
