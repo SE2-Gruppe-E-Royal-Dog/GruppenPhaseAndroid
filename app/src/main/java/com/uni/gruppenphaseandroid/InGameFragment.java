@@ -83,6 +83,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
+
+
         });
 
         view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
@@ -205,8 +207,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
             GameManager.getInstance().getCardManager().discardHandcard(cardholder.getClickedCardIndex());
             GameManager.getInstance().sendLastTurnServerMessage();
+
+
         }
-        GameManager.getInstance().getVisualEffectsManager().setInGameFragment(this);
     }
 
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
