@@ -115,30 +115,32 @@ public class Figure {
             return false;
         }
         for (int i = 0; i < fieldsToMove - 1; i++) {
-            if (currentField.getNextField() == null) {
-                setCurrentField(originField);
-                return false;
-            }
             if (currentField.getNextField().getCurrentFigure() != null && !isOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
-                setCurrentField(originField);
+                setCurrentField(originField);//reset to avoid weird behaviour
                 return false;
             }
 
-            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {
+            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color && currentField != originField) {
                 GoalField goalfield = ((StartingField) currentField).getNextGoalField();
-                if (isGoalFieldPossible(fieldsToMove)) {
+                if (isGoalFieldPossible(fieldsToMove-i)) {
                     setCurrentField(goalfield);
                     continue;
                 }
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
+            if (currentField.getNextField() == null) {//case we reached last goal
+                setCurrentField(originField);//reset to avoid weird behaviour
+                return (typ == typ.JERK && fieldsToMove-i-1 <= 2); //if we are jerk, possibly return true
+            }
         }
 
         Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
-            return isBeaten(); // check if figure2 can be beaten
+            boolean beatingPossible = isBeaten(); // check if figure2 can be beaten
+            setCurrentField(originField);//reset to avoid weird behaviour
+            return beatingPossible;
         }
-        setCurrentField(originField);
+        setCurrentField(originField);//reset to avoid weird behaviour
         return true;
     }
 
