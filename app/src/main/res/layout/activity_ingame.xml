@@ -176,7 +176,7 @@
                     android:layout_marginLeft="749dp"
                     android:layout_marginTop="757dp"
                     android:tag="f39"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField40"
@@ -392,7 +392,7 @@
                     android:layout_marginLeft="361dp"
                     android:layout_marginTop="757dp"
                     android:tag="f55"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField56"
@@ -581,7 +581,7 @@
                     android:layout_marginLeft="361dp"
                     android:layout_marginTop="365dp"
                     android:tag="f7"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField29"
@@ -979,7 +979,7 @@
                     android:layout_marginLeft="749dp"
                     android:layout_marginTop="365dp"
                     android:tag="f23"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField16"

@@ -60,31 +60,31 @@ public class FigureManager {
 
         if(color == Color.BLUE){
             switch (typ){
-                case JERK: return R.drawable.ic_bluejester;
-                case CITIZEN: return R.drawable.ic_bluecitizen;
-                case KNIGHT: return R.drawable.ic_blueknight;
-                case KING: return R.drawable.ic_blueking;
+                case JERK: return R.drawable.ic_bluejestercat;
+                case CITIZEN: return R.drawable.ic_bluecitizencat;
+                case KNIGHT: return R.drawable.ic_blueknightcat;
+                case KING: return R.drawable.ic_bluekingcat;
             }
         }else if(color==Color.GREEN){
             switch (typ){
-                case JERK: return R.drawable.ic_greenjester;
-                case CITIZEN: return R.drawable.ic_greencitizen;
-                case KNIGHT: return R.drawable.ic_greenknight;
-                case KING: return R.drawable.ic_greenking;
+                case JERK: return R.drawable.ic_greenjestercat;
+                case CITIZEN: return R.drawable.ic_greencitizencat;
+                case KNIGHT: return R.drawable.ic_greenknightcat;
+                case KING: return R.drawable.ic_greenkingcat;
             }
         }else if(color == Color.RED){
             switch (typ){
-                case JERK: return R.drawable.ic_redjester;
-                case CITIZEN: return R.drawable.ic_redcitizen;
-                case KNIGHT: return R.drawable.ic_redknight;
-                case KING: return R.drawable.ic_redking;
+                case JERK: return R.drawable.ic_redjestercat;
+                case CITIZEN: return R.drawable.ic_redcitizencat;
+                case KNIGHT: return R.drawable.ic_redknightcat;
+                case KING: return R.drawable.ic_redkingcat;
             }
         }else if(color == Color.YELLOW){
             switch (typ){
-                case JERK: return R.drawable.ic_yellowjester;
-                case CITIZEN: return R.drawable.ic_yellowcitizen;
-                case KNIGHT: return R.drawable.ic_yellowknight;
-                case KING: return R.drawable.ic_yellowking;
+                case JERK: return R.drawable.ic_yellowjestercat;
+                case CITIZEN: return R.drawable.ic_yellowcitizencat;
+                case KNIGHT: return R.drawable.ic_yellowknightcat;
+                case KING: return R.drawable.ic_yellowkingcat;
             }
         }
         return 0;
