@@ -1,8 +1,11 @@
 package com.uni.gruppenphaseandroid.manager;
 
+import com.uni.gruppenphaseandroid.InGameFragment;
 import com.uni.gruppenphaseandroid.cards.Card;
 
 public abstract class VisualEffectsManager {
+
+    private InGameFragment inGameFragment;
 
     protected abstract void setStackImage();
 
@@ -21,4 +24,12 @@ public abstract class VisualEffectsManager {
     protected abstract void showNextTurnMessage(String turnPlayerName);
 
     public abstract void setStackImageAfterMyMove (Card card);
+
+    public void setInGameFragment(InGameFragment inGameFragment) {
+        this.inGameFragment = inGameFragment;
+    }
+
+    public InGameFragment getInGameFragment() {
+        return inGameFragment;
+    }
 }
