@@ -16,7 +16,7 @@ import com.uni.gruppenphaseandroid.playingfield.Typ;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PlayFieldTestMove extends FigureTest {
+public class PlayFieldMoveTest extends FigureTest {
 
     @Override
     public void setUp(){
@@ -659,21 +659,19 @@ public class PlayFieldTestMove extends FigureTest {
         Assert.assertTrue(jerkGreen.getCurrentField() instanceof GoalField);
     }
 
-    /*@Test
-    public void checkMoveGreenJerkIntoGoalFields6True() { // TODO: NOK - Punkte verfallen lassen
+    @Test
+    public void checkMoveGreenJerkIntoGoalFields6True() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
         playingField.move(jerkGreen, 6);
         Assert.assertTrue(jerkGreen.getCurrentField() instanceof GoalField);
     }
 
     @Test
-    public void checkMoveGreenJerkIntoGoalFields7True() { // NOK
+    public void checkMoveGreenJerkIntoGoalFields7True() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
         playingField.move(jerkGreen, 7);
         Assert.assertTrue(jerkGreen.getCurrentField() instanceof GoalField);
     }
-
-     */
 
     @Test
     public void checkMoveGreenJerkIntoGoalFields8False() { // OK
@@ -731,5 +729,15 @@ public class PlayFieldTestMove extends FigureTest {
         Assert.assertTrue(kingGreen.getCurrentField() instanceof StartingField);
         playingField.move(kingGreen, 1);
         Assert.assertEquals(field14,kingGreen.getCurrentField());
+    }
+
+    @Test
+    public void checkMoveGreenKingAndGreenKnightIntoGoalFieldsTrue() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 4);
+        Assert.assertTrue(kingGreen.getCurrentField() instanceof GoalField);
+        knightGreen = new Knight(11, Color.GREEN, field11, Typ.KNIGHT, figureUI11);
+        playingField.move(knightGreen, 4);
+        Assert.assertTrue(knightGreen.getCurrentField() instanceof GoalField);
     }
 }

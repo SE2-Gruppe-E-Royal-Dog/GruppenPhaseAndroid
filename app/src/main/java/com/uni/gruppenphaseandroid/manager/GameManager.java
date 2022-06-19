@@ -253,7 +253,6 @@ public class GameManager {
         this.cheatModifier = cheatModifier;
     }
 
-
     public int getCurrentEffect() {
         return currentEffect;
     }
@@ -265,6 +264,7 @@ public class GameManager {
     public Color getColorOfClient(int playerIndex){
         return Color.values()[playerIndex];
     }
+
     public Color getColorOfMyClient(){
         return getColorOfClient(myTurnNumber);
     }
@@ -285,8 +285,6 @@ public class GameManager {
         for (int i = 0; i < playerNames.size(); i++){
             this.playerNames[i] = playerNames.get(i);
         }
-
-
     }
 
     public String getPlayerNameWithIndex(int index){
@@ -357,7 +355,7 @@ public class GameManager {
         return cardManager;
     }
 
-    public FigureManager getFiguremanager (){
+    public FigureManager getFigureManager(){
         return this.figuremanager;
     }
 

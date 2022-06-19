@@ -17,11 +17,11 @@ public class Jerk extends Figure {
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking() {
+    public boolean isOvertaking() {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (super.checkOvertaking()) {
+        if (super.isOvertaking()) {
             switch (figure2.getTyp()) {
                 case JERK:
                     return true;
@@ -35,18 +35,25 @@ public class Jerk extends Figure {
 
     /**
      * King can only be beaten by another king.
+     * Exception: Beating King allowed on foreign StartingField
      * this figure - figure who moves
      * figure 2 - figure to be beaten
      * @return true if beating is possible
      */
     @Override
-    public boolean checkBeaten() {
+    public boolean isBeaten() {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.checkBeaten() && figure2.getTyp() == Typ.KING) || !super.checkBeaten()) {
+        if((super.isBeaten() && isKing(figure2, newPosition)) || !super.isBeaten()) {
             return false;
         } return true;
+    }
+
+    private boolean isKing(Figure figure2, Field newPosition) {
+        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
+            return true;
+        } return false;
     }
 
     /**
@@ -57,8 +64,8 @@ public class Jerk extends Figure {
      * @return new Position of Jerk within Goal Area.
      */
     @Override
-    public Field setNewPosition ( int fieldsToMove){
-        if (checkMoving(fieldsToMove)) {
+    public Field setNewPosition (int fieldsToMove){
+        if (isMoving(fieldsToMove)) { //für Testzwecke
 
             Field positionMinus2 = getCurrentField().getFieldAtDistance(fieldsToMove - 2, getColor());
             Field positionMinus1 = getCurrentField().getFieldAtDistance(fieldsToMove - 1, getColor());
