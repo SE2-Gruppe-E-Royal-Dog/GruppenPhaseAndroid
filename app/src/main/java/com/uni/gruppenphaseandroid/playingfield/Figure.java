@@ -119,12 +119,12 @@ public class Figure {
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
         }
-        setCurrentField(originField);
 
-        Field newPosition = currentField.getFieldAtDistance(fieldsToMove, color);
+        Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
             return isBeaten(); // check if figure2 can be beaten
         }
+        setCurrentField(originField);
         return true;
     }
 
