@@ -75,10 +75,13 @@ public class AccusationFragment extends DialogFragment {
         switch (players - 1) {
             case 3:
                 playerThree.setVisibility(View.VISIBLE);
+                break;
             case 2:
                 playerTwo.setVisibility(View.VISIBLE);
+                break;
             case 1:
                 playerOne.setVisibility(View.VISIBLE);
+                break;
         }
 
         int i = 0;

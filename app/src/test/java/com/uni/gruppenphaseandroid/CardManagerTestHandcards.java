@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 
-public class CardManagerTest_Handcards {
+public class CardManagerTestHandcards {
 
     private CardManager cardManager;
     private Card card;
@@ -45,23 +45,4 @@ public class CardManagerTest_Handcards {
 
         Assert.assertEquals(1, cardManager.getMyHandCards().size());
     }
-
-    //TODO adapt test
-   /** @Test
-    public void discardHandcard(){
-        LinkedList<Card> list = new LinkedList<>();
-        card = mock(Card.class);
-        when(card.getCardtype()).thenReturn(Cardtype.TWO);
-        list.add(card);
-        cardManager.setMyHandCards(list);
-        LastTurn lastTurn = new LastTurn(null, null, null, null);
-        GameManager.getInstance().setLastTurn(lastTurn);
-
-        Assert.assertEquals(1, cardManager.getMyHandCards().size());
-
-        cardManager.discardHandcard(0);
-
-        Assert.assertEquals(0, cardManager.getMyHandCards().size());
-    }
-   */
 }

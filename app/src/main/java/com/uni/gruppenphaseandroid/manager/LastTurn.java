@@ -36,7 +36,7 @@ public class LastTurn {
         this.newFigure2Field = newFigure2Field;
     }
 
-    public LastTurn(){};
+    public LastTurn(){}
 
     public static LastTurn generateLastTurnObject(UpdateBoardPayload updateBoardPayload, FigureManager figureManager, PlayingField playingField){
         Figure figure1 = figureManager.getFigureWithID(updateBoardPayload.getFigure1ID());
