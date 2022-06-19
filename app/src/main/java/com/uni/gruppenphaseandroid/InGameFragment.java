@@ -49,6 +49,7 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+            GameManager.getInstance().getVisualEffectsManager().setInGameFragment(this);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
@@ -82,18 +83,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             message.setPayload(gson.toJson(payload));
 
             websocketClient.send(message);
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    GameManager.getInstance().getVisualEffectsManager().setInGameFragment(InGameFragment.this);
 
-                }
-            };
+
         });
 
         view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
