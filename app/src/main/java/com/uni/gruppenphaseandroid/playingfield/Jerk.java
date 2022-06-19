@@ -45,7 +45,7 @@ public class Jerk extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.isBeaten() && isKing(figure2, newPosition)) || !super.isBeaten()) {
+        if((super.isBeaten() && isBeatingKingOnNormalField(figure2, newPosition)) || !super.isBeaten()) {
             return false;
         } return true;
     }

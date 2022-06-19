@@ -89,7 +89,7 @@ public class Figure {
         } return true;
     }
 
-    public boolean isKing(Figure figure2, Field newPosition) {
+    public boolean isBeatingKingOnNormalField(Figure figure2, Field newPosition) {
         if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
             return true;
         } return false;
