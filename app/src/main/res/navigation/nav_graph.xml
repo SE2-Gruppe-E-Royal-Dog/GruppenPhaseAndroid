@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_InGameFragment_to_cardViewFragment2"
             app:destination="@id/cardViewFragment2" />
+        <action
+            android:id="@+id/end_of_game"
+            app:destination="@+id/leaderboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardViewFragment2"
@@ -35,5 +38,11 @@
         <action
             android:id="@+id/action_cardViewFragment2_to_InGameFragment2"
             app:destination="@id/InGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.uni.gruppenphaseandroid.LeaderboardFragment"
+        android:label="leaderboard_view"
+        tools:layout="@layout/fragment_leaderboard">
     </fragment>
 </navigation>
