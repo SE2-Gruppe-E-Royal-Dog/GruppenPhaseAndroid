@@ -111,9 +111,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         try {
             sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Log.d("Sensor error tilt", e.getMessage());
-        };
+        }
 
     }
 
@@ -122,8 +122,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         super.onAttach(context);
         try{
             cardInputListener = (OnInputListener) getTargetFragment();
-        }catch (ClassCastException e){
-
+        } catch (ClassCastException e){
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }

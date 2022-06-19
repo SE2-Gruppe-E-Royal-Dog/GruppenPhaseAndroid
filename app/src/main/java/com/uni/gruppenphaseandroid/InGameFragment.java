@@ -41,8 +41,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     private ImageButton btnCardholder;
     private Cardtype selectedCardtype;
     private CardViewFragment cardholder;
-    private SpecialCardDialogFragment specialCardDialog;
-    private ImageView stack;
 
     @Override
     public View onCreateView(
