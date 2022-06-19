@@ -1,5 +1,4 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
-// TODO: König noch offen - Code umschreiben
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -15,7 +14,7 @@ import com.uni.gruppenphaseandroid.playingfield.Typ;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FigureTestBeatingPossible extends FigureTest {
+public class FigureBeatingPossibleTest extends FigureTest {
 
     @Override
     public void setUp(){
@@ -410,14 +409,14 @@ public class FigureTestBeatingPossible extends FigureTest {
         Assert.assertFalse(citizenGreen.isBeaten());
     }
 
-    /*
+
     @Test
-    public void checkBeatenBlueKingByGreenCitizenOnGreenStartingField() { // TODO: NOK - König hier keine Ausnahme!
+    public void checkBeatenBlueKingByGreenCitizenOnGreenStartingField() { // OK
         kingBlue = new King(8, Color.BLUE, field13, Typ.KING, figureUI8);
         citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
-        Assert.assertTrue(citizenGreen.checkBeaten());
+        Assert.assertTrue(citizenGreen.isBeaten());
     }
-    */
+
 
     @Test
     public void checkBeatenBlueKnightByGreenCitizenOnGreenStartingField() { // OK

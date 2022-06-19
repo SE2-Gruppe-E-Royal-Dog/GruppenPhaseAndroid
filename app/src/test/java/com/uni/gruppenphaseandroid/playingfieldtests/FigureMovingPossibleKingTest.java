@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid.playingfieldtests; //fertig
+package com.uni.gruppenphaseandroid.playingfieldtests;
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -10,7 +10,7 @@ import com.uni.gruppenphaseandroid.playingfield.Typ;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FigureTestMovingPossibleKing extends FigureTest {
+public class FigureMovingPossibleKingTest extends FigureTest {
 
     /**
      * Test für King - Overtaking, Beaten, Move possible

@@ -13,7 +13,7 @@ import com.uni.gruppenphaseandroid.playingfield.Typ;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FigureTestMovingPossible extends FigureTest {
+public class FigureMovingPossibleTest extends FigureTest {
 
     @Override
     public void setUp(){
@@ -552,8 +552,6 @@ public class FigureTestMovingPossible extends FigureTest {
         Assert.assertTrue(kingGreen.isMoving(6));
     }
 
-
-
     @Test
     public void checkMovingGreenCitizenIntoGoalFieldTrue() { // OK
         citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
@@ -566,23 +564,10 @@ public class FigureTestMovingPossible extends FigureTest {
         Assert.assertTrue(citizenGreen.isMoving(6));
     }
 
-
     @Test
     public void checkMovingGreenJerkIntoGoalFieldTrue() { // OK
         jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
         Assert.assertTrue(jerkGreen.isMoving(5));
-    }
-
-    @Test
-    public void checkMovingGreenJerkIntoGoalFieldTrueMinus1() { // OK
-        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
-        Assert.assertTrue(jerkGreen.isMoving(6));
-    }
-
-    @Test
-    public void checkMovingGreenJerkIntoGoalFieldTrueMinus2() { // OK
-        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
-        Assert.assertTrue(jerkGreen.isMoving(7));
     }
 
     @Test

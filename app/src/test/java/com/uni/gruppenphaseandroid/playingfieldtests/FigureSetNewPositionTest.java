@@ -1,6 +1,4 @@
 package com.uni.gruppenphaseandroid.playingfieldtests;
-// TODO: Optionen für Startfeld und Zielfeld testen => grüne Figuren
-// TODO: Zieleinfahrt funktioniert nicht, Test Jerk
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -15,7 +13,7 @@ import com.uni.gruppenphaseandroid.playingfield.Typ;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FigureTestSetNewPosition extends FigureTest {
+public class FigureSetNewPositionTest extends FigureTest {
 
     @Override
     public void setUp(){
@@ -449,24 +447,29 @@ public class FigureTestSetNewPosition extends FigureTest {
     }
 
     /**
-     * Test: Einfahrt ins Ziel // TODO: Zieleinfahrt check Nermin
+     * Test: Einfahrt ins Ziel
      */
-    /*@Test
-    public void checkGoalNormalJerkGreen2() {
+    @Test
+    public void checkSetNewPositionGoalJerkGreenTrue2() {
         jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
-        Assert.assertNotEquals(field14, kingBlue.setNewPosition(2));
-
-
-        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
-        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
-        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
-
+        Assert.assertNotEquals(field14, jerkGreen.setNewPosition(2));
     }
 
-     */
+    @Test
+    public void checkSetNewPositionGoalCitizenGreenTrue2() {
+        citizenGreen = new Citizen(10, Color.GREEN, field12, Typ.CITIZEN, figureUI10);
+        Assert.assertNotEquals(field14, citizenGreen.setNewPosition(2));
+    }
 
+    @Test
+    public void checkSetNewPositionGoalKnightGreenTrue2() {
+        knightGreen = new Knight(11, Color.GREEN, field12, Typ.KNIGHT, figureUI11);
+        Assert.assertNotEquals(field14, knightGreen.setNewPosition(2));
+    }
 
-    /**
-     * Test: Jerk zieht in GoalArea und kann bis zu 2 Felder verfallen lassen
-     */
+    @Test
+    public void checkSetNewPositionGoalKingGreenTrue2() {
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        Assert.assertNotEquals(field14, knightGreen.setNewPosition(2));
+    }
 }

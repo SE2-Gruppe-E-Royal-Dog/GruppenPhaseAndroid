@@ -1,4 +1,4 @@
-package com.uni.gruppenphaseandroid.playingfieldtests; // fertig
+package com.uni.gruppenphaseandroid.playingfieldtests;
 
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
@@ -13,7 +13,7 @@ import com.uni.gruppenphaseandroid.playingfield.Typ;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class FigureTestOvertakingPossible extends FigureTest {
+public class FigureOvertakingPossibleTest extends FigureTest {
 
     /**
      * Test Rangfolge innerhalb einer Farbe: Jerk -> Citizen -> Knight -> King

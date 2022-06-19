@@ -17,11 +17,11 @@ public class Knight extends Figure {
      * @return true if overtaking possible
      */
     @Override
-    public boolean checkOvertaking() {
+    public boolean isOvertaking() {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if(super.checkOvertaking()) {
+        if(super.isOvertaking()) {
             switch (figure2.getTyp()) {
                 case JERK:
                 case CITIZEN:
@@ -41,12 +41,18 @@ public class Knight extends Figure {
      * @return true if beating is possible
      */
     @Override
-    public boolean checkBeaten() {
+    public boolean isBeaten() {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.checkBeaten() && figure2.getTyp() == Typ.KING) || !super.checkBeaten()) {
+        if((super.isBeaten() && isKing(figure2, newPosition)) || !super.isBeaten()) {
             return false;
         } return true;
+    }
+
+    private boolean isKing(Figure figure2, Field newPosition) {
+        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
+            return true;
+        } return false;
     }
 }
