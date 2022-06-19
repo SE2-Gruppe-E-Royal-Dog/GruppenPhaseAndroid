@@ -147,7 +147,6 @@ public class CardManager {
             Figure someFigure = GameManager.getInstance().getFigureManager().getFigureWithID(1); //just get any figure to prevent nullpointer
             LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
             GameManager.getInstance().setLastTurn(lastTurn);
-            Log.e("CM_last turn", "was set ?");
         }
         GameManager.getInstance().setSelectedCard(toBeRemoved);
         myHandCards.remove(index);
