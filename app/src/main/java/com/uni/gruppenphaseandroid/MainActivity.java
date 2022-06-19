@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             return getService().getClient();
         } catch (InterruptedException e) {
             Log.d("thread", "Thread was interrupted", e);
+            Thread.currentThread().interrupt();
         }
         throw new RuntimeException("Unable to retrieve websocket client");
     }
