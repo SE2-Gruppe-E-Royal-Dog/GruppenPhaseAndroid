@@ -59,7 +59,7 @@ public class FieldUIimpl implements FieldUI {
 
     @Override
     public void turnIntoWormhole() {
-        changeAppearance(R.drawable.ic_draw2field);
+        changeAppearance(R.drawable.ic_wormhole);
     }
 
     @Override
