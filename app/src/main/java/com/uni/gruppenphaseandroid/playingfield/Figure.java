@@ -122,9 +122,9 @@ public class Figure {
                 }
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
-            if (currentField.getNextField() == null) {
+            if (currentField.getNextField() == null) {//case we reached last goal
                 setCurrentField(originField);//reset to avoid weird behaviour
-                return (typ == typ.JERK && fieldsToMove-i-1 <= 2);//case we reached last goal, if we are jerk, possibly return true
+                return (typ == typ.JERK && fieldsToMove-i-1 <= 2); //if we are jerk, possibly return true
             }
         }
 

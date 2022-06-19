@@ -163,7 +163,7 @@ public class Card {
         }
         switch (getCardtype()){
             case MAGNET:
-                return figure.isAnotherFigureOnPlayingField();
+                return figure.isOnNormalField() && figure.isAnotherFigureOnPlayingField();
 
             case TWO:
             case THREE:
