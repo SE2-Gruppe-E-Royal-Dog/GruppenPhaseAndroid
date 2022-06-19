@@ -114,18 +114,17 @@ public class Figure {
                 return false;
             }
 
-            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {
+            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color && currentField != originField) {
                 GoalField goalfield = ((StartingField) currentField).getNextGoalField();
-                if (isGoalFieldPossible(fieldsToMove)) {
+                if (isGoalFieldPossible(fieldsToMove-i)) {
                     setCurrentField(goalfield);
                     continue;
                 }
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
-
             if (currentField.getNextField() == null) {
                 setCurrentField(originField);//reset to avoid weird behaviour
-                return false;
+                return (typ == typ.JERK && fieldsToMove-i-1 <= 2);//case we reached last goal, if we are jerk, possibly return true
             }
         }
 
