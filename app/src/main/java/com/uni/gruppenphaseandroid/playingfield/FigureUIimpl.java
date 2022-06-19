@@ -40,7 +40,6 @@ public class FigureUIimpl extends FigureUI {
                     //TODO EFFECT
                 } catch (Exception e) {
                     Log.e("Figur", "Figure selection ended up in exception! " + e.getMessage());
-                    e.printStackTrace();
                 }
             }
         });
