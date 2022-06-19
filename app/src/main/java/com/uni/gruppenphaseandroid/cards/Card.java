@@ -175,7 +175,7 @@ public class Card {
             case NINE:
             case TEN:
             case TWELVE:
-                return figure.checkMoving(getCardtype().getValue());
+                return !figure.isOnStartingAreaField() && figure.checkMoving(getCardtype().getValue());
 
             default:
                 throw new IllegalArgumentException(INVALID_ARGUMENTS);
