@@ -39,10 +39,10 @@ public class FigureManagerTest {
     @Test
     public void createFigureSetOfColorTestID(){
         figureManager.createFigureObjects(Color.RED, playingField);
-        Assert.assertTrue(figureManager.getFigureWithID(1)!=null);
-        Assert.assertTrue(figureManager.getFigureWithID(4)!=null);
+        Assert.assertNotNull(figureManager.getFigureWithID(1));
+        Assert.assertNotNull(figureManager.getFigureWithID(4));
         try{
-            Assert.assertTrue(figureManager.getFigureWithID(5)==null);
+            Assert.assertNotNull(figureManager.getFigureWithID(5));
         }catch (IllegalArgumentException e)         {
 
         }
@@ -75,7 +75,7 @@ public class FigureManagerTest {
         figureManager.createFigureObjects(Color.RED, playingField);
         figureManager.createFigureObjects(Color.BLUE, playingField);
 
-        Assert.assertTrue(figureManager.getFigureWithID(16)!= null);
+        Assert.assertNotNull(figureManager.getFigureWithID(16));
     }
 
     @Test
