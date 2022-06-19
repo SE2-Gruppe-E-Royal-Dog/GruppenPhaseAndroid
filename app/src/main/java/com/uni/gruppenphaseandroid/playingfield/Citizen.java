@@ -44,10 +44,14 @@ public class Citizen extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        return (!super.isBeaten() || !isKing(figure2, newPosition)) && super.isBeaten();
+        if((super.isBeaten() && isKing(figure2, newPosition)) || !super.isBeaten()) {
+            return false;
+        } return true;
     }
 
     private boolean isKing(Figure figure2, Field newPosition) {
-        return figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField);
+        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
+            return true;
+        } return false;
     }
 }
