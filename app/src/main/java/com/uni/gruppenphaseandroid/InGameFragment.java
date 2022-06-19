@@ -47,7 +47,6 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-            GameManager.getInstance().getVisualEffectsManager().setInGameFragment(this);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_ingame, container, false);
 
@@ -205,9 +204,8 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
             GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
             GameManager.getInstance().getCardManager().discardHandcard(cardholder.getClickedCardIndex());
             GameManager.getInstance().sendLastTurnServerMessage();
-
-
         }
+        GameManager.getInstance().getVisualEffectsManager().setInGameFragment(this);
     }
 
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
