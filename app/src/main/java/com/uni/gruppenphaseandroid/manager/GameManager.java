@@ -81,7 +81,10 @@ public class GameManager {
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
-
+        if(roundIndex % (5*numberOfPlayers)+1 == 0){
+            hasMovedWormholes = false;
+            hasCheated = false;
+        }
     }
 
     public void cardGotPlayed(Card card) {
@@ -142,7 +145,6 @@ public class GameManager {
         lastTurn.setCardtype(selectedCard.getCardtype());
         selectedCard = null;
         communicationManager.sendUpdateBoardMessage(lastTurn);
-        //webSocketClient.send(lastTurn.generateServerMessage());
     }
 
     public void updateBoard(UpdateBoardPayload updateBoardPayload) {
@@ -157,16 +159,6 @@ public class GameManager {
         }
         visualEffectsManager.setCardHolderUI();
         nextTurn();
-    }
-
-    public boolean doesAnyoneHaveCardsLeftInHand() {
-        //TODO: implement
-        return true;
-    }
-
-    private void everyOneDraws5Cards() {
-        hasMovedWormholes = false;
-        hasCheated = false;
     }
 
     public boolean isItMyTurn() {
@@ -261,7 +253,6 @@ public class GameManager {
         this.cheatModifier = cheatModifier;
     }
 
-
     public int getCurrentEffect() {
         return currentEffect;
     }
@@ -273,6 +264,7 @@ public class GameManager {
     public Color getColorOfClient(int playerIndex){
         return Color.values()[playerIndex];
     }
+
     public Color getColorOfMyClient(){
         return getColorOfClient(myTurnNumber);
     }
@@ -293,8 +285,6 @@ public class GameManager {
         for (int i = 0; i < playerNames.size(); i++){
             this.playerNames[i] = playerNames.get(i);
         }
-
-
     }
 
     public String getPlayerNameWithIndex(int index){
@@ -327,7 +317,7 @@ public class GameManager {
     public void executePunishment(int figureID){
         playingField.beat(figuremanager.getFigureWithID(figureID));
         if(isItMyTurn()){
-            cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
+            //cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
         }
     }
     public int getSelectCardIndex() {
@@ -365,7 +355,7 @@ public class GameManager {
         return cardManager;
     }
 
-    public FigureManager getFiguremanager (){
+    public FigureManager getFigureManager(){
         return this.figuremanager;
     }
 

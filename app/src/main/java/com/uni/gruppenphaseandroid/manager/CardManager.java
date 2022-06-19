@@ -1,7 +1,5 @@
 package com.uni.gruppenphaseandroid.manager;
 
-import android.util.Log;
-
 import com.uni.gruppenphaseandroid.cards.Card;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.playingfield.Color;
@@ -44,6 +42,7 @@ public class CardManager {
     }
 
     private boolean checkIfMoveIsPossibleForSingleCard(Card card, Figure figure){
+        GameManager.getInstance().setSelectedCard(card);//set this temporary for integration hell reasons
         boolean flag;
         switch (card.getCardtype()){
             case ONETOSEVEN:
@@ -64,6 +63,7 @@ public class CardManager {
             default:
                 flag =  card.checkIfCardIsPlayable(figure, -1, null);
         }
+        GameManager.getInstance().setSelectedCard(null);
         return flag;
     }
 
@@ -109,24 +109,6 @@ public class CardManager {
         this.figureManager = figureManager;
     }
 
-    public void turnPlayerDiscardsCard(){       //TODO still needed??
-        /*
-        TODO: Select Card to Discard
-        index = cardIndexInHandcards
-        Handcards.getInstance().discardHandcard(index);
-        InGameFragment.setStackImage();
-         */
-    }
-
-    boolean discardCardIfNecessary(int turnPlayerID, LastTurn lastTurn){        //TODO needed?
-        if(!isThereAnyPossibleMove(turnPlayerID, lastTurn)){
-            turnPlayerDiscardsCard();
-            //int index = selectCardToDiscard();
-            //Handcards.getInstance().discardHandcard(index);
-            return true;
-        }
-        return false;
-    }
 
     //HANDCARDS
 
@@ -146,10 +128,9 @@ public class CardManager {
         Card toBeRemoved = myHandCards.get(index);
         GameManager.getInstance().getVisualEffectsManager().setStackImageAfterMyMove(toBeRemoved);
         if(GameManager.getInstance().getLastTurn() == null){
-            Figure someFigure = GameManager.getInstance().getFiguremanager().getFigureWithID(1); //just get any figure to prevent nullpointer
+            Figure someFigure = GameManager.getInstance().getFigureManager().getFigureWithID(1); //just get any figure to prevent nullpointer
             LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
             GameManager.getInstance().setLastTurn(lastTurn);
-            Log.e("CM_last turn", "was set ?");
         }
         GameManager.getInstance().setSelectedCard(toBeRemoved);
         myHandCards.remove(index);

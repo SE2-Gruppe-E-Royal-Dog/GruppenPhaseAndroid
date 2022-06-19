@@ -32,7 +32,7 @@ public class Figure {
      * figure 2 - figure to be overtaken
      * @return true if overtaking possible
      */
-    public boolean checkOvertaking() {
+    public boolean isOvertaking() {
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -51,7 +51,7 @@ public class Figure {
      * Green Card (4 +/- and 10) cancel overtaking rules.
      * @return true if overtaking possible
      */
-    public boolean checkGreenCard() {
+    public boolean isGreenCard() {
         Card card = GameManager.getInstance().getSelectedCard();
         if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
             return true;
@@ -60,11 +60,11 @@ public class Figure {
         }
     }
 
-    public boolean checkOvertakingPossible() {
-        if (checkGreenCard()) {
+    public boolean isOvertakingPossible() {
+        if (isGreenCard()) {
             return true;
         } else {
-            return checkOvertaking();
+            return isOvertaking();
         }
     }
 
@@ -78,8 +78,7 @@ public class Figure {
      * figure2 - figure to be beaten
      * @return true if beating is possible
      */
-    public boolean checkBeaten() { // TODO: King auf fremdem Startfeld rauswerfen geht von allen Figuren der Farbe des Startfeldes
-        // TODO: Alle checks in einem in SuperKlasse Figure machen - Löschen in Subklassen
+    public boolean isBeaten() {
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
@@ -100,34 +99,47 @@ public class Figure {
      * @param fieldsToMove - number of fields to move
      * @return true if moving is possible
      */
-    public boolean checkMoving(int fieldsToMove) {
+    public boolean isMoving(int fieldsToMove) {
+        if(fieldsToMove == -4){//-4 is a green card, it will always work, no need to rewrite the logic for backwards-checking
+            return true;
+        }
         Field originField = currentField;
 
-
+        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
+            return false;
+        }
         for (int i = 0; i < fieldsToMove - 1; i++) {
             if (currentField.getNextField() == null) {
                 return false;
             }
-            if (currentField.getNextField().getCurrentFigure() != null && !checkOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
+            if (currentField.getNextField().getCurrentFigure() != null && !isOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
                 return false;
             }
 
             if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color) {
                 GoalField goalfield = ((StartingField) currentField).getNextGoalField();
-                if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
+                if (isGoalFieldPossible(fieldsToMove)) {
                     setCurrentField(goalfield);
                     continue;
                 }
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
         }
-        setCurrentField(originField);
 
-        Field newPosition = currentField.getFieldAtDistance(fieldsToMove, color);
+
+        Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
-            return checkBeaten(); // check if figure2 can be beaten
+            return isBeaten(); // check if figure2 can be beaten
         }
+        setCurrentField(originField);
         return true;
+    }
+
+    public boolean isGoalFieldPossible(int fieldsToMove) {
+        if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -138,7 +150,7 @@ public class Figure {
      * @return new Position Field
      */
     public Field setNewPosition(int fieldsToMove) {
-        if (checkMoving(fieldsToMove)) { // for testing included
+        if (isMoving(fieldsToMove)) { // for testing included
             Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
             return newPositionFigure1;
         } else {
@@ -160,14 +172,14 @@ public class Figure {
         return false;
     }
 
-    public boolean checkisOnNormalField(){
+    public boolean isOnNormalField(){
         if(isOnStartingAreaField() || isOnGoalField()){
             return false;
         }
         return true;
     }
 
-    public boolean checkIfAnotherFigureOnPlayingfield(){
+    public boolean isAnotherFigureOnPlayingField(){
         Field current = this.getCurrentField();
         Field field = current;
 
