@@ -740,4 +740,20 @@ public class PlayFieldMoveTest extends FigureTest {
         playingField.move(knightGreen, 4);
         Assert.assertTrue(knightGreen.getCurrentField() instanceof GoalField);
     }
+
+    @Test
+    public void checkMoveGreenKingInGoalAreaTrue() { // OK
+        kingGreen = new King(12, Color.GREEN, field12, Typ.KING, figureUI12);
+        playingField.move(kingGreen, 2);
+        playingField.move(kingGreen, 2);
+        Assert.assertTrue(kingGreen.getCurrentField() instanceof GoalField);
+    }
+
+    @Test
+    public void checkMoveGreenJerkInGoalAreaTrue() { // OK
+        jerkGreen = new Jerk(9, Color.GREEN, field12, Typ.JERK, figureUI9);
+        playingField.move(jerkGreen, 3);
+        playingField.move(jerkGreen, 2);
+        Assert.assertTrue(jerkGreen.getCurrentField() instanceof GoalField);
+    }
 }
