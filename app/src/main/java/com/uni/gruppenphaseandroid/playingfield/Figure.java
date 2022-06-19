@@ -106,7 +106,9 @@ public class Figure {
         }
         Field originField = currentField;
 
-
+        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
+            return false;
+        }
         for (int i = 0; i < fieldsToMove - 1; i++) {
             if (currentField.getNextField() == null) {
                 return false;
