@@ -39,7 +39,7 @@ public class FigureUIimpl extends FigureUI {
                     GameManager.getInstance().figureGotSelected(figure);
                     //TODO EFFECT
                 } catch (Exception e) {
-                    Log.e("Figur", "Figure selection ended up in exception! " + e.getMessage());
+                    Log.e("Figur", "Figure selection ended up in exception! " + e.getStackTrace().toString());
                 }
             }
         });

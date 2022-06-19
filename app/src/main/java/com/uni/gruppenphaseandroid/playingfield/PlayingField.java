@@ -276,12 +276,14 @@ public class PlayingField {
 
         while (current.getNextField().getCurrentFigure()==null) {
             current = current.getNextField();
-            myFigure.getCurrentField().setCurrentFigure(null);
-            current.setCurrentFigure(myFigure);
-            myFigure.setCurrentField(current);
-            myFigure.getFigureUI().moveFigureToPosition(current.getFieldUIobject());
-
         }
+        myFigure.getCurrentField().setCurrentFigure(null);
+        current.setCurrentFigure(myFigure);
+        myFigure.setCurrentField(current);
+        myFigure.getFigureUI().moveFigureToPosition(current.getFieldUIobject());
+
+        LastTurn lastTurn = new LastTurn(myFigure, null, myFigure.getCurrentField(), null);
+        GameManager.getInstance().setLastTurn(lastTurn);
         return current;
     }
 
