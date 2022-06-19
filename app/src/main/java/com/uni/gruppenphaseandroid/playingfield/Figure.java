@@ -100,8 +100,14 @@ public class Figure {
      * @return true if moving is possible
      */
     public boolean isMoving(int fieldsToMove) {
+        if(fieldsToMove == -4){//-4 is a green card, it will always work, no need to rewrite the logic for backwards-checking
+            return true;
+        }
         Field originField = currentField;
 
+        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
+            return false;
+        }
         for (int i = 0; i < fieldsToMove - 1; i++) {
             if (currentField.getNextField() == null) {
                 return false;
@@ -119,6 +125,7 @@ public class Figure {
             }
             setCurrentField(currentField.getFieldAtDistance(1, color));
         }
+
 
         Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
         if (newPosition.getCurrentFigure() != null) {
