@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.uni.gruppenphaseandroid.manager.GameManager;
 import com.uni.gruppenphaseandroid.playingfield.Citizen;
+import com.uni.gruppenphaseandroid.playingfield.Color;
 import com.uni.gruppenphaseandroid.playingfield.Field;
 import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureUI;
@@ -17,9 +18,12 @@ import com.uni.gruppenphaseandroid.playingfield.Jerk;
 import com.uni.gruppenphaseandroid.playingfield.King;
 import com.uni.gruppenphaseandroid.playingfield.Knight;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
+import com.uni.gruppenphaseandroid.playingfield.Typ;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 public class FigureTest {
     PlayingField playingField;
@@ -109,6 +113,13 @@ public class FigureTest {
         view = null;
         playingField = null;
         imageView = null;
+    }
+
+    @Test
+    public void checkOvertakingRedJerkByRedCitizen() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        citizenRed = new Citizen(2, Color.RED, field1, Typ.CITIZEN, figureUI2);
+        Assert.assertTrue(citizenRed.isOvertaking());
     }
 
 }
