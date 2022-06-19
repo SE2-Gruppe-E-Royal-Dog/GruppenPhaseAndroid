@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 
-public class CardManagerTestHandCards {
+public class CardManagerHandCardsTest {
 
     private CardManager cardManager;
     private Card card;
