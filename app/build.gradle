@@ -6,7 +6,7 @@ plugins {
 
 sonarqube {
     properties {
-        property "sonar.coverage.exclusions", "src/main/java/com/uni/gruppenphaseandroid/communication/dto/*, src/main/java/com/uni/gruppenphaseandroid/*Fragment, src/main/java/com/uni/gruppenphaseandroid/MainActivity"
+        property "sonar.coverage.exclusions", "src/main/java/com/uni/gruppenphaseandroid/communication/dto/*, src/main/java/com/uni/gruppenphaseandroid/*Fragment.java, src/main/java/com/uni/gruppenphaseandroid/MainActivity.java"
         property "sonar.projectKey", "SE2-Gruppe-E-Royal-Dog_GruppenPhaseAndroid"
         property "sonar.organization", "se2-gruppe-e-royal-dog"
         property "sonar.host.url", "https://sonarcloud.io"
