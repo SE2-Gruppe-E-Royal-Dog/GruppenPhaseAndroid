@@ -87,7 +87,7 @@ public class GameManager {
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
-        if(roundIndex % (5*numberOfPlayers)+1 == 0){
+        if(roundIndex % ((5*numberOfPlayers)+1) == 0){
             hasMovedWormholes = false;
             hasCheated = false;
         }
