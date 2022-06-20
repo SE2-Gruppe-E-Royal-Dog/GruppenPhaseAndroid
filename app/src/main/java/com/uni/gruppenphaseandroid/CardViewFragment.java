@@ -159,7 +159,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         if (Math.abs(x) > Math.abs(y)) {
 
             if (x < 0 && cheating) { //tilt to right
-                cheater.cheating(cheater);
+                //cheater.cheating(cheater);
                 GameManager.getInstance().setCheatModifier(-1);
                 cheaterNote = "-1";
 
@@ -167,16 +167,18 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 textView.setVisibility(View.VISIBLE);
 
 
-            } else {
-                if (x > 0 && cheating) { //tilt to left
-                    cheater.cheating(cheater);
+            } else if (x > 0 && cheating) { //tilt to left
+                    //cheater.cheating(cheater);
                     GameManager.getInstance().setCheatModifier(+1);
                     cheaterNote = "+1";
 
                     textView.setText("Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
 
-                }
+
+            }else{
+                GameManager.getInstance().setCheatModifier(0);
+                cheaterNote = "0";
             }
         }
     }
