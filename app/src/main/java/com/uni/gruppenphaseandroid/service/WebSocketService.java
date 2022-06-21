@@ -16,7 +16,7 @@ public class WebSocketService extends Service {
     private final Client client;
 
     public WebSocketService() throws URISyntaxException {
-        client = new Client(new URI("ws://104.199.80.138:8080/dog-royal")) {
+        client = new Client(new URI("ws://10.0.2.2:8080/dog-royal")) {
             @Override
             public void onMessage(String message) {
                 super.onMessage(message);
