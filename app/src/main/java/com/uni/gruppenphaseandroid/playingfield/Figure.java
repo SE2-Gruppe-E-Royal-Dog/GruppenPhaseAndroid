@@ -103,9 +103,13 @@ public class Figure {
      * @return true if moving is possible
      */
     public boolean isMoving(int fieldsToMove) {
-        isMinusFour(fieldsToMove);
+        if(isMinusFour(fieldsToMove)){
+            return true;
+        }
         Field originField = currentField;
-        isFieldNull(currentField);
+        if(isFieldNull(currentField)){
+            return false;
+        }
 
         for (int i = 0; i < fieldsToMove - 1; i++) {
             if (currentField.getNextField().getCurrentFigure() != null && !isOvertakingPossible()) { // check if figure1 is allowed to overtake figure2
