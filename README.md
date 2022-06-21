@@ -21,6 +21,9 @@ Spielvorbereitung:
 Jeder Spieler meldet sich bei der Lobby über seinen Username an. Bis zu vier Spieler können teilnehmen. Nachdem alle Spieler, welche mitspielen wollen, anwesend sind kann ein Spieler den "Start Game" Button drücken und das Spiel wird gestartet und jeder Spieler wird darüber informiert, welche Farbe er/sie hat. Es beginnt derjenige Spieler, der als erstes die Lobby gejoint hat. Am Spielfeld erscheint für jeden Player, welcher Spieler gerade am Zug ist.
 
 Bewegen und Schlagen: 
+
+![image](https://user-images.githubusercontent.com/101360700/174876193-08c17510-b7c0-49f7-bcc9-0b5b162b07aa.png)
+
 Jeder Spieler erhält eine Deck mit fünf Karten. Für das Fahren mit einer Figur muss man eine Karte auswählen und dann die gewünschte Figur. Auf jedem Feld darf maximal eine Figur stehen. Sollten auf eine Feld zwei Figuren zu stehen kommen, dann kommt es zum Schlagen und die geschlagene Figur wird auf den Starbereich gesetzt.
 
 Berücksichtigung der Hierarchie:
@@ -102,6 +105,9 @@ Schummelfunktion:
 In Cat Royal ist eine eigene Schummelfunktion implementiert. Ist man am Zug und hat eine Karte ausgwählt, so kann man das Handy nach links oder rechts kippen und dies verändert den Kartenwert um ein Feld mehr oder ein Feld weniger. Nach links bedeutet einen Wert weniger fahren und nach rechts kippen bedeutet einen Wert mehr fahren. Jeder Spieler kann einmal pro fünf Runden Schummeln, sprich das Schummeln ist an die Neuverteilung der Karten gekoppelt.
 
 Anschuldigung eines Schummelversuches:
+
+![image](https://user-images.githubusercontent.com/101360700/174876356-2f3e1b6b-174e-4221-8bd3-2356fdb664da.png)
+
 Wenn ein Mitspieler denkt, dass geschummelt wurde, kann er den Schummelversuch anklagen. Sobald er an der Reihe ist, kann er ein eigenes Fragment öffnen und die Farbe des Schummlers auswählen. Die Auswahl ist nur möglich, wenn der Kläger selbst eine Figur auf dem Spielbrett hat (egal ob Zielbereich oder normale Spielrunde). Wurde der Schummler richtig beschuldigt verliert dieser eine Figur auf dem Spielfeld. Welche Figur zurück zum Starbereich geht, wird random entschieden. Sollte der Ankläger allerdings falsch beschuldigen, verliert dieser eine seiner Figuren random.
 
 
