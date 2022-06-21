@@ -38,9 +38,7 @@ Für den Ritter gelten die Hierarchieregeln nicht.
 So sind auch fremde Startfelder, die
 von einer gleichfarbigen Figur
 besetzt sind, keine Blockade für ihn. Er darf
-darüber hinwegziehen. Allerdings muss er
-dabei die Hierarchie einhalten, so darf er nur mit
-einer grünen Karte an einem König vorbeiziehen.
+darüber hinwegziehen. 
 
 Der Bürger:
 Der Bürger ist keine gewöhnliche
