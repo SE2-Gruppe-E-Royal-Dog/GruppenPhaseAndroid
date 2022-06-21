@@ -47,6 +47,7 @@ Auch kann er mit einer minus 4 Karte geschlagen werden.
 Der Ritter:
 
 ![image](https://user-images.githubusercontent.com/101360700/174872940-791cf825-a9b5-4ce1-acee-8777b77fe303.png)
+
 Ein fremdes Startfelder, das
 von einer gleichfarbigen Figur
 besetzt sind, ist keine Blockade für den Ritter. 
