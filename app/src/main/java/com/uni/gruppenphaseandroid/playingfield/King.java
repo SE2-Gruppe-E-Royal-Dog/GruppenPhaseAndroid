@@ -1,9 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import com.uni.gruppenphaseandroid.cards.Card;
-import com.uni.gruppenphaseandroid.cards.Cardtype;
-import com.uni.gruppenphaseandroid.manager.GameManager;
-
 public class King extends Figure {
 
     public King(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
@@ -38,20 +34,19 @@ public class King extends Figure {
     }
 
     /**
-     * King can only move 1-7 fields and use starting card, magnet card and switch card.
+     * King can only move 1 to 7 fields and use starting card, magnet card and switch card.
      * Equal card is only allowed, if previous move was also allowed for the king.
-     * Starting is allowed with 13 or 1/11.
+     * Starting is allowed with 13-start or 1/11_start.
      * this figure - figure who moves
      * @param fieldsToMove - fields to move
      * @return true if moving possible
      */
     @Override
     public boolean isMoving(int fieldsToMove) {
-        Card card = GameManager.getInstance().getSelectedCard();
-        if(super.isMoving(fieldsToMove) && (card.getCardtype() == Cardtype.ONETOSEVEN || card.getCardtype() == Cardtype.ONEORELEVEN_START || card.getCardtype() == Cardtype.THIRTEEN_START || card.getCardtype() == Cardtype.MAGNET || card.getCardtype() == Cardtype.SWITCH)) {
-            return true;
-        } else {
+        if(!(super.isMoving(fieldsToMove)) || fieldsToMove > 7) {
             return false;
+        } else {
+            return true;
         }
     }
 }
