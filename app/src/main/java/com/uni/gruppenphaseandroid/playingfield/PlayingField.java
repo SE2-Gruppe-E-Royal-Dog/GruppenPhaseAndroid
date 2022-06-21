@@ -69,7 +69,7 @@ public class PlayingField {
         blueStartingField = generateSingleStartField(60, Color.BLUE);
     }
 
-    private StartingField generateSingleStartField(int distanceFromStart, Color color ){
+    private StartingField generateSingleStartField(int distanceFromStart, Color color) {
         Field oldField = rootField.getFieldAtDistance(distanceFromStart, color);
         StartingField startingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), color);
         oldField.getNextField().setPreviousField(startingField);
@@ -88,17 +88,16 @@ public class PlayingField {
         generateStartingAreasOfColor(blueStartingField, 80, Color.BLUE);
     }
 
-    private void generateStartingAreasOfColor(Field startingField, int id, Color color){
+    private void generateStartingAreasOfColor(Field startingField, int id, Color color) {
 
         Field nextField = startingField;
 
-        for(int i = 0; i < 4;i++){
-            StartingAreaField startingAreaField = new StartingAreaField(new FieldUIimpl(view), nextField, null, null,id - i, color);
+        for (int i = 0; i < 4; i++) {
+            StartingAreaField startingAreaField = new StartingAreaField(new FieldUIimpl(view), nextField, null, null, id - i, color);
             startingAreaField.getFieldUIobject().registerUIobject(generateStartingAreaTag(color, 4 - i));
-            if(i==0){
-                ((StartingField)startingField).setPreviousStartingArea(startingAreaField);
-            }
-            else{
+            if (i == 0) {
+                ((StartingField) startingField).setPreviousStartingArea(startingAreaField);
+            } else {
                 nextField.setPreviousField(startingAreaField);
             }
             nextField = startingAreaField;
@@ -113,14 +112,14 @@ public class PlayingField {
         generateGoalFieldsOfColor(blueStartingField, 93, Color.BLUE);
     }
 
-    private void generateGoalFieldsOfColor(Field startingField, int id, Color color){
+    private void generateGoalFieldsOfColor(Field startingField, int id, Color color) {
         Field previousField = startingField;
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             GoalField goalField = new GoalField(new FieldUIimpl(view), null, previousField, null, id + i, color);
             goalField.getFieldUIobject().registerUIobject(generateGoalTag(color, i + 1));
-            if(i==0){
-                ((StartingField)startingField).setNextGoalField(goalField);
-            }else{
+            if (i == 0) {
+                ((StartingField) startingField).setNextGoalField(goalField);
+            } else {
                 previousField.setNextField(goalField);
             }
 
@@ -220,23 +219,27 @@ public class PlayingField {
         return startingAreaField;
     }
 
-    public Field moveToStart(Figure figure){
+    public Field moveToStart(Figure figure) {
         Field newField;
-        switch (figure.getColor()){
-            case BLUE:newField = blueStartingField;
-            break;
-            case RED:newField = redStartingField;
-            break;
-            case GREEN:newField = greenStartingField;
-            break;
-            case YELLOW:newField = yellowStartingField;
+        switch (figure.getColor()) {
+            case BLUE:
+                newField = blueStartingField;
+                break;
+            case RED:
+                newField = redStartingField;
+                break;
+            case GREEN:
+                newField = greenStartingField;
+                break;
+            case YELLOW:
+                newField = yellowStartingField;
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + figure.getColor());
         }
 
         Figure figureToOvertake = newField.getCurrentFigure();
-        if(figureToOvertake!=null){
+        if (figureToOvertake != null) {
             beat(figureToOvertake);
         }
 
@@ -246,25 +249,26 @@ public class PlayingField {
         figure.getFigureUI().moveFigureToPosition(newField.getFieldUIobject());
         newField.triggerSpecialFieldEffect();
 
-        LastTurn lastTurn = new LastTurn(figure, figureToOvertake, figure.getCurrentField(), (figureToOvertake!=null)?figureToOvertake.getCurrentField():null);
+        LastTurn lastTurn = new LastTurn(figure, figureToOvertake, figure.getCurrentField(), (figureToOvertake != null) ? figureToOvertake.getCurrentField() : null);
         GameManager.getInstance().setLastTurn(lastTurn);
 
         return newField;
     }
 
-    public Field switchPositions(Figure figure1, Figure figure2){
-        Field current1 = figure1.getCurrentField();
-        Field current2 = figure2.getCurrentField();
+    public Field switchPositions(Figure figure1, Figure figure2) {
+        Field field1 = figure1.getCurrentField();
+        Field field2 = figure2.getCurrentField();
 
-        figure1.setCurrentField(current2);
-        current2.setCurrentFigure(figure1);
-        figure1.getFigureUI().moveFigureToPosition(current2.getFieldUIobject());
-        current2.triggerSpecialFieldEffect();
+        figure1.setCurrentField(field2);
+        field2.setCurrentFigure(figure1);
+        figure1.getFigureUI().moveFigureToPosition(field2.getFieldUIobject());
 
-        figure2.setCurrentField(current1);
-        current1.setCurrentFigure(figure2);
-        figure2.getFigureUI().moveFigureToPosition(current1.getFieldUIobject());
-        current1.triggerSpecialFieldEffect();
+        figure2.setCurrentField(field1);
+        field1.setCurrentFigure(figure2);
+        figure2.getFigureUI().moveFigureToPosition(field1.getFieldUIobject());
+
+        handleWormhole(true, field2);
+        handleWormhole(true, field1);
 
         LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2.getCurrentField());
         GameManager.getInstance().setLastTurn(lastTurn);
@@ -274,7 +278,7 @@ public class PlayingField {
     public Field moveToNextFigure(Figure myFigure) {
         Field current = myFigure.getCurrentField();
 
-        while (current.getNextField().getCurrentFigure()==null) {
+        while (current.getNextField().getCurrentFigure() == null) {
             current = current.getNextField();
         }
         myFigure.getCurrentField().setCurrentFigure(null);
@@ -287,34 +291,34 @@ public class PlayingField {
         return current;
     }
 
-  public void move(Figure figure1, int fieldsToMove) {
-            Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
-            Figure figure2;
+    public void move(Figure figure1, int fieldsToMove) {
+        Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
+        Figure figure2;
 
-            newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
+        newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
 
-            figure2 = newPositionFigure1.getCurrentFigure();
-            if (figure2 != null) {
-                beat(figure2);
-            }
+        figure2 = newPositionFigure1.getCurrentFigure();
+        if (figure2 != null) {
+            beat(figure2);
+        }
 
-            figure1.getCurrentField().setCurrentFigure(null);
-            newPositionFigure1.setCurrentFigure(figure1);
-            figure1.setCurrentField(newPositionFigure1);
-            figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
-            newPositionFigure1.triggerSpecialFieldEffect();
+        figure1.getCurrentField().setCurrentFigure(null);
+        newPositionFigure1.setCurrentFigure(figure1);
+        figure1.setCurrentField(newPositionFigure1);
+        figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
+        handleWormhole((figure2 != null), newPositionFigure1);
 
-            LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
-            lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
-            GameManager.getInstance().setLastTurn(lastTurn);
+        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
+        lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
+        GameManager.getInstance().setLastTurn(lastTurn);
     }
 
     private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
         return figure.setNewPosition(fieldsToMove);
     }
 
-    public void moveAllWormholesRandomly(){
-        for (int j = 0; j<4; j++){
+    public void moveAllWormholesRandomly() {
+        for (int j = 0; j < 4; j++) {
             wormholeList.get(j).moveWormholeToRandomPosition();
             repairRootField();
         }
@@ -322,17 +326,16 @@ public class PlayingField {
         repairWormholeVisuals();
     }
 
-    public Field getFieldWithID(int id){
-        if(id < 1 || id > 96){
+    public Field getFieldWithID(int id) {
+        if (id < 1 || id > 96) {
             return null;
-        }
-        else {
+        } else {
             Field targetField = rootField;
-            while(targetField.getFieldID() != id){
+            while (targetField.getFieldID() != id) {
                 targetField = targetField.getNextField();
-                if(targetField instanceof StartingField){
+                if (targetField instanceof StartingField) {
                     Field goalOrStartingField = getFieldWithStartingAndGoalID((StartingField) targetField, id);
-                    if(goalOrStartingField != null){
+                    if (goalOrStartingField != null) {
                         return goalOrStartingField;
                     }
                 }
@@ -341,28 +344,28 @@ public class PlayingField {
         }
     }
 
-    public void repairRootField(){
-        if(rootField.getFieldID() != 1){
+    public void repairRootField() {
+        if (rootField.getFieldID() != 1) {
             rootField = getFieldWithID(1);
         }
     }
 
-    public void repairWormholeVisuals(){
-        for(int i = 1; i <=64;i++){
-            if(getFieldWithID(i).getClass() != Wormhole.class){
+    public void repairWormholeVisuals() {
+        for (int i = 1; i <= 64; i++) {
+            if (getFieldWithID(i).getClass() != Wormhole.class) {
                 getFieldWithID(i).getFieldUIobject().turnIntoRegularField();
             }
         }
     }
 
-    private Field getFieldWithStartingAndGoalID(StartingField startingField, int id){
+    private Field getFieldWithStartingAndGoalID(StartingField startingField, int id) {
         Field goalField = startingField.getNextGoalField();
         Field startingAreaField = startingField.getPreviousStartingArea();
-        for(int i = 0; i< 4;i++){
-            if(goalField.getFieldID() == id){
+        for (int i = 0; i < 4; i++) {
+            if (goalField.getFieldID() == id) {
                 return goalField;
             }
-            if(startingAreaField.getFieldID() == id){
+            if (startingAreaField.getFieldID() == id) {
                 return startingAreaField;
             }
             goalField = goalField.getNextField();
@@ -380,7 +383,7 @@ public class PlayingField {
         return view;
     }
 
-    public void moveFigureToField(Figure figure, Field field){
+    public void moveFigureToField(Figure figure, Field field) {
         figure.getCurrentField().setCurrentFigure(null);
         figure.setCurrentField(field);
         field.setCurrentFigure(figure);
@@ -395,7 +398,7 @@ public class PlayingField {
                 return startingField.getNextField();
             }
         } else { //CheatModifier == -1
-           return startingField.getPreviousField();
+            return startingField.getPreviousField();
         }
     }
 
@@ -411,27 +414,42 @@ public class PlayingField {
         }
     }
 
-    public Field applyCheatModifier(Field field, Color figureColor){
+    public Field applyCheatModifier(Field field, Color figureColor) {
         if (GameManager.getInstance().getCheatModifier() == 0) {
-            return field; }
+            return field;
+        }
         GameManager.getInstance().setHasCheated(true);
         if (field instanceof StartingField) {
             return applyCheatModifierForStartingField((StartingField) field, figureColor);
         } else if (field instanceof GoalField) {
-                return applyCheatModifierForGoalField(field);
-            } else{ // Field is regular field
-                    return field.getFieldAtDistance(GameManager.getInstance().getCheatModifier(), Color.BLACK);
+            return applyCheatModifierForGoalField(field);
+        } else { // Field is regular field
+            return field.getFieldAtDistance(GameManager.getInstance().getCheatModifier(), Color.BLACK);
         }
     }
 
-    public void beat(Figure figureToBeat){
+    public void beat(Figure figureToBeat) {
         figureToBeat.getCurrentField().setCurrentFigure(null);
         Field startingAreaField = getRightStartingAreaField(figureToBeat.getColor());
         figureToBeat.setCurrentField(startingAreaField);
         startingAreaField.setCurrentFigure(figureToBeat);
         figureToBeat.getFigureUI().moveFigureToPosition(figureToBeat.getCurrentField().getFieldUIobject()); // visual movement on board
     }
+
+    private void handleWormhole(boolean hasAnotherFigureMovedInThisTurn, Field field) {
+        if (field instanceof Wormhole) {
+            if(!hasAnotherFigureMovedInThisTurn || (((Wormhole) field).getPartnerWormhole().getCurrentFigure() == null)) {
+                field.triggerSpecialFieldEffect();
+
+            } else {
+                field.triggerSpecialFieldEffect();
+            }
+
+
+        }
+    }
 }
+
 
 
 
