@@ -27,7 +27,7 @@ Berücksichtigung der Hierarchie:
 Bei den Figuren gilt eine Hierarchie, die beim Überholen prinzipiell einzuhalten ist - König vor Ritter vor Bürger vor Narr. So darf zum Beispiel ein Bürger nur einem Narren oder einen anderen Bürger egal welcher Farbe überholen - ein König hingegen alle Figuren. Grüne Karten (4+/- und 10) setzen die Hierarchien außer Kraft.
 
 Schmeiß-, Überhol- und Blockierverbot:
-Hat man eine Figur auf seinem eigenen Startfeld, kann diese prinzipiell weder von einer anderen Figur (egal welcher Farbe) geschmissen oder überholt werden. Im Gegenzug darf keine fremde Figur das eigene Startfeld blockieren und kann damit immer geschmissen werden. Generell gilt im eigenen Zielbereich Schmeißverbot. Die Überholregeln müssen jedoch auch im Ziel eingehalten werden.
+Hat man eine Figur auf seinem eigenen Startfeld, kann diese prinzipiell weder von einer anderen Figur (egal welcher Farbe) geschmissen noch überholt werden. Das Überholverbot gilt hingegen nicht für den Ritter - aber nur im Zuge der Hierarchie. Im Gegenzug darf keine fremde Figur das eigene Startfeld blockieren und kann damit immer geschmissen werden. Generell gilt im eigenen Zielbereich Schmeißverbot. Die Überholregeln müssen jedoch auch im Ziel eingehalten werden.
 
 Verbot der Zieleinfahrt:
 Eine Einfahrt in das Ziel ist nicht möglich, wenn die eigene Figur nach einer Runde am Startfeld zu stehen kommt. Denn dann muss sie die Runde erneut absolvieren.
@@ -44,10 +44,10 @@ außer er befindet sich auf einem fremden Startfeld.
 Auch kann er mit einer minus 4 Karte geschlagen werden.
 
 Der Ritter:
-Für den Ritter gelten die Hierarchieregeln nicht. 
-So sind auch fremde Startfelder, die
+Ein fremdes Startfelder, das
 von einer gleichfarbigen Figur
-besetzt sind, keine Blockade für ihn. Er darf
+besetzt sind, ist keine Blockade für den Ritter. 
+Er darf im Zuge der Hierarchieordnung
 darüber hinwegziehen. 
 
 Der Bürger:
