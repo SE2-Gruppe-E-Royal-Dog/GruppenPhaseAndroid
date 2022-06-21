@@ -157,9 +157,9 @@ public class Figure {
 
     public boolean isFieldNull(Field currentField) {
         if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
