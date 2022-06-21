@@ -7,9 +7,9 @@ Nachdem unsere App gewisse Sonderfunktionen hat, welche im normalen Spiel nicht 
 
 Spielmaterial:
 1 Spielplan
-110 Spielkarten (je 10x die 11 und 13, je 7x 2, 3, 4,
-5, 6, 1-7, 8, 9, 10, 12, = und Tauscher, 6x Magnet), 
-16 Spielfiguren (pro Farbe 4 Figuren (König, Ritter,Bürger und Narr)), 
+110 Spielkarten (je 10x die 1/11_Start und 13_Start, je 7x 2, 3, 4+/-,
+5, 6, 1-7, 8, 9, 10, 12, Kopierkarte und Tauscher, 6x Magnet), 
+16 Spielfiguren (pro Farbe 4 Figuren (König, Ritter, Bürger und Narr)), 
 4 Wurmlöcher, 
 ein Anschuldigungsfeld bei welchen man Schummeln anklagen kann
 
@@ -20,24 +20,34 @@ Sobald dies der Fall ist, scheint ein Gewinnerfeld auf, bei dem eine Platzierung
 Spielvorbereitung:
 Jeder Spieler meldet sich bei der Lobby über seinen Username an. Bis zu vier Spieler können teilnehmen. Nachdem alle Spieler, welche mitspielen wollen, anwesend sind kann ein Spieler den "Start Game" Button drücken und das Spiel wird gestartet und jeder Spieler wird darüber informiert, welche Farbe er/sie hat. Es beginnt derjenige Spieler, der als erstes die Lobby gejoint hat. Am Spielfeld erscheint für jeden Player, welcher Spieler gerade am Zug ist.
 
-Bewegen und Schlagen
+Bewegen und Schlagen: 
 Jeder Spieler erhält eine Deck mit fünf Karten. Für das Fahren mit einer Figur muss man eine Karte auswählen und dann die gewünschte Figur. Auf jedem Feld darf maximal eine Figur stehen. Sollten auf eine Feld zwei Figuren zu stehen kommen, dann kommt es zum Schlagen und die geschlagene Figur wird auf den Starbereich gesetzt.
+
+Berücksichtigung der Hierarchie:
+Bei den Figuren gilt eine Hierarchie, die beim Überholen prinzipiell einzuhalten ist - König vor Ritter vor Bürger vor Narr. So darf zum Beispiel ein Bürger nur einem Narren oder einen anderen Bürger egal welcher Farbe überholen - ein König hingegen alle Figuren. Grüne Karten (4+/- und 10) setzen die Hierarchien außer Kraft.
+
+Schmeiß-, Überhol- und Blockierverbot:
+Hat man eine Figur auf seinem eigenen Startfeld, kann diese prinzipiell weder von einer anderen Figur (egal welcher Farbe) geschmissen noch überholt werden. Das Überholverbot gilt hingegen nicht für den Ritter - aber nur im Zuge der Hierarchie. Im Gegenzug darf keine fremde Figur das eigene Startfeld blockieren und kann damit immer geschmissen werden. Generell gilt im eigenen Zielbereich Schmeißverbot. Die Überholregeln müssen jedoch auch im Ziel eingehalten werden.
+
+Verbot der Zieleinfahrt:
+Eine Einfahrt in das Ziel ist nicht möglich, wenn die eigene Figur nach einer Runde am Startfeld zu stehen kommt. Denn dann muss sie die Runde erneut absolvieren.
 
 Figuren:
 Der König:
-Er darf nur mit Karten des Wertes 1 bis 7, den Startkarten, 
-den Tauschkarte, den Magnetkarte und mit den Kopiekarte - 
-solange der vorherige Zug für den König zulässig ist - gefahren werden. 
+Er darf nur mit Karten im Wert von 1 bis 7, den Startkarten, 
+den Tauschkarte, den Magnetkarte, den Kopiekarte - 
+solange der vorherige Zug für den König zulässig ist - und 
+den 4+/- Karten fahren. 
 Die Verbotskarten sind mit einer durchgestrichenen Krone markiert. 
 Ein König kann nur von einem anderen König geschlagen werden - 
 außer er befindet sich auf einem fremden Startfeld. 
 Auch kann er mit einer minus 4 Karte geschlagen werden.
 
 Der Ritter:
-Für den Ritter gelten die Hierarchieregeln nicht. 
-So sind auch fremde Startfelder, die
+Ein fremdes Startfelder, das
 von einer gleichfarbigen Figur
-besetzt sind, keine Blockade für ihn. Er darf
+besetzt sind, ist keine Blockade für den Ritter. 
+Er darf im Zuge der Hierarchieordnung
 darüber hinwegziehen. 
 
 Der Bürger:
