@@ -21,6 +21,9 @@ Spielvorbereitung:
 Jeder Spieler meldet sich bei der Lobby über seinen Username an. Bis zu vier Spieler können teilnehmen. Nachdem alle Spieler, welche mitspielen wollen, anwesend sind kann ein Spieler den "Start Game" Button drücken und das Spiel wird gestartet und jeder Spieler wird darüber informiert, welche Farbe er/sie hat. Es beginnt derjenige Spieler, der als erstes die Lobby gejoint hat. Am Spielfeld erscheint für jeden Player, welcher Spieler gerade am Zug ist.
 
 Bewegen und Schlagen: 
+
+![image](https://user-images.githubusercontent.com/101360700/174876193-08c17510-b7c0-49f7-bcc9-0b5b162b07aa.png)
+
 Jeder Spieler erhält eine Deck mit fünf Karten. Für das Fahren mit einer Figur muss man eine Karte auswählen und dann die gewünschte Figur. Auf jedem Feld darf maximal eine Figur stehen. Sollten auf eine Feld zwei Figuren zu stehen kommen, dann kommt es zum Schlagen und die geschlagene Figur wird auf den Starbereich gesetzt.
 
 Berücksichtigung der Hierarchie:
@@ -33,7 +36,11 @@ Verbot der Zieleinfahrt:
 Eine Einfahrt in das Ziel ist nicht möglich, wenn die eigene Figur nach einer Runde am Startfeld zu stehen kommt. Denn dann muss sie die Runde erneut absolvieren.
 
 Figuren:
+
 Der König:
+
+![image](https://user-images.githubusercontent.com/101360700/174873386-49947c70-209d-4a24-9435-048647a1f6be.png)
+
 Er darf nur mit Karten im Wert von 1 bis 7, den Startkarten, 
 den Tauschkarte, den Magnetkarte, den Kopiekarte - 
 solange der vorherige Zug für den König zulässig ist - und 
@@ -44,6 +51,9 @@ außer er befindet sich auf einem fremden Startfeld.
 Auch kann er mit einer minus 4 Karte geschlagen werden.
 
 Der Ritter:
+
+![image](https://user-images.githubusercontent.com/101360700/174872940-791cf825-a9b5-4ce1-acee-8777b77fe303.png)
+
 Ein fremdes Startfelder, das
 von einer gleichfarbigen Figur
 besetzt sind, ist keine Blockade für den Ritter. 
@@ -51,6 +61,9 @@ Er darf im Zuge der Hierarchieordnung
 darüber hinwegziehen. 
 
 Der Bürger:
+
+![image](https://user-images.githubusercontent.com/101360700/174873987-3d56b477-1a3a-4e8a-ab13-ba52e046a6ca.png)
+
 Der Bürger ist keine gewöhnliche
 Figur. Er hat mehr Ansehen als ein
 Narr (kann diesen also überholen),
@@ -58,6 +71,9 @@ steht aber unter dem Ritter und dem
 König.
 
 Der Narr:
+
+![image](https://user-images.githubusercontent.com/101360700/174873769-a2f8e0f9-6264-480e-987c-51711d2f08a3.png)
+
 Der Narr kann, wenn er ins Ziel
 hineinzieht, bis zu 2 Punkte verfallen
 lassen. Im Verlauf des Spiels darf
@@ -72,14 +88,26 @@ Rote Karten, hier werden verschiedene Events implementiert. Es gibt eigene Karte
 Es gibt eine grün/rote Karte bei der man entscheiden kann ob man 4 Felder nach vorne oder nach hinten rückt.
 Die grüne sowie die grün/rote Karte ignoriert die Hierarchie der Spielfigueren und man kann ohne Blockaden die angebene Zahl am Spielfeld fahren.
 
+![image](https://user-images.githubusercontent.com/101360700/174874297-266950f8-a4a0-47d6-baed-51fadc72c202.png) ![image](https://user-images.githubusercontent.com/101360700/174874477-ffa2bc4c-1b9a-476c-9931-72de452ee1cc.png) ![image](https://user-images.githubusercontent.com/101360700/174874593-bdd83ef0-df5f-4fb7-9996-51494d96c15f.png) ![image](https://user-images.githubusercontent.com/101360700/174874774-0f38bf8b-39bf-402d-bef8-ebebbd4ccfe0.png) ![image](https://user-images.githubusercontent.com/101360700/174874886-dd79cd08-a45f-4251-9fbe-1c7f19297ed7.png) ![image](https://user-images.githubusercontent.com/101360700/174875505-d9abd55e-3d55-4a6b-b739-6030ef58c893.png) ![image](https://user-images.githubusercontent.com/101360700/174875532-a933d42c-169f-4eb6-84e5-b76344bf2003.png)
+
+ 
+
+
+
 
 Wurmlöcher:
+
+![image](https://user-images.githubusercontent.com/101360700/174874117-2854cd4d-4e87-416d-8276-044e237bcbe2.png)
+
 Wenn eine Figur auf ein mit Spiralenform gekennzeichnetes Feld fährt, wird die Figur zu einem anderen Wurmloch teleportiert. Die Wurmlöche können mittels Abdecken des Lichtsensors am Handy random bewegt werden. Eine Verschiebung der Wurmlöcher ist nur möglich, wenn man selbst nicht am Zug ist, sowie nur einmal pro fünf Runden.
 
 Schummelfunktion:
 In Cat Royal ist eine eigene Schummelfunktion implementiert. Ist man am Zug und hat eine Karte ausgwählt, so kann man das Handy nach links oder rechts kippen und dies verändert den Kartenwert um ein Feld mehr oder ein Feld weniger. Nach links bedeutet einen Wert weniger fahren und nach rechts kippen bedeutet einen Wert mehr fahren. Jeder Spieler kann einmal pro fünf Runden Schummeln, sprich das Schummeln ist an die Neuverteilung der Karten gekoppelt.
 
 Anschuldigung eines Schummelversuches:
+
+![image](https://user-images.githubusercontent.com/101360700/174876356-2f3e1b6b-174e-4221-8bd3-2356fdb664da.png)
+
 Wenn ein Mitspieler denkt, dass geschummelt wurde, kann er den Schummelversuch anklagen. Sobald er an der Reihe ist, kann er ein eigenes Fragment öffnen und die Farbe des Schummlers auswählen. Die Auswahl ist nur möglich, wenn der Kläger selbst eine Figur auf dem Spielbrett hat (egal ob Zielbereich oder normale Spielrunde). Wurde der Schummler richtig beschuldigt verliert dieser eine Figur auf dem Spielfeld. Welche Figur zurück zum Starbereich geht, wird random entschieden. Sollte der Ankläger allerdings falsch beschuldigen, verliert dieser eine seiner Figuren random.
 
 

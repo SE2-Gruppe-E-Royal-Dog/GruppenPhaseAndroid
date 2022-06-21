@@ -3,29 +3,40 @@ package com.uni.gruppenphaseandroid.cards;
 import com.uni.gruppenphaseandroid.R;
 import com.uni.gruppenphaseandroid.manager.GameManager;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class CardUI  {
 
-
-    private static CardUI cardUI;
     LinkedList<Integer> imageCardList;
+    Map<Integer, Cardtype> cardtypeMap;
 
 
 
-    public static CardUI getInstance() {
-        if (cardUI == null) {
-            cardUI = new CardUI();
-        }
-        return cardUI;
+    public CardUI(){
+        cardtypeMap = new HashMap<>();
+        setUpMap();
     }
 
-
-    public CardUI() {
-        //default implementation ignored
+    public void setUpMap(){
+        cardtypeMap.put(R.drawable.ic_card_2, Cardtype.TWO);
+        cardtypeMap.put(R.drawable.ic_card_3, Cardtype.THREE);
+        cardtypeMap.put(R.drawable.ic_card_4, Cardtype.FOUR_PLUSMINUS);
+        cardtypeMap.put(R.drawable.ic_card_5, Cardtype.FIVE);
+        cardtypeMap.put(R.drawable.ic_card_6, Cardtype.SIX);
+        cardtypeMap.put(R.drawable.ic_card_7, Cardtype.ONETOSEVEN);
+        cardtypeMap.put(R.drawable.ic_card_8, Cardtype.EIGTH);
+        cardtypeMap.put(R.drawable.ic_card_9, Cardtype.NINE);
+        cardtypeMap.put(R.drawable.ic_card_10, Cardtype.TEN);
+        cardtypeMap.put(R.drawable.ic_card_11, Cardtype.ONEORELEVEN_START);
+        cardtypeMap.put(R.drawable.ic_card_12, Cardtype.TWELVE);
+        cardtypeMap.put(R.drawable.ic_card_13, Cardtype.THIRTEEN_START);
+        cardtypeMap.put(R.drawable.ic_card_switch, Cardtype.SWITCH);
+        cardtypeMap.put(R.drawable.ic_card_copy, Cardtype.EQUAL);
+        cardtypeMap.put(R.drawable.ic_card_magnet, Cardtype.MAGNET);
     }
-
 
     public void addCardToHand() {
         imageCardList = new LinkedList<>();
@@ -37,83 +48,26 @@ public class CardUI  {
     }
 
     public int findImageView (Card card) {
-
-            switch (card.getCardtype()) {
-                case TWO:
-                    return R.drawable.ic_card_2;
-                case THREE:
-                    return R.drawable.ic_card_3;
-                case FIVE:
-                    return R.drawable.ic_card_5;
-                case SIX:
-                    return R.drawable.ic_card_6;
-                case EIGTH:
-                    return R.drawable.ic_card_8;
-                case NINE:
-                    return R.drawable.ic_card_9;
-                case TEN:
-                    return R.drawable.ic_card_10;
-                case TWELVE:
-                    return R.drawable.ic_card_12;
-                case EQUAL:
-                    return R.drawable.ic_card_copy;
-                case FOUR_PLUSMINUS:
-                    return R.drawable.ic_card_4;
-                case ONETOSEVEN:
-                    return R.drawable.ic_card_7;
-                case ONEORELEVEN_START:
-                    return R.drawable.ic_card_11;
-                case THIRTEEN_START:
-                    return R.drawable.ic_card_13;
-                case MAGNET:
-                    return R.drawable.ic_card_magnet;
-                case SWITCH:
-                    return R.drawable.ic_card_switch;
-
+            for (Map.Entry<Integer, Cardtype> entry : cardtypeMap.entrySet()){
+                if (entry.getValue().equals(card.getCardtype())){
+                    return entry.getKey();
+                }
             }
             return 0;
     }
 
     public Cardtype idToCardType (int card) {
-        switch (card) {
-            case R.drawable.ic_card_2:
-                return Cardtype.TWO;
-            case R.drawable.ic_card_3:
-                return Cardtype.THREE;
-            case R.drawable.ic_card_5:
-                return Cardtype.FIVE;
-            case R.drawable.ic_card_6:
-                return Cardtype.SIX;
-            case R.drawable.ic_card_8:
-                return Cardtype.EIGTH;
-            case R.drawable.ic_card_9:
-                return Cardtype.NINE;
-            case R.drawable.ic_card_10:
-                return Cardtype.TEN;
-            case R.drawable.ic_card_12:
-                return Cardtype.TWELVE;
-            case R.drawable.ic_card_copy:
-                return Cardtype.EQUAL;
-            case R.drawable.ic_card_4:
-                return Cardtype.FOUR_PLUSMINUS;
-            case R.drawable.ic_card_7:
-                return Cardtype.ONETOSEVEN;
-            case R.drawable.ic_card_11:
-                return Cardtype.ONEORELEVEN_START;
-            case R.drawable.ic_card_13:
-                return Cardtype.THIRTEEN_START;
-            case R.drawable.ic_card_magnet:
-                return Cardtype.MAGNET;
-            case R.drawable.ic_card_switch:
-                return Cardtype.SWITCH;
-        }
-        return null;
+        return cardtypeMap.get(card);
     }
 
 
     public LinkedList<Integer> cardsForRecyclerView (){
         addCardToHand();
         return imageCardList;
+    }
+
+    public Map<Integer, Cardtype> getCardtypeMap(){
+        return cardtypeMap;
     }
 }
 

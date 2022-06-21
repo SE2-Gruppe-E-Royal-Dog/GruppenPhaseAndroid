@@ -14,50 +14,24 @@ import org.junit.Test;
 public class CardUITest {
 
     CardUI cardUI;
-    /*
-    View view;
-    Card card;
-    Context context;
-    CardViewFragment fragment;
-     */
+
 
     @Before
     public void setUp() {
-        /*
-        view = mock(View.class);
-        fragment = mock(CardViewFragment.class);
-        context = mock(Context.class);
-        //? when(view.findViewWithTag(anyString())).thenReturn(imageView);
-        cardUI = new CardUI(context, view);
-         */
-        cardUI = CardUI.getInstance();
+
+        cardUI = new CardUI();
     }
 
     @After
     public void tearDown() {
-        /*
-        view = null;
-        card = null;
-         */
         cardUI = null;
     }
-    /*
-    @Test
-    public void test1() {
 
-        card = new Card (Cardtype.EIGTH);
-        cardUI.addCardToHand(card);
-
-
-
-
-    }
-    */
     @Test
     public void idToCardType (){
         int id1 = R.drawable.ic_card_2;
 
-        Assert.assertEquals(Cardtype.TWO, CardUI.getInstance().idToCardType(id1));
+        Assert.assertEquals(Cardtype.TWO, cardUI.idToCardType(id1));
     }
 
 

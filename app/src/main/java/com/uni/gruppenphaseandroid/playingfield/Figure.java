@@ -103,11 +103,12 @@ public class Figure {
      * @return true if moving is possible
      */
     public boolean isMoving(int fieldsToMove) {
-        if(isMinusFour(fieldsToMove)){
+        if(fieldsToMove == -4){
             return true;
         }
+
         Field originField = currentField;
-        if(isFieldNull(currentField)){
+        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
             return false;
         }
 
@@ -143,20 +144,6 @@ public class Figure {
 
     public boolean isGoalFieldPossible(int fieldsToMove) {
         if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isMinusFour(int fieldsToMove) {
-        if(fieldsToMove == -4){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isFieldNull(Field currentField) {
-        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
             return true;
         }
         return false;

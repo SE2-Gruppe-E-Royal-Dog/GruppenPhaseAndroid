@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -44,6 +45,7 @@ public class GameManager {
     private VisualEffectsManager visualEffectsManager;
     private CardManager cardManager;
     private CommunicationManager communicationManager;
+    private CardUI cardUI;
     private LastTurn lastTurn;
     private Card selectedCard;
     private int currentEffect;
@@ -57,7 +59,7 @@ public class GameManager {
 
     int roundIndex;
 
-    public void startGame(int numberOfPlayers, int playerTurnNumber, FigureManager figureManager, VisualEffectsManager visualEffectsManager, CardManager cardManager, CommunicationManager communicationManager) {
+    public void startGame(int numberOfPlayers, int playerTurnNumber, FigureManager figureManager, VisualEffectsManager visualEffectsManager, CardManager cardManager, CommunicationManager communicationManager, CardUI cardUI) {
         this.roundIndex = 0;
 
         this.numberOfPlayers = numberOfPlayers;
@@ -66,6 +68,7 @@ public class GameManager {
         this.visualEffectsManager = visualEffectsManager;
         this.cardManager = cardManager;
         this.communicationManager = communicationManager;
+        this.cardUI = cardUI;
 
         for (int i = 0; i < numberOfPlayers; i++) {
             figureManager.createFigureSetOfColor(Color.values()[i], playingField);
@@ -364,5 +367,13 @@ public class GameManager {
 
     public VisualEffectsManager getVisualEffectsManager() {
         return visualEffectsManager;
+    }
+
+    public CardUI getCardUI() {
+        return cardUI;
+    }
+
+    public void setCardUI(CardUI cardUI) {
+        this.cardUI = cardUI;
     }
 }

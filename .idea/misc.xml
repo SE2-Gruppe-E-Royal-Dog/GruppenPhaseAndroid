@@ -16,9 +16,13 @@
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluefield.xml" value="0.1565" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_bluejester.xml" value="0.1" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_blueking.xml" value="0.1" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_10.xml" value="0.2495" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_11.xml" value="0.2495" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_13.xml" value="0.1675" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_4.xml" value="0.1965" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_7.xml" value="0.185" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_8.xml" value="0.2495" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_9.xml" value="0.2495" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_cardholder.xml" value="0.1965" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_copy.xml" value="0.185" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/drawable/ic_card_magnet.xml" value="0.185" />
@@ -44,7 +48,7 @@
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_how__to__player.xml" value="0.3046875" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_howtoplay.xml" value="0.2" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_leaderboard.xml" value="0.1890625" />
-        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_special_card_dialog.xml" value="0.22" />
+        <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/fragment_special_card_dialog.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/image_single_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/image_single_item_1.xml" value="0.1" />
         <entry key="..\:/Users/claud/AndroidStudioProjects/GruppenPhaseAndroid/app/src/main/res/layout/image_single_item_2.xml" value="0.17831813576494426" />

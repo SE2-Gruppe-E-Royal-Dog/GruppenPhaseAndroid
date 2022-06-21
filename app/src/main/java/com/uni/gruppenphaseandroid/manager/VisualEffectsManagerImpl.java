@@ -42,13 +42,13 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
                     throw new IllegalArgumentException("No Cardtype has been set");
                 }
 
-                int imageId = CardUI.getInstance().findImageView(new Card(lastTurn.getCardtype()));
+                int imageId = GameManager.getInstance().getCardUI().findImageView(new Card(lastTurn.getCardtype()));
                 stackImage.setImageResource(imageId);
 
         }
 
         public void setStackImageAfterMyMove (Card card){
-            stackImage.setImageResource(CardUI.getInstance().findImageView(card));
+            stackImage.setImageResource(GameManager.getInstance().getCardUI().findImageView(card));
         }
 
         @Override

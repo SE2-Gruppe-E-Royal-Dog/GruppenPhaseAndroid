@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         var payload = gson.fromJson(sendCardsPayload, SendCardsPayload.class);
 
         GameManager.getInstance().getCardManager().addCardToHand(payload.getCards());
-        CardUI.getInstance().addCardToHand(); //set UI Card Hand
+        GameManager.getInstance().getCardUI().addCardToHand(); //set UI Card Hand
     }
 
     private void handlePlayerLeftMessage(String body) {
@@ -219,9 +219,10 @@ public class MainActivity extends AppCompatActivity {
         GameManager.getInstance().setPlayerNames(payload.getPlayerNames());
         CardManager cardManager = new CardManager();
         FigureManager figureManager = new FigureManager();
+        CardUI cardUI = new CardUI();
         cardManager.setFigureManager(figureManager);
         CommunicationManager communicationManager = new CommunicationManager(websocketClient, lobbyId, playerId);
-        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext(), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)), cardManager, communicationManager);
+        GameManager.getInstance().startGame(payload.getNumberOfPlayers(), payload.getClientPlayerNumber(), figureManager, new VisualEffectsManagerImpl(findViewById(R.id.stack), getApplicationContext(), findViewById(R.id.btn_cardholderButton), findViewById(R.id.txt_cheater)), cardManager, communicationManager, cardUI);
 
         findViewById(R.id.btn_cardholderButton).setVisibility(View.VISIBLE);
         findViewById(R.id.start_game_button).setVisibility(View.INVISIBLE);
