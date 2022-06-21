@@ -58,6 +58,9 @@ Er darf im Zuge der Hierarchieordnung
 darüber hinwegziehen. 
 
 Der Bürger:
+
+![image](https://user-images.githubusercontent.com/101360700/174873987-3d56b477-1a3a-4e8a-ab13-ba52e046a6ca.png)
+
 Der Bürger ist keine gewöhnliche
 Figur. Er hat mehr Ansehen als ein
 Narr (kann diesen also überholen),
@@ -65,6 +68,9 @@ steht aber unter dem Ritter und dem
 König.
 
 Der Narr:
+
+![image](https://user-images.githubusercontent.com/101360700/174873769-a2f8e0f9-6264-480e-987c-51711d2f08a3.png)
+
 Der Narr kann, wenn er ins Ziel
 hineinzieht, bis zu 2 Punkte verfallen
 lassen. Im Verlauf des Spiels darf
@@ -79,8 +85,16 @@ Rote Karten, hier werden verschiedene Events implementiert. Es gibt eigene Karte
 Es gibt eine grün/rote Karte bei der man entscheiden kann ob man 4 Felder nach vorne oder nach hinten rückt.
 Die grüne sowie die grün/rote Karte ignoriert die Hierarchie der Spielfigueren und man kann ohne Blockaden die angebene Zahl am Spielfeld fahren.
 
+![image](https://user-images.githubusercontent.com/101360700/174874297-266950f8-a4a0-47d6-baed-51fadc72c202.png) ![image](https://user-images.githubusercontent.com/101360700/174874477-ffa2bc4c-1b9a-476c-9931-72de452ee1cc.png) ![image](https://user-images.githubusercontent.com/101360700/174874593-bdd83ef0-df5f-4fb7-9996-51494d96c15f.png)
+
+
+
+
 
 Wurmlöcher:
+
+![image](https://user-images.githubusercontent.com/101360700/174874117-2854cd4d-4e87-416d-8276-044e237bcbe2.png)
+
 Wenn eine Figur auf ein mit Spiralenform gekennzeichnetes Feld fährt, wird die Figur zu einem anderen Wurmloch teleportiert. Die Wurmlöche können mittels Abdecken des Lichtsensors am Handy random bewegt werden. Eine Verschiebung der Wurmlöcher ist nur möglich, wenn man selbst nicht am Zug ist, sowie nur einmal pro fünf Runden.
 
 Schummelfunktion:
