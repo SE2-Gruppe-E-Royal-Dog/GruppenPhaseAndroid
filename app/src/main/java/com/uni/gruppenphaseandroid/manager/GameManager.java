@@ -110,7 +110,7 @@ public class GameManager {
     }
 
     private void figureSelectedNormalCase(Figure figure){
-        if(selectedCard.getCardtype() == Cardtype.SWITCH){
+        if(selectedCard.getCardtype() == Cardtype.SWITCH || (selectedCard.getCardtype() == Cardtype.EQUAL && lastTurn != null && lastTurn.getCardtype() == Cardtype.SWITCH)){
             currentTurnPhase = TurnPhase.CHOOSESECONDFIGURE;
             currentlySelectedFigure = figure;
             return;
