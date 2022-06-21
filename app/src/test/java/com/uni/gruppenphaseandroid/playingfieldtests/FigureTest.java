@@ -114,4 +114,11 @@ public class FigureTest {
         playingField = null;
         imageView = null;
     }
+
+    @Test
+    public void checkOvertakingRedJerkByRedKnight() { // OK
+        jerkRed = new Jerk(1, Color.RED, field2, Typ.JERK, figureUI1);
+        knightRed = new Knight(3, Color.RED, field1, Typ.KNIGHT, figureUI3);
+        Assert.assertTrue(knightRed.isOvertaking());
+    }
 }

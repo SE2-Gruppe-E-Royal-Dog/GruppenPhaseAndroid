@@ -53,11 +53,7 @@ public class Figure {
      */
     public boolean isGreenCard() {
         Card card = GameManager.getInstance().getSelectedCard();
-        if (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN) {
-            return true;
-        } else {
-            return false;
-        }
+        return (card.getCardtype() == Cardtype.FOUR_PLUSMINUS || card.getCardtype() == Cardtype.TEN);
     }
 
     public boolean isOvertakingPossible() {
@@ -100,20 +96,17 @@ public class Figure {
      * if its current position is the own starting field or own goal area.
      * Exception: Jerk is allowed to move up to 2 fields less than displayed on the card,
      * if he is moving into the goal area.
-     * Moving into Goal Area starting/pausing from/on the Starting Field isnot possible!
+     * Exception: Card 4+/- is a green card - when moving -4: the figure on that field can always be beaten.
+     * Moving into Goal Area starting/pausing from/on the Starting Field is not possible!
      * this figure - figure who moves
      * @param fieldsToMove - number of fields to move
      * @return true if moving is possible
      */
     public boolean isMoving(int fieldsToMove) {
-        if(fieldsToMove == -4){//-4 is a green card, it will always work, no need to rewrite the logic for backwards-checking
-            return true;
-        }
+        isMinusFour(fieldsToMove);
         Field originField = currentField;
+        isFieldNull(currentField);
 
-        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
-            return false;
-        }
         for (int i = 0; i < fieldsToMove - 1; i++) {
             if (currentField.getNextField() == null) {
                 setCurrentField(originField);
@@ -147,6 +140,20 @@ public class Figure {
             return true;
         }
         return false;
+    }
+
+    public boolean isMinusFour(int fieldsToMove) {
+        if(fieldsToMove == -4){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFieldNull(Field currentField) {
+        if (currentField.getNextField() == null) { //check again, in case entire loop will be skipped if fieldsToMove == 1
+            return false;
+        }
+        return true;
     }
 
     /**
