@@ -76,12 +76,18 @@ public class GameManager {
     }
 
     public void nextTurn() {
+        for(int i = 0; i < numberOfPlayers;i++){
+            if(figuremanager.isWinner(Color.values()[i])){
+                visualEffectsManager.showWinningScreen();
+                return;
+            }
+        }
         currentTurnPlayerNumber = (currentTurnPlayerNumber + 1) % numberOfPlayers;
         visualEffectsManager.showNextTurnMessage(playerNames[currentTurnPlayerNumber]);
 
         currentTurnPhase = TurnPhase.CHOOSECARD;
         roundIndex++;
-        if(roundIndex % (5*numberOfPlayers)+1 == 0){
+        if(roundIndex % ((5*numberOfPlayers)+1) == 0){
             hasMovedWormholes = false;
             hasCheated = false;
         }
@@ -316,9 +322,6 @@ public class GameManager {
 
     public void executePunishment(int figureID){
         playingField.beat(figuremanager.getFigureWithID(figureID));
-        if(isItMyTurn()){
-            //cardManager.discardCardIfNecessary(myTurnNumber, lastTurn); //since the field changed, there may be no playable card in hand
-        }
     }
     public int getSelectCardIndex() {
         return selectCardIndex;

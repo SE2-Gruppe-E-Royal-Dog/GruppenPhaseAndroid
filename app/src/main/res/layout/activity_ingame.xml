@@ -96,6 +96,7 @@
         android:id="@+id/btn_accusation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:clickable="true"
@@ -104,7 +105,8 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_alert" />
+        app:maxImageSize="45dp"
+        app:srcCompat="@drawable/ic_accusate" />
 
     <org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView
         android:id="@+id/twoWayScrollView"
@@ -176,7 +178,7 @@
                     android:layout_marginLeft="749dp"
                     android:layout_marginTop="757dp"
                     android:tag="f39"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField40"
@@ -392,7 +394,7 @@
                     android:layout_marginLeft="361dp"
                     android:layout_marginTop="757dp"
                     android:tag="f55"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField56"
@@ -581,7 +583,7 @@
                     android:layout_marginLeft="361dp"
                     android:layout_marginTop="365dp"
                     android:tag="f7"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField29"
@@ -979,7 +981,7 @@
                     android:layout_marginLeft="749dp"
                     android:layout_marginTop="365dp"
                     android:tag="f23"
-                    app:srcCompat="@drawable/ic_draw2field" />
+                    app:srcCompat="@drawable/ic_wormhole" />
 
                 <ImageView
                     android:id="@+id/regularPlayingField16"

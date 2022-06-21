@@ -81,84 +81,84 @@ public class FigureManagerTest {
     @Test
     public void testCreateRightDrawableGreenJerk(){
         int result = figureManager.createRightDrawable(Color.GREEN, Typ.JERK);
-        Assert.assertEquals(R.drawable.ic_greenjester, result);
+        Assert.assertEquals(R.drawable.ic_greenjestercat, result);
     }
     @Test
     public void testCreateRightDrawableGreenCitizen(){
         int result = figureManager.createRightDrawable(Color.GREEN, Typ.CITIZEN);
-        Assert.assertEquals(R.drawable.ic_greencitizen, result);
+        Assert.assertEquals(R.drawable.ic_greencitizencat, result);
     }
     @Test
     public void testCreateRightDrawableGreenKnight(){
         int result = figureManager.createRightDrawable(Color.GREEN, Typ.KNIGHT);
-        Assert.assertEquals(R.drawable.ic_greenknight, result);
+        Assert.assertEquals(R.drawable.ic_greenknightcat, result);
     }
     @Test
     public void testCreateRightDrawableGreenKing(){
         int result = figureManager.createRightDrawable(Color.GREEN, Typ.KING);
-        Assert.assertEquals(R.drawable.ic_greenking, result);
+        Assert.assertEquals(R.drawable.ic_greenkingcat, result);
     }
     @Test
     public void testCreateRightDrawableBlueJerk(){
         int result = figureManager.createRightDrawable(Color.BLUE, Typ.JERK);
-        Assert.assertEquals(R.drawable.ic_bluejester, result);
+        Assert.assertEquals(R.drawable.ic_bluejestercat, result);
     }
     @Test
     public void testCreateRightDrawableBlueCitizen(){
         int result = figureManager.createRightDrawable(Color.BLUE, Typ.CITIZEN);
-        Assert.assertEquals(R.drawable.ic_bluecitizen, result);
+        Assert.assertEquals(R.drawable.ic_bluecitizencat, result);
     }
     @Test
     public void testCreateRightDrawableBlueKnight(){
         int result = figureManager.createRightDrawable(Color.BLUE, Typ.KNIGHT);
-        Assert.assertEquals(R.drawable.ic_blueknight, result);
+        Assert.assertEquals(R.drawable.ic_blueknightcat, result);
     }
     @Test
     public void testCreateRightDrawableBlueKing(){
         int result = figureManager.createRightDrawable(Color.BLUE, Typ.KING);
-        Assert.assertEquals(R.drawable.ic_blueking, result);
+        Assert.assertEquals(R.drawable.ic_bluekingcat, result);
     }
 
     @Test
     public void testCreateRightDrawableYellowJerk(){
         int result = figureManager.createRightDrawable(Color.YELLOW, Typ.JERK);
-        Assert.assertEquals(R.drawable.ic_yellowjester, result);
+        Assert.assertEquals(R.drawable.ic_yellowjestercat, result);
     }
     @Test
     public void testCreateRightDrawableYellowCitizen(){
         int result = figureManager.createRightDrawable(Color.YELLOW, Typ.CITIZEN);
-        Assert.assertEquals(R.drawable.ic_yellowcitizen, result);
+        Assert.assertEquals(R.drawable.ic_yellowcitizencat, result);
     }
     @Test
     public void testCreateRightDrawableYellowKnight(){
         int result = figureManager.createRightDrawable(Color.YELLOW, Typ.KNIGHT);
-        Assert.assertEquals(R.drawable.ic_yellowknight, result);
+        Assert.assertEquals(R.drawable.ic_yellowknightcat, result);
     }
     @Test
     public void testCreateRightDrawableYellowKing(){
         int result = figureManager.createRightDrawable(Color.YELLOW, Typ.KING);
-        Assert.assertEquals(R.drawable.ic_yellowking, result);
+        Assert.assertEquals(R.drawable.ic_yellowkingcat, result);
     }
 
     @Test
     public void testCreateRightDrawableRedJerk(){
         int result = figureManager.createRightDrawable(Color.RED, Typ.JERK);
-        Assert.assertEquals(R.drawable.ic_redjester, result);
+        Assert.assertEquals(R.drawable.ic_redjestercat, result);
     }
     @Test
     public void testCreateRightDrawableRedCitizen(){
         int result = figureManager.createRightDrawable(Color.RED, Typ.CITIZEN);
-        Assert.assertEquals(R.drawable.ic_redcitizen, result);
+        Assert.assertEquals(R.drawable.ic_redcitizencat, result);
     }
     @Test
     public void testCreateRightDrawableRedKnight(){
         int result = figureManager.createRightDrawable(Color.RED, Typ.KNIGHT);
-        Assert.assertEquals(R.drawable.ic_redknight, result);
+        Assert.assertEquals(R.drawable.ic_redknightcat, result);
     }
     @Test
     public void testCreateRightDrawableRedKing(){
         int result = figureManager.createRightDrawable(Color.RED, Typ.KING);
-        Assert.assertEquals(R.drawable.ic_redking, result);
+        Assert.assertEquals(R.drawable.ic_redkingcat, result);
     }
 
     @Test

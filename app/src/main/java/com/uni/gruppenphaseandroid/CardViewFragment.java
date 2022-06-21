@@ -111,9 +111,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         try {
             sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Log.d("Sensor error tilt", e.getMessage());
-        };
+        }
 
     }
 
@@ -122,8 +122,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         super.onAttach(context);
         try{
             cardInputListener = (OnInputListener) getTargetFragment();
-        }catch (ClassCastException e){
-
+        } catch (ClassCastException e){
             Log.e("CardViewFragment", "onAttach: ClassCastException: " + e.getMessage());
         }
     }
@@ -160,7 +159,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         if (Math.abs(x) > Math.abs(y)) {
 
             if (x < 0 && cheating) { //tilt to right
-                cheater.cheating(cheater);
+                //cheater.cheating(cheater);
                 GameManager.getInstance().setCheatModifier(-1);
                 cheaterNote = "-1";
 
@@ -168,16 +167,18 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                 textView.setVisibility(View.VISIBLE);
 
 
-            } else {
-                if (x > 0 && cheating) { //tilt to left
-                    cheater.cheating(cheater);
+            } else if (x > 0 && cheating) { //tilt to left
+                    //cheater.cheating(cheater);
                     GameManager.getInstance().setCheatModifier(+1);
                     cheaterNote = "+1";
 
                     textView.setText("Cheater + 1");
                     textView.setVisibility(View.VISIBLE);
 
-                }
+
+            }else{
+                GameManager.getInstance().setCheatModifier(0);
+                cheaterNote = "0";
             }
         }
     }
