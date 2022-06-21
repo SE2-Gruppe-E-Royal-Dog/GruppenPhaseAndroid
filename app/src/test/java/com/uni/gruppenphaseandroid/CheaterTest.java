@@ -55,13 +55,15 @@ public class CheaterTest {
         assertEquals(1, Cheater.getCheaters().size());
     }
 
-    @Test
+    /*@Test
     public void addNewCheater(){
         playerID = 2;
         currentRound = GameManager.getInstance().getRoundIndex();
         Cheater cheater3 = new Cheater(playerID,currentRound);
 
     }
+
+     */
 
     @Test
     public void addNewCheaterToList(){
@@ -93,10 +95,10 @@ public class CheaterTest {
         assertEquals(3, cheater3.getLastCheat(cheater3.getPlayerID()));
     }
 
-    @Test
+    /*@Test
     public void makeAccusationTest(){
         //TODO Testable..how ;-;
-        /*cheater.cheating(cheater);
+        cheater.cheating(cheater);
         cheater2.cheating(cheater2);
 
         GameManager gm = mock(GameManager.class);
@@ -106,7 +108,7 @@ public class CheaterTest {
 
         verify(gm, times(1)).punishPlayer(GameManager.getInstance().getCurrentTurnPlayerNumber());
 
-    */
-
     }
+
+     */
 }
