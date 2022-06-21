@@ -33,7 +33,10 @@ Verbot der Zieleinfahrt:
 Eine Einfahrt in das Ziel ist nicht möglich, wenn die eigene Figur nach einer Runde am Startfeld zu stehen kommt. Denn dann muss sie die Runde erneut absolvieren.
 
 Figuren:
+
 Der König:
+
+![image](https://user-images.githubusercontent.com/101360700/174873386-49947c70-209d-4a24-9435-048647a1f6be.png)
 
 Er darf nur mit Karten im Wert von 1 bis 7, den Startkarten, 
 den Tauschkarte, den Magnetkarte, den Kopiekarte - 
