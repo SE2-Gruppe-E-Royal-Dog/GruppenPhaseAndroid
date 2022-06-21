@@ -1,9 +1,5 @@
 package com.uni.gruppenphaseandroid.playingfield;
 
-import com.uni.gruppenphaseandroid.cards.Card;
-import com.uni.gruppenphaseandroid.cards.Cardtype;
-import com.uni.gruppenphaseandroid.manager.GameManager;
-
 public class King extends Figure {
 
     public King(int id, Color color, Field currentField, Typ typ, FigureUI figureUI) {
