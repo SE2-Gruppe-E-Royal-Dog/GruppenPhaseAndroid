@@ -34,7 +34,7 @@ Eine Einfahrt in das Ziel ist nicht möglich, wenn die eigene Figur nach einer R
 
 Figuren:
 Der König:
-![image](https://user-images.githubusercontent.com/101360700/174872404-0c7b84fc-595a-40f2-a17b-1196973d5b65.png)
+
 Er darf nur mit Karten im Wert von 1 bis 7, den Startkarten, 
 den Tauschkarte, den Magnetkarte, den Kopiekarte - 
 solange der vorherige Zug für den König zulässig ist - und 
@@ -45,7 +45,8 @@ außer er befindet sich auf einem fremden Startfeld.
 Auch kann er mit einer minus 4 Karte geschlagen werden.
 
 Der Ritter:
-![image](https://user-images.githubusercontent.com/101360700/174872478-8c189acb-8538-4345-97fe-59f291a6308d.png)
+![image](https://user-images.githubusercontent.com/101360700/174872698-3e8a156c-a99c-4323-80ed-cad0d36a8ab9.png)
+
 Ein fremdes Startfelder, das
 von einer gleichfarbigen Figur
 besetzt sind, ist keine Blockade für den Ritter. 
