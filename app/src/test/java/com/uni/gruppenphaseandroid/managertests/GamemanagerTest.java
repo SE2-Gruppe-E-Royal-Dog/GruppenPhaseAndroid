@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.uni.gruppenphaseandroid.cards.Card;
+import com.uni.gruppenphaseandroid.cards.CardUI;
 import com.uni.gruppenphaseandroid.cards.Cardtype;
 import com.uni.gruppenphaseandroid.communication.Client;
 import com.uni.gruppenphaseandroid.communication.dto.Message;
@@ -39,6 +40,7 @@ public class GamemanagerTest {
     FigureManager figureManager;
     CardManager cardManager;
     CommunicationManager communicationManager;
+    CardUI cardUI;
     Card cardEight;
     Card cardSwitch;
 
@@ -93,7 +95,7 @@ public class GamemanagerTest {
 
         VisualEffectsManager visualEffectsManager = mock(VisualEffectsManager.class);
         CommunicationManager communicationManager = new CommunicationManager(socketClient, "id", "id");
-        GameManager.getInstance().startGame(4, 0,  figureManager, visualEffectsManager, cardManager, communicationManager);
+        GameManager.getInstance().startGame(4, 0,  figureManager, visualEffectsManager, cardManager, communicationManager, cardUI);
     }
 
     @After

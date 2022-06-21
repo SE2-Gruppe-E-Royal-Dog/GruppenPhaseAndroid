@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.uni.gruppenphaseandroid.R;
+import com.uni.gruppenphaseandroid.manager.GameManager;
 
 import java.util.LinkedList;
 
@@ -44,7 +45,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     public CardAdapter(ItemClickListener itemClickListener) {
-        this.imageCardList = CardUI.getInstance().cardsForRecyclerView();
+        this.imageCardList = GameManager.getInstance().getCardUI().cardsForRecyclerView();
         this.mItemClickListener = itemClickListener;
     }
 
