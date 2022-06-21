@@ -267,8 +267,8 @@ public class PlayingField {
         field1.setCurrentFigure(figure2);
         figure2.getFigureUI().moveFigureToPosition(field1.getFieldUIobject());
 
-        handleWormhole(true, field2);
-        handleWormhole(true, field1);
+        handleWormhole(true, field2, null);
+        handleWormhole(true, field1, null);
 
         LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2.getCurrentField());
         GameManager.getInstance().setLastTurn(lastTurn);
@@ -306,11 +306,20 @@ public class PlayingField {
         newPositionFigure1.setCurrentFigure(figure1);
         figure1.setCurrentField(newPositionFigure1);
         figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
-        handleWormhole((figure2 != null), newPositionFigure1);
 
-        LastTurn lastTurn = new LastTurn(figure1, figure2, figure1.getCurrentField(), figure2 != null ? figure2.getCurrentField() : null);
+        LastTurn lastTurn = new LastTurn();
+        handleWormhole((figure2 != null), newPositionFigure1, lastTurn);
+
+        lastTurn.setFigure1(figure1);
+        lastTurn.setNewFigure1Field(figure1.getCurrentField());
+        if (lastTurn.getFigure2() == null){
+            lastTurn.setFigure2(figure2);
+            lastTurn.setNewFigure2Field(figure2 != null ? figure2.getCurrentField() : null);
+        }
         lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
         GameManager.getInstance().setLastTurn(lastTurn);
+
+
     }
 
     private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
@@ -436,11 +445,14 @@ public class PlayingField {
         figureToBeat.getFigureUI().moveFigureToPosition(figureToBeat.getCurrentField().getFieldUIobject()); // visual movement on board
     }
 
-    private void handleWormhole(boolean hasAnotherFigureMovedInThisTurn, Field field) {
+    private void handleWormhole(boolean hasAnotherFigureMovedInThisTurn, Field field, LastTurn lastTurn) {
         if (field instanceof Wormhole) {
             if(!hasAnotherFigureMovedInThisTurn || (((Wormhole) field).getPartnerWormhole().getCurrentFigure() == null)) {
                 field.triggerSpecialFieldEffect();
-
+                if (lastTurn != null) { // switch figure operation will sends empty last turn to this methode
+                    lastTurn.setFigure2(field.getCurrentFigure());
+                    lastTurn.setNewFigure2Field(field.getCurrentFigure() != null ? field : null);
+                }
             } else {
                 field.triggerSpecialFieldEffect();
             }
