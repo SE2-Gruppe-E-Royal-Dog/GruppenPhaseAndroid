@@ -85,8 +85,7 @@ Rote Karten, hier werden verschiedene Events implementiert. Es gibt eigene Karte
 Es gibt eine grün/rote Karte bei der man entscheiden kann ob man 4 Felder nach vorne oder nach hinten rückt.
 Die grüne sowie die grün/rote Karte ignoriert die Hierarchie der Spielfigueren und man kann ohne Blockaden die angebene Zahl am Spielfeld fahren.
 
-![image](https://user-images.githubusercontent.com/101360700/174874297-266950f8-a4a0-47d6-baed-51fadc72c202.png) ![image](https://user-images.githubusercontent.com/101360700/174874477-ffa2bc4c-1b9a-476c-9931-72de452ee1cc.png) ![image](https://user-images.githubusercontent.com/101360700/174874593-bdd83ef0-df5f-4fb7-9996-51494d96c15f.png)
-
+![image](https://user-images.githubusercontent.com/101360700/174874297-266950f8-a4a0-47d6-baed-51fadc72c202.png) ![image](https://user-images.githubusercontent.com/101360700/174874477-ffa2bc4c-1b9a-476c-9931-72de452ee1cc.png) ![image](https://user-images.githubusercontent.com/101360700/174874593-bdd83ef0-df5f-4fb7-9996-51494d96c15f.png) ![image](https://user-images.githubusercontent.com/101360700/174874774-0f38bf8b-39bf-402d-bef8-ebebbd4ccfe0.png) ![image](https://user-images.githubusercontent.com/101360700/174874886-dd79cd08-a45f-4251-9fbe-1c7f19297ed7.png) ![image](https://user-images.githubusercontent.com/101360700/174875010-0c13ca4e-3f22-44ed-94e4-e3d22826a347.png) ![image](https://user-images.githubusercontent.com/101360700/174875083-677c0b42-844c-4367-81b4-3efe9c8eaa5f.png)
 
 
 
