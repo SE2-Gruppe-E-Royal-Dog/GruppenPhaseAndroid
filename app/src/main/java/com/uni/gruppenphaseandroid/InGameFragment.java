@@ -194,13 +194,13 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         btnCardholder.setVisibility(View.VISIBLE);
         if (imageID != -1){
             btnCardholder.setImageResource(imageID);
-            selectedCardtype = CardUI.getInstance().idToCardType(imageID);
-            GameManager.getInstance().setSelectedCard(new Card(CardUI.getInstance().idToCardType(imageID)));
+            selectedCardtype = GameManager.getInstance().getCardUI().idToCardType(imageID);
+            GameManager.getInstance().setSelectedCard(new Card(GameManager.getInstance().getCardUI().idToCardType(imageID)));
             GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
             checkCard(imageID);
         } else{
             btnCardholder.setImageResource(R.drawable.ic_card_cardholder);
-            GameManager.getInstance().setSelectedCard(new Card(CardUI.getInstance().idToCardType(imageID)));
+            GameManager.getInstance().setSelectedCard(new Card(GameManager.getInstance().getCardUI().idToCardType(imageID)));
             GameManager.getInstance().setSelectCardIndex(cardholder.getClickedCardIndex());
             GameManager.getInstance().getCardManager().discardHandcard(cardholder.getClickedCardIndex());
             GameManager.getInstance().sendLastTurnServerMessage();
@@ -209,11 +209,11 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     }
 
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
-            if ((CardUI.getInstance().idToCardType(imageID) == Cardtype.EQUAL && GameManager.getInstance().getLastTurn() != null && checkIfSpecialNumberCardEffect(GameManager.getInstance().getLastTurn().getCardtype()))) {
+            if ((GameManager.getInstance().getCardUI().idToCardType(imageID) == Cardtype.EQUAL && GameManager.getInstance().getLastTurn() != null && checkIfSpecialNumberCardEffect(GameManager.getInstance().getLastTurn().getCardtype()))) {
                 //checks if EQUAL CARD + special card
                     new SpecialCardDialogFragment(GameManager.getInstance().getLastTurn().getCardtype()).show(getChildFragmentManager(), "specialcarddialog für =");
                 }else {
-                    if (CardUI.getInstance().idToCardType(imageID) != Cardtype.EQUAL && checkIfSpecialNumberCardEffect(CardUI.getInstance().idToCardType(imageID))) {
+                    if (GameManager.getInstance().getCardUI().idToCardType(imageID) != Cardtype.EQUAL && checkIfSpecialNumberCardEffect(GameManager.getInstance().getCardUI().idToCardType(imageID))) {
                     //if not EQUAL, open normal dialog
                     new SpecialCardDialogFragment(selectedCardtype).show(getChildFragmentManager(), "specialcarddialog");
 
