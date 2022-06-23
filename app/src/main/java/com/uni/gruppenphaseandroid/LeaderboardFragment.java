@@ -9,7 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.gson.Gson;
+import com.uni.gruppenphaseandroid.communication.Client;
+import com.uni.gruppenphaseandroid.communication.dto.LeaveLobbyPayload;
+import com.uni.gruppenphaseandroid.communication.dto.Message;
+import com.uni.gruppenphaseandroid.communication.dto.MessageType;
 import com.uni.gruppenphaseandroid.manager.PlayerRanking;
 
 public class LeaderboardFragment extends Fragment {
@@ -41,7 +47,19 @@ public class LeaderboardFragment extends Fragment {
 
 
         exitButton.setOnClickListener(view1 -> {
+            Client websocketClient = ((MainActivity)getContext()).getClient();
+            var lobbyId = ((MainActivity) getContext()).getLobbyId();
+            var playerId = ((MainActivity) getContext()).getPlayerId();
+            var message = new Message();
+            message.setType(MessageType.LEAVE_LOBBY);
+            var payload = new LeaveLobbyPayload(lobbyId, playerId);
 
+            Gson gson = new Gson();
+            message.setPayload(gson.toJson(payload));
+
+            websocketClient.send(message);
+            NavHostFragment.findNavController(LeaderboardFragment.this)
+                    .navigate(R.id.leaderboard_to_FirstFragment);
         });
     }
 }
