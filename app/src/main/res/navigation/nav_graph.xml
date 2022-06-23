@@ -44,5 +44,8 @@
         android:name="com.uni.gruppenphaseandroid.LeaderboardFragment"
         android:label="leaderboard_view"
         tools:layout="@layout/fragment_leaderboard">
+    <action
+        android:id="@+id/leaderboard_to_FirstFragment"
+        app:destination="@+id/FirstFragment" />
     </fragment>
 </navigation>
