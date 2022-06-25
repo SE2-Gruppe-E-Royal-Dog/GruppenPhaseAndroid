@@ -84,6 +84,14 @@ public class AccusationFragment extends DialogFragment {
                 break;
         }
 
+
+        /**
+         * sigh, methode der Schande - irgendwas geht nicht wie es sollte und es sieht schrecklich aus ^-^;
+         * sollte anzahl der spieler -  1 buttons anzeigen; ausgenommen die eigene Farbe
+         * und es sollte immer immer den ersten button beschreiben, auch wenn es der zweite spieler ist (weil man selbst der erste spieler ist)
+         * j ist der button index
+         * i ist der spieler und farb index
+         */
         int i = 0;
         int j = 0;
         do {
@@ -123,6 +131,11 @@ public class AccusationFragment extends DialogFragment {
 
     }
 
+    /**
+     *
+     * hilfsmethode für die Farbe
+     * getcolorOfclient gibt uns nur die Enum Color zurück, wir brauchen abder Android Color, was ein Int wert ist
+     */
     public int assignColor(int playerIndex) {
         switch (GameManager.getInstance().getColorOfClient(playerIndex)) {
             case GREEN:

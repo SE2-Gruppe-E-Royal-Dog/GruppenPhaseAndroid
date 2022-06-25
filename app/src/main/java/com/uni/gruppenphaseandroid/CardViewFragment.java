@@ -25,6 +25,9 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 import java.util.EventListener;
 import java.util.Objects;
 
+/**
+ * Dialogfragment! Weil normales Fragemnt hätte, wenn man danach wieder zurück kommt, die Main Aktivity neu gestartet und damit unser spiel gecrasht
+ */
 public class CardViewFragment extends DialogFragment implements EventListener, SensorEventListener {
 
     private SensorManager sensorManager;
@@ -38,6 +41,10 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
     private static String playerId;
 
+    /**
+     * gibt der MainAktivity einen Wert, welcher in dem Dialogfeld gesetzt wurde zurück;
+     * in unseren Fall, einen String mit der Karten ID, und einer CheaterNote, welche genutzt wurde, um die +/-1 notize über den cardholder zu setzen
+     */
     public interface OnInputListener{
         void sendInputCardFragment(String input, String cheaterNote);
     }
@@ -63,6 +70,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
+        //wenn eine Karte geklickt wird, und man dran ist, wird der Card Play button gezeigt; außérdem werden die Werte der Karte gespeichert
         CardAdapter cardAdapter = new CardAdapter((card, position) -> {
             CardAdapter.mPreviousIndex = position;
             if(GameManager.getInstance().isItMyTurn()) {
@@ -89,7 +97,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
                         textView.setText("Select one card to discharge:");
                         textView.setVisibility(View.VISIBLE);
                         cardInputListener.sendInputCardFragment("-1", cheaterNote);
-                        getDialog().dismiss();
+                        getDialog().dismiss();              //Befehl, dass der Dialog geschlossen wird
                 }else {
                     cardInputListener.sendInputCardFragment(clickedCard, cheaterNote);
                     getDialog().dismiss();
@@ -118,7 +126,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {            //Methode für DialogFragement communication
+    public void onAttach(@NonNull Context context) {            //Methode für DialogFragement communication; nötig weil man sonst eine Exception bekommt
         super.onAttach(context);
         try{
             cardInputListener = (OnInputListener) getTargetFragment();
@@ -131,9 +139,8 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
 
     /**
-     * Mehtoden die notwendig für den Sensor sind
+     * Methoden um den Sensor auszulensen
      */
-    //if in CardViewFragment --> listen, otherwise sensor on pause
     @Override
     public void onResume() {
         super.onResume();

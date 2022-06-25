@@ -11,10 +11,16 @@ public class Cheater extends Fragment {
 
     private int roundIndex;
     private int playerID;                    //for now - String evtl in int ändern
+
+    /**
+     *liste ist static, dass alle die selbe Liste mit allen Cheaters habe --> man hätte diese dann noch verweden können fürs leader board um eine statistik auf zustellen, wie oft jemand geschummelt hat
+     */
     private static List<Cheater> cheaters = new ArrayList<>();
 
+
+
     public Cheater(int playerID, int roundIndex) {
-        this.playerID = playerID;                             //bis jetzt nur am Server --> von gameManager?
+        this.playerID = playerID;
         this.roundIndex = roundIndex;                         //merkt sich die Runde, in der geschummelt wurde
     }
 
@@ -32,6 +38,9 @@ public class Cheater extends Fragment {
         return !GameManager.getInstance().getHasCheated();
         }
 
+    /**
+     * cheating ruft noteCheating auf weil um ein objekt der statischen Listen hinzuzufügen muss die methode auch static sein
+     */
     public void cheating(Cheater cheater) {
         noteCheating(cheater);
     }

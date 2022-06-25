@@ -67,9 +67,12 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
             showToast("Cannot accuse this player since they don't have any figure on board.");
         }
 
-        @Override
+    /**
+     * setzt den Cardholder image immer wieder auf default nach dem man dran war, und lässt die Cheaternote über den Cardholder wieder verschwinden
+     */
+    @Override
         protected void setCardHolderUI () {
-                        cardHolder.setImageResource(R.drawable.ic_card_cardholder);
+            cardHolder.setImageResource(R.drawable.ic_card_cardholder);
             cheaterNote.setVisibility(View.INVISIBLE);
         }
 

@@ -108,6 +108,12 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); // Type_Light ist der int Wert 5
     }
 
+    /**
+     *
+     * Optionmenu ist die "liste" in der Appbar
+     * da sich die inGame liste von der Lobby liste unterscheidet (inGame hat es den Leave game button)
+     * muss man es hier nochmal aufrufen und man setzt das item 1 (leave game item) sichtbar
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -117,6 +123,12 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
+    /**
+     *
+     * Methode, die beschreibt, was zu machen ist, wenn ein Item geclickt wurde
+     * für leave Game - server message
+     * für how to play - open fragment
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -176,7 +188,11 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
     }
 
 
-    //method for Dialog Fragment - Card Holder
+    /**
+     *
+     * erhält den wert von Cardholder
+     * setzt den Cheater wert, wenn notwendig
+     */
     @Override
     public void sendInputCardFragment(String input, String cheaterNote) {               //get's input from cardholder aka choosen card
         setCardViewImage(Integer.parseInt(input));
@@ -190,6 +206,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
+    /**
+     * setzt das Cardholder image wenn wert nicht -1 (würde bedeuten, dass eine Karte abgeworfen werden muss
+     * ruft checkCard auf
+     */
     public void setCardViewImage (int imageID){                     //set's the cardholder image to the choosen card, so the player sees what card he has choosen
         btnCardholder.setVisibility(View.VISIBLE);
         if (imageID != -1){
@@ -208,6 +228,13 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
         GameManager.getInstance().getVisualEffectsManager().setInGameFragment(this);
     }
 
+    /**
+     * prüft die karte ob es eine Spezialkarte war und ob es eine equal karte war, und ob die letzt gepielte karte eine eqal karte war
+     * wenn es equal card + last card was special card --> open special card dialog
+     * wenn es nur eine special card war --> open special card dialog
+     * wenn es keine special card war --> currentEffect in gamemanager -1
+     *
+     */
     public void checkCard (int imageID){                            //checks if choosen card is a special card and requires to set an effect/if the user is required to specify the value of the card
             if ((GameManager.getInstance().getCardUI().idToCardType(imageID) == Cardtype.EQUAL && GameManager.getInstance().getLastTurn() != null && checkIfSpecialNumberCardEffect(GameManager.getInstance().getLastTurn().getCardtype()))) {
                 //checks if EQUAL CARD + special card
@@ -229,6 +256,10 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
+
+    /**
+     * methode, wenn man aus dem Specialcard dialog noch einen wert zurück bekommen würde, was nicht nötig ist/war
+     */
     //methods for selecting special cards
     @Override
     public void sendInputSpecialCardFragment(String input) {

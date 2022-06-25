@@ -122,18 +122,24 @@ public class CardManager {
         myHandCards.addAll(cards);
     }
 
+
+    /**
+     *
+     * @param index index der Karte im Cardholder
+     *
+     */
     public void discardHandcard(int index){
 
-        GameManager.getInstance().getVisualEffectsManager().setInitialStackImage();
-        Card toBeRemoved = myHandCards.get(index);
-        GameManager.getInstance().getVisualEffectsManager().setStackImageAfterMyMove(toBeRemoved);
-        if(GameManager.getInstance().getLastTurn() == null){
+        GameManager.getInstance().getVisualEffectsManager().setInitialStackImage();                             //eigentlich unnötige zeile, weil sie eh überschrieben wird. würde den ablagestapel auf das erste bild setzten
+        Card toBeRemoved = myHandCards.get(index);                                                              //speichert die karte
+        GameManager.getInstance().getVisualEffectsManager().setStackImageAfterMyMove(toBeRemoved);              //"wirft die Karte ab", Image wird auf den Kartenstablet angepasst
+        if(GameManager.getInstance().getLastTurn() == null){                                                    //servermessage braucht einen last turn
             Figure someFigure = GameManager.getInstance().getFigureManager().getFigureWithID(1); //just get any figure to prevent nullpointer
             LastTurn lastTurn = new LastTurn(someFigure, null, someFigure.getCurrentField(), null);
             GameManager.getInstance().setLastTurn(lastTurn);
         }
-        GameManager.getInstance().setSelectedCard(toBeRemoved);
-        myHandCards.remove(index);
+        GameManager.getInstance().setSelectedCard(toBeRemoved);                                                   //selectedCard wird im Gamemanager gesetzt und der Prozess (serverbenachrichtigung, next turn etc) läuft weiter
+        myHandCards.remove(index);                                                                                //entfernt die Karte aus myHandCards, dass sie auch im Cardholder nicht mehr sind
     }
 
     public void setMyHandCards(List<Card> myHandCards) {

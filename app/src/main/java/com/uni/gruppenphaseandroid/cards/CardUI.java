@@ -20,6 +20,10 @@ public class CardUI  {
         setUpMap();
     }
 
+    /**
+     * fügt alle Karten in eine Map .. key ist die ID und der Value ist der Cardtype
+     */
+
     public void setUpMap(){
         cardtypeMap.put(R.drawable.ic_card_2, Cardtype.TWO);
         cardtypeMap.put(R.drawable.ic_card_3, Cardtype.THREE);
@@ -38,6 +42,9 @@ public class CardUI  {
         cardtypeMap.put(R.drawable.ic_card_magnet, Cardtype.MAGNET);
     }
 
+    /**
+     * wenn handkarten übergeben werden, wird eine Liste mit den Card Image IDs erstellt
+     */
     public void addCardToHand() {
         imageCardList = new LinkedList<>();
         List<Card> cards = GameManager.getInstance().getCardManager().getMyHandCards();
@@ -47,6 +54,10 @@ public class CardUI  {
         }
     }
 
+    /**
+     *
+     * da man den Cardtype hat, geht man die liste durch, um den Key zu finden (welcher die ImageID ist) und gibt diesen zurück
+     */
     public int findImageView (Card card) {
             for (Map.Entry<Integer, Cardtype> entry : cardtypeMap.entrySet()){
                 if (entry.getValue().equals(card.getCardtype())){
@@ -56,11 +67,18 @@ public class CardUI  {
             return 0;
     }
 
+    /**
+     *
+     * Methode um von der ImageID den Typen zu erhaltne
+     */
     public Cardtype idToCardType (int card) {
         return cardtypeMap.get(card);
     }
 
-
+    /**
+     * Methode die die Liste mit den ImageID and den RecyclerView übergibt
+     * tbh, ist nicht wirklich nötig, und eigentlich ein überbleibsel aus einer vorherigen lösung ¯\_(ツ)_/¯
+     */
     public LinkedList<Integer> cardsForRecyclerView (){
         addCardToHand();
         return imageCardList;

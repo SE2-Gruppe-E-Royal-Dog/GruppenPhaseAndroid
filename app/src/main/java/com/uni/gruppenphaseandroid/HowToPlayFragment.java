@@ -11,6 +11,9 @@ import com.github.barteksc.pdfviewer.PDFView;
 
 public class HowToPlayFragment extends DialogFragment {
 
+    /**
+     * PDFView ist ein Github import... man musste ein fragemnt erstellen, dort ein PDFView container erstellen, in assets ein PDF hochladen, und dann hier einfügen
+     */
     PDFView mPdf;
 
     @Override
