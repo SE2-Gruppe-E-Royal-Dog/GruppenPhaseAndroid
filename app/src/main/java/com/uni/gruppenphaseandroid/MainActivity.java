@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private String playerId;
     private final Gson gson = new Gson();
 
+    /**
+     * Eine Connection mit dem Service der im Hintergrund läuft. Benötigt um den Service
+     * and die Activity zu binden
+     */
     private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -62,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Bindet den Service zur MainActivty
+     */
     private void bindService() {
         var bindIntent = new Intent(MainActivity.this, WebSocketService.class);
         bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
@@ -85,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(" CAT ROYAL");
         getSupportActionBar().setIcon(R.drawable.ic_action_cat);
+
         bindService();
         doRegisterReceiver();
         setPlayerIdInCardView();
@@ -134,6 +142,10 @@ public class MainActivity extends AppCompatActivity {
         return playerId;
     }
 
+    /**
+     * Hier wird der MessageReceiver angelegt, und an die com.xch.servicecallback.content gebunden
+     * für diese der WebSocketClient broadcasted
+     */
     private void doRegisterReceiver() {
         var chatMessageReceiver = new MessageReceiver();
         IntentFilter filter = new IntentFilter("com.xch.servicecallback.content");
