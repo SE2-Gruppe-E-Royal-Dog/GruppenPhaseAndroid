@@ -10,6 +10,10 @@ import com.uni.gruppenphaseandroid.playingfield.Figure;
 import com.uni.gruppenphaseandroid.playingfield.FigureManager;
 import com.uni.gruppenphaseandroid.playingfield.PlayingField;
 
+/**
+ * Eine Klasse die Informationen über den letzten Spielzug speichert
+ * Dies beinhaltet bewegte Figur(en), ausgespielte Karte und ob bzw. auf welche Arte geschummelt wurde.
+ */
 public class LastTurn {
 
     private Figure figure1;
@@ -19,6 +23,12 @@ public class LastTurn {
     private Cardtype cardtype;
     private int cheatModifier = 0;
 
+    /**
+     * Macht aus dem LastTurnObjekt eine Server-Message (mit entsprechender lobbyID und playerID)
+     * @param lobbyID
+     * @param playerID
+     * @return
+     */
     public Message generateServerMessage(String lobbyID, String playerID) {
         Message message = new Message();
         message.setType(MessageType.UPDATE_BOARD);
@@ -38,6 +48,13 @@ public class LastTurn {
 
     public LastTurn(){}
 
+    /**
+     * Erstellt ein LastTurn Objekt aus einem UpdateBoardPayload
+     * @param updateBoardPayload
+     * @param figureManager
+     * @param playingField
+     * @return
+     */
     public static LastTurn generateLastTurnObject(UpdateBoardPayload updateBoardPayload, FigureManager figureManager, PlayingField playingField){
         Figure figure1 = figureManager.getFigureWithID(updateBoardPayload.getFigure1ID());
         Figure figure2 = (updateBoardPayload.getFigure2ID() == -1) ? null : figureManager.getFigureWithID(updateBoardPayload.getFigure2ID());

@@ -17,6 +17,15 @@ public class StartingField extends Field {
 
     }
 
+    /**
+     * Beim Startfeld muss entschiedne werden welche Abzweigung genommen wird
+     * Falls die Farbe passt, das OriginField(Feld wo die Bewegung gestartet hat) != diesem Startfeld ist
+     * kann man zu den Zielfeldern gehen, ansonsten wird der normale Weg genommen.
+     * @param remainingDistance
+     * @param color
+     * @param originField
+     * @return
+     */
     @Override
     protected Field getFieldAtDistanceRecursive(int remainingDistance, Color color, Field originField) {
         if (originField != this && getColor() == color && remainingDistance > 0) {//path toward goalFields

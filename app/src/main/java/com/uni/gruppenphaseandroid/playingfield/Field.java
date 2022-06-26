@@ -26,6 +26,13 @@ public class Field {
         //default implementation ignored
     }
 
+    /**
+     * Gibt das Feld zurück was distance Felder von dem jetzigen Feld entfernt ist.
+     * Color muss mitgegeben werden damit man weiß welche Verzweigungen (normal vs Zielfelder) genommen werden müssen.
+     * @param distance
+     * @param color
+     * @return
+     */
     public Field getFieldAtDistance(int distance, Color color) {
         return getFieldAtDistanceRecursive(distance, color, this);
     }

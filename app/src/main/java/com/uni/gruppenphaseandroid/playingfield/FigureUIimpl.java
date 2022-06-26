@@ -21,6 +21,10 @@ public class FigureUIimpl extends FigureUI {
         imageView.setImageResource(imageResource);
     }
 
+    /**
+     * Bewegt das Figur-UI Objekt zu einem Feld-UI Objekt
+     * @param targetFieldUI
+     */
     @Override
     public void moveFigureToPosition(FieldUI targetFieldUI) {
 
@@ -29,6 +33,10 @@ public class FigureUIimpl extends FigureUI {
         imageView.setLayoutParams(marginLayoutParams);
     }
 
+    /**
+     * Verbindet den Button-Click der Figur mit dem entsprechenden Methodenaufruf im GameManager
+     * @param figure
+     */
     @Override
     public void setButtonClickBehaviour(Figure figure){
         imageView.setOnClickListener(new View.OnClickListener() {

@@ -15,6 +15,10 @@ public class FigureManager {
         this.figureList = new ArrayList<>();
     }
 
+    /**
+     * Erstellt ein Figurenset (die 4 verschiedenen Figuren) einer Farbe und fügt sie der lokalen figureList hinzu
+     * Zuerst werden die Figur-Objekte initialisiert, danach das UI
+     */
     public void createFigureSetOfColor(Color color, PlayingField playingField) {
 
         createFigureObjects(color, playingField);
@@ -26,6 +30,11 @@ public class FigureManager {
         }
     }
 
+    /**
+     * Erstellt die Figur-Objekte (ohne UI)
+     * @param color
+     * @param playingField
+     */
     public void createFigureObjects(Color color, PlayingField playingField){
         figureList.add(createSingleFigure(color, playingField, Typ.JERK));
         figureList.add(createSingleFigure(color, playingField, Typ.CITIZEN));
@@ -33,6 +42,13 @@ public class FigureManager {
         figureList.add(createSingleFigure(color, playingField, Typ.KING));
     }
 
+    /**
+     * Erstellt ein einzelnes Figur-Objekt (ohne UI)
+     * @param color
+     * @param playingField
+     * @param typ
+     * @return
+     */
     private Figure createSingleFigure(Color color, PlayingField playingField, Typ typ){
 
         Figure figure = null;
@@ -48,6 +64,11 @@ public class FigureManager {
         return figure;
     }
 
+    /**
+     * Setzt das UI einer einzelnen Figur
+     * @param figure
+     * @param relativeLayout
+     */
     private void setUpSingleFigureUI(Figure figure, RelativeLayout relativeLayout){
         FigureUIimpl figureUIimpl = new FigureUIimpl();
         figureUIimpl.createFigureUI(relativeLayout.getRootView(),"fig" + figureList.size()+1, relativeLayout, createRightDrawable(figure.getColor(), figure.getTyp()));
@@ -56,6 +77,12 @@ public class FigureManager {
         figure.setFigureUI(figureUIimpl);
     }
 
+    /**
+     * Gibt das richtige UI Drawable für die entsprechende Farbe/FigurTyp zurück
+     * @param color
+     * @param typ
+     * @return
+     */
     public int createRightDrawable(Color color, Typ typ) {
 
         if(color == Color.BLUE){

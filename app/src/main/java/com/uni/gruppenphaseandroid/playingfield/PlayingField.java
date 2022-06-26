@@ -28,6 +28,7 @@ public class PlayingField {
         generateWormholeFields();
     }
 
+    //setup
     private void generateRegularFields() {
         rootField = new Field(new FieldUIimpl(view), null, null, null, 1);
         rootField.getFieldUIobject().registerUIobject(generateRegularFieldTag(1));
@@ -42,7 +43,7 @@ public class PlayingField {
         lastField.setNextField(rootField);
         rootField.setPreviousField(lastField);
     }
-
+    //setup
     private void generateWormholeFields() {
         wormholeList = new ArrayList<>();
 
@@ -60,7 +61,7 @@ public class PlayingField {
         //  moveAllWormholesRandomly(); just show effect
 
     }
-
+    //setup
     private void generateStartingFields() {
 
         greenStartingField = generateSingleStartField(12, Color.GREEN);
@@ -68,7 +69,7 @@ public class PlayingField {
         redStartingField = generateSingleStartField(44, Color.RED);
         blueStartingField = generateSingleStartField(60, Color.BLUE);
     }
-
+    //setup
     private StartingField generateSingleStartField(int distanceFromStart, Color color) {
         Field oldField = rootField.getFieldAtDistance(distanceFromStart, color);
         StartingField startingField = new StartingField(oldField.getFieldUIobject(), oldField.getNextField(), oldField.getPreviousField(), null, null, null, oldField.getFieldID(), color);
@@ -79,7 +80,7 @@ public class PlayingField {
 
         return startingField;
     }
-
+    //setup
     private void generateStartingAreaFields() {
 
         generateStartingAreasOfColor(greenStartingField, 68, Color.GREEN);
@@ -87,7 +88,7 @@ public class PlayingField {
         generateStartingAreasOfColor(redStartingField, 76, Color.RED);
         generateStartingAreasOfColor(blueStartingField, 80, Color.BLUE);
     }
-
+    //setup
     private void generateStartingAreasOfColor(Field startingField, int id, Color color) {
 
         Field nextField = startingField;
@@ -103,7 +104,7 @@ public class PlayingField {
             nextField = startingAreaField;
         }
     }
-
+    //setup
     private void generateGoalFields() {
 
         generateGoalFieldsOfColor(greenStartingField, 81, Color.GREEN);
@@ -111,7 +112,7 @@ public class PlayingField {
         generateGoalFieldsOfColor(redStartingField, 89, Color.RED);
         generateGoalFieldsOfColor(blueStartingField, 93, Color.BLUE);
     }
-
+    //setup
     private void generateGoalFieldsOfColor(Field startingField, int id, Color color) {
         Field previousField = startingField;
         for (int i = 0; i < 4; i++) {
@@ -126,11 +127,11 @@ public class PlayingField {
             previousField = goalField;
         }
     }
-
+    //setup
     private String generateRegularFieldTag(int id) {
         return "f" + id;
     }
-
+    //setup
     private String generateStartingAreaTag(Color color, int id) {
         String tag;
         switch (color) {
@@ -151,7 +152,7 @@ public class PlayingField {
         }
         return tag;
     }
-
+    //setup
     private String generateGoalTag(Color color, int id) {
         String tag;
         switch (color) {
