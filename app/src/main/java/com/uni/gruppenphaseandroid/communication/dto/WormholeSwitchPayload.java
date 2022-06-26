@@ -1,5 +1,10 @@
 package com.uni.gruppenphaseandroid.communication.dto;
 
+/**
+ * hier übergeben wir die 4 Wurmlöcher und die LobbyID,
+ * es ist wichtig, dass bei jeder Verschiebung jedes einzelne Feld auf jedem
+ * Client geupdated wird
+ */
 public class WormholeSwitchPayload {
     int newWormholeFieldPosition1;
     int newWormholeFieldPosition2;

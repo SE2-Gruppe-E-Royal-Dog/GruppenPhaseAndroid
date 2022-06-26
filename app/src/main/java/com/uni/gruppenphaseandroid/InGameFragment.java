@@ -83,7 +83,9 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
 
         });
-
+/** hier wird der Anklagebutton gesetzt
+ * wenn der Knopf gedrückt wird kommt das AccusationFragment
+ */
         view.findViewById(R.id.btn_accusation).setOnClickListener(view1 -> {
                 AccusationFragment accusation = new AccusationFragment();
                 accusation.show(getFragmentManager(), "Anschuldigung");
@@ -101,6 +103,11 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
+    /**
+     * hier wird das Auslesen des Lichtsensors implementiert
+     * über die System Services vom Gerät referenzieren wir auf den Lichtsensor und geben einen default wert an
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,12 +182,18 @@ public class InGameFragment extends Fragment implements SensorEventListener, Car
 
     }
 
+    /**
+     * hier setzten wir, dass wenn der Sensor normal funktioniert nichts passiert
+     */
     @Override
     public void onResume() {
         super.onResume();
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    /**
+     * hier setzten wir das Aussetzten des Lichts
+     */
     @Override
     public void onPause() {
         super.onPause();

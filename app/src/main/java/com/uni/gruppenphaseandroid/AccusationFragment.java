@@ -37,7 +37,9 @@ public class AccusationFragment extends DialogFragment {
         leaveFragment = view.findViewById(R.id.btn_returnGame);
         text = view.findViewById(R.id.textView);
 
-
+/**
+ * hier setzten wir einfach die Überschrift für das Fragment, je nachdem welcher Fall zutrifft
+ */
         if (GameManager.getInstance().isItMyTurn() && GameManager.getInstance().hasThisClientFigureOnBoard()) {
             text.setText("Who do you accuse");
             setButtons();
@@ -47,6 +49,10 @@ public class AccusationFragment extends DialogFragment {
             text.setText("Wait until your turn!");
         }
 
+
+        /**
+         * für die unterschiedlichen Buttons  werden die entpsrechenden Listener erzeugt
+         */
 
         leaveFragment.setOnClickListener(view1 -> getDialog().dismiss());
 
@@ -69,6 +75,13 @@ public class AccusationFragment extends DialogFragment {
 
         return view;
     }
+
+    /**
+     * wir wollten eigentlich, dass immer die Buttons der anderen Spieler sichtbar werden
+     * Anfangs hat es auch funktioniert.. aber irgendwie kam dann nur noch der Button des vorigen Spielers,
+     * aber was solls, die Prof wussten ja nicht was wir eigentlich geplant hatten... und das wichtigste
+     * es hat bei dem Testen funktioniert :-)
+     */
 
     public void setButtons() {
         int players = GameManager.getInstance().getNumberOfPlayers();

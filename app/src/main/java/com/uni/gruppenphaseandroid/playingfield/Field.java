@@ -87,6 +87,17 @@ public class Field {
         this.currentFigure = currentFigure;
     }
 
+    /**
+     * ja meine Lieben... pff das ist eine Methode... net so easy
+     * es wird hier der Switch der Wurmlöcher gemacht, die Figuren werden getauscht,
+     * die Felder werden getauscht, das UI wird getauscht und es wird noch geprüft
+     * und damit das alles auch am Spielfeld dann gut funktioniert müssen wir
+     * dann noch auf das vorherige und das nachfolgende Feld referenzieren
+     * denn beim Tausch ist es auch wichtig, die Field ID zu berücksichtigen,
+     * deshalb gibt es ganz unten noch den Dreieckstausch mit der Field ID
+     * @param targetField
+     */
+
     public void switchField(Field targetField) {
 
         Field currentNextField = getNextField();

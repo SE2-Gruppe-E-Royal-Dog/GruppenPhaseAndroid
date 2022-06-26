@@ -67,6 +67,11 @@ public class Cheater extends Fragment {
         cheaters.clear();
     }
 
+    /**
+     * hier machen wir die Anschuldigung
+     * wir referenzieren hier auf den GameManager weil in diesem die Methode der Bestrafung hinterlegt ist und die aktuelle Runde und Player Number abgespeichert wird,
+     * dies ist notwendig um den Abgleich mit der Cheating Liste machen zu können. Ohne Abgleich wäre keine Strafe möglich
+     */
 
     public static void makeAccusation(int playerID, int currentRoundIndex, int numberOfPlayer) {
         for (int i=0; i<cheaters.size(); i++)

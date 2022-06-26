@@ -44,6 +44,13 @@ public class PlayingField {
         rootField.setPreviousField(lastField);
     }
     //setup
+
+    /**
+     * hier werden die Wurmlöche erzeugt... wir starten im Feld mit den refernzierten Feldnummern vom
+     * Rootfield weg und setzten die Farbe schwarz und erzeugen ein neuen Wormhole Objekt
+     * die 4 Felder werden in eine Wormhole List gespeichert und es gibt je eine Kopplung
+     * zwischen 2 Feldern
+     */
     private void generateWormholeFields() {
         wormholeList = new ArrayList<>();
 
@@ -256,6 +263,15 @@ public class PlayingField {
         return newField;
     }
 
+    /**
+     * Der Positionstausch wird durchgeführt.
+     * Es wird überprüft ob auf dem Partnerwormhole eine Figur steht, wenn  ja gibt es keinen
+     * Tausch - handleWormhole
+     * @param figure1
+     * @param figure2
+     * @return
+     */
+
     public Field switchPositions(Figure figure1, Figure figure2) {
         Field field1 = figure1.getCurrentField();
         Field field2 = figure2.getCurrentField();
@@ -296,6 +312,9 @@ public class PlayingField {
         Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position and sets figure to new position
         Figure figure2;
 
+        /**
+         * der CheatModifier prüft ob es eine Verschiebung um ein Feld gibt
+         */
         newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
 
         figure2 = newPositionFigure1.getCurrentFigure();
@@ -308,6 +327,13 @@ public class PlayingField {
         figure1.setCurrentField(newPositionFigure1); // save new position within figure
         figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
 
+
+        /**
+         * hier erzeugen wir den Last Turn um ihn im Game Manager zu speichern
+         * wir müssen wieder den Sonderfall der Wurmlöcher prüfen und die neuen Werte
+         * durchgeben und die Figuren entsprechend setzten
+         * Das gleiche passiert auch für den CheatModifier
+         */
         LastTurn lastTurn = new LastTurn();
         handleWormhole((figure2 != null), newPositionFigure1, lastTurn);
 
@@ -400,6 +426,14 @@ public class PlayingField {
         figure.getFigureUI().moveFigureToPosition(field.getFieldUIobject());
     }
 
+    /**
+     * hier prüfen wir den CheatModifier, welcher über den GameManager läuft
+     * damit die appyCheatModifier nicht so überladen ist, habe ich Start- und Goalfield
+     * in eigene Mehtoden und Überprüfungen gegeben.
+     * @param startingField
+     * @param figureColor
+     * @return
+     */
     private Field applyCheatModifierForStartingField(StartingField startingField, Color figureColor) {
         if (GameManager.getInstance().getCheatModifier() == 1) {
             if (startingField.getColor() == figureColor && startingField.getNextGoalField().getCurrentFigure() == null) {
@@ -446,6 +480,11 @@ public class PlayingField {
         figureToBeat.getFigureUI().moveFigureToPosition(figureToBeat.getCurrentField().getFieldUIobject()); // visual movement on board
     }
 
+    /**
+     * hier haben wir die Prüfung gemacht, ob beide verbunden Wurmlöcher eine Figur drauf haben
+     * wenn ja, dann soll es keine Teleport geben, denn dann würde der Server crashen, er ist
+     * nur auf eine Kommunikation mit max. 2 Figuren ausgelegt
+     */
     private void handleWormhole(boolean hasAnotherFigureMovedInThisTurn, Field field, LastTurn lastTurn) {
         if (field instanceof Wormhole) {
             if(!hasAnotherFigureMovedInThisTurn || (((Wormhole) field).getPartnerWormhole().getCurrentFigure() == null)) {
