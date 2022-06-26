@@ -33,13 +33,13 @@ public class Figure {
      * @return true if overtaking possible
      */
     public boolean isOvertaking() {
-        Field newPosition = currentField.getNextField();
+        Field newPosition = currentField.getNextField(); // always check next field
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (typ == Typ.KNIGHT) {
+        if (typ == Typ.KNIGHT) { // is always allowed to overtake within degree (not king)
             return true;
         } else {
-            if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) {
+            if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor()) { // overtaking not allowed if figure2 is on own starting field
                 return false;
             } else {
                 return true;
@@ -78,15 +78,15 @@ public class Figure {
         Field newPosition = currentField.getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == color && ((StartingField) newPosition).getColor() != figure2.getColor()) {
+        if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == color && ((StartingField) newPosition).getColor() != figure2.getColor()) { // beating allowed if figure 2 is on foreign starting field
             return true;
-        } else if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) {
+        } else if (newPosition instanceof StartingField && ((StartingField) newPosition).getColor() == figure2.getColor() || newPosition instanceof GoalField) { // it is not allowed to beat figure2 on its own starting field; or within goal area
             return false;
         } return true;
     }
 
     public boolean isBeatingKingOnNormalField(Figure figure2, Field newPosition) {
-        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) {
+        if(figure2.getTyp() == Typ.KING && !(newPosition instanceof StartingField)) { // beating King is only allowed on foreign staring field from a figure of that color => used in Sub classes
             return true;
         } return false;
     }
@@ -103,7 +103,7 @@ public class Figure {
      * @return true if moving is possible
      */
     public boolean isMoving(int fieldsToMove) {
-        if(fieldsToMove == -4){
+        if(fieldsToMove == -4){ // card with -4 will always be true => beating always allowed
             return true;
         }
 
@@ -118,21 +118,21 @@ public class Figure {
                 return false;
             }
 
-            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color && currentField != originField) {
+            if (currentField instanceof StartingField && ((StartingField) currentField).getColor() == color && currentField != originField) { // check possibility for moving into goalarea
                 GoalField goalfield = ((StartingField) currentField).getNextGoalField();
                 if (isGoalFieldPossible(fieldsToMove-i)) {
                     setCurrentField(goalfield);
                     continue;
                 }
             }
-            setCurrentField(currentField.getFieldAtDistance(1, color));
+            setCurrentField(currentField.getFieldAtDistance(1, color)); // checking each field within "fieldsToMove"
             if (currentField.getNextField() == null) {//case we reached last goal
                 setCurrentField(originField);//reset to avoid weird behaviour
-                return (typ == typ.JERK && fieldsToMove-i-1 <= 2); //if we are jerk, possibly return true
+                return (typ == typ.JERK && fieldsToMove-i-1 <= 2); //if we are jerk, possibly return true => jerk is allowed to move up to two fields less
             }
         }
 
-        Field newPosition = originField.getFieldAtDistance(fieldsToMove, color);
+        Field newPosition = originField.getFieldAtDistance(fieldsToMove, color); // check final destination field
         if (newPosition.getCurrentFigure() != null) {
             boolean beatingPossible = isBeaten(); // check if figure2 can be beaten
             setCurrentField(originField);//reset to avoid weird behaviour
@@ -143,7 +143,7 @@ public class Figure {
     }
 
     public boolean isGoalFieldPossible(int fieldsToMove) {
-        if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) {
+        if (typ == Typ.JERK && fieldsToMove <= 6 || typ != Typ.JERK && fieldsToMove <= 4) { // jerk is allowed to move up to two fields less
             return true;
         }
         return false;
@@ -159,7 +159,7 @@ public class Figure {
     public Field setNewPosition(int fieldsToMove) {
         if (isMoving(fieldsToMove)) { // for testing included
             Field newPositionFigure1 = currentField.getFieldAtDistance(fieldsToMove, color);
-            return newPositionFigure1;
+            return newPositionFigure1; // actual setting of figure to final destination
         } else {
             return null;
         }
@@ -191,9 +191,9 @@ public class Figure {
         Field field = current;
 
         while (field.getNextField().getCurrentFigure()==null) {
-            field = field.getNextField();
+            field = field.getNextField(); // checks each field within playfield and stops when he found a figure
         }
-        if(field!=current.getPreviousField()){
+        if(field!=current.getPreviousField()){ // found figure, because loop wasn't finished
             return true;
         }
         return false;

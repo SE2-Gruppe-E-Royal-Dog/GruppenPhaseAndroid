@@ -292,19 +292,19 @@ public class PlayingField {
     }
 
     public void move(Figure figure1, int fieldsToMove) {
-        Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position incl. new position
+        Field newPositionFigure1 = setNewPosition(figure1, fieldsToMove); // includes all checks for moving to new Position and sets figure to new position
         Figure figure2;
 
         newPositionFigure1 = applyCheatModifier(newPositionFigure1, figure1.getColor());
 
         figure2 = newPositionFigure1.getCurrentFigure();
         if (figure2 != null) {
-            beat(figure2);
+            beat(figure2); // beating figure 2 on new position
         }
 
-        figure1.getCurrentField().setCurrentFigure(null);
-        newPositionFigure1.setCurrentFigure(figure1);
-        figure1.setCurrentField(newPositionFigure1);
+        figure1.getCurrentField().setCurrentFigure(null); // delete figure1 from old field
+        newPositionFigure1.setCurrentFigure(figure1); // set figure1 on new position
+        figure1.setCurrentField(newPositionFigure1); // save new position within figure
         figure1.getFigureUI().moveFigureToPosition(newPositionFigure1.getFieldUIobject()); // visual movement on board
 
         LastTurn lastTurn = new LastTurn();
@@ -317,12 +317,12 @@ public class PlayingField {
             lastTurn.setNewFigure2Field(figure2 != null ? figure2.getCurrentField() : null);
         }
         lastTurn.setCheatModifier(GameManager.getInstance().getCheatModifier());
-        GameManager.getInstance().setLastTurn(lastTurn);
+        GameManager.getInstance().setLastTurn(lastTurn); // save information within last turn
 
 
     }
 
-    private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten
+    private Field setNewPosition(Figure figure, int fieldsToMove) { // includes all checks for overtaking, moving, beaten from figure class
         return figure.setNewPosition(fieldsToMove);
     }
 

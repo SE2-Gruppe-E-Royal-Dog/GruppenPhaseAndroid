@@ -22,7 +22,7 @@ public class Jerk extends Figure {
         Figure figure2 = newPosition.getCurrentFigure();
 
         if (super.isOvertaking()) {
-            switch (figure2.getTyp()) {
+            switch (figure2.getTyp()) { // jerk is only allowed to overtake another jerk (exception blocked starting fields)
                 case JERK:
                     return true;
                 case CITIZEN:
@@ -45,7 +45,7 @@ public class Jerk extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.isBeaten() && isBeatingKingOnNormalField(figure2, newPosition)) || !super.isBeaten()) {
+        if((super.isBeaten() && isBeatingKingOnNormalField(figure2, newPosition)) || !super.isBeaten()) { // beating King is only allowed on foreign staring field from a figure of that color => got from Figure class
             return false;
         } return true;
     }
@@ -66,13 +66,13 @@ public class Jerk extends Figure {
             Field positionNormal = getCurrentField().getFieldAtDistance(fieldsToMove, getColor());
 
             if (positionNormal instanceof GoalField) {
-                return positionNormal;
+                return positionNormal; // moving into goal with fieldsToMove 4 left
             } else if (positionMinus1 instanceof GoalField) {
-                return positionMinus1;
+                return positionMinus1;// moving into goal with fieldsToMove 5 left
             } else if (positionMinus2 instanceof GoalField) {
-                return positionMinus2;
+                return positionMinus2;// moving into goal with fieldsToMove 6 left
             } else {
-                return positionNormal;
+                return positionNormal; // going normal way
             }
         } else {
             return null;

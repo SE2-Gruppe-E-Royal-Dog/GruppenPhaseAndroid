@@ -23,7 +23,7 @@ public class King extends Figure {
         Figure figure2 = newPosition.getCurrentFigure();
 
         if(super.isOvertaking()) {
-            switch (figure2.getTyp()) {
+            switch (figure2.getTyp()) { // King is allowed to overtake any figure (exception blocked starting fields)
                 case JERK:
                 case CITIZEN:
                 case KNIGHT:
@@ -43,7 +43,7 @@ public class King extends Figure {
      */
     @Override
     public boolean isMoving(int fieldsToMove) {
-        if(!(super.isMoving(fieldsToMove)) || fieldsToMove > 7) {
+        if(!(super.isMoving(fieldsToMove)) || fieldsToMove > 7) { // cannot move more than 7 fields
             return false;
         } else {
             return true;

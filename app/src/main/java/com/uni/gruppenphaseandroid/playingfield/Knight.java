@@ -22,7 +22,7 @@ public class Knight extends Figure {
         Figure figure2 = newPosition.getCurrentFigure();
 
         if(super.isOvertaking()) {
-            switch (figure2.getTyp()) {
+            switch (figure2.getTyp()) { // Knight cannot overtake king (check blocked starting fields)
                 case JERK:
                 case CITIZEN:
                 case KNIGHT:
@@ -45,7 +45,7 @@ public class Knight extends Figure {
         Field newPosition = getCurrentField().getNextField();
         Figure figure2 = newPosition.getCurrentFigure();
 
-        if((super.isBeaten() && isBeatingKingOnNormalField(figure2, newPosition)) || !super.isBeaten()) {
+        if((super.isBeaten() && isBeatingKingOnNormalField(figure2, newPosition)) || !super.isBeaten()) { // beating King is only allowed on foreign staring field from a figure of that color => got from Figure class
             return false;
         } return true;
     }
