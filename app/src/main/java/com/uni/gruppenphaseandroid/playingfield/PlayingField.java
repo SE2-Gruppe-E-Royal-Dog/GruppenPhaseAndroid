@@ -220,6 +220,9 @@ public class PlayingField {
         return startingAreaField;
     }
 
+    /*
+    Übergebene Figur wird auf das Star6tfeld ihrer Farbe ggestellt. LastTurn Objekt wir geupdated.
+     */
     public Field moveToStart(Figure figure) {
         Field newField;
         switch (figure.getColor()) {
@@ -256,6 +259,9 @@ public class PlayingField {
         return newField;
     }
 
+    /*
+    Vertauscht die Positionen zweier übergebenen Figuren. LastTurn Objekt wir geupdated.
+     */
     public Field switchPositions(Figure figure1, Figure figure2) {
         Field field1 = figure1.getCurrentField();
         Field field2 = figure2.getCurrentField();
@@ -276,6 +282,10 @@ public class PlayingField {
         return figure1.getCurrentField();
     }
 
+    /*
+    Übergebene Figur wird so weit bewegt bis sich eine andere Figur auf dem nächsten Feld befindet.
+    LastTurn Objekt wir geupdated.
+     */
     public Field moveToNextFigure(Figure myFigure) {
         Field current = myFigure.getCurrentField();
 

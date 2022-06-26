@@ -35,6 +35,9 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
             stackImage.setImageResource(R.drawable.ic_card_ablagestapel);
         }
 
+        /*
+        Das Ablagestapelfoto wird neu gesetzt. Kartentyp aus LastTurn Objekt wird verwendet.
+         */
         @Override
         protected void setStackImage () {
                 LastTurn lastTurn = GameManager.getInstance().getLastTurn();
@@ -47,6 +50,9 @@ public class VisualEffectsManagerImpl extends VisualEffectsManager {
 
         }
 
+        /*
+        Das Ablagestapelfoto wird neu gesetzt. Eine beliebige Karte kann angegeben werden.
+         */
         public void setStackImageAfterMyMove (Card card){
             stackImage.setImageResource(GameManager.getInstance().getCardUI().findImageView(card));
         }

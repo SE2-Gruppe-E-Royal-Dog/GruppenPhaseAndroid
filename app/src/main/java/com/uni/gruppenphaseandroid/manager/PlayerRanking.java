@@ -12,8 +12,16 @@ public class PlayerRanking {
         GameManager gameManager = GameManager.getInstance();
         PlayingField playingField = gameManager.getPlayingField();
 
+        //Namen aller Spieler
         names = gameManager.getModifiedPlayerNamesArray();
 
+        /*
+        Punkte aller Spieler werden berechnet. Die Arrays mit den Namen und Punkten sind gleich sortiert.
+        dh. Index 0: Spieler1 Name
+                     Spieler1 Punkte
+
+        Punkte sind die Anzahl der Figuren im Zielbereich (min = 0, max = 4).
+         */
         points = new int[4];
         points[0] = calcPoints(playingField.getGreenStartingField().getNextGoalField());
         if (names[1] != null) {
@@ -37,6 +45,9 @@ public class PlayerRanking {
 
     }
 
+    /*
+    Zählt wie viele Zielfelder eines Spielers besetzt sind. Gibt eine Ganzzahl zwischen 0 und 4 zurück.
+     */
     private int calcPoints(GoalField goalField) {
         int count = 0;
         for (int i = 0; i < 4; i++) {
@@ -48,6 +59,9 @@ public class PlayerRanking {
         return count;
     }
 
+    /*
+    Sortiert beide Arrays von der höchsten zur niedrigsten Punktezahl.
+     */
     private void sortLists() {
         for (int i = 0; i < names.length; i++) {
             for (int j = i + 1; j < names.length; j++) {
@@ -63,6 +77,15 @@ public class PlayerRanking {
         }
     }
 
+
+    /*
+    Fügt Ränge zu den Namen hinzu. Wenn die Punktezahl mehrerer Spieler gleich ist bekommen sie den selben
+    Rang.
+    Bsp. 1: Spieler1
+         2: Spieler2
+         2: Spieler3
+         3: Spieler4
+     */
     private void addRanksToNames() {
         String connector = ": ";
         int rank = 1;

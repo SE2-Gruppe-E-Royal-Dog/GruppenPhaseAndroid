@@ -21,6 +21,30 @@ public class Card {
 
     private static final String INVALID_ARGUMENTS= "Invalid Combination of values";
 
+    /*
+    Methode um eine Karte auszuspielen. Je nach Kartentyp werden verschiedene Methoden aufegrufen.
+
+    TWO, THREE, FIVE, SIX, EIGTH, NINE, TEN, TWELVE:
+    card.playCard(myFigure, -1, null)
+
+    FOUR_PLUSMINUS, ONETOSEVEN_START, ONEORELEVEN_START, THIRTEEN_START, ::
+    Start = 0
+    Effect1 = 1
+    EffectN = N
+    Bsp.:   card(FOUR_PLUSMINUS).playCard(myFigure, 1, null) = 4
+            card(FOUR_PLUSMINUS).playCard(myFigure, 2, null) = -4
+
+            card(ONEORELEVEN_START).playCard(myFigure, 0, null) = toStart
+            card(ONEORELEVEN_START).playCard(myFigure, 1, null) = 1
+            ...
+
+    SWITCH:
+            card.playCard(myFigure, -1, targetFigure)
+
+    EQUAL:
+            card.playCard(myFigure, effect, targetFigure)
+            Hat kein eigenes Format, da ja eine andere Karte aufgerufen wird
+     */
     public void playCard(Figure myFigure, int effect, Figure targetFigure) {
         if(myFigure==null){
             throw new IllegalArgumentException("myFigure cannot be null");
@@ -45,11 +69,19 @@ public class Card {
         }
     }
 
+    /*
+    Wird aufgerufen wenn eine Equalkarte gespielt werden soll. Es wird auf das LastTurn =Objekt zugegriffen
+    der Kartentyp der auszuspielen Karte auf den Kartentyp des LastTurn Objekts gesetzt. Nach beendigung
+    dieser Methode wird playCard normal fortgesetzt und gemäß des neuen Kartentyps abgearbeitet.
+     */
     private void playEqualCard(){
         Cardtype newCardtype = GameManager.getInstance().getLastTurn().getCardtype();
         setCardtype(newCardtype);
     }
 
+    /*
+    Wird Aufgerufen wenn eine Karte der untenstehenden Kartentypen ausgespielt werden soll.
+     */
     private void playNonEffectCard(Figure myFigure) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         switch (getCardtype()){
@@ -72,6 +104,9 @@ public class Card {
         }
     }
 
+    /*
+    Wird Aufgerufen wenn eine Karte der untenstehenden Kartentypen ausgespielt werden soll.
+     */
     private void playEffectCard(Figure myFigure, int effect) {
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         int value;
@@ -115,6 +150,9 @@ public class Card {
         }
     }
 
+    /*
+   Wird Aufgerufen wenn eine Karte mit dem Kartentyp SWITCH ausgespielt werden soll.
+    */
     private void playSwitchCard(Figure figure1, Figure figure2){
         PlayingField playingField = GameManager.getInstance().getPlayingField();
         if (getCardtype().equals(Cardtype.SWITCH)) {
@@ -125,6 +163,10 @@ public class Card {
     }
 
     //////////CHECKS IF MOVE IS POSSIBLE//////////
+
+    /*
+    Überprüft ob das ausspielen einer Karte möglich ist. Vom Aufbau her äquivalent zu playCard.
+     */
 
     public boolean checkIfCardIsPlayable(Figure myFigure, int effect, Figure targetFigure){
         if(myFigure==null){

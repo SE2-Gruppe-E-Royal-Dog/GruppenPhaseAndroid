@@ -398,6 +398,10 @@ public class GameManager {
         return cardManager.isThereAnyPossibleMove(myTurnNumber, lastTurn);
     }
 
+    /*
+    Gibt ein Array der Größe 4 mit allen Spielernamen zurück. Wenn weniger als 4 Spieler im Spiel sind wird
+    das Array mit null aufgefüllt.
+     */
     public String[] getModifiedPlayerNamesArray() {
         String[] names = new String[4];
         for(int i=0;i<4;i++){
