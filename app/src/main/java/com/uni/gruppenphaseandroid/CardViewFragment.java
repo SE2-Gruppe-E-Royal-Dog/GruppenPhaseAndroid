@@ -25,7 +25,7 @@ import com.uni.gruppenphaseandroid.manager.GameManager;
 import java.util.EventListener;
 import java.util.Objects;
 
-public class CardViewFragment extends DialogFragment implements EventListener, SensorEventListener {
+public class CardViewFragment extends DialogFragment {
 
     private SensorManager sensorManager;
     private Sensor sensor;
@@ -34,6 +34,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     private String clickedCard;
     private int clickedCardIndex;
     private String cheaterNote = "0";
+    private SensorTilt sensorTilt;
 
 
     private static String playerId;
@@ -43,6 +44,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     }
 
     public OnInputListener cardInputListener;
+
 
 
     @Override
@@ -97,6 +99,9 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
         }
     });
 
+         sensorTilt = new SensorTilt(playerId);
+
+
         return view;
     }
 
@@ -137,16 +142,16 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     @Override
     public void onResume() {
         super.onResume();
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(sensorTilt, sensor, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     public void onPause() {
-        sensorManager.unregisterListener(this);
+        sensorManager.unregisterListener(sensorTilt);
         super.onPause();
     }
 
-
+/*
     //What happens if sensor change detected
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -160,19 +165,19 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
 
             if (x < 0 && cheating) { //tilt to right
                 //cheater.cheating(cheater);
-                GameManager.getInstance().setCheatModifier(-1);
-                cheaterNote = "-1";
+                GameManager.getInstance().setCheatModifier(1);
+                cheaterNote = "+1";
 
-                textView.setText("Cheater -1");
+                textView.setText("Cheater +1");
                 textView.setVisibility(View.VISIBLE);
 
 
             } else if (x > 0 && cheating) { //tilt to left
                     //cheater.cheating(cheater);
-                    GameManager.getInstance().setCheatModifier(+1);
-                    cheaterNote = "+1";
+                    GameManager.getInstance().setCheatModifier(-1);
+                    cheaterNote = "-1";
 
-                    textView.setText("Cheater + 1");
+                    textView.setText("Cheater - 1");
                     textView.setVisibility(View.VISIBLE);
 
 
@@ -186,7 +191,7 @@ public class CardViewFragment extends DialogFragment implements EventListener, S
     @Override
     public void onAccuracyChanged(Sensor arg0, int arg1) {
     }
-
+*/
     public static void setPlayerId(String playerId) {
         CardViewFragment.playerId = playerId;
     }
